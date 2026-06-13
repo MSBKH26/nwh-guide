@@ -62,12 +62,13 @@
     background: var(--tank-dim);
     border: 1px solid rgba(249,115,22,0.4);
     border-radius: 30px;
-    padding: 4px 14px;
-    font-size: 0.7rem;
-    font-weight: 700;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 900;
     color: var(--tank);
     letter-spacing: 1px;
     margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(249,115,22,0.2);
   }
   .header h1 {
     font-size: 1.6rem;
@@ -296,6 +297,16 @@
     line-height: 1.6;
   }
   .warn-box strong { color: #f87171; }
+
+  .explain-box {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: #94a3b8;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border);
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -311,6 +322,7 @@
 <!-- ══════ FORMATION ══════ -->
 <div class="section">
   <div class="section-head sh-orange">🗺️ تشكيلة القتال</div>
+  <div class="explain-box">هذه التشكيلة تمنحك قوة هجوم عالية مع صمود ممتاز، وهي الأكثر استخداماً للاعبي الدبابات في المراحل المبكرة والمتوسطة وحتى المتقدمة. يُفضَّل وضع Kimberly في منتصف الصف الخلفي لأنها أقوى مصدر ضرر في التشكيلة.</div>
   <div class="formation-wrap">
 
     <div class="row-label">الصف الأمامي — دفاع</div>
@@ -360,6 +372,7 @@
 <!-- ══════ PRIORITY DEV ══════ -->
 <div class="section">
   <div class="section-head sh-gold">⭐ أولوية التطوير</div>
+  <div class="explain-box">لا توزع الموارد على الجميع بالتساوي — ركّز على من يصنع الفارق. معظم اللاعبين المتقدمين يعتبرون Kimberly أهم بطل دبابات في اللعبة بسبب الضرر الهائل الذي تسببه.</div>
   <div class="prio-list">
     <div class="prio-item">
       <div class="prio-rank rank-1">1</div>
@@ -394,6 +407,7 @@
 <!-- ══════ SHARDS PRIORITY ══════ -->
 <div class="section">
   <div class="section-head sh-purple">💎 أولوية النجوم (Shards)</div>
+  <div class="explain-box">أوصل Kimberly إلى 4 نجوم أولاً قبل أي بطل آخر — هذا هو الاستثمار الأذكى في المراحل الأولى والمتوسطة.</div>
   <div class="prio-list">
     <div class="prio-item">
       <div class="prio-rank rank-1">1</div>
@@ -427,6 +441,7 @@
 <!-- ══════ GEAR ══════ -->
 <div class="section">
   <div class="section-head sh-blue">⚙️ أولوية العتاد (Gear)</div>
+  <div class="explain-box">لكل بطل أولوية عتاد مختلفة بحسب دوره — المهاجم يحتاج السلاح أولاً، والمدافع يحتاج الرادار والدرع. لا تصرف خامات التطوير على أبطال الصف الثاني أو الثالث قبل اكتمال الفيلق الأول.</div>
   <div class="gear-grid">
 
     <div class="gear-hero-block">
@@ -434,7 +449,7 @@
       <div class="gear-items">
         <div class="gear-chip gear-1">🔫 السلاح (Gun) — أولاً</div>
         <div class="gear-arrow">→</div>
-        <div class="gear-chip gear-2">💾 الشريحة (Chip)</div>
+        <div class="gear-chip gear-2">💾 ثانياً — الشريحة (Chip)</div>
       </div>
     </div>
 
@@ -443,7 +458,7 @@
       <div class="gear-items">
         <div class="gear-chip gear-1">📡 الرادار (Radar) — أولاً</div>
         <div class="gear-arrow">→</div>
-        <div class="gear-chip gear-2">🛡️ الدرع (Armor)</div>
+        <div class="gear-chip gear-2">🛡️ ثانياً — الدرع (Armor)</div>
       </div>
     </div>
 
@@ -452,7 +467,7 @@
       <div class="gear-items">
         <div class="gear-chip gear-1">📡 الرادار (Radar) — أولاً</div>
         <div class="gear-arrow">→</div>
-        <div class="gear-chip gear-2">🛡️ الدرع (Armor)</div>
+        <div class="gear-chip gear-2">🛡️ ثانياً — الدرع (Armor)</div>
       </div>
     </div>
 
@@ -466,6 +481,7 @@
 <!-- ══════ BUILDINGS ══════ -->
 <div class="section">
   <div class="section-head sh-green">🏙️ تطوير المباني والبحوث</div>
+  <div class="explain-box">رفع Tank Center هو الأولوية القصوى لأنه يرفع قوة جميع أبطال الدبابات. بعد اكتمال فريق الدبابات الأساسي فقط، ابدأ بتجهيز فريق الطيارات.</div>
   <div class="bld-list">
     <div class="bld-item">
       <div class="bld-num">1</div>
