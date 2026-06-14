@@ -307,9 +307,78 @@
     border-bottom: 1px solid var(--border);
     font-style: italic;
   }
+
+  /* ── ALLIANCE LOGO (style VS) ── */
+  .alliance-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 16px rgba(245,197,24,0.5);
+  }
+
+  /* ── ALTERNATIVE FORMATION ── */
+  .alt-list { padding: 10px 14px; }
+  .alt-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(24,31,46,0.8);
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .alt-item:last-child { border-bottom: none; }
+  .alt-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .alt-text strong { color: var(--gold); }
+  .alt-arrow { color: var(--tank); font-weight: 900; }
+
+  /* ── NWH FOOTER (officiel, style VS) ── */
+  .nwh-footer {
+    text-align: center;
+    padding: 20px 16px;
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .nwh-footer .footer-shield {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .nwh-footer .footer-name {
+    color: var(--gold);
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .nwh-footer .footer-credit {
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
 </style>
 </head>
 <body>
+
+<!-- ALLIANCE -->
+<div class="alliance-logo-wrap">
+  <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+</div>
+<div class="alliance-name">[NWH] Night Watch</div>
 
 <!-- HEADER -->
 <div class="header">
@@ -387,18 +456,18 @@
     </div>
     <div class="prio-item">
       <div class="prio-rank rank-3">3</div>
+      <div class="prio-name">Stetmann</div>
+      <div class="prio-note">هجوم إضافي</div>
+    </div>
+    <div class="prio-item">
+      <div class="prio-rank rank-4">4</div>
       <div class="prio-name">Marshall</div>
       <div class="prio-note">دعم أساسي</div>
     </div>
     <div class="prio-item">
-      <div class="prio-rank rank-4">4</div>
+      <div class="prio-rank rank-5">5</div>
       <div class="prio-name">Williams</div>
       <div class="prio-note">دفاع ثانوي</div>
-    </div>
-    <div class="prio-item">
-      <div class="prio-rank rank-5">5</div>
-      <div class="prio-name">Stetmann</div>
-      <div class="prio-note">هجوم إضافي</div>
     </div>
   </div>
 </div>
@@ -421,17 +490,17 @@
     </div>
     <div class="prio-item">
       <div class="prio-rank rank-3">3</div>
-      <div class="prio-name">Marshall</div>
+      <div class="prio-name">Stetmann</div>
       <div class="prio-note"></div>
     </div>
     <div class="prio-item">
       <div class="prio-rank rank-4">4</div>
-      <div class="prio-name">Williams</div>
+      <div class="prio-name">Marshall</div>
       <div class="prio-note"></div>
     </div>
     <div class="prio-item">
       <div class="prio-rank rank-5">5</div>
-      <div class="prio-name">Stetmann</div>
+      <div class="prio-name">Williams</div>
       <div class="prio-note"></div>
     </div>
   </div>
@@ -512,6 +581,32 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- ══════ ALTERNATIVE FORMATION ══════ -->
+<div class="section">
+  <div class="section-head sh-blue">🔄 التشكيلة البديلة (Alternative Formation)</div>
+  <div class="explain-box">إذا لم تمتلك أحد أبطال التشكيلة الأساسية بعد، استخدم هذه البدائل المؤقتة حتى يكتمل فريقك الأساسي.</div>
+  <div class="alt-list">
+    <div class="alt-item">
+      <div class="alt-icon">📌</div>
+      <div class="alt-text">إذا لم تمتلك <strong>Williams</strong>: <span class="alt-arrow">➡️</span> استخدم <strong>Scarlett</strong> مؤقتاً</div>
+    </div>
+    <div class="alt-item">
+      <div class="alt-icon">📌</div>
+      <div class="alt-text">إذا لم تمتلك <strong>Stetmann</strong>: <span class="alt-arrow">➡️</span> استخدم <strong>Mason</strong> مؤقتاً</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════ FOOTER NWH ══════ -->
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">آخر تحديث: يونيو 2026</div>
 </div>
 
 </body>
