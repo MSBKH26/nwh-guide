@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] VS Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #080c10;
+    --card:   #131b24;
+    --border: #1e2d3d;
+    --gold:   #f5c518;
+    --red:    #e8394a;
+    --orange: #f97316;
+    --text:   #e2e8f0;
+    --muted:  #64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:'Cairo',sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; padding:12px; font-size:14px; line-height:1.6;
+  }
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo {
+    width:80px; height:80px; object-fit:contain; border-radius:12px;
+    filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center;
+    letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5);
+  }
+
+  /* TITLE */
+  .page-title {
+    text-align:center; font-size:1.5rem; font-weight:900;
+    color:#fff; margin-bottom:14px; letter-spacing:1px;
+  }
+  .page-title span { color:var(--gold); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .stat-box {
+    flex:1; min-width:140px; background:var(--card);
+    border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px; text-align:center;
+  }
+  .stat-box.gold-box { border-color:rgba(245,197,24,0.4); }
+  .stat-label { font-size:0.75rem; color:var(--muted); margin-bottom:4px; }
+  .stat-value { font-size:1.3rem; font-weight:900; color:var(--gold); }
+  .stat-sub { font-size:0.72rem; color:var(--muted); margin-top:2px; }
+
+  /* GRID */
+  .results-grid {
+    display:flex; flex-direction:column; gap:14px;
+  }
+
+  /* SECTION */
+  .res-section {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:14px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,0.5);
+  }
+  .res-head {
+    padding:12px 14px; font-weight:900; font-size:0.95rem;
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+  .res-head .count {
+    font-size:0.78rem; color:var(--muted); font-weight:600; margin-right:auto;
+  }
+  .res-head .range {
+    font-size:0.75rem; font-weight:600;
+  }
+  .head-rouge  { background:linear-gradient(90deg,rgba(232,57,74,0.15),transparent); color:var(--red); border-bottom:1px solid rgba(232,57,74,0.2); }
+  .head-orange { background:linear-gradient(90deg,rgba(249,115,22,0.15),transparent); color:var(--orange); border-bottom:1px solid rgba(249,115,22,0.2); }
+  .head-jaune  { background:linear-gradient(90deg,rgba(245,197,24,0.12),transparent); color:var(--gold); border-bottom:1px solid rgba(245,197,24,0.2); }
+
+  .table-wrap { overflow-x:auto; }
+  table.res-table {
+    width:100%; border-collapse:collapse; font-size:0.8rem;
+    direction:ltr;
+  }
+  table.res-table th {
+    background:rgba(0,0,0,0.3); padding:8px 10px;
+    font-weight:700; text-align:center; border-bottom:1px solid var(--border);
+    white-space:nowrap;
+  }
+  table.res-table td {
+    padding:7px 10px; text-align:center;
+    border-bottom:1px solid rgba(24,31,46,0.6);
+  }
+  table.res-table tr:last-child td { border-bottom:none; }
+  table.res-table tr:hover { background:rgba(255,255,255,0.02); }
+  .num-cell   { color:var(--muted); font-weight:700; width:36px; }
+  .name-cell  { text-align:left; font-weight:700; min-width:130px; }
+  .avg-cell   { font-weight:900; }
+  .total-cell { color:#94a3b8; }
+
+  /* ALERT BOX */
+  .alert-box {
+    margin:0; padding:12px 14px; font-size:0.78rem;
+    line-height:1.7; display:flex; gap:10px; align-items:flex-start;
+    border-top:1px solid var(--border);
+  }
+  .alert-box.alert-rouge  { background:rgba(232,57,74,0.07); color:#fca5a5; }
+  .alert-box.alert-orange { background:rgba(249,115,22,0.07); color:#fdba74; }
+  .alert-icon { font-size:1.1rem; flex-shrink:0; margin-top:2px; }
+
+  /* FOOTER */
+  .nwh-footer {
+    text-align:center; padding:20px 16px; margin-top:14px;
+    border-top:1px solid var(--border); color:var(--muted);
+    font-size:0.85rem; line-height:1.8;
+  }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="page-title">VS Results — <span>[NWH] Night Watch</span></div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-box gold-box">
+    <div class="stat-label">الهدف اليومي</div>
+    <div class="stat-value">2,600,000</div>
+    <div class="stat-sub">يُحسب يومياً</div>
+  </div>
+  <div class="stat-box gold-box">
+    <div class="stat-label">المجموع المطلوب</div>
+    <div class="stat-value">13,000,000</div>
+    <div class="stat-sub">على 5 أيام (إثنين → جمعة)</div>
+  </div>
+</div>
+
+<!-- RESUME -->
+<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:14px;">
+  <div style="display:flex;flex-direction:column;gap:8px;font-size:0.88rem;font-weight:700;">
+    <div>🔴 <span style="color:#e8394a">15 لاعب</span> — المتوسط أقل من 1,500,000</div>
+    <div>🟠 <span style="color:#f97316">13 لاعب</span> — المتوسط من 1,500,000 إلى 2,600,000</div>
+    <div>🟡 <span style="color:#f5c518">12 لاعب</span> — المتوسط من 2,600,000 إلى 3,600,000</div>
+    <div>✅ <span style="color:#22c55e">58 لاعب</span> أداء جيد (أكثر من 3,600,000) — غير معروضين</div>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="results-grid">
+
+  <!-- ROUGE -->
+  <div class="res-section">
+    <div class="res-head head-rouge">
+      🔴 يحتاج إلى تحسين عاجل
+      <span class="range">(المتوسط أقل من 1,500,000)</span>
+      <span class="count">15 لاعب</span>
+    </div>
+    <div class="table-wrap">
+      <table class="res-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th style="text-align:left">الاسم</th>
+            <th>المتوسط (5 أيام)</th>
+            <th>الإجمالي (5 أيام)</th>
+          </tr>
+        </thead>
+        <tbody><tr>
+          <td class="num-cell">1</td>
+          <td class="name-cell">fede valverde</td>
+          <td class="avg-cell" style="color:#e8394a">447,351</td>
+          <td class="total-cell">2,236,755</td>
+        </tr><tr>
+          <td class="num-cell">2</td>
+          <td class="name-cell">Al3rabxxx</td>
+          <td class="avg-cell" style="color:#e8394a">478,247</td>
+          <td class="total-cell">2,391,238</td>
+        </tr><tr>
+          <td class="num-cell">3</td>
+          <td class="name-cell">Talal079</td>
+          <td class="avg-cell" style="color:#e8394a">593,295</td>
+          <td class="total-cell">2,966,479</td>
+        </tr><tr>
+          <td class="num-cell">4</td>
+          <td class="name-cell">العامري1990</td>
+          <td class="avg-cell" style="color:#e8394a">680,276</td>
+          <td class="total-cell">3,401,384</td>
+        </tr><tr>
+          <td class="num-cell">5</td>
+          <td class="name-cell">Moolaa7010</td>
+          <td class="avg-cell" style="color:#e8394a">689,300</td>
+          <td class="total-cell">3,446,500</td>
+        </tr><tr>
+          <td class="num-cell">6</td>
+          <td class="name-cell">أبو آلاء</td>
+          <td class="avg-cell" style="color:#e8394a">946,934</td>
+          <td class="total-cell">4,734,673</td>
+        </tr><tr>
+          <td class="num-cell">7</td>
+          <td class="name-cell">alhatmi jawad</td>
+          <td class="avg-cell" style="color:#e8394a">1,132,423</td>
+          <td class="total-cell">5,662,117</td>
+        </tr><tr>
+          <td class="num-cell">8</td>
+          <td class="name-cell">ツAPEXメ</td>
+          <td class="avg-cell" style="color:#e8394a">1,217,560</td>
+          <td class="total-cell">6,087,802</td>
+        </tr><tr>
+          <td class="num-cell">9</td>
+          <td class="name-cell">koin1 rb 500 rupiah</td>
+          <td class="avg-cell" style="color:#e8394a">1,338,082</td>
+          <td class="total-cell">6,690,412</td>
+        </tr><tr>
+          <td class="num-cell">10</td>
+          <td class="name-cell">Obead702</td>
+          <td class="avg-cell" style="color:#e8394a">1,347,564</td>
+          <td class="total-cell">6,737,823</td>
+        </tr><tr>
+          <td class="num-cell">11</td>
+          <td class="name-cell">ziyad2021</td>
+          <td class="avg-cell" style="color:#e8394a">1,348,864</td>
+          <td class="total-cell">6,744,321</td>
+        </tr><tr>
+          <td class="num-cell">12</td>
+          <td class="name-cell">nadjme AB</td>
+          <td class="avg-cell" style="color:#e8394a">1,404,391</td>
+          <td class="total-cell">7,021,958</td>
+        </tr><tr>
+          <td class="num-cell">13</td>
+          <td class="name-cell">ahmadamir</td>
+          <td class="avg-cell" style="color:#e8394a">1,427,578</td>
+          <td class="total-cell">7,137,894</td>
+        </tr><tr>
+          <td class="num-cell">14</td>
+          <td class="name-cell">Mahmoud018</td>
+          <td class="avg-cell" style="color:#e8394a">1,441,862</td>
+          <td class="total-cell">7,209,314</td>
+        </tr><tr>
+          <td class="num-cell">15</td>
+          <td class="name-cell">منسفجي</td>
+          <td class="avg-cell" style="color:#e8394a">1,468,661</td>
+          <td class="total-cell">7,343,308</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="alert-box alert-rouge">
+      <span class="alert-icon">⚠️</span>
+      التراجع الحاد في النقاط والأداء لا يليق باسم التحالف بأي شكل من الأشكال. النجاح يتطلب جهداً مشتركاً، ومن غير العادل أن يكون العطاء من طرف واحد وأنتم لا تعملون.
+    </div>
+  </div>
+
+  <!-- ORANGE -->
+  <div class="res-section">
+    <div class="res-head head-orange">
+      🟠 أداء ضعيف ودخل مرحلة الخطر
+      <span class="range">(المتوسط من 1,500,000 إلى 2,600,000)</span>
+      <span class="count">13 لاعب</span>
+    </div>
+    <div class="table-wrap">
+      <table class="res-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th style="text-align:left">الاسم</th>
+            <th>المتوسط (5 أيام)</th>
+            <th>الإجمالي (5 أيام)</th>
+          </tr>
+        </thead>
+        <tbody><tr>
+          <td class="num-cell">1</td>
+          <td class="name-cell">XxWarriorzxX</td>
+          <td class="avg-cell" style="color:#f97316">1,540,403</td>
+          <td class="total-cell">7,702,018</td>
+        </tr><tr>
+          <td class="num-cell">2</td>
+          <td class="name-cell">arifmk</td>
+          <td class="avg-cell" style="color:#f97316">1,562,726</td>
+          <td class="total-cell">7,813,634</td>
+        </tr><tr>
+          <td class="num-cell">3</td>
+          <td class="name-cell">Laylalayla</td>
+          <td class="avg-cell" style="color:#f97316">1,571,491</td>
+          <td class="total-cell">7,857,458</td>
+        </tr><tr>
+          <td class="num-cell">4</td>
+          <td class="name-cell">فهد011</td>
+          <td class="avg-cell" style="color:#f97316">1,643,784</td>
+          <td class="total-cell">8,218,924</td>
+        </tr><tr>
+          <td class="num-cell">5</td>
+          <td class="name-cell">Nazo dz</td>
+          <td class="avg-cell" style="color:#f97316">1,660,079</td>
+          <td class="total-cell">8,300,398</td>
+        </tr><tr>
+          <td class="num-cell">6</td>
+          <td class="name-cell">stalker277</td>
+          <td class="avg-cell" style="color:#f97316">1,983,571</td>
+          <td class="total-cell">9,917,855</td>
+        </tr><tr>
+          <td class="num-cell">7</td>
+          <td class="name-cell">مارشل محمد</td>
+          <td class="avg-cell" style="color:#f97316">1,999,822</td>
+          <td class="total-cell">9,999,112</td>
+        </tr><tr>
+          <td class="num-cell">8</td>
+          <td class="name-cell">1000ed</td>
+          <td class="avg-cell" style="color:#f97316">2,079,080</td>
+          <td class="total-cell">10,395,404</td>
+        </tr><tr>
+          <td class="num-cell">9</td>
+          <td class="name-cell">DuRaiD ッ</td>
+          <td class="avg-cell" style="color:#f97316">2,121,852</td>
+          <td class="total-cell">10,609,263</td>
+        </tr><tr>
+          <td class="num-cell">10</td>
+          <td class="name-cell">1xo</td>
+          <td class="avg-cell" style="color:#f97316">2,181,445</td>
+          <td class="total-cell">10,907,226</td>
+        </tr><tr>
+          <td class="num-cell">11</td>
+          <td class="name-cell">MSBREEWC 陈丽</td>
+          <td class="avg-cell" style="color:#f97316">2,326,847</td>
+          <td class="total-cell">11,634,237</td>
+        </tr><tr>
+          <td class="num-cell">12</td>
+          <td class="name-cell">ibrahim Legend</td>
+          <td class="avg-cell" style="color:#f97316">2,518,570</td>
+          <td class="total-cell">12,592,852</td>
+        </tr><tr>
+          <td class="num-cell">13</td>
+          <td class="name-cell">bahaaliddyn</td>
+          <td class="avg-cell" style="color:#f97316">2,556,248</td>
+          <td class="total-cell">12,781,241</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="alert-box alert-orange">
+      <span class="alert-icon">⚠️</span>
+      أداء ضعيف ودخل مرحلة الخطر. نأمل منكم مراجعة استراتيجيتكم فوراً وتكثيف المشاركة.
+    </div>
+  </div>
+
+  <!-- JAUNE -->
+  <div class="res-section">
+    <div class="res-head head-jaune">
+      🟡 قادر على ما هو أفضل
+      <span class="range">(المتوسط من 2,600,000 إلى 3,600,000)</span>
+      <span class="count">12 لاعب</span>
+    </div>
+    <div class="table-wrap">
+      <table class="res-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th style="text-align:left">الاسم</th>
+            <th>المتوسط (5 أيام)</th>
+            <th>الإجمالي (5 أيام)</th>
+          </tr>
+        </thead>
+        <tbody><tr>
+          <td class="num-cell">1</td>
+          <td class="name-cell">Fahd 55</td>
+          <td class="avg-cell" style="color:#f5c518">2,638,878</td>
+          <td class="total-cell">13,194,391</td>
+        </tr><tr>
+          <td class="num-cell">2</td>
+          <td class="name-cell">Tona911</td>
+          <td class="avg-cell" style="color:#f5c518">2,653,896</td>
+          <td class="total-cell">13,269,481</td>
+        </tr><tr>
+          <td class="num-cell">3</td>
+          <td class="name-cell">mummum mum</td>
+          <td class="avg-cell" style="color:#f5c518">2,691,159</td>
+          <td class="total-cell">13,455,797</td>
+        </tr><tr>
+          <td class="num-cell">4</td>
+          <td class="name-cell">KrrM</td>
+          <td class="avg-cell" style="color:#f5c518">2,720,982</td>
+          <td class="total-cell">13,604,913</td>
+        </tr><tr>
+          <td class="num-cell">5</td>
+          <td class="name-cell">zyad nasseraldin</td>
+          <td class="avg-cell" style="color:#f5c518">2,741,311</td>
+          <td class="total-cell">13,706,556</td>
+        </tr><tr>
+          <td class="num-cell">6</td>
+          <td class="name-cell">LovelySharq</td>
+          <td class="avg-cell" style="color:#f5c518">2,798,070</td>
+          <td class="total-cell">13,990,352</td>
+        </tr><tr>
+          <td class="num-cell">7</td>
+          <td class="name-cell">YAZED9</td>
+          <td class="avg-cell" style="color:#f5c518">2,859,840</td>
+          <td class="total-cell">14,299,201</td>
+        </tr><tr>
+          <td class="num-cell">8</td>
+          <td class="name-cell">noumena</td>
+          <td class="avg-cell" style="color:#f5c518">2,892,214</td>
+          <td class="total-cell">14,461,072</td>
+        </tr><tr>
+          <td class="num-cell">9</td>
+          <td class="name-cell">FatiOme</td>
+          <td class="avg-cell" style="color:#f5c518">2,934,746</td>
+          <td class="total-cell">14,673,731</td>
+        </tr><tr>
+          <td class="num-cell">10</td>
+          <td class="name-cell">رايد عايض</td>
+          <td class="avg-cell" style="color:#f5c518">3,082,004</td>
+          <td class="total-cell">15,410,021</td>
+        </tr><tr>
+          <td class="num-cell">11</td>
+          <td class="name-cell">Kalla Billa</td>
+          <td class="avg-cell" style="color:#f5c518">3,127,931</td>
+          <td class="total-cell">15,639,658</td>
+        </tr><tr>
+          <td class="num-cell">12</td>
+          <td class="name-cell">SimSim Cool</td>
+          <td class="avg-cell" style="color:#f5c518">3,583,236</td>
+          <td class="total-cell">17,916,181</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">آخر تحديث: يونيو 2026</div>
+</div>
+
+</body>
+</html>
