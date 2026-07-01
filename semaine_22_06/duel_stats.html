@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Duel Stats</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #080c10;
+    --card:     #131b24;
+    --border:   #1e2d3d;
+    --gold:     #f5c518;
+    --gold-dim: #8a6f0a;
+    --red:      #e8394a;
+    --blue:     #3b82f6;
+    --green:    #22c55e;
+    --text:     #e2e8f0;
+    --muted:    #64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:'Cairo',sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; padding:12px; font-size:14px; line-height:1.6;
+  }
+
+  /* HEADER */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo {
+    width:80px; height:80px; object-fit:contain; border-radius:12px;
+    filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center;
+    letter-spacing:2px; margin-bottom:6px; text-shadow:0 0 16px rgba(245,197,24,0.5);
+  }
+  .main-header {
+    text-align:center; padding:14px 16px 18px; margin-bottom:18px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid var(--gold-dim); border-radius:16px;
+    position:relative; overflow:hidden;
+  }
+  .main-header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%);
+    pointer-events:none;
+  }
+  .main-header h1 { font-size:1.4rem; font-weight:900; color:#e2e8f0; }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* WEEKS */
+  .weeks-list { display:flex; flex-direction:column; gap:16px; }
+
+  .week-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,0.5);
+  }
+  .week-header {
+    padding:14px 16px;
+    background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent);
+    border-bottom:1px solid rgba(245,197,24,0.2);
+    display:flex; align-items:center; gap:10px;
+  }
+  .week-icon { font-size:1.3rem; }
+  .week-date { font-size:1rem; font-weight:900; color:var(--gold); }
+  .week-badge {
+    margin-right:auto; background:rgba(245,197,24,0.12);
+    color:var(--gold); font-size:0.72rem; font-weight:700;
+    padding:3px 10px; border-radius:20px; border:1px solid rgba(245,197,24,0.2);
+  }
+
+  .week-links { display:flex; flex-direction:column; }
+  .week-link {
+    display:flex; align-items:center; gap:12px;
+    padding:13px 16px; text-decoration:none; color:var(--text);
+    border-bottom:1px solid var(--border);
+    transition:background 0.15s;
+  }
+  .week-link:last-child { border-bottom:none; }
+  .week-link:active { background:rgba(255,255,255,0.03); }
+  .link-icon { font-size:1.2rem; width:32px; text-align:center; flex-shrink:0; }
+  .link-label { flex:1; font-weight:700; font-size:0.9rem; }
+  .link-desc { font-size:0.75rem; color:var(--muted); margin-top:2px; }
+  .link-arrow { color:var(--muted); font-size:1rem; flex-shrink:0; }
+
+  .link-stats  .link-label { color:#60a5fa; }
+  .link-black  .link-label { color:var(--red); }
+  .link-result .link-label { color:var(--green); }
+
+  /* FOOTER */
+  .nwh-footer {
+    text-align:center; padding:20px 16px; margin-top:14px;
+    border-top:1px solid var(--border); color:var(--muted);
+    font-size:0.85rem; line-height:1.8;
+  }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>📊 Duel VS — إحصائيات الأسابيع</h1>
+  <p class="subtitle">اختر الأسبوع لعرض الإحصائيات التفصيلية</p>
+</div>
+
+<div class="weeks-list">
+
+  <!-- ══ SEMAINE 22/06 ══ -->
+  <div class="week-card">
+    <div class="week-header">
+      <span class="week-icon">📅</span>
+      <span class="week-date">22/06/2026 — 26/06/2026</span>
+      <span class="week-badge">S1</span>
+    </div>
+    <div class="week-links">
+      <a href="semaine_22_06/vs_stats.html" class="week-link link-stats">
+        <span class="link-icon">📊</span>
+        <div>
+          <div class="link-label">إحصائيات عامة</div>
+          <div class="link-desc">ترتيب جميع اللاعبين حسب المعدل</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+      <a href="semaine_22_06/black_list.html" class="week-link link-black">
+        <span class="link-icon">⚠️</span>
+        <div>
+          <div class="link-label">Black List</div>
+          <div class="link-desc">اللاعبون تحت 2.6M</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+      <a href="semaine_22_06/vs_results.html" class="week-link link-result">
+        <span class="link-icon">📋</span>
+        <div>
+          <div class="link-label">VS Results</div>
+          <div class="link-desc">تصنيف الأداء بالفئات</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ══ NOUVELLES SEMAINES ICI ══ -->
+
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">آخر تحديث: يونيو 2026</div>
+</div>
+
+</body>
+</html>
