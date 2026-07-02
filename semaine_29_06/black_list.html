@@ -11,145 +11,160 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .alliance-logo{width:80px;height:80px;object-fit:contain;border-radius:12px;filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));}
 .alliance-name{font-size:1.1rem;font-weight:900;color:var(--gold);text-align:center;letter-spacing:2px;margin-bottom:6px;text-shadow:0 0 16px rgba(245,197,24,0.5);}
 .main-header{text-align:center;padding:14px 16px 18px;margin-bottom:14px;background:linear-gradient(135deg,#0e1419,#131b24);border:1px solid rgba(232,57,74,0.4);border-radius:16px;position:relative;overflow:hidden;}
-.main-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(232,57,74,0.08),transparent 70%);pointer-events:none;}
-.main-header h1{font-size:1.3rem;font-weight:900;color:#f87171;}
+.main-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%);pointer-events:none;}
+.main-header h1{font-size:1.3rem;font-weight:900;color:#e2e8f0;}
 .main-header .subtitle{font-size:0.82rem;color:var(--muted);margin-top:4px;}
 .section{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.5);}
-.section-head{padding:12px 14px;font-weight:900;font-size:0.95rem;border-bottom:1px solid rgba(232,57,74,0.2);display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent);color:var(--red);}
-.legend{display:flex;gap:18px;padding:10px 14px;font-size:0.78rem;border-bottom:1px solid var(--border);flex-wrap:wrap;}
-.legend span{display:flex;align-items:center;gap:6px;}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+.section-head{padding:12px 14px;font-weight:900;font-size:0.95rem;border-bottom:1px solid rgba(245,197,24,0.2);display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent);color:var(--gold);}
 .table-wrap{overflow-x:auto;}
-table.black-table{width:100%;border-collapse:collapse;font-size:0.78rem;direction:ltr;}
-table.black-table th{background:rgba(0,0,0,0.35);color:#f87171;padding:9px 8px;font-weight:700;text-align:center;border-bottom:1px solid var(--border);white-space:nowrap;}
-table.black-table td{padding:7px 8px;text-align:center;border-bottom:1px solid rgba(24,31,46,0.6);}
-table.black-table tr:last-child td{border-bottom:none;}
+table{width:100%;border-collapse:collapse;font-size:0.78rem;direction:ltr;}
+th{background:rgba(0,0,0,0.35);color:var(--gold);padding:9px 8px;font-weight:700;text-align:center;border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:7px 8px;text-align:center;border-bottom:1px solid rgba(24,31,46,0.6);}
+tr:last-child td{border-bottom:none;}
 tr:hover{background:rgba(255,255,255,0.02);}
 .rang-cell{font-weight:700;color:var(--muted);}
-.name-cell{text-align:left;font-weight:700;min-width:130px;}
+.name-cell{text-align:left;font-weight:600;min-width:130px;}
 .avg-cell{font-weight:900;color:var(--gold);}
 .pts-cell{color:#cbd5e1;}
 .zero{color:var(--red);font-weight:700;}
+.zero-bg{background:rgba(232,57,74,0.04);}
 .nwh-footer{text-align:center;padding:20px 16px;margin-top:14px;border-top:1px solid var(--border);color:var(--muted);font-size:0.85rem;line-height:1.8;}
 .nwh-footer .footer-shield{font-size:1.4rem;margin-bottom:4px;}
 .nwh-footer .footer-name{color:var(--gold);font-weight:900;letter-spacing:1px;}
 .nwh-footer .footer-credit{color:#94a3b8;font-size:0.8rem;}
+
+.section-head-red{padding:12px 14px;font-weight:900;font-size:0.95rem;border-bottom:1px solid rgba(232,57,74,0.2);display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent);color:var(--red);}
+.legend{display:flex;gap:18px;padding:10px 14px;font-size:0.78rem;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.legend span{display:flex;align-items:center;gap:6px;}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
 </style></head><body>
 <a href="../duel_stats.html"><div class="alliance-logo-wrap"><img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo"></div></a>
 <div class="alliance-name">[NWH] Night Watch</div>
-<div class="main-header">
-  <h1>⚠️ Black List — Duel VS</h1>
+<div class="main-header" style="border-color:rgba(232,57,74,0.4);">
+  <h1 style="color:#f87171;">⚠️ Black List — Duel VS</h1>
   <p class="subtitle">📅 29/06/2026 — 03/07/2026</p>
-  <p class="subtitle">اللاعبون تحت 2.6M (معدل الأيام المسجلة) — 23 لاعب</p>
+  <p class="subtitle">اللاعبون تحت 2.6M — 26 لاعب</p>
   <p class="subtitle" style="color:#f97316;margin-top:4px;">⚠️ جارٍ التحديث — الخميس والجمعة لم يُسجَّلا بعد</p>
 </div>
 <div class="section">
-  <div class="section-head">⚠️ قائمة اللاعبين المعنيين</div>
+  <div class="section-head-red">⚠️ قائمة اللاعبين المعنيين</div>
   <div class="legend">
     <span><span class="dot" style="background:#e8394a"></span> غائب يومين</span>
     <span><span class="dot" style="background:#f97316"></span> غائب يوم واحد</span>
     <span><span class="dot" style="background:#f5c518"></span> حاضر لكن تحت الهدف</span>
   </div>
   <div class="table-wrap">
-    <table class="black-table">
+    <table>
       <thead><tr>
         <th>#</th><th style="text-align:left">الاسم</th>
         <th>الإثنين</th><th>الثلاثاء</th><th>الأربعاء</th>
         <th>المعدل</th><th>أيام الغياب</th>
       </tr></thead>
-      <tbody><tr><td class="rang-cell">1</td><td class="name-cell">nadjme AB</td>
-        <td class="pts-cell">2K</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">604K</td>
-        <td class="avg-cell">303K</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">2</td><td class="name-cell">Al3rabxxx</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">352K</td>
-        <td class="avg-cell">352K</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">3</td><td class="name-cell">Moolaa7010</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
+      <tbody><tr><td class="rang-cell">1</td><td class="name-cell">Moolaa7010</td>
+        <td class="pts-cell">368K</td><td class="pts-cell">1.16M</td>
         <td class="pts-cell">398K</td>
-        <td class="avg-cell">398K</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">4</td><td class="name-cell">العامري1990</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">643K</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">2</td><td class="name-cell">Al3rabxxx</td>
+        <td class="pts-cell">927K</td><td class="pts-cell">757K</td>
+        <td class="pts-cell">352K</td>
+        <td class="avg-cell">679K</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">3</td><td class="name-cell">العامري1990</td>
+        <td class="pts-cell">569K</td><td class="pts-cell">963K</td>
         <td class="pts-cell">725K</td>
-        <td class="avg-cell">725K</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">5</td><td class="name-cell">ziyad2021</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">790K</td>
-        <td class="avg-cell">790K</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">6</td><td class="name-cell">فهد011</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">752K</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">4</td><td class="name-cell">nadjme AB</td>
+        <td class="pts-cell">1.88M</td><td class="pts-cell">3K</td>
+        <td class="pts-cell">604K</td>
+        <td class="avg-cell">830K</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">5</td><td class="name-cell">Talal079</td>
+        <td class="pts-cell">1.16M</td><td class="pts-cell">380K</td>
         <td class="pts-cell">1.15M</td>
-        <td class="avg-cell">1.15M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">7</td><td class="name-cell">Talal079</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.15M</td>
-        <td class="avg-cell">1.15M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">8</td><td class="name-cell">D 3 s</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.30M</td>
-        <td class="avg-cell">1.30M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">9</td><td class="name-cell">1xo</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.46M</td>
-        <td class="avg-cell">1.46M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">10</td><td class="name-cell">Mahmoud018</td>
-        <td class="pts-cell">1.90M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.08M</td>
-        <td class="avg-cell">1.49M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">11</td><td class="name-cell">DuRaiD ツ</td>
-        <td class="pts-cell">2.03M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.17M</td>
-        <td class="avg-cell">1.60M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">12</td><td class="name-cell">fahad 666</td>
-        <td class="pts-cell">1.90M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.35M</td>
-        <td class="avg-cell">1.63M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">13</td><td class="name-cell">mummum mum</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">894K</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">6</td><td class="name-cell">YAZED9</td>
+        <td class="pts-cell">1.05M</td><td class="pts-cell">900K</td>
+        <td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">975K</td>
+        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">7</td><td class="name-cell">mummum mum</td>
+        <td class="pts-cell">1.03M</td><td class="pts-cell">550K</td>
         <td class="pts-cell">1.63M</td>
-        <td class="avg-cell">1.63M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">14</td><td class="name-cell">Nazo dz</td>
-        <td class="pts-cell">2.04M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">1.31M</td>
-        <td class="avg-cell">1.67M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">15</td><td class="name-cell">أبو آلاء</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">1.07M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">8</td><td class="name-cell">ziyad2021</td>
+        <td class="pts-cell">1.48M</td><td class="pts-cell">1.15M</td>
+        <td class="pts-cell">790K</td>
+        <td class="avg-cell">1.14M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">9</td><td class="name-cell">أبو آلاء</td>
+        <td class="pts-cell">1.68M</td><td class="pts-cell">308K</td>
         <td class="pts-cell">1.72M</td>
-        <td class="avg-cell">1.72M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">16</td><td class="name-cell">alhatmi jawad</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">1.24M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">10</td><td class="name-cell">D 3 s</td>
+        <td class="pts-cell">774K</td><td class="pts-cell">1.70M</td>
+        <td class="pts-cell">1.30M</td>
+        <td class="avg-cell">1.26M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">11</td><td class="name-cell">DuRaiD ツ</td>
+        <td class="pts-cell">2.03M</td><td class="pts-cell">710K</td>
+        <td class="pts-cell">1.17M</td>
+        <td class="avg-cell">1.30M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">12</td><td class="name-cell">فهد011</td>
+        <td class="pts-cell">1.46M</td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="pts-cell">1.15M</td>
+        <td class="avg-cell">1.30M</td>
+        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">13</td><td class="name-cell">Mahmoud018</td>
+        <td class="pts-cell">1.90M</td><td class="pts-cell">1.58M</td>
+        <td class="pts-cell">1.08M</td>
+        <td class="avg-cell">1.52M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">14</td><td class="name-cell">alhatmi jawad</td>
+        <td class="pts-cell">1.65M</td><td class="pts-cell">1.21M</td>
         <td class="pts-cell">1.78M</td>
-        <td class="avg-cell">1.78M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">17</td><td class="name-cell">Tona911</td>
-        <td class="pts-cell">2.86M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">863K</td>
-        <td class="avg-cell">1.86M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">18</td><td class="name-cell">XxWarriorzxX</td>
-        <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">2.04M</td>
-        <td class="avg-cell">2.04M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">19</td><td class="name-cell">arifmk</td>
-        <td class="pts-cell">2.73M</td><td class="pts-cell"><span class="zero">—</span></td>
+        <td class="avg-cell">1.55M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">15</td><td class="name-cell">fahad 666</td>
+        <td class="pts-cell">1.90M</td><td class="pts-cell">1.70M</td>
+        <td class="pts-cell">1.35M</td>
+        <td class="avg-cell">1.65M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">16</td><td class="name-cell">1xo</td>
+        <td class="pts-cell">1.64M</td><td class="pts-cell">1.97M</td>
+        <td class="pts-cell">1.46M</td>
+        <td class="avg-cell">1.69M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">17</td><td class="name-cell">Nazo dz</td>
+        <td class="pts-cell">2.04M</td><td class="pts-cell">2.14M</td>
+        <td class="pts-cell">1.31M</td>
+        <td class="avg-cell">1.83M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">18</td><td class="name-cell">arifmk</td>
+        <td class="pts-cell">2.73M</td><td class="pts-cell">2.07M</td>
         <td class="pts-cell">1.36M</td>
-        <td class="avg-cell">2.05M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">20</td><td class="name-cell">Gogebakan</td>
+        <td class="avg-cell">2.06M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">19</td><td class="name-cell">bahaaliddyn</td>
+        <td class="pts-cell">1.86M</td><td class="pts-cell">1.72M</td>
+        <td class="pts-cell">2.77M</td>
+        <td class="avg-cell">2.12M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">20</td><td class="name-cell">XxWarriorzxX</td>
+        <td class="pts-cell">1.61M</td><td class="pts-cell">2.75M</td>
+        <td class="pts-cell">2.04M</td>
+        <td class="avg-cell">2.13M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">21</td><td class="name-cell">مارشل محمد</td>
+        <td class="pts-cell">2.45M</td><td class="pts-cell">1.67M</td>
+        <td class="pts-cell">2.48M</td>
+        <td class="avg-cell">2.20M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">22</td><td class="name-cell">Tona911</td>
+        <td class="pts-cell">2.86M</td><td class="pts-cell">3.25M</td>
+        <td class="pts-cell">863K</td>
+        <td class="avg-cell">2.32M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">23</td><td class="name-cell">Gogebakan</td>
         <td class="pts-cell">2.75M</td><td class="pts-cell"><span class="zero">—</span></td>
         <td class="pts-cell">1.94M</td>
         <td class="avg-cell">2.35M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">21</td><td class="name-cell">KrrM</td>
-        <td class="pts-cell">2.15M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">2.69M</td>
-        <td class="avg-cell">2.42M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">22</td><td class="name-cell">AMPUN BANG JAGO 45</td>
+        <td style="font-weight:900;color:#f97316">1</td></tr><tr><td class="rang-cell">24</td><td class="name-cell">AMPUN BANG JAGO 45</td>
         <td class="pts-cell"><span class="zero">—</span></td><td class="pts-cell"><span class="zero">—</span></td>
         <td class="pts-cell">2.44M</td>
         <td class="avg-cell">2.44M</td>
-        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">23</td><td class="name-cell">مارشل محمد</td>
-        <td class="pts-cell">2.45M</td><td class="pts-cell"><span class="zero">—</span></td>
-        <td class="pts-cell">2.48M</td>
-        <td class="avg-cell">2.47M</td>
-        <td style="font-weight:900;color:#f97316">1</td></tr></tbody>
+        <td style="font-weight:900;color:#e8394a">2</td></tr><tr><td class="rang-cell">25</td><td class="name-cell">Obead702</td>
+        <td class="pts-cell">5.38M</td><td class="pts-cell">1.17M</td>
+        <td class="pts-cell">1.03M</td>
+        <td class="avg-cell">2.53M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr><tr><td class="rang-cell">26</td><td class="name-cell">Laylalayla</td>
+        <td class="pts-cell">1.91M</td><td class="pts-cell">1.61M</td>
+        <td class="pts-cell">4.22M</td>
+        <td class="avg-cell">2.58M</td>
+        <td style="font-weight:900;color:#f5c518">0</td></tr></tbody>
     </table>
   </div>
 </div>
@@ -157,6 +172,5 @@ tr:hover{background:rgba(255,255,255,0.02);}
   <div class="footer-shield">🛡️</div>
   <div class="footer-name">NWH Night Watch</div>
   <div class="footer-credit">إعداد: MSBKH</div>
-  <div class="footer-credit">آخر تحديث: 01/07/2026</div>
-</div>
-</body></html>
+  <div class="footer-credit">آخر تحديث: 02/07/2026</div>
+</div></body></html>
