@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] تحليل تجهيزات الأبطال</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #080c10;
+    --card:   #131b24;
+    --border: #1e2d3d;
+    --gold:   #f5c518;
+    --red:    #e8394a;
+    --blue:   #3b82f6;
+    --text:   #e2e8f0;
+    --muted:  #64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:'Cairo',sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; padding:12px; font-size:14px; line-height:1.8;
+  }
+
+  /* HEADER */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo {
+    width:80px; height:80px; object-fit:contain; border-radius:12px;
+    filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center;
+    letter-spacing:2px; margin-bottom:6px; text-shadow:0 0 16px rgba(245,197,24,0.5);
+  }
+  .main-header {
+    text-align:center; padding:14px 16px 18px; margin-bottom:18px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid #8a6f0a; border-radius:16px; position:relative; overflow:hidden;
+  }
+  .main-header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%);
+    pointer-events:none;
+  }
+  .main-header h1 { font-size:1.2rem; font-weight:900; color:#e2e8f0; }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* GRID 2 COLONNES */
+  .analysis-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  @media (max-width: 640px) {
+    .analysis-grid { grid-template-columns:1fr; }
+  }
+
+  /* CARDS */
+  .analysis-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:14px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,0.5);
+  }
+  .card-header {
+    padding:12px 16px; font-weight:900; font-size:0.95rem;
+    display:flex; align-items:center; gap:8px;
+    border-bottom:1px solid var(--border);
+  }
+  .card-ar .card-header {
+    background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent);
+    color:var(--gold); border-bottom-color:rgba(245,197,24,0.2);
+    direction:rtl;
+  }
+  .card-en .card-header {
+    background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent);
+    color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2);
+    direction:ltr;
+  }
+  .card-body { padding:16px; }
+  .card-ar .card-body { direction:rtl; text-align:right; }
+  .card-en .card-body { direction:ltr; text-align:left; }
+
+  /* PARAGRAPHES */
+  .card-body p { margin-bottom:12px; color:#cbd5e1; font-size:0.85rem; line-height:1.9; }
+  .card-body p:last-child { margin-bottom:0; }
+
+  /* HIGHLIGHT */
+  .highlight-gold {
+    background:rgba(245,197,24,0.08); border:1px solid rgba(245,197,24,0.2);
+    border-radius:10px; padding:12px 14px; margin-bottom:12px;
+    color:var(--gold); font-weight:700; font-size:0.85rem; line-height:1.8;
+  }
+  .highlight-blue {
+    background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2);
+    border-radius:10px; padding:12px 14px; margin-bottom:12px;
+    color:#93c5fd; font-weight:700; font-size:0.85rem; line-height:1.8;
+  }
+  .highlight-red {
+    background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.2);
+    border-radius:10px; padding:12px 14px; margin-bottom:12px;
+    color:#fca5a5; font-size:0.82rem; line-height:1.8;
+  }
+
+  /* FOOTER */
+  .nwh-footer {
+    text-align:center; padding:20px 16px; margin-top:8px;
+    border-top:1px solid var(--border); color:var(--muted);
+    font-size:0.85rem; line-height:1.8;
+  }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>⚔️ تحليل تجهيزات أبطال الهجوم</h1>
+  <p class="subtitle">Offensive Heroes Gear Analysis — تحليل ثنائي اللغة</p>
+</div>
+
+<!-- GRID -->
+<div class="analysis-grid">
+
+  <!-- ARABE -->
+  <div class="analysis-card card-ar">
+    <div class="card-header">📌 العربية</div>
+    <div class="card-body">
+      <p>
+        يركز أغلب اللاعبين على تطوير السلاح والرقاقة لأبطال الهجوم مثل <strong>كيمبرلي</strong> و<strong>ستيتمان</strong>،
+        لكن يتم في المقابل إهمال الدرع والرادار.
+      </p>
+      <p>
+        يعتقد البعض أن وجود <strong>مورفي</strong> و<strong>ويليامز</strong> في الصف الأمامي كافٍ لحماية أبطال الصف الخلفي،
+        لكن هذا غير صحيح بشكل كامل.
+      </p>
+      <p>
+        فمورفي وويليامز يستطيعان امتصاص الهجمات المباشرة، لكنهما لا يستطيعان منع المهارات التي تتجاوز الصف الأمامي
+        أو تصيب عدة أهداف في وقت واحد، لذلك تصل هذه الهجمات إلى أبطال الصف الخلفي.
+      </p>
+      <p>
+        لهذا السبب، إذا كان مستوى الدرع والرادار منخفضًا لدى كيمبرلي أو ستيتمان، فقد يتم القضاء عليهما بسرعة
+        قبل أن يتمكنا من استخدام كامل قوتهما الهجومية، مهما كانت قوة أسلحتهما.
+      </p>
+      <p>
+        لذلك، بعد تطوير تجهيزات الهجوم، يُنصح بالعمل تدريجيًا على رفع الدرع والرادار أيضًا،
+        حتى يتمكن أبطال الهجوم من الصمود لفترة أطول وإطلاق مهاراتهم أكثر من مرة أثناء القتال.
+      </p>
+      <div class="highlight-gold">
+        🎯 الخلاصة: وجود مورفي وويليامز في المقدمة لا يعني أن أبطال الصف الخلفي محميون بالكامل،
+        لذلك من المهم تحقيق توازن بين قوة الهجوم وقوة الدفاع لأبطال الهجوم.
+      </div>
+      <div class="highlight-red">
+        ⚠️ ملاحظة: هذا تحليل مبني على طريقة عمل المعارك وتجارب اللاعبين، وليس معلومة رسمية من مطوري اللعبة.
+      </div>
+    </div>
+  </div>
+
+  <!-- ANGLAIS -->
+  <div class="analysis-card card-en">
+    <div class="card-header">📌 English</div>
+    <div class="card-body">
+      <p>
+        Most players focus on upgrading the <strong>Weapon</strong> and <strong>Chip</strong> of offensive heroes
+        like <strong>Kimberly</strong> and <strong>Stetmann</strong>, while often neglecting their <strong>Armor</strong> and <strong>Radar</strong>.
+      </p>
+      <p>
+        Many players believe that having <strong>Murphy</strong> and <strong>Williams</strong> on the front line
+        is enough to protect the backline. However, this is not entirely true.
+      </p>
+      <p>
+        Murphy and Williams are excellent at absorbing direct attacks, but they cannot block area-of-effect (AoE)
+        abilities or skills that bypass the front line and hit multiple targets.
+        As a result, your backline heroes can still take heavy damage.
+      </p>
+      <p>
+        If Kimberly or Stetmann have low Armor and Radar levels, they may die before dealing their full damage,
+        no matter how strong their Weapon and Chip are.
+      </p>
+      <p>
+        For this reason, once your offensive gear is well developed, it is recommended to gradually upgrade
+        the Armor and Radar of your damage dealers as well. Keeping them alive a few seconds longer can allow them
+        to cast additional skills and significantly increase your team's overall damage output.
+      </p>
+      <div class="highlight-blue">
+        🎯 Conclusion: Having Murphy and Williams on the front line does not guarantee complete protection
+        for your backline. Building a strong team is not only about maximizing attack, but also about giving
+        your damage dealers enough survivability to stay alive and make the most of their abilities.
+      </div>
+      <div class="highlight-red">
+        ⚠️ Note: This is a community-based analysis and combat observation, not an official statement
+        from the game developers. It is especially relevant in Arena and PvP battles where AoE damage is very common.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">يوليو 2026</div>
+</div>
+
+</body>
+</html>
