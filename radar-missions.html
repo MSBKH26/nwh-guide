@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل مهام الرادار الشامل | [NWH] Night Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080c10;
+    --card:#131b24;
+    --gold:#f5c518;
+    --red:#e8394a;
+    --blue:#3b82f6;
+    --green:#2ecc71;
+    --text:#e6e9ec;
+    --muted:#9aa4ae;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Cairo', sans-serif;
+    line-height:1.9;
+  }
+  a{color:var(--gold); text-decoration:none;}
+
+  /* ===== Header ===== */
+  header.site-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px 20px;
+    background:#0c1218;
+    border-bottom:1px solid rgba(245,197,24,0.25);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  header.site-header img{
+    width:46px;
+    height:46px;
+    border-radius:10px;
+    object-fit:cover;
+    border:1px solid rgba(245,197,24,0.4);
+  }
+  header.site-header .alliance-name{
+    color:var(--gold);
+    font-weight:800;
+    font-size:1.2rem;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:36px 20px 24px;
+    text-align:center;
+    background:radial-gradient(ellipse at top, rgba(245,197,24,0.08), transparent 60%);
+  }
+  .hero h1{
+    font-size:1.9rem;
+    color:var(--gold);
+    margin:0 0 8px;
+  }
+  .hero p{
+    color:var(--muted);
+    font-size:1.05rem;
+    margin:0;
+  }
+
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:10px 16px 60px;
+  }
+
+  /* ===== Section style (spec fournie) ===== */
+  .section{
+    margin:26px 0;
+    background:var(--card);
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.05);
+  }
+  .section-header{
+    background:linear-gradient(90deg, rgba(245,197,24,0.1), transparent);
+    border-bottom:1px solid rgba(245,197,24,0.2);
+    color:var(--gold);
+    padding:14px 18px;
+    font-size:1.2rem;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-body{
+    padding:18px;
+  }
+  .section-body p{margin:0 0 12px;}
+  .section-body ul, .section-body ol{
+    padding-inline-start:22px;
+    margin:0 0 12px;
+  }
+  .section-body li{margin-bottom:8px;}
+
+  /* ===== Alert / Announcement box ===== */
+  .alert-box{
+    background:linear-gradient(135deg, rgba(232,57,74,0.12), rgba(19,27,36,0.4));
+    border:1px solid rgba(232,57,74,0.4);
+    border-radius:14px;
+    padding:20px;
+    margin:26px 0;
+  }
+  .alert-box h3{
+    color:var(--red);
+    margin:0 0 12px;
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .alert-box p{margin:0 0 10px;}
+  .alert-box strong.highlight{
+    color:var(--gold);
+  }
+
+  /* ===== Flow diagram ===== */
+  .flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0;
+    margin:16px 0;
+  }
+  .flow-step{
+    background:#0c1218;
+    border:1px solid rgba(245,197,24,0.3);
+    border-radius:10px;
+    padding:12px 20px;
+    text-align:center;
+    min-width:220px;
+    font-weight:600;
+  }
+  .flow-step.red{border-color:rgba(232,57,74,0.5); color:var(--red);}
+  .flow-step.gold{border-color:var(--gold); color:var(--gold);}
+  .flow-step.blue{border-color:rgba(59,130,246,0.5); color:var(--blue);}
+  .flow-arrow{
+    color:var(--muted);
+    font-size:1.4rem;
+    margin:4px 0;
+  }
+
+  /* ===== States side by side ===== */
+  .states{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:16px 0;
+  }
+  @media(max-width:640px){ .states{grid-template-columns:1fr;} }
+  .state-card{
+    background:#0c1218;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .state-card .state-tag{
+    padding:10px 14px;
+    font-weight:800;
+    text-align:center;
+  }
+  .state-card.a .state-tag{background:rgba(46,204,113,0.12); color:var(--green);}
+  .state-card.b .state-tag{background:rgba(232,57,74,0.12); color:var(--red);}
+  .state-card img{
+    width:100%;
+    display:block;
+    background:#000;
+    min-height:160px;
+    object-fit:cover;
+  }
+  .state-card .state-desc{
+    padding:12px 14px;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  .img-placeholder{
+    width:100%;
+    min-height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    background:repeating-linear-gradient(45deg, #0c1218, #0c1218 10px, #10161d 10px, #10161d 20px);
+  }
+
+  /* ===== Stack comparison ===== */
+  .stack-compare{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:16px 0;
+  }
+  .stack-box{
+    flex:1;
+    min-width:150px;
+    max-width:220px;
+    text-align:center;
+    border-radius:12px;
+    padding:20px 10px;
+    font-weight:800;
+    font-size:1.3rem;
+  }
+  .stack-box.bad{background:rgba(232,57,74,0.12); border:1px solid rgba(232,57,74,0.5); color:var(--red);}
+  .stack-box.good{background:rgba(46,204,113,0.12); border:1px solid rgba(46,204,113,0.5); color:var(--green);}
+  .stack-box span{display:block; font-size:0.9rem; font-weight:600; margin-top:6px; color:var(--text);}
+
+  /* ===== Table ===== */
+  table.weekly{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+  }
+  table.weekly th, table.weekly td{
+    border:1px solid rgba(255,255,255,0.08);
+    padding:10px 12px;
+    text-align:center;
+  }
+  table.weekly th{
+    background:rgba(245,197,24,0.1);
+    color:var(--gold);
+  }
+  table.weekly td.collect{color:var(--green); font-weight:700;}
+  table.weekly td.stack{color:var(--blue); font-weight:700;}
+  table.weekly td.prepare{color:var(--gold); font-weight:700;}
+
+  /* ===== Mistakes list ===== */
+  .mistakes-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .mistakes-list li::before{
+    content:"❌";
+    flex-shrink:0;
+  }
+
+  /* ===== FAQ ===== */
+  details.faq-item{
+    background:#0c1218;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;
+    padding:12px 16px;
+    margin-bottom:10px;
+  }
+  details.faq-item summary{
+    color:var(--gold);
+    font-weight:700;
+    cursor:pointer;
+    outline:none;
+  }
+  details.faq-item p{
+    margin:10px 0 0;
+    color:var(--muted);
+  }
+
+  /* ===== Advanced tips ===== */
+  .tips-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:12px;
+    margin:12px 0;
+  }
+  .tip-card{
+    background:#0c1218;
+    border:1px solid rgba(59,130,246,0.3);
+    border-radius:10px;
+    padding:14px;
+  }
+  .tip-card .tip-title{
+    color:var(--blue);
+    font-weight:700;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  /* ===== Footer ===== */
+  footer.site-footer{
+    text-align:center;
+    padding:24px 16px;
+    color:var(--muted);
+    border-top:1px solid rgba(245,197,24,0.15);
+    font-size:0.9rem;
+  }
+  footer.site-footer .foot-name{
+    color:var(--gold);
+    font-weight:700;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html"><img src="../images/logo_alliance.jpg" alt="شعار التحالف"></a>
+  <span class="alliance-name">[NWH] Night Watch</span>
+</header>
+
+<div class="hero">
+  <h1>📡 دليل مهام الرادار الشامل</h1>
+  <p>كيف تعظّم نقاط دوري المبارزة دون أن تخسر أي مهمة</p>
+</div>
+
+<main>
+
+  <!-- 1. مقدمة -->
+  <div class="section">
+    <div class="section-header">1️⃣ مقدمة</div>
+    <div class="section-body">
+      <p>مهام الرادار هي مهام يومية تظهر على الخريطة وتمنحك مكافآت متنوعة، وهي من أهم مصادر النقاط في اللعبة إذا استُغلت بالطريقة الصحيحة.</p>
+      <p>لماذا هي مهمة؟ لأنها تمنحك:</p>
+      <ul>
+        <li>💰 موارد (RSS) لتطوير المبنى والبحث</li>
+        <li>⚡ استهلاك ستامينا يُحتسب في سباق التسلح</li>
+        <li>🏆 نقاط في دوري المبارزة (Duel VS) عند جمعها في اليوم الصحيح</li>
+      </ul>
+      <p>في هذا الدليل ستتعلم كيف تدير مهام الرادار بذكاء بدل أن تجمعها بشكل عشوائي وتخسر نقاطاً ثمينة.</p>
+    </div>
+  </div>
+
+  <!-- توضيح مهم رسمي -->
+  <div class="alert-box">
+    <h3>📢 توضيح مهم بخصوص مهام الرادار</h3>
+    <p>السلام عليكم ورحمة الله وبركاته،</p>
+    <p>نلاحظ أن بعض الأعضاء يستهلكون مهام الرادار قبل يومها المخصص، لذلك نرجو الانتباه للطريقة الصحيحة:</p>
+    <p><strong class="highlight">A:</strong> في البداية تكون مهمة الرادار كما في الصورة A. أنجز المهمة بشكل عادي.</p>
+    <p><strong class="highlight">B:</strong> بعد إكمالها ستتحول إلى الحالة الموجودة في الصورة B، وستظهر عليها النقطة الحمراء 🔴، وهذا يعني أنها جاهزة للاستلام.</p>
+    <p>❌ لا تضغط عليها ولا تستلمها خارج يوم الرادار.</p>
+    <p>✅ اترك جميع المهام بهذه الحالة (مع النقطة الحمراء) حتى يحين يوم الرادار، ثم قم باستلامها لتحصل على نقاط VS.</p>
+    <p><strong class="highlight">تذكير مهم:</strong> إنجاز المهمة مسموح، أما استلام المكافأة فيجب تأجيله إلى يوم الرادار فقط.</p>
+  </div>
+
+  <!-- 2. كيف يعمل الرادار -->
+  <div class="section">
+    <div class="section-header">2️⃣ كيف يعمل الرادار</div>
+    <div class="section-body">
+      <p>آلية عمل مهمة الرادار تمر بأربع مراحل بسيطة:</p>
+      <div class="flow">
+        <div class="flow-step">🗺️ تظهر المهمة على الخريطة</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step blue">⚔️ تقوم بتنفيذها</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step red">🔴 نقطة حمراء تظهر</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step gold">⏳ أنت من يقرر متى يستلم المكافأة</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. الحالتان -->
+  <div class="section">
+    <div class="section-header">3️⃣ الحالتان الأساسيتان</div>
+    <div class="section-body">
+      <p>كل مهمة رادار تمر بحالتين فقط، ومن الضروري التفريق بينهما:</p>
+      <div class="states">
+        <div class="state-card a">
+          <div class="state-tag">🟢 الحالة A — مهمة غير منتهية</div>
+          <img src="../images/radar-state-a.jpg" alt="مهمة رادار غير منتهية - الحالة A" onerror="this.outerHTML='&lt;div class=&quot;img-placeholder&quot;&gt;📷 ضع هنا الصورة: images/radar-state-a.jpg&lt;/div&gt;'">
+          <div class="state-desc">المهمة ما زالت بحاجة إلى تنفيذ من طرفك (قتال، جمع موارد، إرسال فرقة...).</div>
+        </div>
+        <div class="state-card b">
+          <div class="state-tag">🔴 الحالة B — مهمة منتهية</div>
+          <img src="../images/radar-state-b.jpg" alt="مهمة رادار منتهية مع نقطة حمراء - الحالة B" onerror="this.outerHTML='&lt;div class=&quot;img-placeholder&quot;&gt;📷 ضع هنا الصورة: images/radar-state-b.jpg&lt;/div&gt;'">
+          <div class="state-desc">النقطة الحمراء 🔴 ظهرت، المكافأة 🎁 جاهزة للاستلام — لكن لا تستلمها إلا يوم الرادار المحدد!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. أكبر خطأ -->
+  <div class="section">
+    <div class="section-header">4️⃣ أكبر خطأ يرتكبه اللاعبون</div>
+    <div class="section-body">
+      <p>❌ أغلب اللاعبين يضغطون مباشرة على المهمة فور ظهور النقطة الحمراء ويستلمون المكافأة دون تفكير.</p>
+      <p>النتيجة: هم يخسرون نقاط دوري المبارزة (Duel VS) التي كانت ستُحتسب لو انتظروا اليوم المناسب لجمع المهام.</p>
+    </div>
+  </div>
+
+  <!-- 5. الطريقة الصحيحة -->
+  <div class="section">
+    <div class="section-header">5️⃣ الطريقة الصحيحة</div>
+    <div class="section-body">
+      <div class="flow">
+        <div class="flow-step">📷 الصورة A — مهمة غير منجزة</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step blue">⚔️ إنجاز المهمة</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step">📷 الصورة B — نقطة حمراء ظاهرة</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step red">🚫 لا تضغط عليها</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step gold">⏳ انتظر يوم 1 أو يوم 5 من دوري المبارزة</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step">✅ اضغط "Collect All"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. استراتيجية التكديس -->
+  <div class="section">
+    <div class="section-header">6️⃣ استراتيجية التكديس (Stack Strategy)</div>
+    <div class="section-body">
+      <p>هذه من أهم النقاط في هذا الدليل. اترك دائماً خانة فارغة واحدة على الأقل في مخزون مهام الرادار.</p>
+      <p>لماذا؟ لأنه عندما يصل عدّاد المهام إلى الحد الأقصى (مثلاً 35/35)، يتوقف مؤقت ظهور المهام الجديدة ❌، وبالتالي تخسر مهاماً كاملة كانت ستُضاف.</p>
+      <div class="stack-compare">
+        <div class="stack-box bad">35/35 ❌<span>المخزون ممتلئ، المؤقت متوقف، خسارة مهام</span></div>
+        <div class="stack-box good">34/35 ✅<span>خانة فارغة، المؤقت يعمل، لا خسارة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. التخطيط الأسبوعي -->
+  <div class="section">
+    <div class="section-header">7️⃣ التخطيط الأسبوعي المثالي</div>
+    <div class="section-body">
+      <p>مثال على جدول أسبوعي لإدارة مهام الرادار (عدّله حسب تقويم دوري المبارزة الخاص بسيرفرك):</p>
+      <table class="weekly">
+        <thead>
+          <tr><th>اليوم</th><th>الإجراء</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>الأحد</td><td class="prepare">🟡 تحضير</td></tr>
+          <tr><td>الاثنين</td><td class="collect">🟢 استلام</td></tr>
+          <tr><td>الثلاثاء</td><td class="stack">🔵 تكديس</td></tr>
+          <tr><td>الأربعاء</td><td class="collect">🟢 استلام</td></tr>
+          <tr><td>الخميس</td><td class="stack">🔵 تكديس</td></tr>
+          <tr><td>الجمعة</td><td class="collect">🟢 استلام</td></tr>
+        </tbody>
+      </table>
+      <p>⚠️ عدّل الأيام حسب مواعيد أيام 1 و3 و5 من دوري المبارزة في سيرفرك.</p>
+    </div>
+  </div>
+
+  <!-- 8. الرادار + سباق التسلح -->
+  <div class="section">
+    <div class="section-header">8️⃣ الرادار وسباق التسلح (Arms Race)</div>
+    <div class="section-body">
+      <p>كثير من اللاعبين لا يعرفون هذه: بعض مهام الرادار تستهلك ستامينا. إذاً يمكنك مضاعفة الفائدة:</p>
+      <div class="flow">
+        <div class="flow-step blue">🚀 مرحلة Drone Boost</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step">⚔️ إنجاز المهمة (استهلاك ستامينا)</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step red">🚫 لا تستلم المكافأة الآن</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step gold">✅ استلمها يوم دوري المبارزة</div>
+      </div>
+      <p>بهذه الطريقة تحصل على نقاط سباق التسلح من استهلاك الستامينا، ثم نقاط دوري المبارزة عند الاستلام لاحقاً — تعظيم مزدوج 💪.</p>
+    </div>
+  </div>
+
+  <!-- 9. الأخطاء الشائعة -->
+  <div class="section">
+    <div class="section-header">9️⃣ الأخطاء الشائعة</div>
+    <div class="section-body">
+      <ul class="mistakes-list">
+        <li>الوصول إلى 35/35 وتوقف ظهور مهام جديدة</li>
+        <li>استلام المكافأة مباشرة بعد ظهور النقطة الحمراء</li>
+        <li>ترك مهمة حتى تنتهي مدتها فتختفي دون تنفيذها</li>
+        <li>استهلاك الستامينا خارج فترة Drone Boost</li>
+        <li>نسيان مهمة Doom Walker وعدم المشاركة فيها</li>
+        <li>عدم التنسيق مع أعضاء التحالف لمساعدة بعضهم البعض</li>
+        <li>استلام كل المهام دفعة واحدة دون مراعاة يوم دوري المبارزة</li>
+        <li>عدم متابعة مؤقت ظهور المهام الجديدة</li>
+        <li>تجاهل مهمة الكنز (Treasure) رغم ندرتها وقيمتها</li>
+        <li>عدم استخدام "Quick Execute" عند توفرها لتوفير الوقت</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 10. الأسئلة الشائعة -->
+  <div class="section">
+    <div class="section-header">🔟 الأسئلة الشائعة</div>
+    <div class="section-body">
+      <details class="faq-item">
+        <summary>لماذا أرى نقطة حمراء على مهمة لم ألمسها؟</summary>
+        <p>عندما تكون في تحالف، يمكن لأعضاء آخرين مساعدتك في إنجاز مهمتك، فتظهر النقطة الحمراء تلقائياً دون أن تنفق ستامينا.</p>
+      </details>
+      <details class="faq-item">
+        <summary>هل تنتهي صلاحية المهام؟</summary>
+        <p>نعم، لكل مهمة عداد تنازلي خاص بها. إذا لم تُنجز خلال هذه المدة فإنها تختفي تلقائياً.</p>
+      </details>
+      <details class="faq-item">
+        <summary>هل يتوقف المؤقت الخاص بظهور المهام الجديدة؟</summary>
+        <p>نعم، عندما يمتلئ المخزون بالكامل (مثال: 35/35) يتوقف المؤقت. لهذا ننصح بترك خانة واحدة فارغة دائماً.</p>
+      </details>
+      <details class="faq-item">
+        <summary>لماذا يُنصح بالبقاء عند 34/35 بدل 35/35؟</summary>
+        <p>لأن البقاء عند 34/35 يبقي مؤقت ظهور المهام الجديدة يعمل، بينما 35/35 يوقفه وتخسر مهاماً كانت ستُضاف.</p>
+      </details>
+      <details class="faq-item">
+        <summary>هل يمكنني الاحتفاظ بمهمة لعدة أيام؟</summary>
+        <p>نعم، طالما بقيت في حالة "منتهية مع نقطة حمراء" ولم تُستلم، يمكنك تأجيل استلامها إلى يوم دوري المبارزة الأنسب.</p>
+      </details>
+    </div>
+  </div>
+
+  <!-- 11. حساب نقاط دوري المبارزة -->
+  <div class="section">
+    <div class="section-header">1️⃣1️⃣ 🧮 احسب نقاطك في دوري المبارزة</div>
+    <div class="section-body">
+      <p>هذا رقم لا يجب أن يفوتك أبداً 👇</p>
+      <p>كل مهمة رادار واحدة تمنحك تقريباً <strong style="color:var(--gold)">25,000 نقطة</strong> في دوري المبارزة (Duel VS) عند استلامها في اليوم الصحيح.</p>
+      <p>وباتباع استراتيجية التكديس التي شرحناها في هذا الدليل، أنت تصل ليوم الاستلام بـ:</p>
+      <ul>
+        <li>📦 <strong>40 مهمة</strong> مخزّنة مسبقاً (Stack)</li>
+        <li>➕ <strong>40 مهمة</strong> جديدة تحصل عليها يوم الاستهلاك نفسه</li>
+      </ul>
+      <p>المجموع: <strong style="color:var(--blue)">80 مهمة</strong> جاهزة للاستلام دفعة واحدة.</p>
+
+      <div class="stack-compare" style="margin-top:18px;">
+        <div class="stack-box good" style="max-width:180px;">80 مهمة<span>إجمالي المهام الجاهزة</span></div>
+        <div class="stack-box good" style="max-width:180px;">× 25,000<span>نقطة لكل مهمة</span></div>
+        <div class="stack-box bad" style="max-width:220px; background:rgba(245,197,24,0.12); border-color:var(--gold); color:var(--gold);">≈ 2,000,000<span>نقطة في دوري المبارزة 🏆</span></div>
+      </div>
+
+      <p style="margin-top:16px;">🚨 حوالي <strong style="color:var(--red)">مليوني نقطة</strong> في يوم واحد فقط — هذا ما تخسره إذا استلمت مهامك بشكل عشوائي بدل التكديس والانتظار ليوم دوري المبارزة الصحيح!</p>
+    </div>
+  </div>
+
+  <!-- 12. خلاصة -->
+  <div class="section">
+    <div class="section-header">1️⃣2️⃣ خلاصة</div>
+    <div class="section-body">
+      <p>مهام الرادار ليست مجرد مهام عادية، بل أداة استراتيجية لتعظيم نقاطك في دوري المبارزة وسباق التسلح. القاعدة الذهبية: <strong style="color:var(--gold)">أنجِز باستمرار، لا تستلم إلا يوم الرادار، وابقَ دائماً عند 34/35</strong>.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  🛡️ <span class="foot-name">[NWH] Night Watch</span> — إعداد: MSBKH<br>
+  آخر تحديث: 13 يوليو 2026
+</footer>
+
+</body>
+</html>
