@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] دليل اليوم الأول — VS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #080c10;
+    --card:   #131b24;
+    --border: #1e2d3d;
+    --gold:   #f5c518;
+    --orange: #f97316;
+    --red:    #e8394a;
+    --text:   #e2e8f0;
+    --muted:  #64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:'Cairo',sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; padding:12px; font-size:14px; line-height:1.8;
+  }
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo {
+    width:80px; height:80px; object-fit:contain; border-radius:12px;
+    filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center;
+    letter-spacing:2px; margin-bottom:6px; text-shadow:0 0 16px rgba(245,197,24,0.5);
+  }
+  .main-header {
+    text-align:center; padding:14px 16px 18px; margin-bottom:14px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid rgba(245,197,24,0.4); border-radius:16px; position:relative; overflow:hidden;
+  }
+  .main-header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%);
+    pointer-events:none;
+  }
+  .main-header h1 { font-size:1.35rem; font-weight:900; color:var(--gold); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* Target banner */
+  .target-banner {
+    display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .target-box {
+    flex:1; min-width:150px; border-radius:14px; padding:14px 12px; text-align:center;
+    border:1px solid var(--border); background:var(--card);
+  }
+  .target-box .label {
+    font-size:0.72rem; color:var(--muted); font-weight:700; letter-spacing:1px; margin-bottom:6px;
+  }
+  .target-box .value {
+    font-size:1.5rem; font-weight:900;
+  }
+  .target-box.min { border-color:rgba(249,115,22,0.5); }
+  .target-box.min .value { color:var(--orange); }
+  .target-box.goal { border-color:rgba(245,197,24,0.5); }
+  .target-box.goal .value { color:var(--gold); }
+
+  .section {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.5); margin-bottom:14px;
+  }
+  .section-head {
+    padding:12px 14px; font-weight:900; font-size:0.95rem;
+    border-bottom:1px solid rgba(245,197,24,0.2); display:flex; align-items:center; gap:8px;
+    background:linear-gradient(270deg,rgba(245,197,24,0.12),transparent);
+  }
+  .section-head.orange { color:var(--orange); border-bottom-color:rgba(249,115,22,0.25); background:linear-gradient(270deg,rgba(249,115,22,0.12),transparent); }
+  .section-head.gold { color:var(--gold); border-bottom-color:rgba(245,197,24,0.25); background:linear-gradient(270deg,rgba(245,197,24,0.12),transparent); }
+
+  .intro-text { padding:14px 16px; font-size:0.9rem; color:var(--text); }
+  .intro-text p { margin-bottom:10px; }
+  .intro-text p:last-child { margin-bottom:0; }
+
+  .table-wrap { overflow-x:auto; }
+  table.calc-table {
+    width:100%; border-collapse:collapse; font-size:0.85rem;
+  }
+  table.calc-table th {
+    background:rgba(0,0,0,0.35); padding:9px 10px;
+    font-weight:700; text-align:right; border-bottom:1px solid var(--border);
+    white-space:nowrap; color:var(--muted); font-size:0.75rem;
+  }
+  table.calc-table td {
+    padding:9px 10px; text-align:right;
+    border-bottom:1px solid rgba(24,31,46,0.6);
+  }
+  table.calc-table tr:last-child td { border-bottom:none; }
+  table.calc-table .pts { font-weight:700; color:var(--text); text-align:left; direction:ltr; }
+  .total-row {
+    background:rgba(245,197,24,0.06);
+  }
+  .total-row td { font-weight:900; padding:12px 10px; }
+  .total-row.orange { background:rgba(249,115,22,0.08); }
+  .total-row.orange td { color:var(--orange); }
+  .total-row.gold td { color:var(--gold); }
+
+  /* Final result card */
+  .final-result {
+    text-align:center; padding:22px 16px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid rgba(245,197,24,0.5); border-radius:16px; margin-bottom:14px;
+    position:relative; overflow:hidden;
+  }
+  .final-result::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.1),transparent 70%);
+    pointer-events:none;
+  }
+  .final-result .eq {
+    font-size:0.95rem; color:var(--muted); font-weight:700; direction:ltr; margin-bottom:8px;
+  }
+  .final-result .big {
+    font-size:2rem; font-weight:900; color:var(--gold);
+    text-shadow:0 0 20px rgba(245,197,24,0.5); direction:ltr;
+  }
+  .final-result .badge {
+    display:inline-block; margin-top:12px; padding:6px 16px; border-radius:20px;
+    background:rgba(245,197,24,0.15); border:1px solid rgba(245,197,24,0.4);
+    color:var(--gold); font-weight:900; font-size:0.85rem;
+  }
+
+  .note-box {
+    padding:12px 14px; font-size:0.82rem; color:var(--muted);
+    border-top:1px dashed var(--border); background:rgba(0,0,0,0.15);
+  }
+
+  /* CTA */
+  .cta {
+    text-align:center; padding:20px 16px;
+    background:linear-gradient(135deg,rgba(249,115,22,0.1),rgba(245,197,24,0.08));
+    border:1px solid rgba(245,197,24,0.4); border-radius:16px; margin-bottom:14px;
+  }
+  .cta .headline {
+    font-size:1.05rem; font-weight:900; color:var(--gold); margin-bottom:10px; line-height:1.7;
+  }
+  .cta .sub {
+    font-size:0.88rem; color:var(--text); font-weight:700;
+  }
+  .cta .fire { font-size:1.4rem; margin-bottom:6px; }
+
+  .nwh-footer {
+    text-align:center; padding:20px 16px; margin-top:14px;
+    border-top:1px solid var(--border); color:var(--muted);
+    font-size:0.85rem; line-height:1.8;
+  }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>🔥 اليوم الأول — VS</h1>
+  <p class="subtitle">التنظيم، استغلال الموارد، ومشاركة الجميع</p>
+</div>
+
+<!-- Target banner -->
+<div class="target-banner">
+  <div class="target-box min">
+    <div class="label">MINIMUM</div>
+    <div class="value">3.6M</div>
+  </div>
+  <div class="target-box goal">
+    <div class="label">GOAL</div>
+    <div class="value">7.2M</div>
+  </div>
+</div>
+
+<!-- Intro -->
+<div class="section">
+  <div class="section-head">👋 السلام عليكم ورحمة الله وبركاته</div>
+  <div class="intro-text">
+    <p>غدًا نبدأ اليوم الأول من VS، ونريد أن نبدأ هذا الأسبوع بطريقة مختلفة: بتنظيم أفضل، واستغلال صحيح للموارد، ومشاركة من الجميع.</p>
+    <p>ولكي تكون الصورة واضحة، إليكم مثالًا بسيطًا يوضح أن الوصول إلى <b style="color:var(--orange)">3.6M</b> ليس صعبًا كما يعتقد البعض.</p>
+  </div>
+</div>
+
+<!-- 3.6M calculation -->
+<div class="section">
+  <div class="section-head orange">🎯 كيف تصل إلى 3.6M بسهولة في اليوم الأول؟</div>
+  <div class="table-wrap">
+    <table class="calc-table">
+      <thead>
+        <tr><th>المورد</th><th>النقاط</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>80 مهمة رادار</td><td class="pts">2,000,000</td></tr>
+        <tr><td>300 طاقة (Stamina)</td><td class="pts">240,000</td></tr>
+        <tr><td>100 قطعة درون (Drone Parts)</td><td class="pts">500,000</td></tr>
+        <tr><td>100K بيانات قتال الدرون (Drone Combat Data)</td><td class="pts">600,000</td></tr>
+        <tr><td>100M خبرة أبطال (Hero EXP)</td><td class="pts">≈ 303,000</td></tr>
+        <tr class="total-row orange">
+          <td>المجموع</td>
+          <td class="pts">≈ 3,643,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box">بهذه الموارد العادية فقط، تصل إلى 3.6M وتفتح الصناديق المطلوبة، حتى دون احتساب نقاط جمع الموارد (Gathering). الفكرة ليست أن تمتلك كميات ضخمة من الموارد، بل أن تخزن الموارد المناسبة وتستخدمها في اليوم المناسب.</div>
+</div>
+
+<!-- 7.2M calculation -->
+<div class="section">
+  <div class="section-head gold">🏆 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد</div>
+  <div class="intro-text" style="padding-bottom:0;">
+    <p>بعد الوصول إلى 3.6M، تحتاج إلى حوالي 3.6M إضافية لفتح صندوق 7.2M. وهذا مثال آخر:</p>
+  </div>
+  <div class="table-wrap">
+    <table class="calc-table">
+      <thead>
+        <tr><th>المورد الإضافي</th><th>النقاط</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>جمع الموارد بـ3 فرق لمدة 16 ساعة</td><td class="pts">≈ 1,000,000</td></tr>
+        <tr><td>200 Drone Parts إضافية</td><td class="pts">1,000,000</td></tr>
+        <tr><td>200K Drone Combat Data إضافية</td><td class="pts">1,200,000</td></tr>
+        <tr><td>100M Hero EXP إضافية</td><td class="pts">≈ 303,000</td></tr>
+        <tr><td>150 Stamina إضافية</td><td class="pts">120,000</td></tr>
+        <tr class="total-row gold">
+          <td>النقاط الإضافية</td>
+          <td class="pts">≈ 3,623,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box">والأهم أن حوالي 1M نقطة يمكن الحصول عليها من جمع الموارد وحده، دون استهلاك أي موارد مخزنة.</div>
+</div>
+
+<!-- Final result -->
+<div class="final-result">
+  <div class="eq">3,643,000 + 3,623,000</div>
+  <div class="big">= 7,266,000</div>
+  <div class="badge">🏆 جميع صناديق VS مفتوحة</div>
+</div>
+
+<!-- Disclaimer -->
+<div class="section">
+  <div class="intro-text">
+    <p>هذه الحسابات مجرد أمثلة وليست طريقة إلزامية يجب اتباعها حرفيًا.</p>
+    <p>الهدف منها أن نوضح للجميع أن <b style="color:var(--orange)">3.6M</b> هدف سهل جدًا مع القليل من التنظيم، وأن <b style="color:var(--gold)">7.2M</b> أيضًا هدف واقعي لمن يملك موارد إضافية ويستغلها بشكل صحيح.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="fire">🔥</div>
+  <div class="headline">
+    غدًا لا نريد أن نرى أي عضو تحت 3.6M،<br>
+    ونتمنى أن نراكم جميعًا وقد فتحتم صندوق 7.2M.
+  </div>
+  <div class="sub">كلما نظّم كل عضو موارده واستغلها في يومها الصحيح، تطوّر حسابه بشكل أسرع، حصل على مكافآت أكثر، وساهم في تحقيق الفوز للتحالف.<br><br>غدًا نريد أن نرى الفرق. أرونا ما تستطيعون فعله، ولنبدأ أسبوع VS بقوة! 💪</div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Prepared by: MSBKH</div>
+  <div class="footer-credit">Last updated: August 2026</div>
+</div>
+
+</body>
+</html>
