@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Day 1 Guide — VS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #080c10;
+    --card:   #131b24;
+    --border: #1e2d3d;
+    --gold:   #f5c518;
+    --orange: #f97316;
+    --red:    #e8394a;
+    --text:   #e2e8f0;
+    --muted:  #64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:'Cairo',sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; padding:12px; font-size:14px; line-height:1.8;
+  }
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo {
+    width:80px; height:80px; object-fit:contain; border-radius:12px;
+    filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center;
+    letter-spacing:2px; margin-bottom:6px; text-shadow:0 0 16px rgba(245,197,24,0.5);
+  }
+  .main-header {
+    text-align:center; padding:14px 16px 18px; margin-bottom:14px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid rgba(245,197,24,0.4); border-radius:16px; position:relative; overflow:hidden;
+  }
+  .main-header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%);
+    pointer-events:none;
+  }
+  .main-header h1 { font-size:1.35rem; font-weight:900; color:var(--gold); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* Target banner */
+  .target-banner {
+    display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .target-box {
+    flex:1; min-width:150px; border-radius:14px; padding:14px 12px; text-align:center;
+    border:1px solid var(--border); background:var(--card);
+  }
+  .target-box .label {
+    font-size:0.72rem; color:var(--muted); font-weight:700; letter-spacing:1px; margin-bottom:6px;
+  }
+  .target-box .value {
+    font-size:1.5rem; font-weight:900;
+  }
+  .target-box.min { border-color:rgba(249,115,22,0.5); }
+  .target-box.min .value { color:var(--orange); }
+  .target-box.goal { border-color:rgba(245,197,24,0.5); }
+  .target-box.goal .value { color:var(--gold); }
+
+  .section {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.5); margin-bottom:14px;
+  }
+  .section-head {
+    padding:12px 14px; font-weight:900; font-size:0.95rem;
+    border-bottom:1px solid rgba(245,197,24,0.2); display:flex; align-items:center; gap:8px;
+    background:linear-gradient(90deg,rgba(245,197,24,0.12),transparent);
+  }
+  .section-head.orange { color:var(--orange); border-bottom-color:rgba(249,115,22,0.25); background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent); }
+  .section-head.gold { color:var(--gold); border-bottom-color:rgba(245,197,24,0.25); background:linear-gradient(90deg,rgba(245,197,24,0.12),transparent); }
+
+  .intro-text { padding:14px 16px; font-size:0.9rem; color:var(--text); }
+  .intro-text p { margin-bottom:10px; }
+  .intro-text p:last-child { margin-bottom:0; }
+
+  .table-wrap { overflow-x:auto; }
+  table.calc-table {
+    width:100%; border-collapse:collapse; font-size:0.85rem;
+  }
+  table.calc-table th {
+    background:rgba(0,0,0,0.35); padding:9px 10px;
+    font-weight:700; text-align:left; border-bottom:1px solid var(--border);
+    white-space:nowrap; color:var(--muted); font-size:0.75rem;
+  }
+  table.calc-table td {
+    padding:9px 10px; text-align:left;
+    border-bottom:1px solid rgba(24,31,46,0.6);
+  }
+  table.calc-table tr:last-child td { border-bottom:none; }
+  table.calc-table .pts { font-weight:700; color:var(--text); text-align:right; }
+  .total-row {
+    background:rgba(245,197,24,0.06);
+  }
+  .total-row td { font-weight:900; padding:12px 10px; }
+  .total-row.orange { background:rgba(249,115,22,0.08); }
+  .total-row.orange td { color:var(--orange); }
+  .total-row.gold td { color:var(--gold); }
+
+  /* Final result card */
+  .final-result {
+    text-align:center; padding:22px 16px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid rgba(245,197,24,0.5); border-radius:16px; margin-bottom:14px;
+    position:relative; overflow:hidden;
+  }
+  .final-result::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.1),transparent 70%);
+    pointer-events:none;
+  }
+  .final-result .eq {
+    font-size:0.95rem; color:var(--muted); font-weight:700; margin-bottom:8px;
+  }
+  .final-result .big {
+    font-size:2rem; font-weight:900; color:var(--gold);
+    text-shadow:0 0 20px rgba(245,197,24,0.5);
+  }
+  .final-result .badge {
+    display:inline-block; margin-top:12px; padding:6px 16px; border-radius:20px;
+    background:rgba(245,197,24,0.15); border:1px solid rgba(245,197,24,0.4);
+    color:var(--gold); font-weight:900; font-size:0.85rem;
+  }
+
+  .note-box {
+    padding:12px 14px; font-size:0.82rem; color:var(--muted);
+    border-top:1px dashed var(--border); background:rgba(0,0,0,0.15);
+  }
+
+  /* CTA */
+  .cta {
+    text-align:center; padding:20px 16px;
+    background:linear-gradient(135deg,rgba(249,115,22,0.1),rgba(245,197,24,0.08));
+    border:1px solid rgba(245,197,24,0.4); border-radius:16px; margin-bottom:14px;
+  }
+  .cta .headline {
+    font-size:1.05rem; font-weight:900; color:var(--gold); margin-bottom:10px; line-height:1.7;
+  }
+  .cta .sub {
+    font-size:0.88rem; color:var(--text); font-weight:700;
+  }
+  .cta .fire { font-size:1.4rem; margin-bottom:6px; }
+
+  .nwh-footer {
+    text-align:center; padding:20px 16px; margin-top:14px;
+    border-top:1px solid var(--border); color:var(--muted);
+    font-size:0.85rem; line-height:1.8;
+  }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>🔥 Day 1 — VS</h1>
+  <p class="subtitle">Organization, resource efficiency, and everyone's participation</p>
+</div>
+
+<!-- Target banner -->
+<div class="target-banner">
+  <div class="target-box min">
+    <div class="label">MINIMUM</div>
+    <div class="value">3.6M</div>
+  </div>
+  <div class="target-box goal">
+    <div class="label">GOAL</div>
+    <div class="value">7.2M</div>
+  </div>
+</div>
+
+<!-- Intro -->
+<div class="section">
+  <div class="section-head">👋 Assalamu alaikum wa rahmatullahi wa barakatuh</div>
+  <div class="intro-text">
+    <p>Tomorrow we start Day 1 of VS, and we want to start this week differently: with better organization, smart resource management, and participation from everyone.</p>
+    <p>To make things clear, here's a simple example showing that reaching <b style="color:var(--orange)">3.6M</b> isn't as hard as some might think.</p>
+  </div>
+</div>
+
+<!-- 3.6M calculation -->
+<div class="section">
+  <div class="section-head orange">🎯 How to easily reach 3.6M on Day 1?</div>
+  <div class="table-wrap">
+    <table class="calc-table">
+      <thead>
+        <tr><th>Resource</th><th>Points</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>80 Radar Missions</td><td class="pts">2,000,000</td></tr>
+        <tr><td>300 Stamina</td><td class="pts">240,000</td></tr>
+        <tr><td>100 Drone Parts</td><td class="pts">500,000</td></tr>
+        <tr><td>100K Drone Combat Data</td><td class="pts">600,000</td></tr>
+        <tr><td>100M Hero EXP</td><td class="pts">≈ 303,000</td></tr>
+        <tr class="total-row orange">
+          <td>Total</td>
+          <td class="pts">≈ 3,643,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box">With just these ordinary resources, you reach 3.6M and unlock the required chests — without even counting Gathering points. The idea isn't to hold huge amounts of resources, but to store the right resources and use them on the right day.</div>
+</div>
+
+<!-- 7.2M calculation -->
+<div class="section">
+  <div class="section-head gold">🏆 Can you reach 7.2M? Absolutely</div>
+  <div class="intro-text" style="padding-bottom:0;">
+    <p>After reaching 3.6M, you need about 3.6M more to unlock the 7.2M chest. Here's another example:</p>
+  </div>
+  <div class="table-wrap">
+    <table class="calc-table">
+      <thead>
+        <tr><th>Additional Resource</th><th>Points</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gathering with 3 teams for 16 hours</td><td class="pts">≈ 1,000,000</td></tr>
+        <tr><td>200 additional Drone Parts</td><td class="pts">1,000,000</td></tr>
+        <tr><td>200K additional Drone Combat Data</td><td class="pts">1,200,000</td></tr>
+        <tr><td>100M additional Hero EXP</td><td class="pts">≈ 303,000</td></tr>
+        <tr><td>150 additional Stamina</td><td class="pts">120,000</td></tr>
+        <tr class="total-row gold">
+          <td>Additional Points</td>
+          <td class="pts">≈ 3,623,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box">Importantly, around 1M points can come from Gathering alone, without consuming any stored resources.</div>
+</div>
+
+<!-- Final result -->
+<div class="final-result">
+  <div class="eq">3,643,000 + 3,623,000</div>
+  <div class="big">= 7,266,000</div>
+  <div class="badge">🏆 All VS chests unlocked</div>
+</div>
+
+<!-- Disclaimer -->
+<div class="section">
+  <div class="intro-text">
+    <p>These calculations are just examples, not a mandatory method to follow exactly.</p>
+    <p>The goal is to show everyone that <b style="color:var(--orange)">3.6M</b> is a very achievable target with a bit of organization, and that <b style="color:var(--gold)">7.2M</b> is also realistic for those with extra resources who use them wisely.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="fire">🔥</div>
+  <div class="headline">
+    Tomorrow, we don't want to see any member below 3.6M,<br>
+    and we hope to see all of you unlock the 7.2M chest.
+  </div>
+  <div class="sub">The more each member organizes their resources and uses them on the right day, the faster their account grows, the more rewards they earn, and the more they contribute to the alliance's victory.<br><br>Tomorrow we want to see the difference. Show us what you can do, and let's start VS week strong! 💪</div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Prepared by: MSBKH</div>
+  <div class="footer-credit">Last updated: August 2026</div>
+</div>
+
+</body>
+</html>
