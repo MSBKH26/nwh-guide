@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Radar Missions Guide | [NWH] Night Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080c10;
+    --card:#131b24;
+    --gold:#f5c518;
+    --red:#e8394a;
+    --blue:#3b82f6;
+    --green:#2ecc71;
+    --text:#e6e9ec;
+    --muted:#9aa4ae;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Cairo', sans-serif;
+    line-height:1.9;
+  }
+  a{color:var(--gold); text-decoration:none;}
+
+  /* ===== Header (same as VS.html) ===== */
+  .main-header {
+    text-align: center;
+    padding: 20px 16px 16px;
+    margin: 0 auto 16px;
+    max-width: 900px;
+    background: linear-gradient(135deg, #0e1419 0%, #131b24 100%);
+    border: 1px solid #8a6f0a;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .main-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .main-header h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(245,197,24,0.4);
+    margin: 0;
+  }
+  .main-header .subtitle {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .alliance-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 16px rgba(245,197,24,0.5);
+    position: relative;
+  }
+
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:10px 16px 60px;
+  }
+
+  /* ===== Section style (spec fournie) ===== */
+  .section{
+    margin:26px 0;
+    background:var(--card);
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.05);
+  }
+  .section-header{
+    background:linear-gradient(90deg, rgba(245,197,24,0.1), transparent);
+    border-bottom:1px solid rgba(245,197,24,0.2);
+    color:var(--gold);
+    padding:14px 18px;
+    font-size:1.2rem;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-body{
+    padding:18px;
+  }
+  .section-body p{margin:0 0 12px;}
+  .section-body ul, .section-body ol{
+    padding-inline-start:22px;
+    margin:0 0 12px;
+  }
+  .section-body li{margin-bottom:8px;}
+
+  /* ===== Alert / Announcement box ===== */
+  .alert-box{
+    background:linear-gradient(135deg, rgba(232,57,74,0.12), rgba(19,27,36,0.4));
+    border:1px solid rgba(232,57,74,0.4);
+    border-radius:14px;
+    padding:20px;
+    margin:26px 0;
+  }
+  .alert-box h3{
+    color:var(--red);
+    margin:0 0 12px;
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .alert-box p{margin:0 0 10px;}
+  .alert-box strong.highlight{
+    color:var(--gold);
+  }
+
+  /* ===== Flow diagram ===== */
+  .flow{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0;
+    margin:16px 0;
+  }
+  .flow-step{
+    background:#0c1218;
+    border:1px solid rgba(245,197,24,0.3);
+    border-radius:10px;
+    padding:12px 20px;
+    text-align:center;
+    min-width:220px;
+    font-weight:600;
+  }
+  .flow-step.red{border-color:rgba(232,57,74,0.5); color:var(--red);}
+  .flow-step.gold{border-color:var(--gold); color:var(--gold);}
+  .flow-step.blue{border-color:rgba(59,130,246,0.5); color:var(--blue);}
+  .flow-arrow{
+    color:var(--muted);
+    font-size:1.4rem;
+    margin:4px 0;
+  }
+
+  /* ===== States side by side ===== */
+  .states{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:16px 0;
+  }
+  @media(max-width:640px){ .states{grid-template-columns:1fr;} }
+  .state-card{
+    background:#0c1218;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .state-card .state-tag{
+    padding:10px 14px;
+    font-weight:800;
+    text-align:center;
+  }
+  .state-card.a .state-tag{background:rgba(46,204,113,0.12); color:var(--green);}
+  .state-card.b .state-tag{background:rgba(232,57,74,0.12); color:var(--red);}
+  .state-card img{
+    width:100%;
+    display:block;
+    background:#000;
+    min-height:160px;
+    object-fit:cover;
+  }
+  .state-card .state-desc{
+    padding:12px 14px;
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  .img-placeholder{
+    width:100%;
+    min-height:160px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    background:repeating-linear-gradient(45deg, #0c1218, #0c1218 10px, #10161d 10px, #10161d 20px);
+  }
+
+  /* ===== Stack comparison ===== */
+  .stack-compare{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:16px 0;
+  }
+  .stack-box{
+    flex:1;
+    min-width:150px;
+    max-width:220px;
+    text-align:center;
+    border-radius:12px;
+    padding:20px 10px;
+    font-weight:800;
+    font-size:1.3rem;
+  }
+  .stack-box.bad{background:rgba(232,57,74,0.12); border:1px solid rgba(232,57,74,0.5); color:var(--red);}
+  .stack-box.good{background:rgba(46,204,113,0.12); border:1px solid rgba(46,204,113,0.5); color:var(--green);}
+  .stack-box span{display:block; font-size:0.9rem; font-weight:600; margin-top:6px; color:var(--text);}
+
+  /* ===== Table ===== */
+  table.weekly{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+  }
+  table.weekly th, table.weekly td{
+    border:1px solid rgba(255,255,255,0.08);
+    padding:10px 12px;
+    text-align:center;
+  }
+  table.weekly th{
+    background:rgba(245,197,24,0.1);
+    color:var(--gold);
+  }
+  table.weekly td.collect{color:var(--green); font-weight:700;}
+  table.weekly td.stack{color:var(--blue); font-weight:700;}
+  table.weekly td.prepare{color:var(--gold); font-weight:700;}
+
+  /* ===== Mistakes list ===== */
+  .mistakes-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .mistakes-list li::before{
+    content:"❌";
+    flex-shrink:0;
+  }
+
+  /* ===== FAQ ===== */
+  details.faq-item{
+    background:#0c1218;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px;
+    padding:12px 16px;
+    margin-bottom:10px;
+  }
+  details.faq-item summary{
+    color:var(--gold);
+    font-weight:700;
+    cursor:pointer;
+    outline:none;
+  }
+  details.faq-item p{
+    margin:10px 0 0;
+    color:var(--muted);
+  }
+
+  /* ===== Advanced tips ===== */
+  .tips-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:12px;
+    margin:12px 0;
+  }
+  .tip-card{
+    background:#0c1218;
+    border:1px solid rgba(59,130,246,0.3);
+    border-radius:10px;
+    padding:14px;
+  }
+  .tip-card .tip-title{
+    color:var(--blue);
+    font-weight:700;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  /* ===== Footer ===== */
+  footer.site-footer{
+    text-align:center;
+    padding:24px 16px;
+    color:var(--muted);
+    border-top:1px solid rgba(245,197,24,0.15);
+    font-size:0.9rem;
+  }
+  footer.site-footer .foot-name{
+    color:var(--gold);
+    font-weight:700;
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="main-header">
+  <div class="alliance-logo-wrap">
+    <a href="https://msbkh26.github.io/nwh-guide/"><img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo"></a>
+  </div>
+  <div class="alliance-name">[NWH] Night Watch</div>
+  <h1>📡 Complete Radar Missions Guide</h1>
+  <p class="subtitle">How to maximize your Duel VS points without losing a single mission</p>
+</div>
+
+<main>
+
+  <!-- 1. Introduction -->
+  <div class="section">
+    <div class="section-header">1️⃣ Introduction</div>
+    <div class="section-body">
+      <p>Radar Missions are daily missions that appear on the map and grant you various rewards. They're one of the most important point sources in the game if used the right way.</p>
+      <p>Why do they matter? Because they give you:</p>
+      <ul>
+        <li>💰 Resources (RSS) for buildings and research</li>
+        <li>⚡ Stamina consumption that counts toward the Arms Race</li>
+        <li>🏆 Duel VS points when collected on the right day</li>
+      </ul>
+      <p>In this guide, you'll learn how to manage Radar Missions smartly instead of collecting them randomly and losing valuable points.</p>
+    </div>
+  </div>
+
+  <!-- Important official clarification -->
+  <div class="alert-box">
+    <h3>📢 Important Clarification About Radar Missions</h3>
+    <p>Assalamu alaikum wa rahmatullahi wa barakatuh,</p>
+    <p>We've noticed some members collecting Radar Missions before their designated day. Please pay attention to the correct method:</p>
+    <p><strong class="highlight">A:</strong> At first, the Radar Mission looks like Image A. Complete the mission normally.</p>
+    <p><strong class="highlight">B:</strong> After completing it, it switches to the state shown in Image B, with a red dot 🔴 appearing — meaning it's ready to collect.</p>
+    <p>❌ Don't tap it or collect it outside a Radar day.</p>
+    <p>✅ Leave all missions in this state (with the red dot) until the Radar day arrives, then collect them to get VS points.</p>
+    <p><strong class="highlight">Important reminder:</strong> completing the mission is fine — but collecting the reward must be saved for the Radar day only.</p>
+  </div>
+
+  <!-- 2. How Radar Works -->
+  <div class="section">
+    <div class="section-header">2️⃣ How Radar Works</div>
+    <div class="section-body">
+      <p>The Radar Mission mechanic follows four simple stages:</p>
+      <div class="flow">
+        <div class="flow-step">🗺️ Mission appears on the map</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step blue">⚔️ You complete it</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step red">🔴 A red dot appears</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step gold">⏳ You decide when to collect the reward</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. The Two States -->
+  <div class="section">
+    <div class="section-header">3️⃣ The Two Key States</div>
+    <div class="section-body">
+      <p>Every Radar Mission goes through just two states, and it's essential to tell them apart:</p>
+      <div class="states">
+        <div class="state-card a">
+          <div class="state-tag">🟢 State A — Mission not finished</div>
+          <img src="../images/radar-state-a.jpg" alt="Unfinished Radar Mission - State A" onerror="this.outerHTML='&lt;div class=&quot;img-placeholder&quot;&gt;📷 Place image here: ../images/radar-state-a.jpg&lt;/div&gt;'">
+          <div class="state-desc">The mission still needs to be completed by you (fighting, gathering, sending a squad...).</div>
+        </div>
+        <div class="state-card b">
+          <div class="state-tag">🔴 State B — Mission finished</div>
+          <img src="../images/radar-state-b.jpg" alt="Finished Radar Mission with red dot - State B" onerror="this.outerHTML='&lt;div class=&quot;img-placeholder&quot;&gt;📷 Place image here: ../images/radar-state-b.jpg&lt;/div&gt;'">
+          <div class="state-desc">The red dot 🔴 appeared, the reward 🎁 is ready to collect — but don't collect it until the designated Radar day!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Biggest Mistake -->
+  <div class="section">
+    <div class="section-header">4️⃣ The Biggest Mistake Players Make</div>
+    <div class="section-body">
+      <p>❌ Most players tap the mission the moment the red dot appears and collect the reward without thinking.</p>
+      <p>The result: they lose the Duel VS points that would have counted if they had waited for the right collection day.</p>
+    </div>
+  </div>
+
+  <!-- 5. The Correct Method -->
+  <div class="section">
+    <div class="section-header">5️⃣ The Correct Method</div>
+    <div class="section-body">
+      <div class="flow">
+        <div class="flow-step">📷 Image A — Unfinished mission</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step blue">⚔️ Complete the mission</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step">📷 Image B — Red dot visible</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step red">🚫 Don't tap it</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step gold">⏳ Wait for Day 1 or Day 5 of Duel VS</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step">✅ Tap "Collect All"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Stack Strategy -->
+  <div class="section">
+    <div class="section-header">6️⃣ Stack Strategy</div>
+    <div class="section-body">
+      <p>This is one of the most important points in this guide. Always leave at least one empty slot in your Radar Mission stock.</p>
+      <p>Why? Because once the mission counter hits the max (e.g. 35/35), the timer for new missions stops ❌, so you lose out on entire missions that would have appeared.</p>
+      <div class="stack-compare">
+        <div class="stack-box bad">35/35 ❌<span>Stock full, timer stopped, missions lost</span></div>
+        <div class="stack-box good">34/35 ✅<span>Empty slot, timer running, no loss</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Weekly Planning -->
+  <div class="section">
+    <div class="section-header">7️⃣ Ideal Weekly Planning</div>
+    <div class="section-body">
+      <p>Example weekly schedule for managing Radar Missions (adjust to your server's Duel VS calendar):</p>
+      <table class="weekly">
+        <thead>
+          <tr><th>Day</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sunday</td><td class="prepare">🟡 Prepare</td></tr>
+          <tr><td>Monday</td><td class="collect">🟢 Collect</td></tr>
+          <tr><td>Tuesday</td><td class="stack">🔵 Stack</td></tr>
+          <tr><td>Wednesday</td><td class="collect">🟢 Collect</td></tr>
+          <tr><td>Thursday</td><td class="stack">🔵 Stack</td></tr>
+          <tr><td>Friday</td><td class="collect">🟢 Collect</td></tr>
+        </tbody>
+      </table>
+      <p>⚠️ Adjust the days according to Days 1, 3, and 5 of your server's Duel VS schedule.</p>
+    </div>
+  </div>
+
+  <!-- 8. Radar + Arms Race -->
+  <div class="section">
+    <div class="section-header">8️⃣ Radar and the Arms Race</div>
+    <div class="section-body">
+      <p>Many players don't know this: some Radar Missions consume Stamina. So you can double the benefit:</p>
+      <div class="flow">
+        <div class="flow-step blue">🚀 Drone Boost phase</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step">⚔️ Complete the mission (consumes Stamina)</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step red">🚫 Don't collect the reward now</div>
+        <div class="flow-arrow">⬇</div>
+        <div class="flow-step gold">✅ Collect it on the Duel VS day</div>
+      </div>
+      <p>This way you get Arms Race points from the Stamina used, then Duel VS points when you collect later — double the value 💪.</p>
+    </div>
+  </div>
+
+  <!-- 9. Common Mistakes -->
+  <div class="section">
+    <div class="section-header">9️⃣ Common Mistakes</div>
+    <div class="section-body">
+      <ul class="mistakes-list">
+        <li>Hitting 35/35 and stopping new mission spawns</li>
+        <li>Collecting the reward right after the red dot appears</li>
+        <li>Letting a mission expire and disappear without completing it</li>
+        <li>Using Stamina outside the Drone Boost window</li>
+        <li>Forgetting the Doom Walker mission and not participating</li>
+        <li>Not coordinating with alliance members to help each other</li>
+        <li>Collecting all missions at once without considering the Duel VS day</li>
+        <li>Not tracking the new mission spawn timer</li>
+        <li>Ignoring the Treasure mission despite its rarity and value</li>
+        <li>Not using "Quick Execute" when available to save time</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 10. FAQ -->
+  <div class="section">
+    <div class="section-header">🔟 Frequently Asked Questions</div>
+    <div class="section-body">
+      <details class="faq-item">
+        <summary>Why do I see a red dot on a mission I haven't touched?</summary>
+        <p>When you're in an alliance, other members can help complete your mission for you, so the red dot appears automatically without you spending any Stamina.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do missions expire?</summary>
+        <p>Yes, each mission has its own countdown timer. If it isn't completed within that time, it disappears automatically.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the new mission spawn timer stop?</summary>
+        <p>Yes, once the stock is completely full (e.g. 35/35), the timer stops. That's why we recommend always leaving one empty slot.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why is it recommended to stay at 34/35 instead of 35/35?</summary>
+        <p>Because staying at 34/35 keeps the new mission spawn timer running, while 35/35 stops it and you lose missions that would have been added.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I hold onto a mission for several days?</summary>
+        <p>Yes, as long as it stays in the "finished with red dot" state and isn't collected, you can delay collecting it until the most suitable Duel VS day.</p>
+      </details>
+    </div>
+  </div>
+
+  <!-- 11. Duel VS Points Calculation -->
+  <div class="section">
+    <div class="section-header">1️⃣1️⃣ 🧮 Calculate Your Duel VS Points</div>
+    <div class="section-body">
+      <p>This is a number you should never miss 👇</p>
+      <p>Each single Radar Mission gives you roughly <strong style="color:var(--gold)">25,000 points</strong> in Duel VS when collected on the right day.</p>
+      <p>By following the stacking strategy explained in this guide, you arrive at the collection day with:</p>
+      <ul>
+        <li>📦 <strong>40 missions</strong> pre-stacked</li>
+        <li>➕ <strong>40 new missions</strong> earned on the collection day itself</li>
+      </ul>
+      <p>Total: <strong style="color:var(--blue)">80 missions</strong> ready to collect at once.</p>
+
+      <div class="stack-compare" style="margin-top:18px;">
+        <div class="stack-box good" style="max-width:180px;">80 missions<span>Total ready missions</span></div>
+        <div class="stack-box good" style="max-width:180px;">× 25,000<span>Points per mission</span></div>
+        <div class="stack-box bad" style="max-width:220px; background:rgba(245,197,24,0.12); border-color:var(--gold); color:var(--gold);">≈ 2,000,000<span>points in Duel VS 🏆</span></div>
+      </div>
+
+      <p style="margin-top:16px;">🚨 About <strong style="color:var(--red)">two million points</strong> in a single day — that's what you lose if you collect your missions randomly instead of stacking and waiting for the correct Duel VS day!</p>
+    </div>
+  </div>
+
+  <!-- 12. Conclusion -->
+  <div class="section">
+    <div class="section-header">1️⃣2️⃣ Conclusion</div>
+    <div class="section-body">
+      <p>Radar Missions aren't just ordinary tasks — they're a strategic tool for maximizing your Duel VS and Arms Race points. The golden rule: <strong style="color:var(--gold)">keep completing them continuously, only collect on Radar day, and always stay at 34/35</strong>.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  🛡️ <span class="foot-name">[NWH] Night Watch</span> — Prepared by: MSBKH<br>
+  Last updated: July 13, 2026
+</footer>
+
+</body>
+</html>

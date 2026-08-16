@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Offensive Heroes Gear Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:     #080c10;
+    --card:   #131b24;
+    --border: #1e2d3d;
+    --gold:   #f5c518;
+    --red:    #e8394a;
+    --blue:   #3b82f6;
+    --text:   #e2e8f0;
+    --muted:  #64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:'Cairo',sans-serif;
+    background:var(--bg); color:var(--text);
+    min-height:100vh; padding:12px; font-size:14px; line-height:1.8;
+  }
+
+  /* HEADER */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo {
+    width:80px; height:80px; object-fit:contain; border-radius:12px;
+    filter:drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center;
+    letter-spacing:2px; margin-bottom:6px; text-shadow:0 0 16px rgba(245,197,24,0.5);
+  }
+  .main-header {
+    text-align:center; padding:14px 16px 18px; margin-bottom:18px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid #8a6f0a; border-radius:16px; position:relative; overflow:hidden;
+  }
+  .main-header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%);
+    pointer-events:none;
+  }
+  .main-header h1 { font-size:1.2rem; font-weight:900; color:#e2e8f0; }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* CARD */
+  .analysis-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:14px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,0.5);
+    margin-bottom:14px;
+  }
+  .card-header {
+    padding:12px 16px; font-weight:900; font-size:0.95rem;
+    display:flex; align-items:center; gap:8px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent);
+    color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2);
+  }
+  .card-body { padding:16px; }
+
+  /* PARAGRAPHS */
+  .card-body p { margin-bottom:12px; color:#cbd5e1; font-size:0.85rem; line-height:1.9; }
+  .card-body p:last-child { margin-bottom:0; }
+
+  /* HIGHLIGHT */
+  .highlight-blue {
+    background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2);
+    border-radius:10px; padding:12px 14px; margin-bottom:12px;
+    color:#93c5fd; font-weight:700; font-size:0.85rem; line-height:1.8;
+  }
+  .highlight-red {
+    background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.2);
+    border-radius:10px; padding:12px 14px; margin-bottom:12px;
+    color:#fca5a5; font-size:0.82rem; line-height:1.8;
+  }
+
+  /* FOOTER */
+  .nwh-footer {
+    text-align:center; padding:20px 16px; margin-top:8px;
+    border-top:1px solid var(--border); color:var(--muted);
+    font-size:0.85rem; line-height:1.8;
+  }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>⚔️ Offensive Heroes Gear Analysis</h1>
+  <p class="subtitle">Armor, Radar, and gear balance for damage dealers</p>
+</div>
+
+<div class="analysis-card">
+  <div class="card-header">📌 English</div>
+  <div class="card-body">
+    <p>
+      Most players focus on upgrading the <strong>Weapon</strong> and <strong>Chip</strong> of offensive heroes
+      like <strong>Kimberly</strong> and <strong>Stetmann</strong>, while often neglecting their <strong>Armor</strong> and <strong>Radar</strong>.
+    </p>
+    <p>
+      Many players believe that having <strong>Murphy</strong> and <strong>Williams</strong> on the front line
+      is enough to protect the backline. However, this is not entirely true.
+    </p>
+    <p>
+      Murphy and Williams are excellent at absorbing direct attacks, but they cannot block area-of-effect (AoE)
+      abilities or skills that bypass the front line and hit multiple targets.
+      As a result, your backline heroes can still take heavy damage.
+    </p>
+    <p>
+      If Kimberly or Stetmann have low Armor and Radar levels, they may die before dealing their full damage,
+      no matter how strong their Weapon and Chip are.
+    </p>
+    <p>
+      For this reason, once your offensive gear is well developed, it is recommended to gradually upgrade
+      the Armor and Radar of your damage dealers as well. Keeping them alive a few seconds longer can allow them
+      to cast additional skills and significantly increase your team's overall damage output.
+    </p>
+    <div class="highlight-blue">
+      🎯 Conclusion: Having Murphy and Williams on the front line does not guarantee complete protection
+      for your backline. Building a strong team is not only about maximizing attack, but also about giving
+      your damage dealers enough survivability to stay alive and make the most of their abilities.
+    </div>
+    <div class="card-header" style="margin:12px 0 8px;border-radius:8px;padding:10px 14px;">📌 Additional Note</div>
+    <p>
+      When upgrading hero gear, it is generally not recommended to focus all your resources on a single hero
+      while neglecting the rest of the team. Even if one offensive hero is your main damage dealer,
+      over-investing in that hero alone can leave the rest of your formation too fragile,
+      reducing your team's overall effectiveness.
+    </p>
+    <p>
+      Instead, try to upgrade your core heroes in a balanced way, gradually improving their equipment
+      to ensure that your entire team survives longer and performs consistently during battle.
+    </p>
+    <div class="highlight-blue">
+      🎯 Conclusion: A balanced gear progression across your main heroes often provides better overall
+      performance than maximizing a single hero while ignoring the others.
+    </div>
+    <div class="highlight-red">
+      ⚠️ Note: This is a community-based analysis and combat observation, not an official statement
+      from the game developers. It is especially relevant in Arena and PvP battles where AoE damage is very common.
+    </div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Prepared by: MSBKH</div>
+  <div class="footer-credit">July 2026</div>
+</div>
+
+</body>
+</html>

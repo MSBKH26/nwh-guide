@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Weekly Alliance VS Battle Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #080c10;
+    --card:      #131b24;
+    --border:    #1e2d3d;
+    --gold:      #f5c518;
+    --gold-dim:  #8a6f0a;
+    --red:       #e8394a;
+    --blue:      #3b82f6;
+    --cyan:      #06b6d4;
+    --text:      #e2e8f0;
+    --muted:     #64748b;
+    --warn-bg:   rgba(232,57,74,0.08);
+    --warn-border:rgba(232,57,74,0.3);
+    --sync-bg:   rgba(245,197,24,0.07);
+    --sync-border:rgba(245,197,24,0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .main-header {
+    text-align: center;
+    padding: 20px 16px 16px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #0e1419 0%, #131b24 100%);
+    border: 1px solid var(--gold-dim);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .main-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .main-header h1 { font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; text-shadow: 0 0 20px rgba(245,197,24,0.4); }
+  .main-header .subtitle { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+  .crown { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #e2e8f0;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .priority-banner {
+    background: linear-gradient(90deg, rgba(232,57,74,0.15), rgba(232,57,74,0.05));
+    border: 1px solid var(--red);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fca5a5;
+    text-align: center;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 0.78rem;
+  }
+  .legend-title { width: 100%; font-weight: 700; color: var(--muted); font-size: 0.75rem; margin-bottom: 4px; }
+  .leg { display: flex; align-items: center; gap: 5px; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  .day-block {
+    margin-bottom: 14px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .day-header {
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 900;
+  }
+  .day-num {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.85;
+  }
+  .day-theme { font-size: 0.78rem; opacity: 0.75; margin-right: auto; font-weight: 600; }
+
+  .day-0 .day-header { background: linear-gradient(90deg,#141410,#0e0e0a); color:#f5c518; border-bottom:2px solid #f5c518; }
+  .day-1 .day-header { background: linear-gradient(90deg,#0f1f2e,#0a1520); color:#3b82f6; border-bottom:2px solid #3b82f6; }
+  .day-2 .day-header { background: linear-gradient(90deg,#1a1a2e,#110f20); color:#a855f7; border-bottom:2px solid #a855f7; }
+  .day-3 .day-header { background: linear-gradient(90deg,#1a2010,#111508); color:#22c55e; border-bottom:2px solid #22c55e; }
+  .day-4 .day-header { background: linear-gradient(90deg,#201808,#160f03); color:#f97316; border-bottom:2px solid #f97316; }
+  .day-5 .day-header { background: linear-gradient(90deg,#1f0a14,#15060d); color:#ec4899; border-bottom:2px solid #ec4899; }
+  .day-6 .day-header { background: linear-gradient(90deg,#1a0a08,#120602); color:#e8394a; border-bottom:2px solid #e8394a; }
+
+  .prep-note { padding: 14px; background: var(--card); font-size: 0.85rem; line-height: 2; }
+  .prep-note .prep-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .prep-note .prep-item:last-child { border-bottom: none; }
+  .prep-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+  .tasks-section { background: var(--card); }
+  .task-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+    transition: background 0.15s;
+  }
+  .task-row:last-child { border-bottom: none; }
+  .task-row:hover { background: rgba(255,255,255,0.02); }
+  .task-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 1px; }
+  .task-content { flex: 1; }
+  .task-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .task-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+  .badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 12px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .b-ur    { background:rgba(249,115,22,0.2); color:#f97316; border:1px solid #f97316; }
+  .b-ssr   { background:rgba(245,197,24,0.2); color:#f5c518; border:1px solid #f5c518; }
+  .b-sr    { background:rgba(148,163,184,0.2); color:#94a3b8; border:1px solid #94a3b8; }
+  .b-star2 { background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e; }
+  .b-star3 { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid #60a5fa; }
+  .b-radar { background:rgba(6,182,212,0.15); color:#06b6d4; border:1px solid #06b6d4; }
+
+  .sync-box {
+    margin: 0 12px 12px;
+    padding: 10px 12px;
+    background: var(--sync-bg);
+    border: 1px solid var(--sync-border);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  .sync-box .sync-title {
+    font-weight: 900;
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sync-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 3px 0;
+    color: #fde68a;
+  }
+  .sync-item::before { content: '↗'; color: var(--gold); flex-shrink: 0; }
+
+  .warn-box {
+    margin: 0 12px 12px;
+    padding: 9px 12px;
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: #fca5a5;
+    line-height: 1.6;
+  }
+  .warn-box strong { color: #f87171; }
+  .spacer { height: 8px; background: var(--card); }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+  }
+  .intro-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .intro-tip {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(245,197,24,0.06);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: #fde68a;
+  }
+
+  /* ── DAY DESCRIPTION ── */
+  .day-desc {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #94a3b8;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  /* ── REWARDS ── */
+  .rewards-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .rewards-title {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    background: linear-gradient(90deg,#1c1a08,#13120a);
+    border-bottom: 2px solid var(--gold-dim);
+  }
+  .reward-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+  }
+  .reward-item:last-child { border-bottom: none; }
+  .reward-name { font-weight: 700; font-size: 0.88rem; color: var(--text); margin-bottom: 3px; }
+  .reward-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── CONCLUSION ── */
+  .conclusion-block {
+    background: linear-gradient(135deg, #0e1419, #131b24);
+    border: 1px solid var(--gold-dim);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+  }
+  .conclusion-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  /* ── VERSION BADGE ── */
+  .version-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    z-index: 2;
+  }
+  .version-badge strong { color: #94a3b8; }
+
+  /* ── QUICK MENU ── */
+  .quick-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .menu-btn {
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 6px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: transform 0.15s, opacity 0.15s;
+    border: 1px solid transparent;
+  }
+  .menu-btn:active { transform: scale(0.96); }
+  .menu-sun { background: rgba(245,197,24,0.1); color: var(--gold); border-color: rgba(245,197,24,0.3); }
+  .menu-mon { background: rgba(59,130,246,0.1); color: #60a5fa; border-color: rgba(59,130,246,0.3); }
+  .menu-tue { background: rgba(168,85,247,0.1); color: #c084fc; border-color: rgba(168,85,247,0.3); }
+  .menu-wed { background: rgba(34,197,94,0.1); color: #4ade80; border-color: rgba(34,197,94,0.3); }
+  .menu-thu { background: rgba(249,115,22,0.1); color: #fb923c; border-color: rgba(249,115,22,0.3); }
+  .menu-fri { background: rgba(236,72,153,0.1); color: #f472b6; border-color: rgba(236,72,153,0.3); }
+  .menu-sat { background: rgba(232,57,74,0.1); color: #f87171; border-color: rgba(232,57,74,0.3); }
+  .menu-rew { background: rgba(148,163,184,0.1); color: #cbd5e1; border-color: rgba(148,163,184,0.3); }
+
+  /* ── TL;DR ── */
+  .tldr-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .tldr-title {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--gold);
+    background: linear-gradient(90deg, rgba(245,197,24,0.1), transparent);
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 1px;
+  }
+  .tldr-list { padding: 8px 16px; }
+  .tldr-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.82rem;
+    border-bottom: 1px solid rgba(30,45,61,0.4);
+  }
+  .tldr-item:last-child { border-bottom: none; }
+  .tldr-day {
+    font-weight: 900;
+    min-width: 60px;
+    flex-shrink: 0;
+  }
+  .tldr-content { color: #cbd5e1; }
+
+  /* ── THEME PROGRESSION TAG ── */
+  .theme-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    margin-right: auto;
+  }
+  .theme-activity { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.4); }
+  .theme-base     { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); }
+  .theme-tech     { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.4); }
+  .theme-heroes   { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.4); }
+  .theme-mobil    { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.4); }
+  .theme-pvp      { background: rgba(232,57,74,0.15); color: #f87171; border: 1px solid rgba(232,57,74,0.4); }
+  .theme-prep     { background: rgba(245,197,24,0.15); color: var(--gold); border: 1px solid rgba(245,197,24,0.4); }
+
+  /* ── COMMON MISTAKES ── */
+  .mistakes-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .mistakes-title {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #f87171;
+    background: linear-gradient(90deg, rgba(232,57,74,0.12), transparent);
+    border-bottom: 2px solid rgba(232,57,74,0.3);
+  }
+  .mistake-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+  }
+  .mistake-item:last-child { border-bottom: none; }
+  .mistake-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .mistake-text { font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; }
+  .mistake-text strong { color: #fca5a5; }
+
+  /* ── ALLIANCE LOGO ── */
+  .alliance-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 16px rgba(245,197,24,0.5);
+  }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--gold), #d4a017);
+    border: 2px solid #fff8e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 999;
+  }
+  .back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* ── FAQ ── */
+  .faq-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .faq-title {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    background: linear-gradient(90deg,#1c1a08,#13120a);
+    border-bottom: 2px solid var(--gold-dim);
+  }
+  .faq-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .faq-a {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── ACTION BADGES ── */
+  .action-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 2px 0;
+  }
+  .action-do {
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.4);
+  }
+  .action-dont {
+    background: rgba(232,57,74,0.15);
+    color: #f87171;
+    border: 1px solid rgba(232,57,74,0.4);
+  }
+  .action-keep {
+    background: rgba(245,197,24,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(245,197,24,0.4);
+  }
+
+  /* ── FOOTER ── */
+  .nwh-footer {
+    text-align: center;
+    padding: 20px 16px;
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .nwh-footer .footer-shield {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .nwh-footer .footer-name {
+    color: var(--gold);
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .nwh-footer .footer-credit {
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="main-header">
+  <div class="alliance-logo-wrap">
+    <a href="https://msbkh26.github.io/nwh-guide/"><img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo"></a>
+  </div>
+  <div class="alliance-name">[NWH] Night Watch</div>
+  <img src="../images/logo_vs.png" alt="VS Logo" style="width:90px;height:90px;object-fit:contain;margin-bottom:8px;filter:drop-shadow(0 0 16px rgba(245,197,24,0.5));">
+  <h1>Weekly Alliance VS Battle Plan</h1>
+  <p class="subtitle">Last War: Survival — Complete Guide to Winning VS</p>
+</div>
+
+<div class="priority-banner">
+  🏆 Top priority always: winning the Alliance VS Battle — the Arms Race is just a bonus!
+</div>
+
+<div class="legend">
+  <div class="legend-title">🔑 Legend</div>
+  <div class="leg"><div class="leg-dot" style="background:#3b82f6"></div> Core task</div>
+  <div class="leg"><div class="leg-dot" style="background:#f5c518"></div> Sync with Arms Race</div>
+  <div class="leg"><div class="leg-dot" style="background:#e8394a"></div> Important warning</div>
+  <div class="leg"><div class="leg-dot" style="background:#06b6d4"></div> Radar Missions (Monday/Wednesday/Friday only)</div>
+  <span class="badge b-star3">***</span> Repeats 3 days &nbsp;
+  <span class="badge b-star2">**</span> Repeats 2 days
+</div>
+
+<!-- ══════ INTRO ══════ -->
+<div class="intro-block">
+  <div class="intro-title">⚔️ What is the Alliance VS Battle?</div>
+  <p>The Alliance VS Battle is a 6-day event where your alliance competes against another in a variety of daily challenges. Each day focuses on a different theme, and every member earns points by completing daily tasks. The alliance that scores the most points wins the day, and whoever wins the most days wins the week. You'll earn daily and weekly rewards based on both your individual performance and your alliance's performance.</p>
+  <div class="intro-tip">
+    <strong>🔑 Key to success:</strong> winning isn't only about power — it's about smart planning, good timing, and coordination between alliance members. Each day focuses on a different aspect of your base and progress, so know what to do and when to do it.
+  </div>
+</div>
+
+
+<!-- ══════ QUICK MENU ══════ -->
+<div class="quick-menu">
+  <a href="#day-sun" class="menu-btn menu-sun">☀️ Sunday</a>
+  <a href="#day-mon" class="menu-btn menu-mon">🌙 Monday</a>
+  <a href="#day-tue" class="menu-btn menu-tue">⚡ Tuesday</a>
+  <a href="#day-wed" class="menu-btn menu-wed">🔬 Wednesday</a>
+  <a href="#day-thu" class="menu-btn menu-thu">🦸 Thursday</a>
+  <a href="#day-fri" class="menu-btn menu-fri">🔥 Friday</a>
+  <a href="#day-sat" class="menu-btn menu-sat">💥 Saturday</a>
+  <a href="#rewards" class="menu-btn menu-rew">🏅 Rewards</a>
+</div>
+
+<!-- ══════ TL;DR ══════ -->
+<div class="tldr-block">
+  <div class="tldr-title">📌 Quick Summary</div>
+  <div class="tldr-list">
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#f5c518">☀️ Sunday</span>
+      <span class="theme-tag theme-prep">Prep</span>
+      <span class="tldr-content">Gather resources + save Radar and fragments</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#60a5fa">🌙 Monday</span>
+      <span class="theme-tag theme-activity">Activity</span>
+      <span class="tldr-content">Radar + Stamina + EXP + Drone</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#c084fc">⚡ Tuesday</span>
+      <span class="theme-tag theme-base">Build</span>
+      <span class="tldr-content">Build + Orange Trucks + Recruitment</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#4ade80">🔬 Wednesday</span>
+      <span class="theme-tag theme-tech">Tech</span>
+      <span class="tldr-content">Research + Honor Badges + Drone chests</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#fb923c">🦸 Thursday</span>
+      <span class="theme-tag theme-heroes">Heroes</span>
+      <span class="tldr-content">Recruitment + EXP + Fragments + Medals</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#f472b6">🔥 Friday</span>
+      <span class="theme-tag theme-mobil">Mobilize</span>
+      <span class="tldr-content">Troops + Research + Build + Radar</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#f87171">💥 Saturday</span>
+      <span class="theme-tag theme-pvp">PvP</span>
+      <span class="tldr-content">Combat + Trucks + Secret Missions</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════ SUNDAY ══════ -->
+<div class="day-block day-0" id="day-sun">
+  <div class="day-header">
+    <span>☀️ Sunday</span>
+    <span class="day-num">Prep Day</span>
+    <span class="day-theme">Get ready before VS starts</span>
+    <span class="theme-tag theme-prep">Prep</span>
+  </div>
+  <div class="prep-note">
+    <div class="prep-item">
+      <span class="prep-icon">🍖</span>
+      <div><strong>Start gathering Food, Steel, and Coin from the map on Sunday night</strong> — so your troops return right as VS starts on Monday for the points to count</div>
+    </div>
+    <div class="prep-item">
+      <span class="prep-icon">📡</span>
+      <div><strong>Save your Radar Missions</strong> — don't use them now, you'll need them on Monday</div>
+    </div>
+    <div class="prep-item">
+      <span class="prep-icon">🚫</span>
+      <div><strong>Don't spend anything</strong> — the week ahead requires a lot of spending, so hold onto all your resources</div>
+    </div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️ Remember:</strong> don't use your Radar Missions — save them for Monday. And don't drain all your Stamina, start VS with a full bar (40+40+120=200)
+  </div>
+  <div style="padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+    <span class="action-badge action-keep">🟡 Keep UR fragments</span>
+    <span class="action-badge action-dont">🔴 Don't open before Thursday</span>
+    <span class="action-badge action-keep">🟡 Keep Radar Missions</span>
+    <span class="action-badge action-do">🟢 Gather resources from the map at night</span>
+    <span class="action-badge action-dont">🔴 Don't spend resources today</span>
+  </div>
+</div>
+
+
+<!-- ══════ MONDAY ══════ -->
+<div class="day-block day-1" id="day-mon">
+  <div class="day-header">
+    <span>🌙 Monday</span>
+    <span class="day-num">Day 1</span>
+    <span class="day-theme">Radar Training</span>
+    <span class="theme-tag theme-activity">Activity</span>
+  </div>
+  <div class="day-desc">Day 1 is all about staying active and keeping things moving. Focus on using your Stamina, completing Radar Missions, and upgrading your Drone. A good setup on Sunday is the key to success today.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">📡</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-radar">Radar</span> <span class="badge b-star3">***</span> Complete Radar Missions</div>
+        <div class="task-desc">Target: 80 missions — saved since Sunday, now it's time to use them</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_eclair.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Use Stamina (Energy)</div>
+        <div class="task-desc">Use it on Zombie attacks, raids, or alliance tasks</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">✈️</span>
+      <div class="task-content">
+        <div class="task-name">Drone Training Data + Drone Parts</div>
+        <div class="task-desc">Save your Drone Parts — you'll need them for this day</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_exp.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Use Hero EXP</div>
+        <div class="task-desc">Level up your core heroes</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🍖</span>
+      <div class="task-content">
+        <div class="task-name">Gather Food, Steel, and Coin from the map — all day</div>
+        <div class="task-desc">Continue what you started Sunday night — keep sending your troops to gather all through Monday</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Kill two birds with one stone — Arms Race</div>
+    <div class="sync-item">When the Arms Race phase is <strong>"Drone Boost"</strong> — use your combat data and Stamina at the same time to double up on points</div>
+    <div class="sync-item">When the phase is <strong>"Hero Advancement"</strong> — use your Hero EXP during this window</div>
+  </div>
+</div>
+
+
+<!-- ══════ TUESDAY ══════ -->
+<div class="day-block day-2" id="day-tue">
+  <div class="day-header">
+    <span>⚡ Tuesday</span>
+    <span class="day-num">Day 2</span>
+    <span class="day-theme">Base Expansion</span>
+    <span class="theme-tag theme-base">Build</span>
+  </div>
+  <div class="day-desc">Day 2 shifts your focus to base development. Upgrading key buildings like Tech Centers, Barracks, and Hospitals gives you a long-term edge that outlasts this event. Instead of using your speedups randomly, focus on what actually makes a difference.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">🏙️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Use Construction Speedups</div>
+        <div class="task-desc">Use Construction Speedups and finish building — points count when construction completes</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏗️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Increase Building Power</div>
+        <div class="task-desc">Upgrade buildings to increase base power</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🚛</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-ur">UR</span> Send Orange Trucks</div>
+        <div class="task-desc">Collect truck renewal tickets throughout the week — you'll need them on Tuesday and Saturday</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🎯</span>
+      <div class="task-content">
+        <div class="task-name">Complete Legendary (Orange) Secret Missions</div>
+        <div class="task-desc">Collect secret mission renewal tickets throughout the week — you'll need them on Tuesday and Saturday</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🎟️</span>
+      <div class="task-content">
+        <div class="task-name">Recruit Survivors</div>
+        <div class="task-desc">Use all the recruitment tickets you've saved throughout the week</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Kill two birds with one stone — Arms Race</div>
+    <div class="sync-item">If the Arms Race phase is <strong>"City Building"</strong> — use Construction Speedups and upgrade buildings at the same time to score both VS and Arms Race points together</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Don't use your Radar Missions — you'll need them on Wednesday
+  </div>
+</div>
+
+
+<!-- ══════ WEDNESDAY ══════ -->
+<div class="day-block day-3" id="day-wed">
+  <div class="day-header">
+    <span>🔬 Wednesday</span>
+    <span class="day-num">Day 3</span>
+    <span class="day-theme">Age of Science</span>
+    <span class="theme-tag theme-tech">Tech</span>
+  </div>
+  <div class="day-desc">Day 3 is about making smart choices in the Research Lab. This is your chance to invest in technologies that strengthen your base. Focus on research that uses Honor Badges, especially in the Alliance VS, Inter-City Trucks, and Special Forces sections — these are long-term upgrades that boost your power in every challenge.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">📡</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-radar">Radar</span> <span class="badge b-star3">***</span> Complete Radar Missions</div>
+        <div class="task-desc">Target: 80 missions — 40 saved from Tuesday + 40 from Wednesday = 80 missions ready!</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🔬</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Use Research Speedups</div>
+        <div class="task-desc">Use Research Speedups and finish pending research</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚗️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Increase Tech Power</div>
+        <div class="task-desc">Upgrade research to increase tech power</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏅</span>
+      <div class="task-content">
+        <div class="task-name">Use Honor Badges — Special Forces</div>
+        <div class="task-desc">Use Honor Badges on Alliance VS research at the Tech Center</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🚁</span>
+      <div class="task-content">
+        <div class="task-name">Open Drone Component Chests (Level 1→7)</div>
+        <div class="task-desc">⚠️ Collect these chests throughout the week — today is the only day to open them</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">✈️</span>
+      <div class="task-content">
+        <div class="task-name">Upgrade Drone Components</div>
+        <div class="task-desc">Combine components on the Drone components page</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Kill two birds with one stone — Arms Race</div>
+    <div class="sync-item">If the phase is <strong>"Technological Research"</strong> — use Research Speedups and boost your tech power at the same time</div>
+    <div class="sync-item">If the phase is <strong>"Drone Boost"</strong> — open Drone component chests and use combat data</div>
+  </div>
+</div>
+
+
+<!-- ══════ THURSDAY ══════ -->
+<div class="day-block day-4" id="day-thu">
+  <div class="day-header">
+    <span>🦸 Thursday</span>
+    <span class="day-num">Day 4</span>
+    <span class="day-theme">Hero Training</span>
+    <span class="theme-tag theme-heroes">Heroes</span>
+  </div>
+  <div class="day-desc">Day 4 focuses on hero development, and it's one of the most rewarding days if you've been saving your materials. This is when all the EXP, fragments, and skill medals you've saved come together to push your team to the next level. Focus on developing your core heroes — this improves your power across every part of the game.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">🎟️</span>
+      <div class="task-content">
+        <div class="task-name">Recruit Heroes</div>
+        <div class="task-desc">Collect recruitment tickets throughout the week — today's the day to use them all</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_exp.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Use Hero EXP</div>
+        <div class="task-desc">Level up your core heroes</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_fragment.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Use Hero Fragments <span class="badge b-ur">UR</span> <span class="badge b-ssr">SSR</span> <span class="badge b-sr">SR</span></div>
+        <div class="task-desc">Collect fragments throughout the week — today's the day to use them all</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_medaille.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Use Skill Medals</div>
+        <div class="task-desc">Collect medals throughout the week — today's the day to use them all</div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Kill two birds with one stone — Arms Race</div>
+    <div class="sync-item">If the phase is <strong>"Hero Advancement"</strong> — use Hero EXP, fragments, and recruitment tickets at the same time to score both VS and Arms Race points together</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Don't use your Radar Missions — you'll need them on Friday
+  </div>
+</div>
+
+
+<!-- ══════ FRIDAY ══════ -->
+<div class="day-block day-5" id="day-fri">
+  <div class="day-header">
+    <span>🔥 Friday</span>
+    <span class="day-num">Day 5</span>
+    <span class="day-theme">Full Mobilization</span>
+    <span class="theme-tag theme-mobil">Mobilize</span>
+  </div>
+  <div class="day-desc">At this point in the week, it's time to unleash your full power. Day 5 is where multiple systems come together: your base, your tech, and your troops. It's a demanding day, but it's also where a well-prepared week gives you a huge edge.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">📡</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-radar">Radar</span> <span class="badge b-star3">***</span> Complete Radar Missions</div>
+        <div class="task-desc">Target: 80 missions — you should have been saving Radar Missions since Thursday morning</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏙️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Use Construction Speedups</div>
+        <div class="task-desc">Use Construction Speedups and complete the buildings</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏗️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Increase Building Power</div>
+        <div class="task-desc">Upgrade buildings to increase base power</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚔️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Training Speedups + Train Troops</div>
+        <div class="task-desc">Train your troops and level them up — from Level 1 to Level 10</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🔬</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Use Research Speedups</div>
+        <div class="task-desc">Use Research Speedups and finish pending research</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚗️</span>
+      <div class="task-content">
+        <div class="task-name">Increase Tech Power</div>
+        <div class="task-desc">Upgrade research to increase tech power</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Kill two birds with one stone — Arms Race</div>
+    <div class="sync-item">If the phase is <strong>"City Building"</strong> — use Construction Speedups at the same time</div>
+    <div class="sync-item">If the phase is <strong>"Technological Research"</strong> — use Research Speedups at the same time</div>
+    <div class="sync-item">If the phase is <strong>"Unit Progress"</strong> — use Training Speedups at the same time</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Activate your shield before sleeping — so the rival alliance can't score points off you
+  </div>
+</div>
+
+
+<!-- ══════ SATURDAY ══════ -->
+<div class="day-block day-6" id="day-sat">
+  <div class="day-header">
+    <span>💥 Saturday</span>
+    <span class="day-num">Day 6</span>
+    <span class="day-theme">Enemy Crusher</span>
+    <span class="theme-tag theme-pvp">PvP</span>
+  </div>
+  <div class="day-desc">Welcome to Enemy Crusher day! This is the PvP combat day, where killing enemy troops earns you massive points. If you can't fight, a shield is essential to avoid unnecessary losses. For those who plan well, this chaotic day becomes the most valuable of the week.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">🚛</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-ur">UR</span> Send Orange Trucks</div>
+        <div class="task-desc">Collect truck renewal tickets throughout the week — you'll need them on Tuesday and Saturday</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🎯</span>
+      <div class="task-content">
+        <div class="task-name">Complete Legendary (Orange) Secret Missions</div>
+        <div class="task-desc">Collect secret mission renewal tickets throughout the week — you'll need them on Tuesday and Saturday</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏙️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Use Construction Speedups</div>
+        <div class="task-desc">Use Construction Speedups and complete the buildings</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚔️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Training Speedups</div>
+        <div class="task-desc">Train your troops and level them up</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🔬</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Use Research Speedups</div>
+        <div class="task-desc">Use Research Speedups and finish pending research</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">➕</span>
+      <div class="task-content">
+        <div class="task-name">Healing Speedups</div>
+        <div class="task-desc">Used to heal wounded troops at the hospital</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🗡️</span>
+      <div class="task-content">
+        <div class="task-name">Kill Enemy Alliance Troops</div>
+        <div class="task-desc">Attack the rival alliance's stronghold — marked with a red flag on the map. The higher the troop level, the more points you earn</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚔️</span>
+      <div class="task-content">
+        <div class="task-name">Kill Other Alliances' Troops</div>
+        <div class="task-desc">Attack other alliances' strongholds — marked with a white flag on the map</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">💀</span>
+      <div class="task-content">
+        <div class="task-name">Your Troops Being Killed</div>
+        <div class="task-desc">Even losing troops earns you points — activate your shield if you don't plan to fight</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Kill two birds with one stone — Arms Race</div>
+    <div class="sync-item">If the phase is <strong>"City Building"</strong> — use Construction Speedups at the same time</div>
+    <div class="sync-item">If the phase is <strong>"Unit Progress"</strong> — use Training and Healing Speedups at the same time</div>
+    <div class="sync-item">If the phase is <strong>"Technological Research"</strong> — use Research Speedups at the same time</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Don't use your Radar Missions in the evening — you'll need them next Monday
+  </div>
+</div>
+
+<!-- ══════ COMMON MISTAKES ══════ -->
+<div class="mistakes-block">
+  <div class="mistakes-title">❌ Common Mistakes to Avoid</div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text">Opening <strong>UR fragments</strong> before Thursday — save them for the right moment</div>
+  </div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text">Using <strong>Radar Missions</strong> outside their days (Monday/Wednesday/Friday)</div>
+  </div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text">Spending <strong>Honor Badges</strong> randomly instead of focusing on Alliance VS research</div>
+  </div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text">Forgetting to activate your <strong>shield</strong> on Saturday before sleeping</div>
+  </div>
+</div>
+
+<!-- ══════ REWARDS ══════ -->
+<div class="rewards-block" id="rewards">
+  <div class="rewards-title">🏅 Alliance VS Rewards</div>
+
+  <div class="reward-item">
+    <div class="reward-name">🥇 Daily Ranking Rewards</div>
+    <div class="reward-desc">If you rank among the top 30 players in daily individual points, you'll receive special bonus rewards.</div>
+  </div>
+
+  <div class="reward-item">
+    <div class="reward-name">📦 Daily Tier Rewards</div>
+    <div class="reward-desc">Every day you participate in VS you get a reward package regardless of winning or losing — all you need is to complete the daily tasks. At the end of the week, your alliance also earns extra rewards based on the VS result.</div>
+  </div>
+
+  <div class="reward-item">
+    <div class="reward-name">🏆 League Settlement Rewards</div>
+    <div class="reward-desc">By the end of the VS league, your alliance must accumulate at least 6,000,000 points. The rewards you receive depend heavily on your alliance's tier (Silver, Gold, or Diamond) in the event.</div>
+  </div>
+</div>
+
+<!-- ══════ CONCLUSION ══════ -->
+<div class="conclusion-block">
+  <div class="conclusion-title">🎯 Conclusion</div>
+  <p>The Alliance VS Battle isn't just about who's the strongest — it's about who plans smarter, times things better, and works with their team as one cohesive unit. Each day focuses on a different aspect of your base and progress. Know what to do, when to do it, and how to get the most out of every resource.</p>
+  <br>
+  <p>Sync your actions with the Arms Race, save items like resources, Construction/Research/Training Speedups and Honor Badges, and focus on the upgrades that matter most. <strong>Planning for the Alliance VS rewards is just as important as participating itself — plan, coordinate, and finish the week strong! 🏆</strong></p>
+</div>
+
+<!-- ══════ FAQ ══════ -->
+<div class="faq-block">
+  <div class="faq-title">❓ Frequently Asked Questions</div>
+  <div class="faq-item">
+    <div class="faq-q">When should I open UR fragments?</div>
+    <div class="faq-a">➡️ On Hero day (Train Heroes) — this is the best day to open and use UR hero fragments.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">When should I use speedups?</div>
+    <div class="faq-a">➡️ Depending on their type, on the matching day: Construction Speedups on Base day, Research Speedups on Science day, Training Speedups on Hero day.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Should I save my Radar Missions?</div>
+    <div class="faq-a">➡️ Yes, save them ahead of Radar days (Monday, Wednesday, Friday) to get the maximum possible points.</div>
+  </div>
+</div>
+
+<!-- ══════ FOOTER NWH ══════ -->
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Prepared by: MSBKH</div>
+  <div class="footer-credit">Last updated: June 2026</div>
+</div>
+
+<!-- ══════ BACK TO TOP ══════ -->
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">🔝</a>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
