@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Last Week — VS Stats</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #080c10;
+    --card:      #131b24;
+    --border:    #1e2d3d;
+    --gold:      #f5c518;
+    --gold-dim:  #8a6f0a;
+    --red:       #e8394a;
+    --orange:    #f97316;
+    --text:      #e2e8f0;
+    --muted:     #64748b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .main-header {
+    text-align: center;
+    padding: 24px 16px 18px;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #0e1419 0%, #131b24 100%);
+    border: 1px solid var(--gold-dim);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .main-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .alliance-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 16px rgba(245,197,24,0.5);
+  }
+  .main-header h1 { font-size: 1.3rem; font-weight: 900; color: #e2e8f0; letter-spacing: 1px; }
+  .main-header .subtitle { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+
+  .links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .link-card:active { transform: scale(0.98); }
+  .link-card:hover { border-color: var(--gold-dim); }
+
+  .link-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+  }
+  .link-content { flex: 1; }
+  .link-title {
+    font-weight: 900;
+    font-size: 1.02rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .link-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .link-arrow {
+    font-size: 1.2rem;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .card-all { border-bottom: 2px solid var(--gold); }
+  .card-all .link-icon { color: var(--gold); }
+  .card-warn { border-bottom: 2px solid var(--orange); }
+  .card-warn .link-icon { color: var(--orange); }
+  .card-black { border-bottom: 2px solid var(--red); }
+  .card-black .link-icon { color: var(--red); }
+
+  .nwh-footer {
+    text-align: center;
+    padding: 22px 12px;
+    background: linear-gradient(135deg, #0e1419, #131b24);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-top: 12px;
+  }
+  .footer-shield { font-size: 1.8rem; margin-bottom: 6px; }
+  .footer-name {
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .footer-credit {
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img class="alliance-logo" src="../images/logo_alliance.jpg" alt="NWH Logo">
+  </div>
+</a>
+
+<div class="main-header">
+  <div class="alliance-name">[NWH] Night Watch</div>
+  <h1>📊 Last Week — VS Stats</h1>
+  <p class="subtitle">10/08/2026 — 14/08/2026</p>
+</div>
+
+<div class="links-grid">
+
+  <a href="vs_stats.html" class="link-card card-all">
+    <div class="link-icon">📊</div>
+    <div class="link-content">
+      <div class="link-title">Full VS Results</div>
+      <div class="link-desc">All 97 members — daily points and weekly average, ranked highest to lowest</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="warning.html" class="link-card card-warn">
+    <div class="link-icon">⚠️</div>
+    <div class="link-content">
+      <div class="link-title">Warning List</div>
+      <div class="link-desc">23 members between 3.6M and 7.2M average</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="black_list.html" class="link-card card-black">
+    <div class="link-icon">🚫</div>
+    <div class="link-content">
+      <div class="link-title">Black List</div>
+      <div class="link-desc">9 members below 3.6M average</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Prepared by: MSBKH</div>
+  <div class="footer-credit">Last updated: August 2026</div>
+</div>
+
+</body>
+</html>
