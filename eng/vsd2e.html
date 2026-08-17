@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] VS Day 2 Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --blue:#3b82f6; --green:#22c55e; --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:16px; margin-bottom:14px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.3rem; font-weight:900; color:#e2e8f0; }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.95rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+  .points-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
+  .points-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.8); }
+  .points-table tr:last-child td { border-bottom:none; }
+  .points-table .item { color:#e2e8f0; font-weight:600; }
+  .points-table .pts { color:var(--gold); font-weight:900; text-align:right; }
+  .total-row td { background:rgba(245,197,24,0.08); color:var(--gold); font-weight:900; font-size:0.95rem; border-top:1px solid rgba(245,197,24,0.3); }
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.88rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.88rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.88rem; }
+  .target-badges { display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+  .badge { padding:8px 18px; border-radius:20px; font-weight:900; font-size:0.9rem; }
+  .badge-min { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); color:#60a5fa; }
+  .badge-max { background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green); }
+  .warning-list { list-style:none; padding:0; }
+  .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#fca5a5; }
+  .warning-list li:last-child { border-bottom:none; }
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="../index.html">
+  <div class="alliance-logo-wrap">
+    <img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>⚔️ VS Day 2 – Base Expansion</h1>
+  <p class="subtitle">How to Reach 3.6M and 7.2M Easily</p>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+  <div class="section-head sh-gold">📢 Introduction</div>
+  <div class="section-body">
+    <p>Hello everyone,</p>
+    <p>Tomorrow we start <strong>VS Day 2 – Base Expansion</strong>, and we continue with the same idea we started on Day 1: better organization, proper resource saving, and using each resource on the day when it gives the most points.</p>
+    <p>To make things clear, here is a simple example showing that reaching <strong style="color:var(--gold)">3.6M</strong> on Day 2 does not require a huge amount of resources.</p>
+  </div>
+</div>
+
+<!-- 3.6M -->
+<div class="section">
+  <div class="section-head sh-blue">🎯 How to Reach 3.6M Easily</div>
+  <div class="section-body">
+    <table class="points-table">
+      <tr><td class="item">4 UR Trucks</td><td class="pts">800,000 pts</td></tr>
+      <tr><td class="item">8 UR Secret Tasks</td><td class="pts">1,200,000 pts</td></tr>
+      <tr><td class="item">200 Survivor Recruitment Tickets</td><td class="pts">600,000 pts</td></tr>
+      <tr><td class="item">6 days of Construction Speedups</td><td class="pts">1,080,000 pts</td></tr>
+      <tr class="total-row"><td>TOTAL</td><td>3,680,000 pts ✅</td></tr>
+    </table>
+    <div class="highlight-box">
+      With these resources alone, you already pass 3.6M and unlock the required reward box — and this calculation does not even include the points earned from increasing Building Power.
+    </div>
+    <p>The idea is simple: you don't need a huge amount of resources. You need to <strong>save the right resources and use them on the right day.</strong></p>
+  </div>
+</div>
+
+<!-- 7.2M -->
+<div class="section">
+  <div class="section-head sh-green">🚀 Can You Reach 7.2M? Absolutely!</div>
+  <div class="section-body">
+    <p>If you have already reached 3.68M and still have resources available, there is no reason to stop. Let's add to the previous example:</p>
+    <table class="points-table">
+      <tr><td class="item">150K Building Power increase</td><td class="pts">3,375,000 pts</td></tr>
+      <tr><td class="item">3 additional days of Construction Speedups</td><td class="pts">540,000 pts</td></tr>
+      <tr class="total-row"><td>Additional points</td><td>3,915,000 pts</td></tr>
+    </table>
+    <div class="highlight-green">
+      3,680,000 + 3,915,000 = 7,595,000 pts 🎉
+      <br>That means you can pass 7.2M and unlock all VS reward boxes on Day 2!
+    </div>
+  </div>
+</div>
+
+<!-- NOTE -->
+<div class="section">
+  <div class="section-head sh-gold">📌 Important Note</div>
+  <div class="section-body">
+    <p>These calculations are only <strong>examples</strong>. You do not need to follow them exactly. You may have more or fewer Speedups, buildings ready to complete, more Survivor Recruitment Tickets, or other opportunities to score points.</p>
+    <p>The purpose of these examples is simply to show that <strong style="color:var(--gold)">3.6M is not difficult</strong> when you prepare for the day properly, and that <strong style="color:var(--green)">7.2M is also a very realistic target</strong> for anyone who has enough resources and uses them wisely.</p>
+  </div>
+</div>
+
+<!-- TARGETS -->
+<div class="section">
+  <div class="section-head sh-gold">🏆 Our Day 2 Target Is Clear</div>
+  <div class="section-body">
+    <div class="target-badges">
+      <div class="badge badge-min">3.6M — Minimum</div>
+      <div class="badge badge-max">7.2M — Optimal Target</div>
+    </div>
+    <p>If you have the resources to continue, do not stop at 3.6M. Push toward 7.2M and unlock all your VS reward boxes.</p>
+    <p>Plan your construction, use your Speedups wisely, and don't forget your UR Trucks, UR Secret Tasks, and Survivor Recruitment Tickets.</p>
+    <div class="highlight-box">The right resource on the right day = more points, more rewards, and more power for both you and the alliance. 💪🔥</div>
+  </div>
+</div>
+
+<!-- RADAR WARNING -->
+<div class="section">
+  <div class="section-head sh-red">⚠️ VERY IMPORTANT – RADAR TASKS</div>
+  <div class="section-body">
+    <ul class="warning-list">
+      <li>⛔ DO NOT claim your Radar Task rewards on Day 2.</li>
+      <li>✅ You can complete your Radar Tasks normally, but once the task is finished and the red dot appears, leave it there and DO NOT click it.</li>
+      <li>🎯 We need to save those completed Radar Tasks for VS Day 3, when they will give us VS points.</li>
+      <li>⛔ Do not waste your saved Radar Tasks by claiming them on Day 2.</li>
+      <li>🔁 COMPLETE your Radar Tasks, but DO NOT CLAIM them! Leave them ready for Day 3.</li>
+    </ul>
+    <div class="highlight-red">Show us what you can do on Day 2! 💪🔥</div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">By: MSBKH</div>
+  <div class="footer-credit">Last update: 18/08/2026</div>
+</div>
+
+</body>
+</html>

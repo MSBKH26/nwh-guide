@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] اليوم الثاني من VS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --blue:#3b82f6; --green:#22c55e; --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:16px; margin-bottom:14px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.3rem; font-weight:900; color:#e2e8f0; }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.95rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+  .points-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
+  .points-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.8); }
+  .points-table tr:last-child td { border-bottom:none; }
+  .points-table .item { color:#e2e8f0; font-weight:600; }
+  .points-table .pts { color:var(--gold); font-weight:900; text-align:left; }
+  .total-row td { background:rgba(245,197,24,0.08); color:var(--gold); font-weight:900; font-size:0.95rem; border-top:1px solid rgba(245,197,24,0.3); }
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.88rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.88rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.88rem; }
+  .target-badges { display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+  .badge { padding:8px 18px; border-radius:20px; font-weight:900; font-size:0.9rem; }
+  .badge-min { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); color:#60a5fa; }
+  .badge-max { background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green); }
+  .warning-list { list-style:none; padding:0; }
+  .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#fca5a5; }
+  .warning-list li:last-child { border-bottom:none; }
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="index.html">
+  <div class="alliance-logo-wrap">
+    <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>⚔️ اليوم الثاني من VS — تطوير القاعدة</h1>
+  <p class="subtitle">كيف تصل إلى 3.6M و 7.2M بسهولة</p>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+  <div class="section-head sh-gold">📢 مقدمة</div>
+  <div class="section-body">
+    <p>السلام عليكم ورحمة الله وبركاته،</p>
+    <p>غدًا نبدأ <strong>اليوم الثاني من VS – تطوير القاعدة</strong>، ونواصل بنفس الفكرة التي بدأنا بها في اليوم الأول: التنظيم، التخزين، واستخدام كل مورد في اليوم الذي يمنح فيه أكبر عدد من النقاط.</p>
+    <p>ولكي تكون الصورة واضحة، إليكم مثالًا بسيطًا يوضح أن الوصول إلى <strong style="color:var(--gold)">3.6M</strong> في اليوم الثاني لا يحتاج إلى موارد ضخمة.</p>
+  </div>
+</div>
+
+<!-- 3.6M -->
+<div class="section">
+  <div class="section-head sh-blue">🎯 كيف تصل إلى 3.6M بسهولة؟</div>
+  <div class="section-body">
+    <table class="points-table">
+      <tr><td class="item">4 شاحنات UR</td><td class="pts">800,000 نقطة</td></tr>
+      <tr><td class="item">8 مهام سرية UR</td><td class="pts">1,200,000 نقطة</td></tr>
+      <tr><td class="item">200 تذكرة تجنيد ناجين</td><td class="pts">600,000 نقطة</td></tr>
+      <tr><td class="item">6 أيام من مسرعات البناء</td><td class="pts">1,080,000 نقطة</td></tr>
+      <tr class="total-row"><td>المجموع</td><td>3,680,000 نقطة ✅</td></tr>
+    </table>
+    <div class="highlight-box">
+      بهذه الموارد فقط تكون قد تجاوزت 3.6M وفتحت الصندوق المطلوب — وهذه الحسبة لا تشمل حتى النقاط الناتجة عن زيادة قوة المباني (Building Power).
+    </div>
+    <p>الفكرة بسيطة: لا تحتاج إلى كميات هائلة من الموارد، بل تحتاج إلى <strong>تخزين الموارد المناسبة واستخدامها في اليوم المناسب.</strong></p>
+  </div>
+</div>
+
+<!-- 7.2M -->
+<div class="section">
+  <div class="section-head sh-green">🚀 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد!</div>
+  <div class="section-body">
+    <p>إذا وصلت إلى 3.68M وتستطيع المواصلة، فلا يوجد سبب للتوقف. نضيف إلى المثال السابق:</p>
+    <table class="points-table">
+      <tr><td class="item">زيادة 150K في قوة المباني</td><td class="pts">3,375,000 نقطة</td></tr>
+      <tr><td class="item">3 أيام إضافية من مسرعات البناء</td><td class="pts">540,000 نقطة</td></tr>
+      <tr class="total-row"><td>النقاط الإضافية</td><td>3,915,000 نقطة</td></tr>
+    </table>
+    <div class="highlight-green">
+      3,680,000 + 3,915,000 = 7,595,000 نقطة 🎉
+      <br>أي أنك تستطيع تجاوز 7.2M وفتح جميع صناديق VS في اليوم الثاني!
+    </div>
+  </div>
+</div>
+
+<!-- NOTE -->
+<div class="section">
+  <div class="section-head sh-gold">📌 ملاحظة مهمة</div>
+  <div class="section-body">
+    <p>هذه الحسابات مجرد <strong>أمثلة</strong> وليست طريقة إلزامية. قد يكون لديك عدد أكبر أو أقل من المسرعات، أو مبانٍ جاهزة للإكمال، أو تذاكر ناجين أكثر.</p>
+    <p>الهدف من هذه الأمثلة هو توضيح أن <strong style="color:var(--gold)">3.6M ليس رقمًا صعبًا</strong> عندما يتم التحضير لليوم مسبقًا، وأن <strong style="color:var(--green)">7.2M هدف واقعي جدًا</strong> لمن يملك الموارد ويستخدمها بذكاء.</p>
+  </div>
+</div>
+
+<!-- TARGETS -->
+<div class="section">
+  <div class="section-head sh-gold">🏆 هدفنا في اليوم الثاني</div>
+  <div class="section-body">
+    <div class="target-badges">
+      <div class="badge badge-min">3.6M — الحد الأدنى</div>
+      <div class="badge badge-max">7.2M — الهدف الأمثل</div>
+    </div>
+    <p>من لديه الموارد والإمكانية، لا يتوقف عند 3.6M، بل يواصل نحو 7.2M ويفتح جميع الصناديق.</p>
+    <p>نظّموا بناءكم، استغلوا المسرعات جيدًا، ولا تنسوا شاحنات UR والمهام السرية UR وتذاكر تجنيد الناجين.</p>
+    <div class="highlight-box">كل مورد في يومه الصحيح = نقاط أكثر، مكافآت أكثر، وقوة أكبر لكم وللتحالف. 💪🔥</div>
+  </div>
+</div>
+
+<!-- RADAR WARNING -->
+<div class="section">
+  <div class="section-head sh-red">⚠️ تحذير مهم جداً — مهام الرادار</div>
+  <div class="section-body">
+    <ul class="warning-list">
+      <li>⛔ لا تستلم مكافآت مهام الرادار في اليوم الثاني.</li>
+      <li>✅ يمكنك إكمال مهام الرادار بشكل طبيعي، لكن بمجرد انتهاء المهمة وظهور النقطة الحمراء، اتركها ولا تضغط عليها.</li>
+      <li>🎯 نحتاج إلى حفظ مهام الرادار المكتملة لليوم الثالث من VS، حيث ستمنحنا نقاط VS.</li>
+      <li>⛔ لا تهدر مهام الرادار المحفوظة باستلامها في اليوم الثاني.</li>
+      <li>🔁 أكمل مهام الرادار، لكن لا تستلمها! اتركها جاهزة لليوم الثالث.</li>
+    </ul>
+    <div class="highlight-red">أرونا ما تستطيعون فعله في اليوم الثاني! 💪🔥</div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">آخر تحديث: 18/08/2026</div>
+</div>
+
+</body>
+</html>
