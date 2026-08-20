@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Waterfall Strategy — T9 Troop Promotion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --blue:#3b82f6; --green:#22c55e; --orange:#f97316;
+    --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:16px; margin-bottom:14px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.3rem; font-weight:900; color:#e2e8f0; }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.95rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-orange { background:linear-gradient(90deg,rgba(249,115,22,0.1),transparent); color:var(--orange); border-bottom-color:rgba(249,115,22,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+
+  /* FLOW CHART */
+  .flow { display:flex; flex-direction:column; gap:6px; margin:12px 0; }
+  .flow-step { display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.2); border-radius:10px; padding:10px 14px; }
+  .flow-badge { font-weight:900; font-size:0.85rem; padding:4px 12px; border-radius:20px; white-space:nowrap; }
+  .t7 { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); }
+  .t8 { background:rgba(249,115,22,0.15); color:var(--orange); border:1px solid rgba(249,115,22,0.3); }
+  .t9 { background:rgba(245,197,24,0.15); color:var(--gold); border:1px solid rgba(245,197,24,0.3); }
+  .flow-arrow { color:var(--muted); font-size:1.2rem; }
+  .flow-pts { margin-right:auto; color:var(--green); font-weight:700; font-size:0.85rem; }
+  .flow-barracks { font-size:0.78rem; color:var(--muted); }
+
+  /* POINTS TABLE */
+  .points-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
+  .points-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.8); }
+  .points-table tr:last-child td { border-bottom:none; }
+  .points-table .item { color:#e2e8f0; font-weight:600; }
+  .points-table .pts { color:var(--gold); font-weight:900; text-align:right; }
+  .total-row td { background:rgba(245,197,24,0.08); color:var(--gold); font-weight:900; font-size:0.95rem; border-top:1px solid rgba(245,197,24,0.3); }
+
+  /* HIGHLIGHT */
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.88rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.88rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.88rem; }
+  .highlight-blue { background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#93c5fd; font-size:0.88rem; line-height:1.9; }
+
+  /* BARRACKS TABLE */
+  .barrack-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
+  .barrack-table th { background:rgba(0,0,0,0.3); color:var(--gold); padding:8px 12px; font-weight:700; text-align:left; border-bottom:1px solid var(--border); }
+  .barrack-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.6); color:#cbd5e1; }
+  .barrack-table tr:last-child td { border-bottom:none; }
+  .barrack-table .role { font-weight:700; color:#e2e8f0; }
+
+  /* CHECKLIST */
+  .checklist { list-style:none; padding:0; }
+  .checklist li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.6); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; }
+  .checklist li:last-child { border-bottom:none; }
+
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+</style>
+</head>
+<body>
+
+<a href="index.html">
+  <div class="alliance-logo-wrap">
+    <img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>💧 Waterfall Strategy — T9 Troop Promotion</h1>
+  <p class="subtitle">How to double your VS points from the same troops on Friday</p>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+  <div class="section-head sh-gold">📢 Introduction</div>
+  <div class="section-body">
+    <p>Hello everyone,</p>
+    <p>This guide is especially important for every member who has already unlocked <strong>T9 troops</strong>.</p>
+    <p>We want to explain a simple but very effective way to organize your troop training during the week and earn many more VS points on <strong style="color:var(--gold)">Friday – VS Day 5: Total Mobilization</strong> using the same troops.</p>
+  </div>
+</div>
+
+<!-- MAIN IDEA -->
+<div class="section">
+  <div class="section-head sh-blue">💡 The Main Idea</div>
+  <div class="section-body">
+    <p>If you have T9 troops, <strong>don't spend the entire week training T9 directly</strong>.</p>
+    <p>Instead, during the week, <strong>train and accumulate T7 troops</strong> and keep them in your Drill Ground.</p>
+    <p>Then wait until <strong style="color:var(--gold)">Friday – VS Day 5</strong> and promote them in two separate steps:</p>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-badge t7">T7</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t8">T8</span>
+        <span class="flow-pts">+points ✅</span>
+      </div>
+      <div class="flow-step">
+        <span class="flow-badge t8">T8</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t9">T9</span>
+        <span class="flow-pts">+points ✅</span>
+      </div>
+    </div>
+    <div class="highlight-green">This allows you to earn VS points twice from the same group of troops. 🔥</div>
+  </div>
+</div>
+
+<!-- EXAMPLE -->
+<div class="section">
+  <div class="section-head sh-orange">📊 Simple Example: 5,000 Troops</div>
+  <div class="section-body">
+    <p>We are using 5,000 troops only as a simple example. You can apply the same strategy with 10,000, 20,000, or more troops depending on how many you accumulate during the week.</p>
+    <table class="points-table">
+      <tr><td class="item">5,000 T7 → T8</td><td class="pts">≈ 1,057,500 pts</td></tr>
+      <tr><td class="item">5,000 T8 → T9</td><td class="pts">≈ 1,175,000 pts</td></tr>
+      <tr class="total-row"><td>TOTAL</td><td>2,232,500 pts 🔥</td></tr>
+    </table>
+    <div class="highlight-box">Just 5,000 troops can generate more than 2.2M VS points when their promotions are used correctly. The more troops you save during the week, the greater the benefit on Friday.</div>
+  </div>
+</div>
+
+<!-- BARRACKS -->
+<div class="section">
+  <div class="section-head sh-red">⚠️ VERY IMPORTANT — Barracks Levels</div>
+  <div class="section-body">
+    <p>For this strategy to work correctly, you need to have <strong>Barracks at different levels</strong>.</p>
+    <p>Do not upgrade all your Barracks to the same level, because:</p>
+    <div class="highlight-red">
+      A Level 27 Barracks can only upgrade troops to T9. If you select T7 troops to upgrade on a Lv.27 Barracks, they will be promoted directly to T9 — skipping T8 entirely, and you lose those points.
+    </div>
+    <p>This is why you need a Barracks between <strong>Lv.24 and Lv.26</strong> to perform the T7 → T8 step, and a <strong>Lv.27 Barracks</strong> for the T8 → T9 step.</p>
+
+    <table class="barrack-table">
+      <thead><tr><th>Barracks Level</th><th>Role</th><th>Promotion</th></tr></thead>
+      <tbody>
+        <tr><td>Lv.24 – Lv.26</td><td class="role">Intermediate step</td><td>T7 → T8</td></tr>
+        <tr><td>Lv.27</td><td class="role">Final step</td><td>T8 → T9</td></tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-blue">
+      For training (production), it doesn't matter which Barracks level you use — you can produce T7 on any Barracks regardless of its level. The level restriction only applies to upgrades (promotions).
+    </div>
+  </div>
+</div>
+
+<!-- MSBKH EXAMPLE -->
+<div class="section">
+  <div class="section-head sh-green">🛠️ Practical Example — How MSBKH Organizes His Barracks</div>
+  <div class="section-body">
+    <p>Here is a real example of how to organize 4 Barracks for this strategy:</p>
+    <table class="barrack-table">
+      <thead><tr><th>Barracks</th><th>Used For</th></tr></thead>
+      <tbody>
+        <tr><td>All 4 Barracks</td><td class="role">Produce T7 troops all week (any level works for production)</td></tr>
+        <tr><td>1 Barracks Lv.24–26</td><td class="role">Upgrade T7 → T8 on Friday</td></tr>
+        <tr><td>1 Barracks Lv.27</td><td class="role">Upgrade T8 → T9 on Friday</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight-green">
+      Key point: for production, barracks level doesn't matter — produce T7 on all of them. But for upgrades, level matters. Keep at least one Barracks between Lv.24–26 and one at Lv.27 to perform both promotion steps separately.
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY PLAN -->
+<div class="section">
+  <div class="section-head sh-gold">📅 What Should You Do During the Week?</div>
+  <div class="section-body">
+    <ul class="checklist">
+      <li>✅ Train T7 troops all week on all your Barracks.</li>
+      <li>✅ Accumulate as many T7 as possible in your Drill Ground.</li>
+      <li>⛔ Do not rush to promote them to T8 or T9 during the week.</li>
+      <li>✅ Save them for <strong>Friday – Total Mobilization</strong>.</li>
+      <li>✅ Use your Lv.24–26 Barracks to promote T7 → T8.</li>
+      <li>✅ Then use your Lv.27 Barracks to promote T8 → T9.</li>
+    </ul>
+    <div class="highlight-box">This way, the same troops generate points through two separate promotion stages. 💪</div>
+  </div>
+</div>
+
+<!-- WHY -->
+<div class="section">
+  <div class="section-head sh-blue">🎯 Why Is This Strategy Better?</div>
+  <div class="section-body">
+    <p>The goal is not simply to train as many troops as possible. The goal is to <strong>extract as many VS points as possible</strong> from the troops you already have.</p>
+    <p>Instead of doing one promotion:</p>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-badge t7">T7</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t9">T9</span>
+        <span style="color:var(--red);font-weight:700;font-size:0.85rem;margin-right:auto;">Points × 1 ❌</span>
+      </div>
+    </div>
+    <p>We split it on Friday into:</p>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-badge t7">T7</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t8">T8</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t9">T9</span>
+        <span style="color:var(--green);font-weight:700;font-size:0.85rem;margin-right:auto;">Points × 2 ✅</span>
+      </div>
+    </div>
+    <div class="highlight-green">This allows us to score from both promotion stages. 🔥</div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="section">
+  <div class="section-head sh-gold">📋 Summary</div>
+  <div class="section-body">
+    <ul class="checklist">
+      <li>✅ During the week → Train and accumulate T7 troops.</li>
+      <li>✅ On Friday → T7 → T8 → T9 (two separate steps).</li>
+      <li>✅ Keep Barracks at different levels: Lv.24–26 for T7→T8, Lv.27 for T8→T9.</li>
+      <li>⛔ Do not waste promotion opportunities before Friday.</li>
+    </ul>
+    <div class="highlight-box">
+      Remember, 5,000 troops is only a simple example. Apply the same principle to as many troops as you can save. The more T7 troops you accumulate during the week, the more opportunities you have to generate huge VS points on Friday.
+    </div>
+    <div class="highlight-red">Don't waste your promotion opportunities before the correct VS day. Save your troops, organize your Barracks, and make every promotion count. 💪🔥</div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">By: MSBKH</div>
+  <div class="footer-credit">Last update: 21/08/2026</div>
+</div>
+
+</body>
+</html>
