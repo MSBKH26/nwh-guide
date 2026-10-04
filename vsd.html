@@ -530,12 +530,20 @@
   const tabs = document.querySelectorAll('.day-tab');
   const panels = document.querySelectorAll('.day-panel');
 
+  const dayTabsBar = document.querySelector('.day-tabs');
+
   function goToDay(n) {
     tabs.forEach(t => t.classList.remove('active'));
     panels.forEach(p => p.classList.remove('active'));
     document.querySelector('.day-tab[data-day="' + n + '"]').classList.add('active');
     document.getElementById('day' + n + '-panel').classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Scroll so the tabs bar lands at the top, right above the new panel,
+    // instead of jumping to the very top of the page.
+    requestAnimationFrame(() => {
+      const barTop = dayTabsBar.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: Math.max(barTop - 8, 0), behavior: 'smooth' });
+    });
   }
 
   tabs.forEach(tab => {
