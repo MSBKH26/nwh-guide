@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>[NWH] استراتيجية الشلال — ترقية جنود T9</title>
+<title>[NWH] استراتيجية الشلال — ترقية جنود T10</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:#080c10; --card:#131b24; --border:#1e2d3d;
     --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
-    --blue:#3b82f6; --green:#22c55e; --orange:#f97316;
+    --blue:#3b82f6; --green:#22c55e; --orange:#f97316; --purple:#a855f7;
     --text:#e2e8f0; --muted:#64748b;
   }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -28,15 +28,17 @@
   .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
   .sh-orange { background:linear-gradient(90deg,rgba(249,115,22,0.1),transparent); color:var(--orange); border-bottom-color:rgba(249,115,22,0.2); }
   .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .sh-purple { background:linear-gradient(90deg,rgba(168,85,247,0.12),transparent); color:var(--purple); border-bottom-color:rgba(168,85,247,0.2); }
   .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
   .section-body p { margin-bottom:10px; }
   .section-body p:last-child { margin-bottom:0; }
   .flow { display:flex; flex-direction:column; gap:6px; margin:12px 0; }
-  .flow-step { display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.2); border-radius:10px; padding:10px 14px; flex-direction:row-reverse; }
+  .flow-step { display:flex; align-items:center; gap:10px; background:rgba(0,0,0,0.2); border-radius:10px; padding:10px 14px; flex-direction:row-reverse; flex-wrap:wrap; }
   .flow-badge { font-weight:900; font-size:0.85rem; padding:4px 12px; border-radius:20px; white-space:nowrap; }
   .t7 { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); }
   .t8 { background:rgba(249,115,22,0.15); color:var(--orange); border:1px solid rgba(249,115,22,0.3); }
   .t9 { background:rgba(245,197,24,0.15); color:var(--gold); border:1px solid rgba(245,197,24,0.3); }
+  .t10 { background:rgba(168,85,247,0.15); color:var(--purple); border:1px solid rgba(168,85,247,0.3); }
   .flow-arrow { color:var(--muted); font-size:1.2rem; transform:scaleX(-1); }
   .flow-pts { margin-left:auto; color:var(--green); font-weight:700; font-size:0.85rem; }
   .points-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
@@ -49,6 +51,7 @@
   .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.88rem; line-height:1.9; }
   .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.88rem; }
   .highlight-blue { background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#93c5fd; font-size:0.88rem; line-height:1.9; }
+  .highlight-purple { background:rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#d8b4fe; font-size:0.88rem; line-height:1.9; }
   .barrack-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
   .barrack-table th { background:rgba(0,0,0,0.3); color:var(--gold); padding:8px 12px; font-weight:700; text-align:right; border-bottom:1px solid var(--border); }
   .barrack-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.6); color:#cbd5e1; }
@@ -57,6 +60,7 @@
   .checklist { list-style:none; padding:0; }
   .checklist li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.6); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; }
   .checklist li:last-child { border-bottom:none; }
+  .note-box { padding:10px 14px; font-size:0.8rem; color:var(--muted); border-top:1px dashed var(--border); background:rgba(0,0,0,0.15); border-radius:0 0 10px 10px; margin-top:4px; }
   .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
   .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
   .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
@@ -73,8 +77,8 @@
 <div class="alliance-name">[NWH] Night Watch</div>
 
 <div class="main-header">
-  <h1>💧 استراتيجية الشلال — ترقية جنود T9</h1>
-  <p class="subtitle">كيف تضاعف نقاط VS من نفس الجنود يوم الجمعة</p>
+  <h1>💧 استراتيجية الشلال — ترقية جنود T9 و T10</h1>
+  <p class="subtitle">كيف تضاعف (أو تضاعف ثلاثياً) نقاط VS من نفس الجنود يوم الجمعة</p>
 </div>
 
 <!-- INTRO -->
@@ -82,7 +86,7 @@
   <div class="section-head sh-gold">📢 مقدمة</div>
   <div class="section-body">
     <p>السلام عليكم ورحمة الله وبركاته،</p>
-    <p>هذا الدليل مهم بشكل خاص لكل عضو فتح جنود <strong>T9</strong>.</p>
+    <p>هذا الدليل مهم بشكل خاص لكل عضو فتح جنود <strong>T9</strong>، وأهم بكثير لمن فتح <strong>T10</strong>.</p>
     <p>نريد شرح طريقة بسيطة لكنها فعّالة جداً لتنظيم تدريب جنودك خلال الأسبوع، وكسب نقاط VS أكثر بكثير يوم <strong style="color:var(--gold)">الجمعة — اليوم الخامس من VS: التعبئة الشاملة</strong>.</p>
   </div>
 </div>
@@ -91,9 +95,9 @@
 <div class="section">
   <div class="section-head sh-blue">💡 الفكرة الأساسية</div>
   <div class="section-body">
-    <p>إذا كان لديك جنود T9، <strong>لا تقضِ الأسبوع كله في إنتاج T9 مباشرة</strong>.</p>
+    <p>إذا كان لديك جنود T9 أو T10، <strong>لا تقضِ الأسبوع كله في إنتاج جنود جاهزة T9/T10 مباشرة</strong>.</p>
     <p>بدلاً من ذلك، خلال الأسبوع <strong>أنتج وراكم جنود T7</strong> واحتفظ بهم في ساحة التدريب.</p>
-    <p>ثم انتظر حتى <strong style="color:var(--gold)">يوم الجمعة — اليوم الخامس</strong> وارتقِ بهم في خطوتين منفصلتين:</p>
+    <p>ثم انتظر حتى <strong style="color:var(--gold)">يوم الجمعة — اليوم الخامس</strong> وارتقِ بهم تدريجياً، خطوة بخطوة:</p>
     <div class="flow">
       <div class="flow-step">
         <span class="flow-badge t7">T7</span>
@@ -107,8 +111,14 @@
         <span class="flow-badge t9">T9</span>
         <span class="flow-pts">+ نقاط ✅</span>
       </div>
+      <div class="flow-step">
+        <span class="flow-badge t9">T9</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t10">T10</span>
+        <span class="flow-pts">+ نقاط ✅ (لمن فتح T10)</span>
+      </div>
     </div>
-    <div class="highlight-green">هذا يسمح لك بكسب نقاط VS مرتين من نفس مجموعة الجنود. 🔥</div>
+    <div class="highlight-green">هذا يسمح لك بكسب نقاط VS مرتين (أو ثلاث مرات لمن لديه T10) من نفس مجموعة الجنود. 🔥</div>
   </div>
 </div>
 
@@ -120,9 +130,11 @@
     <table class="points-table">
       <tr><td class="item">5,000 T7 → T8</td><td class="pts">≈ 1,057,500 نقطة</td></tr>
       <tr><td class="item">5,000 T8 → T9</td><td class="pts">≈ 1,175,000 نقطة</td></tr>
-      <tr class="total-row"><td>المجموع</td><td>2,232,500 نقطة 🔥</td></tr>
+      <tr><td class="item">5,000 T9 → T10</td><td class="pts">≈ 1,292,500 نقطة</td></tr>
+      <tr class="total-row"><td>المجموع (من يملك T10)</td><td>3,525,000 نقطة 🔥</td></tr>
     </table>
-    <div class="highlight-box">5,000 جندي فقط يمكنهم توليد أكثر من 2.2M نقطة VS عند استخدام الترقيات بشكل صحيح. كلما زاد عدد الجنود الذين تجمعهم خلال الأسبوع، كلما كانت الفائدة أكبر يوم الجمعة.</div>
+    <div class="highlight-box">5,000 جندي فقط يمكنهم توليد أكثر من 3.5M نقطة VS عند استخدام سلسلة الترقيات الكاملة T7→T8→T9→T10. كلما زاد عدد الجنود الذين تجمعهم خلال الأسبوع، كلما كانت الفائدة أكبر يوم الجمعة.</div>
+    <div class="note-box">⚠️ رقم خطوة T9→T10 (≈1,292,500) تقديري ويعتمد على مستوى تقنياتك (Technology Power) — كلما كانت تقنياتك أقوى، كلما زادت النقطة لكل جندي. القيمة قد تكون أعلى عندك.</div>
   </div>
 </div>
 
@@ -130,17 +142,18 @@
 <div class="section">
   <div class="section-head sh-red">⚠️ مهم جداً — مستويات الثكنات (Barracks)</div>
   <div class="section-body">
-    <p>لكي تعمل هذه الاستراتيجية بشكل صحيح، تحتاج إلى <strong>ثكنات بمستويات مختلفة</strong>.</p>
+    <p>لكي تعمل هذه الاستراتيجية بشكل صحيح، تحتاج إلى <strong>ثكنات بمستويات مختلفة</strong> — كل مستوى يفتح سقف ترقية معيّن.</p>
     <p>لا ترفع مستوى جميع ثكناتك إلى نفس المستوى، لأن:</p>
     <div class="highlight-red">
-      ثكنة المستوى 27 لا تستطيع الترقية إلا نحو T9. إذا اخترت ترقية جنود T7 على ثكنة Lv.27، سيتم ترقيتهم مباشرة إلى T9 — متخطين T8 كلياً، وتخسر نقاط مرحلة T8.
+      ثكنة المستوى 27 لا تستطيع الترقية إلا نحو T9. إذا اخترت ترقية جنود T7 على ثكنة Lv.27، سيتم ترقيتهم مباشرة إلى T9 — متخطين T8 كلياً، وتخسر نقاط مرحلة T8. وبنفس المنطق، ثكنة أقل من Lv.30 لا يمكنها الترقية إلى T10.
     </div>
-    <p>لهذا تحتاج إلى ثكنة بين <strong>Lv.24 و Lv.26</strong> لخطوة T7 → T8، وثكنة <strong>Lv.27</strong> لخطوة T8 → T9.</p>
+    <p>لهذا تحتاج إلى ثكنة بين <strong>Lv.24 و Lv.26</strong> لخطوة T7 → T8، ثكنة <strong>Lv.27</strong> لخطوة T8 → T9، وثكنة <strong style="color:var(--purple)">Lv.30</strong> لخطوة T9 → T10.</p>
     <table class="barrack-table">
       <thead><tr><th>مستوى الثكنة</th><th>الدور</th><th>الترقية</th></tr></thead>
       <tbody>
-        <tr><td>Lv.24 – Lv.26</td><td class="role">الخطوة الوسيطة</td><td>T7 → T8</td></tr>
-        <tr><td>Lv.27</td><td class="role">الخطوة النهائية</td><td>T8 → T9</td></tr>
+        <tr><td>Lv.24 – Lv.26</td><td class="role">الخطوة الأولى</td><td>T7 → T8</td></tr>
+        <tr><td>Lv.27</td><td class="role">الخطوة الثانية</td><td>T8 → T9</td></tr>
+        <tr><td style="color:var(--purple);font-weight:700;">Lv.30</td><td class="role">الخطوة الثالثة</td><td>T9 → T10</td></tr>
       </tbody>
     </table>
     <div class="highlight-blue">
@@ -153,17 +166,18 @@
 <div class="section">
   <div class="section-head sh-green">🛠️ مثال عملي — كيف يُنظّم MSBKH ثكناته</div>
   <div class="section-body">
-    <p>إليك مثالاً حقيقياً لتنظيم 4 ثكنات لتطبيق هذه الاستراتيجية:</p>
+    <p>إليك مثالاً حقيقياً لتنظيم الثكنات لتطبيق هذه الاستراتيجية (مع افتراض امتلاك ثكنة بمستوى Lv.30 لمن فتح T10):</p>
     <table class="barrack-table">
       <thead><tr><th>الثكنات</th><th>الاستخدام</th></tr></thead>
       <tbody>
-        <tr><td>جميع الثكنات الـ 4</td><td class="role">إنتاج جنود T7 طوال الأسبوع (أي مستوى يصلح للإنتاج)</td></tr>
+        <tr><td>جميع الثكنات</td><td class="role">إنتاج جنود T7 طوال الأسبوع (أي مستوى يصلح للإنتاج)</td></tr>
         <tr><td>ثكنة واحدة Lv.24–26</td><td class="role">ترقية T7 → T8 يوم الجمعة</td></tr>
         <tr><td>ثكنة واحدة Lv.27</td><td class="role">ترقية T8 → T9 يوم الجمعة</td></tr>
+        <tr><td style="color:var(--purple);font-weight:700;">ثكنة واحدة Lv.30</td><td class="role">ترقية T9 → T10 يوم الجمعة (لمن فتح T10)</td></tr>
       </tbody>
     </table>
     <div class="highlight-green">
-      النقطة الجوهرية: للإنتاج، مستوى الثكنة لا يهم — أنتج T7 على جميعها. لكن للترقية، المستوى مهم. احتفظ بثكنة واحدة على الأقل بين Lv.24–26 وأخرى على Lv.27 لتنفيذ خطوتَي الترقية بشكل منفصل.
+      النقطة الجوهرية: للإنتاج، مستوى الثكنة لا يهم — أنتج T7 على جميعها. لكن للترقية، المستوى مهم. احتفظ بثكنة واحدة على الأقل لكل خطوة من السلسلة (Lv.24–26، Lv.27، وLv.30) لتنفيذ كل مرحلة ترقية بشكل منفصل.
     </div>
   </div>
 </div>
@@ -175,12 +189,13 @@
     <ul class="checklist">
       <li>✅ أنتج جنود T7 طوال الأسبوع على جميع ثكناتك.</li>
       <li>✅ راكم أكبر عدد ممكن من T7 في ساحة التدريب.</li>
-      <li>⛔ لا تتسرع في ترقيتهم إلى T8 أو T9 خلال الأسبوع.</li>
+      <li>⛔ لا تتسرع في ترقيتهم إلى T8 أو T9 أو T10 خلال الأسبوع.</li>
       <li>✅ احتفظ بهم ليوم <strong>الجمعة — التعبئة الشاملة</strong>.</li>
       <li>✅ استخدم ثكنة Lv.24–26 لترقية T7 → T8.</li>
       <li>✅ ثم استخدم ثكنة Lv.27 لترقية T8 → T9.</li>
+      <li>✅ ومن فتح T10: استخدم ثكنة Lv.30 لترقية T9 → T10.</li>
     </ul>
-    <div class="highlight-box">بهذه الطريقة، نفس الجنود يولّدون نقاطاً من خلال مرحلتَي ترقية منفصلتين. 💪</div>
+    <div class="highlight-box">بهذه الطريقة، نفس الجنود يولّدون نقاطاً من خلال 2 أو 3 مراحل ترقية منفصلة. 💪</div>
   </div>
 </div>
 
@@ -189,16 +204,16 @@
   <div class="section-head sh-blue">🎯 لماذا هذه الاستراتيجية أفضل؟</div>
   <div class="section-body">
     <p>الهدف ليس فقط تدريب أكبر عدد ممكن من الجنود. الهدف هو <strong>استخراج أكبر عدد ممكن من نقاط VS</strong> من الجنود الذين لديك.</p>
-    <p>بدلاً من ترقية واحدة:</p>
+    <p>بدلاً من ترقية واحدة مباشرة:</p>
     <div class="flow">
       <div class="flow-step">
         <span class="flow-badge t7">T7</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-badge t9">T9</span>
+        <span class="flow-badge t10">T10</span>
         <span style="color:var(--red);font-weight:700;font-size:0.85rem;margin-left:auto;">نقاط × 1 ❌</span>
       </div>
     </div>
-    <p>نقسّمها يوم الجمعة إلى:</p>
+    <p>نقسّمها يوم الجمعة إلى 3 خطوات متتالية:</p>
     <div class="flow">
       <div class="flow-step">
         <span class="flow-badge t7">T7</span>
@@ -206,10 +221,21 @@
         <span class="flow-badge t8">T8</span>
         <span class="flow-arrow">→</span>
         <span class="flow-badge t9">T9</span>
-        <span style="color:var(--green);font-weight:700;font-size:0.85rem;margin-left:auto;">نقاط × 2 ✅</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-badge t10">T10</span>
+        <span style="color:var(--green);font-weight:700;font-size:0.85rem;margin-left:auto;">نقاط × 3 ✅</span>
       </div>
     </div>
-    <div class="highlight-green">هذا يسمح لنا بالتسجيل من مرحلتَي الترقية معاً. 🔥</div>
+    <div class="highlight-green">هذا يسمح لنا بالتسجيل من كل مراحل الترقية معاً — وليس فقط النتيجة النهائية. 🔥</div>
+  </div>
+</div>
+
+<!-- T10 NOTE -->
+<div class="section">
+  <div class="section-head sh-purple">🟣 ملاحظة خاصة بـ T10</div>
+  <div class="section-body">
+    <p>مستوى الثكنة المطلوب لإنتاج/ترقية جنود T10 هو <strong style="color:var(--purple)">Lv.30</strong>.</p>
+    <p>كمية النقطة المكتسبة في خطوة T9 → T10 تعتمد بشكل مباشر على مستوى تقنياتك العسكرية (Technology Power) — فكلما رفعت تقنياتك، زادت النقاط التي يمنحها كل جندي في هذه الخطوة. القيمة المذكورة في المثال أعلاه (≈258.5 نقطة/جندي) تقديرية وقد تكون أعلى عندك إذا لم تكن تقنياتك ممكّنة بالكامل.</p>
   </div>
 </div>
 
@@ -219,12 +245,12 @@
   <div class="section-body">
     <ul class="checklist">
       <li>✅ خلال الأسبوع → أنتج وراكم جنود T7.</li>
-      <li>✅ يوم الجمعة → T7 → T8 → T9 (خطوتان منفصلتان).</li>
-      <li>✅ احتفظ بثكنات بمستويات مختلفة: Lv.24–26 لـ T7→T8، و Lv.27 لـ T8→T9.</li>
+      <li>✅ يوم الجمعة → T7 → T8 → T9 → T10 (حسب ما فتحته، خطوات منفصلة).</li>
+      <li>✅ احتفظ بثكنات بمستويات مختلفة: Lv.24–26 لـ T7→T8، Lv.27 لـ T8→T9، وLv.30 لـ T9→T10.</li>
       <li>⛔ لا تهدر فرص الترقية قبل يوم الجمعة.</li>
     </ul>
     <div class="highlight-box">
-      تذكر، 5,000 جندي مجرد مثال بسيط. طبّق نفس المبدأ على أكبر عدد ممكن من الجنود. كلما راكمت جنود T7 أكثر خلال الأسبوع، كلما كانت فرصتك أكبر في توليد نقاط VS ضخمة يوم الجمعة.
+      تذكر، 5,000 جندي مجرد مثال بسيط. طبّق نفس المبدأ على أكبر عدد ممكن من الجنود. كلما راكمت جنود T7 أكثر خلال الأسبوع، كلما كانت فرصتك أكبر في توليد نقاط VS ضخمة يوم الجمعة — خصوصاً إذا كنت تملك T10 وتستفيد من السلسلة الكاملة.
     </div>
     <div class="highlight-red">لا تهدر فرص الترقية قبل يوم VS الصحيح. وفّر جنودك، نظّم ثكناتك، واجعل كل ترقية تُحسب. 💪🔥</div>
   </div>
@@ -234,7 +260,7 @@
   <div class="footer-shield">🛡️</div>
   <div class="footer-name">NWH Night Watch</div>
   <div class="footer-credit">إعداد: MSBKH</div>
-  <div class="footer-credit">آخر تحديث: 21/08/2026</div>
+  <div class="footer-credit">آخر تحديث: 04/10/2026</div>
 </div>
 
 </body>
