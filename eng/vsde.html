@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Weekly Chest-Opening Plan — VS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --orange:#f97316; --blue:#3b82f6; --green:#22c55e;
+    --purple:#a855f7; --pink:#ec4899;
+    --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+
+  /* ── HEADER ── */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:20px 16px 16px; margin-bottom:16px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.4rem; font-weight:900; color:var(--gold); letter-spacing:1px; text-shadow:0 0 20px rgba(245,197,24,0.4); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* ── QUICK START / GOLDEN RULES ── */
+  .info-box {
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:14px 16px; margin-bottom:14px; font-size:0.86rem; line-height:1.9;
+  }
+  .info-box .info-title {
+    font-weight:900; font-size:0.98rem; color:var(--gold); margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .info-box.rules { border-color:rgba(245,197,24,0.35); background:linear-gradient(135deg,#0e1419,#131b24); }
+  .info-box .steps { color:#cbd5e1; }
+  .info-box .steps strong { color:var(--gold); }
+  .info-box .target-mini { display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
+  .info-box .target-mini span {
+    padding:5px 12px; border-radius:16px; font-weight:900; font-size:0.8rem;
+  }
+  .mini-min { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); }
+  .mini-max { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.3); }
+  .rules-list { list-style:none; padding:0; }
+  .rules-list li { padding:6px 0; border-bottom:1px solid rgba(24,31,46,0.8); color:#cbd5e1; display:flex; gap:8px; align-items:flex-start; }
+  .rules-list li:last-child { border-bottom:none; }
+  .rules-list li::before { content:'⭐'; flex-shrink:0; }
+
+  /* ── DAY TABS ── */
+  .day-tabs {
+    display:flex; flex-wrap:wrap; gap:8px; padding:10px;
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    margin-bottom:16px; position:sticky; top:8px; z-index:30;
+    backdrop-filter:blur(6px);
+  }
+  .day-tab {
+    flex:1; min-width:64px; text-align:center; padding:10px 6px;
+    border-radius:9px; font-size:0.8rem; font-weight:900;
+    border:1px solid var(--tab-color); color:var(--tab-color);
+    background:rgba(255,255,255,0.02); cursor:pointer;
+    font-family:'Cairo',sans-serif; transition:background 0.15s, transform 0.15s;
+  }
+  .day-tab:active { transform:scale(0.96); }
+  .day-tab.active { background:var(--tab-color); color:#0b0e12; box-shadow:0 0 14px color-mix(in srgb, var(--tab-color) 50%, transparent); }
+
+  /* ── PANELS ── */
+  .day-panel { display:none; animation:fadeUp 0.35s ease both; }
+  .day-panel.active { display:block; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  .panel-title {
+    text-align:center; padding:14px 16px; margin-bottom:14px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid var(--tab-color); border-radius:14px;
+  }
+  .panel-title h2 { font-size:1.2rem; font-weight:900; color:var(--tab-color); }
+  .panel-title .subtitle { font-size:0.8rem; color:var(--muted); margin-top:4px; }
+
+  /* ── SECTION (shared) ── */
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.95rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .sh-orange { background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent); color:var(--orange); border-bottom-color:rgba(249,115,22,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+  .points-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
+  .points-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.8); }
+  .points-table tr:last-child td { border-bottom:none; }
+  .points-table .item { color:#e2e8f0; font-weight:600; }
+  .points-table .pts { color:var(--gold); font-weight:900; text-align:right; }
+  .total-row td { background:rgba(245,197,24,0.08); color:var(--gold); font-weight:900; font-size:0.95rem; border-top:1px solid rgba(245,197,24,0.3); }
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.88rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.88rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.88rem; }
+  .highlight-blue { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#93c5fd; font-size:0.88rem; line-height:1.9; }
+  .target-badges { display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+  .badge { padding:8px 18px; border-radius:20px; font-weight:900; font-size:0.9rem; }
+  .badge-min { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); color:#60a5fa; }
+  .badge-max { background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green); }
+  .warning-list, .claim-list, .use-list { list-style:none; padding:0; }
+  .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#fca5a5; }
+  .warning-list li:last-child, .claim-list li:last-child, .use-list li:last-child { border-bottom:none; }
+  .claim-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#fde68a; }
+  .use-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#86efac; }
+
+  /* ── calc-table (Day 1) ── */
+  .table-wrap { overflow-x:auto; }
+  table.calc-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  table.calc-table th { background:rgba(0,0,0,0.35); padding:9px 10px; font-weight:700; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; color:var(--muted); font-size:0.75rem; }
+  table.calc-table td { padding:9px 10px; text-align:left; border-bottom:1px solid rgba(24,31,46,0.6); }
+  table.calc-table tr:last-child td { border-bottom:none; }
+  table.calc-table .pts { font-weight:700; color:var(--text); text-align:right; }
+  .total-row.orange { background:rgba(249,115,22,0.08); } .total-row.orange td { color:var(--orange); }
+  .total-row.gold td { color:var(--gold); }
+  .note-box { padding:12px 14px; font-size:0.82rem; color:var(--muted); border-top:1px dashed var(--border); background:rgba(0,0,0,0.15); }
+
+  /* ── FOOTER ── */
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+
+  /* ── WEEKLY SUMMARY ── */
+  .summary-block { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; }
+  .summary-title { padding:12px 16px; font-size:1rem; font-weight:900; color:var(--gold); background:linear-gradient(90deg,#1c1a08,#13120a); border-bottom:2px solid var(--gold-dim); }
+  .summary-row { display:flex; gap:10px; padding:10px 16px; border-bottom:1px solid rgba(30,45,61,0.6); font-size:0.85rem; align-items:baseline; flex-wrap:wrap; }
+  .summary-row:last-child { border-bottom:none; }
+  .summary-day { font-weight:900; min-width:70px; flex-shrink:0; }
+  .summary-content { color:#cbd5e1; }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top {
+    position:fixed; bottom:20px; right:16px; width:48px; height:48px;
+    background:linear-gradient(135deg, var(--gold), #d4a017);
+    border:2px solid #fff8e1; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; text-decoration:none;
+    box-shadow:0 4px 14px rgba(0,0,0,0.4);
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index:999;
+  }
+  .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+</style>
+</head>
+<body id="top">
+
+<a href="index.html">
+  <div class="alliance-logo-wrap">
+    <img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>📦 Weekly Chest-Opening Plan</h1>
+  <p class="subtitle">Last War: Survival — How to reach 3.6M and 7.2M every VS day</p>
+</div>
+
+<!-- ══════ How to use this guide ══════ -->
+<div class="info-box">
+  <div class="info-title">📖 How to Use This Guide</div>
+  <div class="steps">
+    Pick the VS day from the tabs below → follow the example → open at least <strong>3.6M</strong> → if you have extra resources, push on to <strong>7.2M</strong>.
+  </div>
+  <div class="target-mini">
+    <span class="mini-min">3.6M = Minimum</span>
+    <span class="mini-max">7.2M = All Chests</span>
+  </div>
+</div>
+
+<!-- ══════ Golden Rules ══════ -->
+<div class="info-box rules">
+  <div class="info-title">🏆 Golden Rules for VS</div>
+  <ul class="rules-list">
+    <li>Don't spend a resource before its assigned day.</li>
+    <li>Save your Radar Missions for the next day whenever the guide tells you to.</li>
+    <li>3.6M is the minimum, not the final goal.</li>
+    <li>If you can reach 7.2M, don't stop at 3.6M.</li>
+    <li>The numbers in the examples can be adjusted to match your own resources.</li>
+  </ul>
+</div>
+
+<!-- ══════ Day selector ══════ -->
+<div class="day-tabs">
+  <button class="day-tab active" data-day="1" style="--tab-color:#f97316">🔥 Day 1</button>
+  <button class="day-tab" data-day="2" style="--tab-color:#3b82f6">🏗️ Day 2</button>
+  <button class="day-tab" data-day="3" style="--tab-color:#22c55e">🔬 Day 3</button>
+  <button class="day-tab" data-day="4" style="--tab-color:#a855f7">🦸 Day 4</button>
+  <button class="day-tab" data-day="5" style="--tab-color:#ec4899">🚀 Day 5</button>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- DAY 1 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel active" id="day1-panel" style="--tab-color:#f97316">
+  <div class="panel-title">
+    <h2>🔥 VS Day 1</h2>
+    <p class="subtitle">Organization, resource efficiency, and everyone's participation</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-orange">🎯 Minimum — 3.6M</div>
+    <div class="table-wrap">
+      <table class="calc-table">
+        <thead><tr><th>Resource</th><th>Points</th></tr></thead>
+        <tbody>
+          <tr><td>80 Radar Missions</td><td class="pts">2,000,000</td></tr>
+          <tr><td>300 Stamina</td><td class="pts">240,000</td></tr>
+          <tr><td>100 Drone Parts</td><td class="pts">500,000</td></tr>
+          <tr><td>100K Drone Combat Data</td><td class="pts">600,000</td></tr>
+          <tr><td>100M Hero EXP</td><td class="pts">≈ 303,000</td></tr>
+          <tr class="total-row orange"><td>Total</td><td class="pts">≈ 3,643,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">This does not include Gathering points — calculated separately below.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">🏆 All Chests — 7.2M</div>
+    <div class="table-wrap">
+      <table class="calc-table">
+        <thead><tr><th>Extra Resource</th><th>Points</th></tr></thead>
+        <tbody>
+          <tr><td>Gathering with 3 squads for 16 hours</td><td class="pts">≈ 1,000,000</td></tr>
+          <tr><td>200 extra Drone Parts</td><td class="pts">1,000,000</td></tr>
+          <tr><td>200K extra Drone Combat Data</td><td class="pts">1,200,000</td></tr>
+          <tr><td>100M extra Hero EXP</td><td class="pts">≈ 303,000</td></tr>
+          <tr><td>150 extra Stamina</td><td class="pts">120,000</td></tr>
+          <tr class="total-row gold"><td>Extra points</td><td class="pts">≈ 3,623,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">⚠️ The Gathering figure (≈1M) is only an estimate, and varies depending on your squads' speed, level, and the resources available to you.</div>
+    <div class="highlight-box" style="margin:10px 16px;">3,643,000 + 3,623,000 = <strong>7,266,000</strong> points 🏆</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">✅ Use Today</div>
+    <div class="section-body">
+      <ul class="use-list">
+        <li>📡 Radar Missions</li>
+        <li>⚡ Stamina</li>
+        <li>🚁 Drone Parts & Drone Combat Data</li>
+        <li>🎖️ Hero EXP</li>
+        <li>🍖 Gathering — all day</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- DAY 2 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day2-panel" style="--tab-color:#3b82f6">
+  <div class="panel-title">
+    <h2>⚔️ VS Day 2 — Train Development</h2>
+    <p class="subtitle">How to reach 3.6M and 7.2M easily</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 Minimum — 3.6M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">4 UR Train Crates</td><td class="pts">800,000 pts</td></tr>
+        <tr><td class="item">8 UR Secret Missions</td><td class="pts">1,200,000 pts</td></tr>
+        <tr><td class="item">200 Survivor Recruitment Tickets</td><td class="pts">600,000 pts</td></tr>
+        <tr><td class="item">6 days of Construction Speedups</td><td class="pts">1,080,000 pts</td></tr>
+        <tr class="total-row"><td>Total</td><td>3,680,000 pts ✅</td></tr>
+      </table>
+      <div class="note-box">This does not include points from increasing Building Power.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🏆 All Chests — 7.2M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">+150K Building Power</td><td class="pts">3,375,000 pts</td></tr>
+        <tr><td class="item">3 extra days of Construction Speedups</td><td class="pts">540,000 pts</td></tr>
+        <tr class="total-row"><td>Extra points</td><td>3,915,000 pts</td></tr>
+      </table>
+      <div class="highlight-green">3,680,000 + 3,915,000 = <strong>7,595,000</strong> pts 🎉</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">✅ Use Today</div>
+    <div class="section-body">
+      <ul class="use-list">
+        <li>🏙️ Construction Speedups</li>
+        <li>🚛 UR Train Crates + UR Secret Missions</li>
+        <li>🎟️ Survivor Recruitment Tickets</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">💾 Prepare Day 3 Now</div>
+    <div class="section-body">
+      <ul class="claim-list">
+        <li>✅ Complete your Radar Missions as usual.</li>
+        <li>⛔ Do not claim the reward when the red dot appears — leave it as is until Day 3.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- DAY 3 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day3-panel" style="--tab-color:#22c55e">
+  <div class="panel-title">
+    <h2>🔬 VS Day 3 — Age of Science</h2>
+    <p class="subtitle">How to reach 3.6M and 7.2M easily</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📡 First Thing Today</div>
+    <div class="section-body">
+      <ul class="claim-list">
+        <li>✅ Claim all the Radar Missions you saved from Day 2 right now — each one gives you full VS points.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 Minimum — 3.6M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">80 Radar Missions</td><td class="pts">2,000,000 pts</td></tr>
+        <tr><td class="item">150 Drone Component Chests — Level 1</td><td class="pts">330,000 pts</td></tr>
+        <tr><td class="item">50 Drone Component Chests — Level 2</td><td class="pts">330,000 pts</td></tr>
+        <tr><td class="item">15 Drone Component Chests — Level 3</td><td class="pts">300,000 pts</td></tr>
+        <tr><td class="item">1,100 Honor Badges</td><td class="pts">660,000 pts</td></tr>
+        <tr class="total-row"><td>Total</td><td>3,620,000 pts ✅</td></tr>
+      </table>
+      <div class="note-box">This does not include any Research Speedups, or any increase in Technology Power.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🏆 All Chests — 7.2M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">4,000 extra Honor Badges</td><td class="pts">2,400,000 pts</td></tr>
+        <tr><td class="item">6 days of Research Speedups</td><td class="pts">1,080,000 pts</td></tr>
+        <tr><td class="item">+10,000 Technology Power</td><td class="pts">225,000 pts</td></tr>
+        <tr class="total-row"><td>Extra points</td><td>3,705,000 pts</td></tr>
+      </table>
+      <div class="highlight-green">3,620,000 + 3,705,000 = <strong>7,325,000</strong> pts 🏆</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">✅ Use Today</div>
+    <div class="section-body">
+      <ul class="use-list">
+        <li>📡 Radar Missions (saved from Day 2)</li>
+        <li>🚁 Drone Component Chests (Level 1/2/3)</li>
+        <li>🏅 Honor Badges</li>
+        <li>🔬 Research Speedups</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- DAY 4 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day4-panel" style="--tab-color:#a855f7">
+  <div class="panel-title">
+    <h2>🦸 VS Day 4 — Train Heroes</h2>
+    <p class="subtitle">How to reach 3.6M and 7.2M easily</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 Minimum — 3.6M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">200 Hero Recruitment Tickets</td><td class="pts">750,000 pts</td></tr>
+        <tr><td class="item">100 UR Hero Fragments</td><td class="pts">2,000,000 pts</td></tr>
+        <tr><td class="item">100 SSR Hero Fragments</td><td class="pts">700,000 pts</td></tr>
+        <tr><td class="item">10,000 Skill Medals</td><td class="pts">200,000 pts</td></tr>
+        <tr class="total-row"><td>Total</td><td>3,650,000 pts ✅</td></tr>
+      </table>
+      <div class="note-box">This does not include Hero EXP or Exclusive Weapon Shards.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🏆 All Chests — 7.2M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">900M Hero EXP</td><td class="pts">≈ 2,727,000 pts</td></tr>
+        <tr><td class="item">20 Exclusive Weapon Shards</td><td class="pts">400,000 pts</td></tr>
+        <tr><td class="item">30,000 extra Skill Medals</td><td class="pts">600,000 pts</td></tr>
+        <tr class="total-row"><td>Extra points</td><td>≈ 3,727,000 pts</td></tr>
+      </table>
+      <div class="highlight-green">3,650,000 + 3,727,000 ≈ <strong>7,377,000</strong> pts 🏆</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">✅ Use Today</div>
+    <div class="section-body">
+      <ul class="use-list">
+        <li>🎟️ Hero Recruitment Tickets</li>
+        <li>💠 UR / SSR Hero Fragments</li>
+        <li>🎖️ Skill Medals</li>
+        <li>⭐ Hero EXP and Exclusive Weapon Shards</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-red">💾 Prepare Day 5 Now</div>
+    <div class="section-body">
+      <ul class="claim-list">
+        <li>✅ Complete your Radar Missions as usual.</li>
+        <li>⛔ Do not claim the reward when the red dot appears — we'll need it tomorrow for Total Mobilization.</li>
+      </ul>
+      <div class="highlight-red">For the fifth time 😅: complete the Radar... don't claim it!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- DAY 5 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day5-panel" style="--tab-color:#ec4899">
+  <div class="panel-title">
+    <h2>🚀 VS Day 5 — Total Mobilization</h2>
+    <p class="subtitle">How to reach 3.6M and 7.2M easily</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📡 First Thing Today</div>
+    <div class="section-body">
+      <ul class="claim-list">
+        <li>✅ Claim all the Radar Missions you saved from Day 4 right now — each one gives you full VS points.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 Minimum — 3.6M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">80 Radar Missions</td><td class="pts">2,000,000 pts</td></tr>
+        <tr><td class="item">5,000 T8 troops</td><td class="pts">1,057,500 pts</td></tr>
+        <tr><td class="item">4 days of Speedups</td><td class="pts">720,000 pts</td></tr>
+        <tr class="total-row"><td>Total</td><td>3,777,500 pts ✅</td></tr>
+      </table>
+      <div class="note-box">Day 5 awards points for several Speedup types at once: Construction + Research + Training Speedups — use whichever of the three you have available.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🏆 All Chests — 7.2M</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">6 extra days of Speedups</td><td class="pts">1,080,000 pts</td></tr>
+        <tr><td class="item">5,000 T9 troops</td><td class="pts">1,175,000 pts</td></tr>
+        <tr><td class="item">+60K Power</td><td class="pts">1,350,000 pts</td></tr>
+        <tr class="total-row"><td>Extra points</td><td>3,605,000 pts</td></tr>
+      </table>
+      <div class="highlight-green">3,777,500 + 3,605,000 = <strong>7,382,500</strong> pts 🏆</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">✅ Use Today</div>
+    <div class="section-body">
+      <ul class="use-list">
+        <li>📡 Radar Missions (saved from Day 4)</li>
+        <li>⚔️ Training and promoting troops</li>
+        <li>🏗️🔬⚔️ Speedups (Construction + Research + Training)</li>
+      </ul>
+      <p style="margin-top:8px; color:#cbd5e1;">Remember that promoting the troops you already have (not just training new ones) is an excellent way to earn points.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">💡 Double Your Points From the Same Troops</div>
+    <div class="section-body">
+      <p>There's an advanced strategy to double your promotion points from the same troops (promoting T7→T8 then T8→T9 instead of training directly to T9), with details on the Barracks level required for each step.</p>
+      <div class="highlight-blue">📖 Full details in the <a href="waterfalle.html" style="color:var(--blue); font-weight:900;">Waterfall Strategy — T9 Troop Promotion →</a> guide</div>
+      <p style="margin-top:10px;">🔹 And if you have <strong>T10</strong> troops: the same principle applies to you — promoting your troops from <strong>T9 → T10</strong> gives you extra points the same way, so don't stop at T9 if T10 is available to you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ What to save for each day ══════ -->
+<div class="summary-block">
+  <div class="summary-title">📅 What Should I Save for Each Day?</div>
+  <div class="summary-row"><span class="summary-day" style="color:#f97316">Day 1</span><span class="summary-content">Drone Parts / Stamina / Hero EXP</span></div>
+  <div class="summary-row"><span class="summary-day" style="color:#3b82f6">Day 2</span><span class="summary-content">Construction / Train Crates / Secret Missions</span></div>
+  <div class="summary-row"><span class="summary-day" style="color:#22c55e">Day 3</span><span class="summary-content">Research / Honor Badges / Drone Component Chests / Radar</span></div>
+  <div class="summary-row"><span class="summary-day" style="color:#a855f7">Day 4</span><span class="summary-content">Hero Fragments / Recruitment / Skill Medals / Hero EXP</span></div>
+  <div class="summary-row"><span class="summary-day" style="color:#ec4899">Day 5</span><span class="summary-content">Radar / Troops / Speedups / Power</span></div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">By: MSBKH</div>
+  <div class="footer-credit">Last updated: October 4, 2026</div>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">🔝</a>
+
+<script>
+  const tabs = document.querySelectorAll('.day-tab');
+  const panels = document.querySelectorAll('.day-panel');
+  const dayTabsBar = document.querySelector('.day-tabs');
+
+  function goToDay(n) {
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    document.querySelector('.day-tab[data-day="' + n + '"]').classList.add('active');
+    document.getElementById('day' + n + '-panel').classList.add('active');
+
+    requestAnimationFrame(() => {
+      const barTop = dayTabsBar.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: Math.max(barTop - 8, 0), behavior: 'smooth' });
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => goToDay(tab.dataset.day));
+  });
+
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
