@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] خطة فتح الصناديق الأسبوعية — VS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --orange:#f97316; --blue:#3b82f6; --green:#22c55e;
+    --purple:#a855f7; --pink:#ec4899;
+    --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+
+  /* ── HEADER ── */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:20px 16px 16px; margin-bottom:16px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.08),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.4rem; font-weight:900; color:var(--gold); letter-spacing:1px; text-shadow:0 0 20px rgba(245,197,24,0.4); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+
+  /* ── DAY TABS ── */
+  .day-tabs {
+    display:flex; flex-wrap:wrap; gap:8px; padding:10px;
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    margin-bottom:16px; position:sticky; top:8px; z-index:30;
+    backdrop-filter:blur(6px);
+  }
+  .day-tab {
+    flex:1; min-width:64px; text-align:center; padding:10px 6px;
+    border-radius:9px; font-size:0.8rem; font-weight:900;
+    border:1px solid var(--tab-color); color:var(--tab-color);
+    background:rgba(255,255,255,0.02); cursor:pointer;
+    font-family:'Cairo',sans-serif; transition:background 0.15s, transform 0.15s;
+  }
+  .day-tab:active { transform:scale(0.96); }
+  .day-tab.active { background:var(--tab-color); color:#0b0e12; box-shadow:0 0 14px color-mix(in srgb, var(--tab-color) 50%, transparent); }
+
+  /* ── PANELS ── */
+  .day-panel { display:none; animation:fadeUp 0.35s ease both; }
+  .day-panel.active { display:block; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  .panel-title {
+    text-align:center; padding:14px 16px; margin-bottom:14px;
+    background:linear-gradient(135deg,#0e1419,#131b24);
+    border:1px solid var(--tab-color); border-radius:14px;
+  }
+  .panel-title h2 { font-size:1.2rem; font-weight:900; color:var(--tab-color); }
+  .panel-title .subtitle { font-size:0.8rem; color:var(--muted); margin-top:4px; }
+
+  /* ── SECTION (style commun vsd2–vsd5) ── */
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.95rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+  .points-table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.85rem; }
+  .points-table td { padding:8px 12px; border-bottom:1px solid rgba(24,31,46,0.8); }
+  .points-table tr:last-child td { border-bottom:none; }
+  .points-table .item { color:#e2e8f0; font-weight:600; }
+  .points-table .pts { color:var(--gold); font-weight:900; text-align:left; }
+  .total-row td { background:rgba(245,197,24,0.08); color:var(--gold); font-weight:900; font-size:0.95rem; border-top:1px solid rgba(245,197,24,0.3); }
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.88rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.88rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.88rem; }
+  .target-badges { display:flex; gap:10px; flex-wrap:wrap; margin:10px 0; }
+  .badge { padding:8px 18px; border-radius:20px; font-weight:900; font-size:0.9rem; }
+  .badge-min { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); color:#60a5fa; }
+  .badge-max { background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green); }
+  .warning-list, .claim-list { list-style:none; padding:0; }
+  .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#fca5a5; }
+  .warning-list li:last-child, .claim-list li:last-child { border-bottom:none; }
+  .claim-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; align-items:flex-start; gap:8px; font-size:0.88rem; color:#fde68a; }
+
+  /* ── SECTION (style spécifique vsd1) ── */
+  .target-banner { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+  .target-box { flex:1; min-width:150px; border-radius:14px; padding:14px 12px; text-align:center; border:1px solid var(--border); background:var(--card); }
+  .target-box .label { font-size:0.72rem; color:var(--muted); font-weight:700; letter-spacing:1px; margin-bottom:6px; }
+  .target-box .value { font-size:1.5rem; font-weight:900; }
+  .target-box.min { border-color:rgba(249,115,22,0.5); } .target-box.min .value { color:var(--orange); }
+  .target-box.goal { border-color:rgba(245,197,24,0.5); } .target-box.goal .value { color:var(--gold); }
+  .intro-text { padding:14px 16px; font-size:0.9rem; color:var(--text); }
+  .intro-text p { margin-bottom:10px; }
+  .intro-text p:last-child { margin-bottom:0; }
+  .table-wrap { overflow-x:auto; }
+  table.calc-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  table.calc-table th { background:rgba(0,0,0,0.35); padding:9px 10px; font-weight:700; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; color:var(--muted); font-size:0.75rem; }
+  table.calc-table td { padding:9px 10px; text-align:right; border-bottom:1px solid rgba(24,31,46,0.6); }
+  table.calc-table tr:last-child td { border-bottom:none; }
+  table.calc-table .pts { font-weight:700; color:var(--text); text-align:left; direction:ltr; }
+  .section-head.orange { color:var(--orange); border-bottom-color:rgba(249,115,22,0.25); background:linear-gradient(270deg,rgba(249,115,22,0.12),transparent); }
+  .section-head.gold { color:var(--gold); border-bottom-color:rgba(245,197,24,0.25); background:linear-gradient(270deg,rgba(245,197,24,0.12),transparent); }
+  .total-row.orange { background:rgba(249,115,22,0.08); } .total-row.orange td { color:var(--orange); }
+  .total-row.gold td { color:var(--gold); }
+  .note-box { padding:12px 14px; font-size:0.82rem; color:var(--muted); border-top:1px dashed var(--border); background:rgba(0,0,0,0.15); }
+  .final-result { text-align:center; padding:22px 16px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid rgba(245,197,24,0.5); border-radius:16px; margin-bottom:14px; position:relative; overflow:hidden; }
+  .final-result::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,0.1),transparent 70%); pointer-events:none; }
+  .final-result .eq { font-size:0.95rem; color:var(--muted); font-weight:700; direction:ltr; margin-bottom:8px; }
+  .final-result .big { font-size:2rem; font-weight:900; color:var(--gold); text-shadow:0 0 20px rgba(245,197,24,0.5); direction:ltr; }
+  .final-result .badge-pill { display:inline-block; margin-top:12px; padding:6px 16px; border-radius:20px; background:rgba(245,197,24,0.15); border:1px solid rgba(245,197,24,0.4); color:var(--gold); font-weight:900; font-size:0.85rem; }
+  .cta { text-align:center; padding:20px 16px; background:linear-gradient(135deg,rgba(249,115,22,0.1),rgba(245,197,24,0.08)); border:1px solid rgba(245,197,24,0.4); border-radius:16px; margin-bottom:14px; }
+  .cta .headline { font-size:1.05rem; font-weight:900; color:var(--gold); margin-bottom:10px; line-height:1.7; }
+  .cta .sub { font-size:0.88rem; color:var(--text); font-weight:700; }
+  .cta .fire { font-size:1.4rem; margin-bottom:6px; }
+
+  /* ── FOOTER ── */
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top {
+    position:fixed; bottom:20px; left:16px; width:48px; height:48px;
+    background:linear-gradient(135deg, var(--gold), #d4a017);
+    border:2px solid #fff8e1; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; text-decoration:none;
+    box-shadow:0 4px 14px rgba(0,0,0,0.4);
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index:999;
+  }
+  .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+</style>
+</head>
+<body id="top">
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>📦 خطة فتح الصناديق الأسبوعية</h1>
+  <p class="subtitle">Last War: Survival — كيف تصل إلى 3.6M و7.2M كل يوم من أيام VS</p>
+</div>
+
+<!-- ══════ أزرار اختيار اليوم ══════ -->
+<div class="day-tabs">
+  <button class="day-tab active" data-day="1" style="--tab-color:#f97316">🔥 اليوم 1</button>
+  <button class="day-tab" data-day="2" style="--tab-color:#3b82f6">🏗️ اليوم 2</button>
+  <button class="day-tab" data-day="3" style="--tab-color:#22c55e">🔬 اليوم 3</button>
+  <button class="day-tab" data-day="4" style="--tab-color:#a855f7">🦸 اليوم 4</button>
+  <button class="day-tab" data-day="5" style="--tab-color:#ec4899">🚀 اليوم 5</button>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- اليوم 1 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel active" id="day1-panel" style="--tab-color:#f97316">
+  <div class="panel-title">
+    <h2>🔥 اليوم الأول — VS</h2>
+    <p class="subtitle">التنظيم، استغلال الموارد، ومشاركة الجميع</p>
+  </div>
+
+  <div class="target-banner">
+    <div class="target-box min"><div class="label">MINIMUM</div><div class="value">3.6M</div></div>
+    <div class="target-box goal"><div class="label">GOAL</div><div class="value">7.2M</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">👋 السلام عليكم ورحمة الله وبركاته</div>
+    <div class="intro-text">
+      <p>نبدأ اليوم الأول من VS بتنظيم أفضل، واستغلال صحيح للموارد، ومشاركة من الجميع.</p>
+      <p>ولكي تكون الصورة واضحة، إليكم مثالًا بسيطًا يوضح أن الوصول إلى <b style="color:var(--orange)">3.6M</b> ليس صعبًا كما يعتقد البعض.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head orange">🎯 كيف تصل إلى 3.6M بسهولة في اليوم الأول؟</div>
+    <div class="table-wrap">
+      <table class="calc-table">
+        <thead><tr><th>المورد</th><th>النقاط</th></tr></thead>
+        <tbody>
+          <tr><td>80 مهمة رادار</td><td class="pts">2,000,000</td></tr>
+          <tr><td>300 طاقة (Stamina)</td><td class="pts">240,000</td></tr>
+          <tr><td>100 قطعة درون (Drone Parts)</td><td class="pts">500,000</td></tr>
+          <tr><td>100K بيانات قتال الدرون (Drone Combat Data)</td><td class="pts">600,000</td></tr>
+          <tr><td>100M خبرة أبطال (Hero EXP)</td><td class="pts">≈ 303,000</td></tr>
+          <tr class="total-row orange"><td>المجموع</td><td class="pts">≈ 3,643,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">بهذه الموارد العادية فقط، تصل إلى 3.6M وتفتح الصناديق المطلوبة، حتى دون احتساب نقاط جمع الموارد (Gathering).</div>
+  </div>
+
+  <div class="section">
+    <div class="section-head gold">🏆 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد</div>
+    <div class="intro-text" style="padding-bottom:0;"><p>بعد الوصول إلى 3.6M، تحتاج إلى حوالي 3.6M إضافية لفتح صندوق 7.2M. وهذا مثال آخر:</p></div>
+    <div class="table-wrap">
+      <table class="calc-table">
+        <thead><tr><th>المورد الإضافي</th><th>النقاط</th></tr></thead>
+        <tbody>
+          <tr><td>جمع الموارد بـ3 فرق لمدة 16 ساعة</td><td class="pts">≈ 1,000,000</td></tr>
+          <tr><td>200 Drone Parts إضافية</td><td class="pts">1,000,000</td></tr>
+          <tr><td>200K Drone Combat Data إضافية</td><td class="pts">1,200,000</td></tr>
+          <tr><td>100M Hero EXP إضافية</td><td class="pts">≈ 303,000</td></tr>
+          <tr><td>150 Stamina إضافية</td><td class="pts">120,000</td></tr>
+          <tr class="total-row gold"><td>النقاط الإضافية</td><td class="pts">≈ 3,623,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box">والأهم أن حوالي 1M نقطة يمكن الحصول عليها من جمع الموارد وحده، دون استهلاك أي موارد مخزنة.</div>
+  </div>
+
+  <div class="final-result">
+    <div class="eq">3,643,000 + 3,623,000</div>
+    <div class="big">= 7,266,000</div>
+    <div class="badge-pill">🏆 جميع صناديق VS مفتوحة</div>
+  </div>
+
+  <div class="cta">
+    <div class="fire">🔥</div>
+    <div class="headline">لا نريد أن نرى أي عضو تحت 3.6M،<br>ونتمنى أن نراكم جميعًا وقد فتحتم صندوق 7.2M.</div>
+    <div class="sub">كلما نظّم كل عضو موارده واستغلها في يومها الصحيح، تطوّر حسابه بشكل أسرع وساهم في فوز التحالف. أرونا ما تستطيعون فعله! 💪</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- اليوم 2 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day2-panel" style="--tab-color:#3b82f6">
+  <div class="panel-title">
+    <h2>⚔️ اليوم الثاني من VS — تطوير القاعدة</h2>
+    <p class="subtitle">كيف تصل إلى 3.6M و 7.2M بسهولة</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📢 مقدمة</div>
+    <div class="section-body">
+      <p>نواصل بنفس الفكرة التي بدأنا بها في اليوم الأول: التنظيم، التخزين، واستخدام كل مورد في اليوم الذي يمنح فيه أكبر عدد من النقاط.</p>
+      <p>ولكي تكون الصورة واضحة، إليكم مثالًا بسيطًا يوضح أن الوصول إلى <strong style="color:var(--gold)">3.6M</strong> في اليوم الثاني لا يحتاج إلى موارد ضخمة.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 كيف تصل إلى 3.6M بسهولة؟</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">4 شاحنات UR</td><td class="pts">800,000 نقطة</td></tr>
+        <tr><td class="item">8 مهام سرية UR</td><td class="pts">1,200,000 نقطة</td></tr>
+        <tr><td class="item">200 تذكرة تجنيد ناجين</td><td class="pts">600,000 نقطة</td></tr>
+        <tr><td class="item">6 أيام من مسرعات البناء</td><td class="pts">1,080,000 نقطة</td></tr>
+        <tr class="total-row"><td>المجموع</td><td>3,680,000 نقطة ✅</td></tr>
+      </table>
+      <div class="highlight-box">بهذه الموارد فقط تكون قد تجاوزت 3.6M وفتحت الصندوق المطلوب — وهذه الحسبة لا تشمل حتى النقاط الناتجة عن زيادة قوة المباني (Building Power).</div>
+      <p>الفكرة بسيطة: لا تحتاج إلى كميات هائلة من الموارد، بل تحتاج إلى <strong>تخزين الموارد المناسبة واستخدامها في اليوم المناسب.</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🚀 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد!</div>
+    <div class="section-body">
+      <p>إذا وصلت إلى 3.68M وتستطيع المواصلة، فلا يوجد سبب للتوقف. نضيف إلى المثال السابق:</p>
+      <table class="points-table">
+        <tr><td class="item">زيادة 150K في قوة المباني</td><td class="pts">3,375,000 نقطة</td></tr>
+        <tr><td class="item">3 أيام إضافية من مسرعات البناء</td><td class="pts">540,000 نقطة</td></tr>
+        <tr class="total-row"><td>النقاط الإضافية</td><td>3,915,000 نقطة</td></tr>
+      </table>
+      <div class="highlight-green">3,680,000 + 3,915,000 = 7,595,000 نقطة 🎉<br>أي أنك تستطيع تجاوز 7.2M وفتح جميع صناديق VS في اليوم الثاني!</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📌 ملاحظة مهمة</div>
+    <div class="section-body">
+      <p>هذه الحسابات مجرد <strong>أمثلة</strong> وليست طريقة إلزامية. قد يكون لديك عدد أكبر أو أقل من المسرعات، أو مبانٍ جاهزة للإكمال، أو تذاكر ناجين أكثر.</p>
+      <p>الهدف هو توضيح أن <strong style="color:var(--gold)">3.6M ليس رقمًا صعبًا</strong> عندما يتم التحضير لليوم مسبقًا، وأن <strong style="color:var(--green)">7.2M هدف واقعي جدًا</strong> لمن يملك الموارد ويستخدمها بذكاء.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">🏆 هدفنا في اليوم الثاني</div>
+    <div class="section-body">
+      <div class="target-badges">
+        <div class="badge badge-min">3.6M — الحد الأدنى</div>
+        <div class="badge badge-max">7.2M — الهدف الأمثل</div>
+      </div>
+      <p>من لديه الموارد والإمكانية، لا يتوقف عند 3.6M، بل يواصل نحو 7.2M ويفتح جميع الصناديق.</p>
+      <p>نظّموا بناءكم، استغلوا المسرعات جيدًا، ولا تنسوا شاحنات UR والمهام السرية UR وتذاكر تجنيد الناجين.</p>
+      <div class="highlight-box">كل مورد في يومه الصحيح = نقاط أكثر، مكافآت أكثر، وقوة أكبر لكم وللتحالف. 💪🔥</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-red">⚠️ تحذير مهم جداً — مهام الرادار</div>
+    <div class="section-body">
+      <ul class="warning-list">
+        <li>⛔ لا تستلم مكافآت مهام الرادار في اليوم الثاني.</li>
+        <li>✅ يمكنك إكمال مهام الرادار بشكل طبيعي، لكن بمجرد انتهاء المهمة وظهور النقطة الحمراء، اتركها ولا تضغط عليها.</li>
+        <li>🎯 نحتاج إلى حفظ مهام الرادار المكتملة لليوم الثالث من VS، حيث ستمنحنا نقاط VS.</li>
+        <li>⛔ لا تهدر مهام الرادار المحفوظة باستلامها في اليوم الثاني.</li>
+        <li>🔁 أكمل مهام الرادار، لكن لا تستلمها! اتركها جاهزة لليوم الثالث.</li>
+      </ul>
+      <div class="highlight-red">أرونا ما تستطيعون فعله في اليوم الثاني! 💪🔥</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- اليوم 3 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day3-panel" style="--tab-color:#22c55e">
+  <div class="panel-title">
+    <h2>🔬 اليوم الثالث من VS — عصر العلم</h2>
+    <p class="subtitle">كيف تصل إلى 3.6M و 7.2M بسهولة</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📢 مقدمة</div>
+    <div class="section-body">
+      <p>نواصل بنفس الاستراتيجية التي اتبعناها في الأيام السابقة: ادّخار الموارد، التنظيم، واستخدام كل مورد في اليوم الذي يمنحك فيه أكبر عدد من النقاط.</p>
+      <p>وكالعادة، سنستخدم أرقامًا بسيطة لنوضح أن الوصول إلى <strong style="color:var(--gold)">3.6M</strong> لا يحتاج إلى كميات ضخمة من الموارد عند التحضير الجيد.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 كيف تصل إلى 3.6M بسهولة؟</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">80 مهمة رادار</td><td class="pts">2,000,000 نقطة</td></tr>
+        <tr><td class="item">150 صندوق قطع درون — المستوى الأول</td><td class="pts">330,000 نقطة</td></tr>
+        <tr><td class="item">50 صندوق قطع درون — المستوى الثاني</td><td class="pts">330,000 نقطة</td></tr>
+        <tr><td class="item">15 صندوق قطع درون — المستوى الثالث</td><td class="pts">300,000 نقطة</td></tr>
+        <tr><td class="item">1,100 شارة شرف</td><td class="pts">660,000 نقطة</td></tr>
+        <tr class="total-row"><td>المجموع</td><td>3,620,000 نقطة ✅</td></tr>
+      </table>
+      <div class="highlight-box">بهذه الموارد فقط تتجاوز 3.6M وتفتح صندوق المكافآت المطلوب — والأهم أن هذه الحسبة لا تستخدم أي مسرّعات بحث، ولا تشمل أي زيادة في القوة التقنية (Technology Power).</div>
+      <p>ومرة أخرى، الفكرة ليست أن تمتلك كمية ضخمة من الموارد، بل أن <strong>تدّخر الموارد المناسبة وتستخدمها في اليوم الذي يمنحك فيه أكبر عدد من نقاط VS.</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🚀 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد!</div>
+    <div class="section-body">
+      <p>إذا وصلت إلى 3.62M ولا تزال تملك موارد إضافية، فلا داعي للتوقف. نضيف إلى المثال السابق:</p>
+      <table class="points-table">
+        <tr><td class="item">4,000 شارة شرف إضافية</td><td class="pts">2,400,000 نقطة</td></tr>
+        <tr><td class="item">6 أيام من مسرعات البحث</td><td class="pts">1,080,000 نقطة</td></tr>
+        <tr><td class="item">زيادة 10,000 في القوة التقنية</td><td class="pts">225,000 نقطة</td></tr>
+        <tr class="total-row"><td>النقاط الإضافية</td><td>3,705,000 نقطة</td></tr>
+      </table>
+      <div class="highlight-green">3,620,000 + 3,705,000 = 7,325,000 نقطة 🏆<br>أي أنك تستطيع تجاوز 7.2M وفتح جميع صناديق مكافآت VS في اليوم الثالث!</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📌 ملاحظة مهمة</div>
+    <div class="section-body">
+      <p>هذه الحسابات مجرد <strong>أمثلة</strong> وليست طريقة إلزامية. يمكنك تعديل الكميات حسب الموارد المتوفرة لديك.</p>
+      <p>الهدف هو توضيح أن <strong style="color:var(--gold)">3.6M هدف سهل جدًا</strong> عند التحضير له مسبقًا، وأن <strong style="color:var(--green)">7.2M هدف واقعي جدًا</strong> لمن يدّخر موارده ويستخدمها بذكاء.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">🏆 هدفنا في اليوم الثالث</div>
+    <div class="section-body">
+      <div class="target-badges">
+        <div class="badge badge-min">3.6M — الحد الأدنى</div>
+        <div class="badge badge-max">7.2M — الهدف الأمثل</div>
+      </div>
+      <p>من لديه الموارد والإمكانية، لا يتوقف عند 3.6M، بل يواصل نحو 7.2M ويفتح جميع الصناديق.</p>
+      <p>استلم مهام الرادار التي ادّخرناها من اليوم الثاني، افتح صناديق قطع الدرون، واستخدم شارات الشرف ومسرّعات البحث في الوقت المناسب.</p>
+      <div class="highlight-box">المورد المناسب في يومه الصحيح = نقاط أكثر، مكافآت أكثر، وتقدّم أسرع لك وللتحالف. 💪🔥</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📡 الآن حان وقت استلام مهام الرادار</div>
+    <div class="section-body">
+      <ul class="claim-list">
+        <li>✅ استلموا الآن جميع مهام الرادار التي أنجزناها وادّخرناها خلال اليوم الثاني.</li>
+        <li>🎯 كل مهمة محفوظة تمنحكم نقاط VS كاملة اليوم — لا تتركوا أي مهمة بدون استلام.</li>
+        <li>💪 استلموها جميعًا دفعة واحدة للحصول على أقصى عدد ممكن من النقاط.</li>
+      </ul>
+      <div class="highlight-green">لنجعل اليوم الثالث أفضل من الأيام السابقة. أرونا ما تستطيعون فعله! 💪🔥</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- اليوم 4 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day4-panel" style="--tab-color:#a855f7">
+  <div class="panel-title">
+    <h2>🦸 اليوم الرابع من VS — تدريب الأبطال</h2>
+    <p class="subtitle">كيف تصل إلى 3.6M و 7.2M بسهولة</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📢 مقدمة</div>
+    <div class="section-body">
+      <p>اليوم الرابع من أسهل الأيام لتحقيق عدد كبير من النقاط إذا ادّخرت موارد الأبطال واستخدمتها في الوقت المناسب.</p>
+      <p>وكالعادة، لنبدأ بمثال بسيط.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 كيف تصل إلى 3.6M بسهولة؟</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">200 تذكرة تجنيد أبطال</td><td class="pts">750,000 نقطة</td></tr>
+        <tr><td class="item">100 شظية بطل UR</td><td class="pts">2,000,000 نقطة</td></tr>
+        <tr><td class="item">100 شظية بطل SSR</td><td class="pts">700,000 نقطة</td></tr>
+        <tr><td class="item">10,000 ميدالية مهارة</td><td class="pts">200,000 نقطة</td></tr>
+        <tr class="total-row"><td>المجموع</td><td>3,650,000 نقطة ✅</td></tr>
+      </table>
+      <div class="highlight-box">بهذه الموارد فقط تتجاوز 3.6M وتفتح صندوق المكافآت المطلوب — والأهم أن هذه الحسبة لا تستخدم أي خبرة أبطال (Hero EXP)، ولا تشمل أي شظايا سلاح حصري (Exclusive Weapon Shards).</div>
+      <p>ومرة أخرى، الوصول إلى 3.6M لا يحتاج كمية ضخمة من الموارد. المفتاح هو <strong>ادّخار الموارد المناسبة وتجنّب صرفها قبل يوم VS الصحيح.</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🚀 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد!</div>
+    <div class="section-body">
+      <p>إذا وصلت إلى 3.65M ولا تزال تملك موارد إضافية، فلا داعي للتوقف. نضيف إلى المثال السابق:</p>
+      <table class="points-table">
+        <tr><td class="item">900M خبرة أبطال (Hero EXP)</td><td class="pts">≈ 2,727,000 نقطة</td></tr>
+        <tr><td class="item">20 شظية سلاح حصري</td><td class="pts">400,000 نقطة</td></tr>
+        <tr><td class="item">30,000 ميدالية مهارة إضافية</td><td class="pts">600,000 نقطة</td></tr>
+        <tr class="total-row"><td>النقاط الإضافية</td><td>≈ 3,727,000 نقطة</td></tr>
+      </table>
+      <div class="highlight-green">3,650,000 + 3,727,000 ≈ 7,377,000 نقطة 🏆<br>أي أنك تستطيع تجاوز 7.2M وفتح جميع صناديق مكافآت VS في اليوم الرابع!</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📌 ملاحظة مهمة</div>
+    <div class="section-body">
+      <p>هذه الحسابات مجرد <strong>أمثلة</strong> وليست طريقة إلزامية. يمكن لكل عضو تعديل الكميات حسب موارده المتوفرة.</p>
+      <p>الهدف هو أن نوضح مرة أخرى أن <strong style="color:var(--gold)">3.6M هدف سهل التحقيق</strong> مع التخطيط الجيد، وأن <strong style="color:var(--green)">7.2M أيضًا هدف واقعي</strong> لمن ادّخر موارده خلال الأيام السابقة.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">🏆 هدفنا في اليوم الرابع</div>
+    <div class="section-body">
+      <div class="target-badges">
+        <div class="badge badge-min">3.6M — الحد الأدنى</div>
+        <div class="badge badge-max">7.2M — الهدف الأمثل</div>
+      </div>
+      <p>من لديه الموارد والإمكانية، لا يتوقف عند 3.6M، بل يواصل نحو 7.2M ويفتح جميع الصناديق.</p>
+      <p>لا تصرفوا موارد الأبطال عشوائيًا. استخدموا تذاكر تجنيد الأبطال، شظايا UR وSSR، خبرة الأبطال، ميداليات المهارة، وشظايا السلاح الحصري في اليوم الصحيح.</p>
+      <div class="highlight-box">كل مورد يُدّخر ويُستخدم في وقته الصحيح = نقاط أكثر، مكافآت أكثر، وتقدّم أسرع لكم وللتحالف. 💪🔥</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-red">⚠️ تحذير مهم جداً — مهام الرادار</div>
+    <div class="section-body">
+      <ul class="warning-list">
+        <li>⛔ لا تستلموا مكافآت مهام الرادار في اليوم الرابع.</li>
+        <li>✅ يمكنكم إكمال مهام الرادار بشكل طبيعي، لكن بمجرد انتهاء المهمة وظهور النقطة الحمراء، اتركوها ولا تضغطوا عليها.</li>
+        <li>🎯 نحتاج إلى حفظ مهام الرادار المكتملة لليوم الخامس من VS، حيث ستمنحنا نقاط VS.</li>
+        <li>⛔ لا تهدروا مهام الرادار المحفوظة باستلامها اليوم.</li>
+        <li>🔁 وللمرة الخامسة 😅: أكملوا مهام الرادار، لكن لا تستلموها! اتركوها جاهزة لليوم الخامس.</li>
+      </ul>
+      <div class="highlight-red">لنواصل التحسّن يومًا بعد يوم. أرونا ما تستطيعون فعله في اليوم الرابع! 💪🔥</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- اليوم 5 -->
+<!-- ══════════════════════════════════════ -->
+<div class="day-panel" id="day5-panel" style="--tab-color:#ec4899">
+  <div class="panel-title">
+    <h2>🚀 اليوم الخامس من VS — التعبئة الشاملة</h2>
+    <p class="subtitle">كيف تصل إلى 3.6M و 7.2M بسهولة</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📢 مقدمة</div>
+    <div class="section-body">
+      <p>اليوم الخامس يمنحنا عدة طرق لتحقيق النقاط، خصوصًا عبر مهام الرادار، تدريب وترقية الجنود، المسرّعات، وزيادة القوة.</p>
+      <p>وكالعادة، لنبدأ بمثال بسيط يوضح أن الوصول إلى 3.6M أسهل مما يبدو.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-blue">🎯 كيف تصل إلى 3.6M بسهولة؟</div>
+    <div class="section-body">
+      <table class="points-table">
+        <tr><td class="item">80 مهمة رادار</td><td class="pts">2,000,000 نقطة</td></tr>
+        <tr><td class="item">5,000 جندي من المستوى T8</td><td class="pts">1,057,500 نقطة</td></tr>
+        <tr><td class="item">4 أيام من المسرّعات</td><td class="pts">720,000 نقطة</td></tr>
+        <tr class="total-row"><td>المجموع</td><td>3,777,500 نقطة ✅</td></tr>
+      </table>
+      <div class="highlight-box">بهذه الموارد فقط تتجاوز 3.6M وتفتح صندوق المكافآت المطلوب. والأهم أن اليوم الخامس يمنح نقاطًا على عدة أنواع من المسرّعات.</div>
+      <p>ومرة أخرى، المفتاح ليس امتلاك كمية ضخمة من الموارد، بل <strong>ادّخار الموارد المناسبة واستخدامها في اليوم الصحيح.</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-green">🚀 هل تستطيع الوصول إلى 7.2M؟ بالتأكيد!</div>
+    <div class="section-body">
+      <p>إذا وصلت إلى 3.77M ولا تزال تملك موارد إضافية، فلا داعي للتوقف. نضيف إلى المثال السابق:</p>
+      <table class="points-table">
+        <tr><td class="item">6 أيام إضافية من المسرّعات</td><td class="pts">1,080,000 نقطة</td></tr>
+        <tr><td class="item">5,000 جندي من المستوى T9</td><td class="pts">1,175,000 نقطة</td></tr>
+        <tr><td class="item">زيادة 60K في القوة</td><td class="pts">1,350,000 نقطة</td></tr>
+        <tr class="total-row"><td>النقاط الإضافية</td><td>3,605,000 نقطة</td></tr>
+      </table>
+      <div class="highlight-green">3,777,500 + 3,605,000 = 7,382,500 نقطة 🏆<br>أي أنك تستطيع تجاوز 7.2M وفتح جميع صناديق مكافآت VS في اليوم الخامس!</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📌 ملاحظة مهمة</div>
+    <div class="section-body">
+      <p>هذه الحسابات مجرد <strong>أمثلة</strong> وليست طريقة إلزامية. يمكن لكل عضو تعديل الكميات حسب مستوى جنوده وموارده المتوفرة.</p>
+      <p>الهدف هو أن نوضح مرة أخرى أن <strong style="color:var(--gold)">3.6M هدف سهل التحقيق</strong> مع تنظيم جيد، وأن <strong style="color:var(--green)">7.2M أيضًا هدف واقعي</strong> لمن ادّخر موارده وحضّر طوال الأسبوع.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">🏆 هدفنا في اليوم الخامس</div>
+    <div class="section-body">
+      <div class="target-badges">
+        <div class="badge badge-min">3.6M — الحد الأدنى</div>
+        <div class="badge badge-max">7.2M — الهدف الأمثل</div>
+      </div>
+      <p>من لديه الموارد والإمكانية، لا يتوقف عند 3.6M، بل يواصل نحو 7.2M ويفتح جميع الصناديق.</p>
+      <p>استلم مهام الرادار التي ادّخرناها من اليوم الرابع، استفد من تدريب وترقية الجنود، واستخدم المسرّعات في الوقت المناسب.</p>
+      <p>تذكّروا أن ترقية الجنود الموجودين لديكم يمكن أن تكون طريقة ممتازة لكسب النقاط، فلا تعتمدوا فقط على تدريب جنود جدد.</p>
+      <div class="highlight-box">المورد المناسب في يومه الصحيح = نقاط أكثر، مكافآت أكثر، وتقدّم أسرع لكم وللتحالف. 💪🔥</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head sh-gold">📡 الآن حان وقت استلام مهام الرادار</div>
+    <div class="section-body">
+      <ul class="claim-list">
+        <li>✅ استلموا الآن جميع مهام الرادار التي أنجزناها وادّخرناها خلال اليوم الرابع.</li>
+        <li>🎯 كل مهمة محفوظة تمنحكم نقاط VS كاملة اليوم — لا تتركوا أي مهمة بدون استلام.</li>
+        <li>💪 استلموها جميعًا دفعة واحدة للحصول على أقصى عدد ممكن من النقاط.</li>
+      </ul>
+      <div class="highlight-green">وصلنا إلى اليوم الخامس، فلنحافظ على نفس التنظيم ونسعى لأفضل نتيجة ممكنة. أرونا ما تستطيعون فعله! 💪🔥</div>
+    </div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">آخر تحديث: 04/10/2026</div>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">🔝</a>
+
+<script>
+  const tabs = document.querySelectorAll('.day-tab');
+  const panels = document.querySelectorAll('.day-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('day' + tab.dataset.day + '-panel').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
