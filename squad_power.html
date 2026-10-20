@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>دليل قوة الفريق — [NWH] Night Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #06080e;
+    --card:     #0c1018;
+    --border:   #181f2e;
+    --gold:     #f5c518;
+    --gold-dim: rgba(245,197,24,0.12);
+    --red:      #e8394a;
+    --blue:     #3b82f6;
+    --cyan:     #06b6d4;
+    --green:    #22c55e;
+    --orange:   #f97316;
+    --purple:   #a855f7;
+    --steel:    #94a3b8;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 14px;
+    font-size: 14px;
+    background-image:
+      radial-gradient(ellipse at 15% 5%, rgba(245,197,24,0.06) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 95%, rgba(59,130,246,0.05) 0%, transparent 45%);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 22px 14px 18px;
+    margin-bottom: 18px;
+    background: linear-gradient(160deg, #0f1118 0%, #0c1018 100%);
+    border: 1px solid #1e2a3a;
+    border-top: 3px solid var(--gold);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(245,197,24,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(245,197,24,0.4);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(245,197,24,0.18);
+  }
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .header h1 span { color: var(--gold); }
+  .header-sub { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+  .back-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    transition: border-color .2s, color .2s;
+  }
+  .back-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .section-head {
+    padding: 11px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    border-bottom: 1px solid var(--border);
+  }
+  .sh-gold   { background: linear-gradient(90deg, rgba(245,197,24,0.10), transparent);  color: var(--gold);   border-bottom-color: rgba(245,197,24,0.2); }
+  .sh-orange { background: linear-gradient(90deg, rgba(249,115,22,0.10), transparent);  color: var(--orange); border-bottom-color: rgba(249,115,22,0.2); }
+  .sh-blue   { background: linear-gradient(90deg, rgba(59,130,246,0.10), transparent);  color: #60a5fa;       border-bottom-color: rgba(59,130,246,0.2); }
+  .sh-cyan   { background: linear-gradient(90deg, rgba(6,182,212,0.10), transparent);   color: var(--cyan);   border-bottom-color: rgba(6,182,212,0.2); }
+  .sh-green  { background: linear-gradient(90deg, rgba(34,197,94,0.10), transparent);   color: var(--green);  border-bottom-color: rgba(34,197,94,0.2); }
+  .sh-red    { background: linear-gradient(90deg, rgba(232,57,74,0.10), transparent);   color: var(--red);    border-bottom-color: rgba(232,57,74,0.2); }
+  .sh-purple { background: linear-gradient(90deg, rgba(168,85,247,0.10), transparent);  color: #c084fc;       border-bottom-color: rgba(168,85,247,0.2); }
+  .sh-steel  { background: linear-gradient(90deg, rgba(148,163,184,0.08), transparent); color: var(--steel);  border-bottom-color: rgba(148,163,184,0.15); }
+
+  .section-body { padding: 14px 15px; }
+
+  /* ── TEXT ── */
+  p { line-height: 1.65; margin-bottom: 8px; }
+  p:last-child { margin-bottom: 0; }
+  .t-gold   { color: var(--gold); }
+  .t-orange { color: var(--orange); }
+  .t-blue   { color: #60a5fa; }
+  .t-cyan   { color: var(--cyan); }
+  .t-green  { color: var(--green); }
+  .t-red    { color: var(--red); }
+  .t-purple { color: #c084fc; }
+  .t-muted  { color: var(--muted); }
+  .bold     { font-weight: 900; }
+  a { color: inherit; text-decoration: underline; }
+
+  /* ── INTRO BOX ── */
+  .intro-box {
+    background: rgba(245,197,24,0.05);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .intro-box .intro-title {
+    font-weight: 900;
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+  .alert:last-child { margin-bottom: 0; }
+  .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .alert-gold   { background: rgba(245,197,24,0.07); border: 1px solid rgba(245,197,24,0.25); }
+  .alert-orange { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.25); }
+  .alert-red    { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .alert-blue   { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.25); }
+  .alert-green  { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .alert-purple { background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.25); }
+  .alert-cyan   { background: rgba(6,182,212,0.07);  border: 1px solid rgba(6,182,212,0.25); }
+  .alert-steel  { background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.2); }
+
+  /* ── ROW LIST ── */
+  .row-list { display: flex; flex-direction: column; gap: 7px; }
+  .row-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 10px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 8px;
+    font-size: 0.82rem;
+  }
+  .row-label { color: var(--muted); flex-shrink: 0; min-width: 90px; }
+  .row-val   { font-weight: 700; text-align: left; line-height: 1.45; }
+
+  /* ── PILL ── */
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .pill-gold   { background: rgba(245,197,24,0.12);  color: var(--gold);   border: 1px solid rgba(245,197,24,0.3); }
+  .pill-orange { background: rgba(249,115,22,0.12);  color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+  .pill-blue   { background: rgba(59,130,246,0.12);  color: #60a5fa;       border: 1px solid rgba(59,130,246,0.3); }
+  .pill-cyan   { background: rgba(6,182,212,0.12);   color: var(--cyan);   border: 1px solid rgba(6,182,212,0.3); }
+  .pill-green  { background: rgba(34,197,94,0.12);   color: var(--green);  border: 1px solid rgba(34,197,94,0.3); }
+  .pill-red    { background: rgba(232,57,74,0.12);   color: var(--red);    border: 1px solid rgba(232,57,74,0.3); }
+  .pill-purple { background: rgba(168,85,247,0.12);  color: #c084fc;       border: 1px solid rgba(168,85,247,0.3); }
+  .pill-steel  { background: rgba(148,163,184,0.10); color: var(--steel);  border: 1px solid rgba(148,163,184,0.2); }
+
+  /* ── DECISION TABLE ── */
+  .prio-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  .prio-table th {
+    padding: 7px 10px;
+    text-align: right;
+    font-weight: 900;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.72rem;
+    letter-spacing: .5px;
+  }
+  .prio-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+    line-height: 1.45;
+  }
+  .prio-table tr:last-child td { border-bottom: none; }
+
+  /* ── TIER BADGES ── */
+  .tier-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tier-badge {
+    flex: 1;
+    min-width: 68px;
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 0.75rem;
+  }
+  .tier-num  { font-size: 1.05rem; font-weight: 900; display: block; margin-bottom: 2px; }
+  .tier-sub  { font-size: 0.72rem; color: var(--muted); line-height: 1.35; }
+  .tb-green  { border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.05);  color: var(--green); }
+  .tb-blue   { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); color: #60a5fa; }
+  .tb-orange { border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); color: var(--orange); }
+  .tb-gold   { border-color: rgba(245,197,24,0.3); background: rgba(245,197,24,0.05); color: var(--gold); }
+
+  /* ── DECISION CARD ── */
+  .decision-card {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .decision-card:last-child { margin-bottom: 0; }
+  .dc-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .dc-body { flex: 1; }
+  .dc-title { font-weight: 900; font-size: 0.88rem; margin-bottom: 4px; }
+  .dc-desc  { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+  .dc-gold   { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.2); }
+  .dc-orange { background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.2); }
+  .dc-blue   { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); }
+  .dc-green  { background: rgba(34,197,94,0.06);  border: 1px solid rgba(34,197,94,0.2); }
+  .dc-red    { background: rgba(232,57,74,0.06);  border: 1px solid rgba(232,57,74,0.2); }
+  .dc-purple { background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2); }
+  .dc-cyan   { background: rgba(6,182,212,0.06);  border: 1px solid rgba(6,182,212,0.2); }
+  .dc-steel  { background: rgba(148,163,184,0.05); border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── CHECKLIST ── */
+  .checklist { display: flex; flex-direction: column; gap: 6px; }
+  .check-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.025);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .cb-gold  { border-color: var(--gold);   background: rgba(245,197,24,0.12); color: var(--gold); }
+  .cb-todo  { border-color: var(--orange);  background: rgba(249,115,22,0.10); color: var(--orange); }
+  .cb-later { border-color: var(--muted);   background: transparent;           color: var(--muted); }
+  .cb-red   { border-color: var(--red);     background: rgba(232,57,74,0.10);  color: var(--red); }
+
+  /* ── VS COMPARE ── */
+  .compare-wrap { display: flex; gap: 10px; }
+  .compare-col {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .cc-bad  { background: rgba(232,57,74,0.06);  border: 1px solid rgba(232,57,74,0.2); }
+  .cc-good { background: rgba(34,197,94,0.06);  border: 1px solid rgba(34,197,94,0.2); }
+  .compare-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .compare-items { font-size: 0.78rem; color: var(--muted); line-height: 1.8; text-align: right; }
+
+  /* ── SQUAD FORMATION ── */
+  .formation-wrap { padding: 4px 0 10px; }
+  .formation-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+  }
+  .formation-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .hero-card {
+    border-radius: 10px;
+    padding: 9px 10px;
+    text-align: center;
+    flex: 1;
+    max-width: 100px;
+  }
+  .hc-front { background: linear-gradient(160deg, #160f04, #0e0a04); border: 1px solid rgba(249,115,22,0.4); }
+  .hc-back  { background: linear-gradient(160deg, #060d18, #040910); border: 1px solid rgba(59,130,246,0.35); }
+  .hero-role { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+  .role-front { color: var(--orange); }
+  .role-back  { color: #60a5fa; }
+  .hero-name { font-size: 0.85rem; font-weight: 900; color: var(--text); }
+  .hero-sub  { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .formation-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 2px 0 8px;
+  }
+  .fdiv-line { flex: 1; height: 1px; background: var(--border); }
+  .fdiv-label { font-size: 0.72rem; color: var(--muted); padding: 2px 8px; border: 1px solid var(--border); border-radius: 8px; }
+
+  /* ── DECISION FLOW ── */
+  .flow-wrap { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+  .flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .flow-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .flow-line { flex: 1; width: 2px; background: var(--border); margin: 2px 0; }
+  .flow-body {
+    flex: 1;
+    padding: 8px 0 8px 10px;
+  }
+  .flow-q {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .flow-answers { display: flex; gap: 8px; flex-wrap: wrap; }
+  .flow-ans {
+    flex: 1;
+    min-width: 100px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .fa-yes { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .fa-no  { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .fa-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 3px; }
+  .fa-yes .fa-label { color: var(--green); }
+  .fa-no  .fa-label { color: var(--red); }
+  .fa-val { color: var(--text); font-weight: 700; }
+
+  /* ── PHASE CARDS ── */
+  .phase-card {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+  }
+  .phase-card:last-child { margin-bottom: 0; }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .phase-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .phase-title { font-weight: 900; font-size: 0.9rem; }
+  .phase-sub   { font-size: 0.75rem; color: var(--muted); }
+  .pc-1 { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.25); }
+  .pn-1 { background: rgba(34,197,94,0.15); color: var(--green); }
+  .pt-1 { color: var(--green); }
+  .pc-2 { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.25); }
+  .pn-2 { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .pt-2 { color: #60a5fa; }
+  .pc-3 { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.25); }
+  .pn-3 { background: rgba(245,197,24,0.15); color: var(--gold); }
+  .pt-3 { color: var(--gold); }
+
+  /* ── SCENARIO BOX ── */
+  .scenario {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    font-size: 0.82rem;
+  }
+  .scenario:last-child { margin-bottom: 0; }
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .sc-badge {
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
+  .scenario-items { display: flex; flex-direction: column; gap: 4px; line-height: 1.55; }
+  .si-stat  { display: flex; gap: 8px; }
+  .si-label { color: var(--muted); flex-shrink: 0; min-width: 90px; }
+  .si-val   { font-weight: 700; }
+  .scenario-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 8px 0; }
+  .sc-1 { background: rgba(34,197,94,0.05);  border: 1px solid rgba(34,197,94,0.2); }
+  .sc-2 { background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.2); }
+  .sc-3 { background: rgba(232,57,74,0.05);  border: 1px solid rgba(232,57,74,0.2); }
+
+  /* ── DIAG CHECKLIST ── */
+  .diag-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+  }
+  .diag-item:last-child { margin-bottom: 0; }
+  .diag-q {
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .diag-answers { display: flex; gap: 8px; flex-wrap: wrap; }
+  .diag-ans {
+    flex: 1;
+    min-width: 110px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .da-yes { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .da-no  { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .da-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+  .da-yes .da-label { color: var(--red); }
+  .da-no  .da-label { color: var(--green); }
+  .da-val { color: var(--text); font-weight: 700; }
+  .di-red    { background: rgba(232,57,74,0.04);  border: 1px solid rgba(232,57,74,0.18); }
+  .di-orange { background: rgba(249,115,22,0.04); border: 1px solid rgba(249,115,22,0.18); }
+  .di-blue   { background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.18); }
+  .di-green  { background: rgba(34,197,94,0.04);  border: 1px solid rgba(34,197,94,0.18); }
+  .di-steel  { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── INTERNAL LINK ── */
+  .inner-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid;
+    transition: opacity .2s;
+  }
+  .inner-link:hover { opacity: .8; }
+  .il-gold   { border-color: rgba(245,197,24,0.4); color: var(--gold);   background: rgba(245,197,24,0.06); }
+  .il-orange { border-color: rgba(249,115,22,0.4); color: var(--orange); background: rgba(249,115,22,0.06); }
+  .il-blue   { border-color: rgba(59,130,246,0.4); color: #60a5fa;       background: rgba(59,130,246,0.06); }
+
+  /* ── TODAY BOX ── */
+  .today-grid { display: flex; flex-direction: column; gap: 8px; }
+  .today-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.82rem;
+  }
+  .today-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .today-q { font-weight: 900; color: var(--text); margin-bottom: 3px; }
+  .today-a { color: var(--muted); font-size: 0.78rem; line-height: 1.5; }
+  .ti-gold   { background: rgba(245,197,24,0.05);  border: 1px solid rgba(245,197,24,0.2); }
+  .ti-orange { background: rgba(249,115,22,0.05);  border: 1px solid rgba(249,115,22,0.2); }
+  .ti-blue   { background: rgba(59,130,246,0.05);  border: 1px solid rgba(59,130,246,0.2); }
+  .ti-purple { background: rgba(168,85,247,0.05);  border: 1px solid rgba(168,85,247,0.2); }
+  .ti-steel  { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.18); }
+  .ti-cyan   { background: rgba(6,182,212,0.05);   border: 1px solid rgba(6,182,212,0.2); }
+  .ti-green  { background: rgba(34,197,94,0.05);   border: 1px solid rgba(34,197,94,0.2); }
+
+  /* ── TAG GRID ── */
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 4px; }
+  .tag { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; border: 1px solid; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 18px 14px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.8;
+  }
+  .footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ════════ HEADER ════════ -->
+<div class="header">
+  <div class="header-badge">🛡️ [NWH] Night Watch</div>
+  <h1>دليل <span>قوة الفريق</span></h1>
+  <div class="header-sub">تشخيص · قرار · استثمار — عندي هذا المورد، أين أصرفه؟</div>
+  <a href="index.html" class="back-link">← الصفحة الرئيسية</a>
+</div>
+
+<!-- ════════ QUICK START ════════ -->
+<div class="section" style="margin-bottom:14px;">
+  <div class="section-head sh-gold">⚡ Quick Start — ابدأ من هنا قبل صرف أي مورد</div>
+  <div class="section-body">
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">1️⃣</span>
+        <span class="row-val">افتح <strong class="t-gold">Battle Report</strong> آخر معركة خسرتها</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">2️⃣</span>
+        <span class="row-val">حدّد أول نقطة انهارت: <span class="pill pill-red">Front</span> <span class="pill pill-orange">Backline</span> <span class="pill pill-blue">Damage ضعيف</span> <span class="pill pill-purple">Counter</span></span>
+      </div>
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">3️⃣</span>
+        <span class="row-val">انزل مباشرة للـDecision المناسب ← <strong class="t-cyan">لا تصرف مورداً قبل هذه الخطوة</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ INTRO ════════ -->
+<div class="intro-box">
+  <div class="intro-title">🎯 خمسة أسئلة يجب أن تجيبها هذه الصفحة</div>
+  <strong class="t-gold">1.</strong> لماذا فريقي يخسر؟<br>
+  <strong class="t-gold">2.</strong> ما أكبر Bottleneck عندي الآن؟<br>
+  <strong class="t-gold">3.</strong> أين أصرف المورد الذي عندي؟<br>
+  <strong class="t-gold">4.</strong> ما الشيء الذي <em>لا يجب</em> أن أصرف عليه الآن؟<br>
+  <strong class="t-gold">5.</strong> متى أنتقل إلى Squad 2 بالنسبة للشظايا؟
+</div>
+
+
+<!-- ════════════════════════════════
+  §1 — مكوّنات قوة الفريق
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚙️ ما الذي يصنع قوة الفريق؟</div>
+  <div class="section-body">
+    <div class="tag-grid">
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">مستوى البطل</span>
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">نجوم البطل</span>
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">مهارات البطل</span>
+      <span class="tag" style="border-color:rgba(249,115,22,0.35); color:var(--orange); background:rgba(249,115,22,0.07);">المعدات (4 قطع)</span>
+      <span class="tag" style="border-color:rgba(249,115,22,0.35); color:var(--orange); background:rgba(249,115,22,0.07);">مستوى المعدات</span>
+      <span class="tag" style="border-color:rgba(6,182,212,0.35); color:var(--cyan); background:rgba(6,182,212,0.07);">الأسلحة الحصرية</span>
+      <span class="tag" style="border-color:rgba(59,130,246,0.35); color:#60a5fa; background:rgba(59,130,246,0.07);">الجنود T7→T10</span>
+      <span class="tag" style="border-color:rgba(168,85,247,0.35); color:#c084fc; background:rgba(168,85,247,0.07);">أبحاث القوات الخاصة</span>
+      <span class="tag" style="border-color:rgba(168,85,247,0.35); color:#c084fc; background:rgba(168,85,247,0.07);">أبحاث نوع الفريق</span>
+      <span class="tag" style="border-color:rgba(34,197,94,0.35); color:var(--green); background:rgba(34,197,94,0.07);">Type Center</span>
+      <span class="tag" style="border-color:rgba(148,163,184,0.3); color:var(--steel); background:rgba(148,163,184,0.07);">الطائرة المسيّرة (Drone)</span>
+    </div>
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">⚖️</span>
+      <div><strong class="t-gold">لا تطور نظاماً واحداً حتى الكمال بينما بقية الأنظمة تتخلف.</strong> ابحث دائماً عن أضعف نقطة تمنع الفريق من التقدم.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §2 — لا تطارد رقم Power
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">⚠️ لا تطارد رقم Power فقط</div>
+  <div class="section-body">
+    <div class="compare-wrap">
+      <div class="compare-col cc-bad">
+        <div class="compare-label t-red">❌ أخطاء شائعة</div>
+        <div class="compare-items">
+          3 فرق متوسطة<br>
+          Tech مهملة<br>
+          Troop Tier منخفض<br>
+          Gear غير متوازنة<br>
+          Skills ضعيفة
+        </div>
+      </div>
+      <div class="compare-col cc-good">
+        <div class="compare-label t-green">✅ الطريق الصح</div>
+        <div class="compare-items">
+          تركيز فريق واحد<br>
+          5 × 5 نجوم<br>
+          Gear حسب الدور<br>
+          Tech تخدم هدفك الحالي<br>
+          Troop Tier مناسب لمرحلتك
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §3 — تشخيص ضعف الفريق
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">🔍 تشخيص ضعف الفريق — أين المشكلة؟</div>
+  <div class="section-body">
+
+    <div class="diag-item di-red">
+      <div class="diag-q">🛡️ الحالة 1 — الصف الأمامي يموت بسرعة</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;"><strong class="t-orange">أسباب مباشرة:</strong> Armor/Radar ضعيفان · Stars منخفضة · Skills دفاعية ضعيفة<br><span class="t-muted"><strong>عوامل عامة تضعف الأداء:</strong> Troop Tier منخفض · Type Center متأخر — هذه تقلل القوة الكلية لكنها ليست السبب المباشر أن Murphy يموت قبل Kimberly.</span></div>
+      <div class="alert-gold alert" style="margin:0;">
+        <span class="alert-icon">💡</span>
+        <div>لا تضف Damage الآن. حسّن بقاء الصف الأمامي أولاً — الـDPS لا يعمل إذا كان الـFront ينهار.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-orange" style="margin-top:8px;">
+      <div class="diag-q">⚔️ الحالة 2 — الـFront يعيش لكن Damage ضعيف</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">علامات: المعركة تطول · الخصم يبقى حيًا · Kimberly / Stetmann لا يسجلان Damage كافيًا</div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">ابحث في</span><span class="row-val t-orange">Cannon · Data Chip · Hero Skills · Hero Stars · Exclusive Weapon · Offensive Tech</span></div>
+      </div>
+      <div class="alert-orange alert" style="margin:8px 0 0;">
+        <span class="alert-icon">💡</span>
+        <div>الاستثمار التالي يجب أن يذهب إلى الـDPS وليس إلى المزيد من الدفاع.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-blue" style="margin-top:8px;">
+      <div class="diag-q">💥 الحالة 3 — الخلفية تموت رغم أن الـFront حي</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">الأسباب: AoE يصل للخلفية · Radar/Armor ضعيفان على الـDPS · فارق Tech · Counter</div>
+      <div class="alert-blue alert" style="margin:0;">
+        <span class="alert-icon">💡</span>
+        <div>لا تواصل رفع Cannon وChip فقط. ابدأ تحسين Survivability للـBackline.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">❓ الحالة 4 — تخسر أمام لاعب أقل منك Power</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">لا تقل فقط "Counter" — افحص:</div>
+      <div class="checklist">
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل نوع الخصم Counter لك؟ (Aircraft ضد Tank)</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل Troop Tier لديه أعلى؟</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل Hero Stars لديه أفضل؟</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل Gear موزعة بشكل أذكى؟</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل Drone أقوى؟</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل Tech القتالية أعلى؟</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>هل Exclusive Weapons متقدمة؟</div></div>
+      </div>
+      <div class="alert-steel alert" style="margin:8px 0 0;">
+        <span class="alert-icon">📋</span>
+        <div>افتح Battle Report وحاول معرفة أي جزء انهار أولاً — الـPower وحده لا يشرح سبب الفوز.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §4 — Battle Report Diagnostic
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">📊 ماذا أراقب في Battle Report؟</div>
+  <div class="section-body">
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">DPS يموت أولاً</span>
+        <span class="row-val t-red">→ ابدأ بفحص: الاستهداف (Targeting) + الـDamage المتلقّى + Armor/Radar للـBackline + توزيع الـGear الحالي</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Tank يموت أولاً</span>
+        <span class="row-val t-orange">→ ابدأ بفحص: الاستهداف (Targeting) + الـDamage المتلقّى + Defense Gear + Stars + Tech للـFront</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">الجميع يعيش لكن Damage ضعيف</span>
+        <span class="row-val t-blue">→ DPS مشكلة — Cannon / Skills / Weapon / Tech</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">تخسر دائماً ضد نفس النوع</span>
+        <span class="row-val t-purple">→ افحص الـCounter أولاً؛ إذا تكرر المشكل، خطّط لفريق ثانٍ مضاد</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">خصم أقل Power لكن جنوده أقوى</span>
+        <span class="row-val t-gold">→ ابدأ بفحص: Troop Tier / Tech</span>
+      </div>
+    </div>
+    <div class="alert alert-steel" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>قبل أي استثمار:</strong> قارن الأبطال المكافئين عند الخصم، Damage المُعطى والمُتلقَّى، ومستوى Skills. معركة واحدة قد لا تكفي للتشخيص — ابحث عن نمط متكرر عبر عدة معارك.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §5 — مثال فريق الدبابات
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">🚗 مثال عملي — فريق الدبابات</div>
+  <div class="section-body">
+    <div class="alert alert-orange">
+      <span class="alert-icon">ℹ️</span>
+      <div>فريق الدبابات خيار شائع وقوي كبداية، لكن لديه نقطة ضعف واضحة أمام Aircraft — خطط لها مسبقاً.</div>
+    </div>
+    <div class="formation-wrap">
+      <div class="formation-label">الصف الأمامي — Front</div>
+      <div class="formation-row">
+        <div class="hero-card hc-front">
+          <div class="hero-role role-front">Tank</div>
+          <div class="hero-name">Murphy</div>
+          <div class="hero-sub">Defense</div>
+        </div>
+        <div class="hero-card hc-front">
+          <div class="hero-role role-front">Tank</div>
+          <div class="hero-name">Williams</div>
+          <div class="hero-sub">Defense</div>
+        </div>
+      </div>
+      <div class="formation-divider">
+        <div class="fdiv-line"></div>
+        <div class="fdiv-label">الصف الخلفي — Back</div>
+        <div class="fdiv-line"></div>
+      </div>
+      <div class="formation-row">
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">DPS</div>
+          <div class="hero-name">Kimberly</div>
+          <div class="hero-sub">Main Damage</div>
+        </div>
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">DPS</div>
+          <div class="hero-name">Stetmann</div>
+          <div class="hero-sub">Damage</div>
+        </div>
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">SUP</div>
+          <div class="hero-name">Marshall</div>
+          <div class="hero-sub">Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-steel" style="margin-top:4px;">
+      <span class="alert-icon">📌</span>
+      <div><strong class="t-gold">5 أبطال</strong>: 2 أمامي + 3 خلفي. الهدف: <strong class="t-gold">5 أبطال × 5 نجوم</strong>.</div>
+    </div>
+    <a href="tank_squad.html" class="inner-link il-orange">🛡️ راجع دليل فريق الدبابات بالتفصيل</a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §6 — 3 مراحل الحساب
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-green">📈 المراحل الثلاث — نفس المورد لا يملك نفس الأولوية دائماً</div>
+  <div class="section-body">
+
+    <div class="phase-card pc-1">
+      <div class="phase-header">
+        <div class="phase-num pn-1">1</div>
+        <div>
+          <div class="phase-title pt-1">حساب في طور البناء</div>
+          <div class="phase-sub">Squad 1 غير مكتمل · Stars ناقصة · Gear غير مستقرة · Troops منخفضة</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">🥇 أولوية</span><span class="row-val t-green">Squad 1 · Stars · Hero EXP · Skills · Gear أساسية · Troop Tier</span></div>
+        <div class="row-item"><span class="row-label">❌ ليس الآن</span><span class="row-val t-muted">Squad 2 · Squad 3 · <strong>استثمار Drone ضخم يستنزف الموارد الأساسية</strong> — لكن التطوير التدريجي المنتظم ضروري منذ الفتح</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card pc-2">
+      <div class="phase-header">
+        <div class="phase-num pn-2">2</div>
+        <div>
+          <div class="phase-title pt-2">فريق أول مستقر</div>
+          <div class="phase-sub">5 أبطال واضحون · Stars متقدمة · Gear جيدة · Troops مقبولة</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">🎯 هدف</span><span class="row-val t-gold">الوصول إلى 5×5 لـSquad 1 (للشظايا) + تقوية بقية الأنظمة</span></div>
+        <div class="row-item"><span class="row-label">🔎 كيف تختار؟</span><span class="row-val t-blue">Gear · Tech · Type Center · Drone · Exclusive Weapon — هذه كلها مرشحة. افتح Battle Report وحدد الـBottleneck، ثم استثمر في واحد أو اثنين منهم فقط.</span></div>
+        <div class="row-item"><span class="row-label">اختياري</span><span class="row-val t-muted">بدء التخطيط الخفيف لـSquad 2</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card pc-3">
+      <div class="phase-header">
+        <div class="phase-num pn-3">3</div>
+        <div>
+          <div class="phase-title pt-3">Squad 1 وصل 5×5 (للشظايا)</div>
+          <div class="phase-sub">القرارات تتغير هنا</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">Shards</span><span class="row-val t-gold">→ Squad 2 يبدأ</span></div>
+        <div class="row-item"><span class="row-label">Gear</span><span class="row-val t-orange">→ يبقى غالباً Squad 1 أولوية فترة أطول</span></div>
+        <div class="row-item"><span class="row-label">Hero EXP</span><span class="row-val t-blue">→ Squad 2 بعد Squad 1 Max</span></div>
+        <div class="row-item"><span class="row-label">Skill Medals</span><span class="row-val t-purple">→ Core Squad 1 تبقى أولوية حتى تستقر</span></div>
+        <div class="row-item"><span class="row-label">Tech/Drone</span><span class="row-val t-steel">→ استمرار تدريجي</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §7 — الشظايا — من يأخذها أولاً؟
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🔷 الشظايا — داخل Squad 1، من يأخذها أولاً؟</div>
+  <div class="section-body">
+
+    <div class="alert alert-gold">
+      <span class="alert-icon">🎯</span>
+      <div>لا توزع الشظايا بالتساوي بشكل آلي. <strong class="t-gold">ارفع البطل الذي يزيل أكبر Bottleneck في الفريق.</strong></div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">Main DPS</span>
+        <span class="row-val t-gold">أولوية عالية — رفع نجومه يرفع Damage بشكل مباشر وواضح</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Frontline</span>
+        <span class="row-val t-orange">إذا كان يموت بسرعة ويمنع الـDPS من العمل → رفعه أولوية</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Support</span>
+        <span class="row-val t-muted">لا يُهمل، لكن الأولوية تعتمد على المرحلة ودوره الفعلي</span>
+      </div>
+    </div>
+
+    <div class="divider">متى تنتقل الشظايا إلى Squad 2؟</div>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--gold);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">هل Squad 1 وصل 5×5 لكل الأبطال الخمسة؟</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">لا</div><div class="fa-val">بشكل عام: الشظايا → Squad 1</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">نعم</div><div class="fa-val">ابدأ توجيه الشظايا → Squad 2</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-steel" style="margin-top:10px;">
+      <span class="alert-icon">⚖️</span>
+      <div><strong class="t-steel">هذه استراتيجية عامة، لا قاعدة مطلقة.</strong> إذا كانت الترقية التالية لأحد أبطال Squad 1 ستعطي فائدة محدودة، بينما ترقية بطل في Squad 2 ستفتح تحسيناً أكبر — <strong class="t-gold">أعد تقييم القرار حسب الفائدة الفعلية لكل ترقية.</strong> القرار يعتمد على الأبطال المتاحين ومرحلتك الحالية.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §8 — Gear: القرار الذكي
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-cyan">⚙️ Gear — القرار يعتمد على ما يظهر في القتال</div>
+  <div class="section-body">
+
+    <div class="alert alert-cyan">
+      <span class="alert-icon">📌</span>
+      <div>4 قطع لكل بطل: <strong class="t-cyan">Cannon/Railgun · رقاقة البيانات (Data Chip) · Armor · Radar</strong></div>
+    </div>
+
+    <div class="divider">متى أتوقف عن الهجوم وأبدأ الدفاع؟</div>
+
+    <div class="decision-card dc-orange">
+      <div class="dc-icon">⚔️</div>
+      <div class="dc-body">
+        <div class="dc-title t-orange">سيناريو A — Kimberly تعمل Damage جيداً لكنها تموت بسرعة</div>
+        <div class="dc-desc">→ ابدأ رفع Radar / Armor للـBackline</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">🎯</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">سيناريو B — Kimberly تعيش للنهاية لكن Damage ضعيف</div>
+        <div class="dc-desc">→ واصل Cannon / Data Chip</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">🛡️</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">سيناريو C — Murphy/Williams يموتان بسرعة</div>
+        <div class="dc-desc">→ ابدأ بفحص: Defense Gear + Stars + Skills + Tech للـFrontline</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-purple">
+      <div class="dc-icon">💥</div>
+      <div class="dc-body">
+        <div class="dc-title t-purple">سيناريو D — Frontline قوي لكن Backline ينفجر من AoE</div>
+        <div class="dc-desc">→ لا تترك Defensive Gear للـDPS متأخراً جداً — AoE يصل</div>
+      </div>
+    </div>
+
+    <div class="divider">Decision Flow — Gear</div>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--orange);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">هل الـFrontline يصمد بشكل كافٍ؟</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">لا</div><div class="fa-val">ابدأ بفحص: Armor/Radar · Stars · Skills · Tech للأماميين</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">نعم ↓</div><div class="fa-val">انتقل للسؤال التالي</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--red);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">هل الـDPS يعيش حتى نهاية المعركة؟</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">لا</div><div class="fa-val">Defensive Gear للـDPS — Radar / Armor</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">نعم ↓</div><div class="fa-val">انتقل للسؤال التالي</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:#60a5fa;"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">هل Damage كافٍ لإنهاء الخصم؟</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">لا</div><div class="fa-val">Cannon / Data Chip / Skills</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">نعم</div><div class="fa-val">انتقل إلى Bottleneck آخر: Tech / Drone / Troops</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div><strong class="t-gold">Gear لا تتطور حسب اسم البطل فقط، بل حسب المشكلة التي تظهر في القتال.</strong></div>
+    </div>
+
+    <div class="divider">خطوة مجانية قبل صرف أي Ore</div>
+
+    <div class="decision-card dc-steel">
+      <div class="dc-icon">🔄</div>
+      <div class="dc-body">
+        <div class="dc-title t-steel">جرّب تبادل الـGear أولاً — قبل الترقية</div>
+        <div class="dc-desc">
+          يمكن نقل القطع بين الأبطال مجاناً.<br>
+          <strong>الترتيب الصحيح:</strong><br>
+          1. افحص التوزيع الحالي<br>
+          2. جرّب تبادلاً منطقياً (مثلاً: Radar من DPS إلى Front)<br>
+          3. قارن النتيجة في معارك مشابهة<br>
+          4. استثمر Ore فقط إذا التبادل لم يكفِ
+        </div>
+      </div>
+    </div>
+
+    <a href="gear_analysis.html" class="inner-link il-blue">⚙️ راجع دليل المعدات بالتفصيل</a>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §9 — الأسلحة الحصرية
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-cyan">🗡️ الأسلحة الحصرية — قرار حقيقي</div>
+  <div class="section-body">
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--cyan);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">هل هذا البطل سيبقى في Squad 1 أو Squad 2 لفترة طويلة؟</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">لا</div><div class="fa-val">لا تستثمر في Exclusive Weapon له الآن</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">نعم ↓</div><div class="fa-val">انتقل للسؤال التالي</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--gold);"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">هل البطل Core في Squad 1 أو Squad 2 طويل المدى؟</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-yes"><div class="fa-label">نعم ↓</div><div class="fa-val">قيّم ROI السلاح نفسه — ليس كل Core Hero له نفس الاستفادة من Exclusive Weapon</div></div>
+            <div class="flow-ans fa-no"><div class="fa-label">لا</div><div class="fa-val">لا تستثمر الآن — احتفظ بالشظايا</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-cyan" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div>Exclusive Weapon Shards من الموارد التي <strong>لا يجب نشرها بين عدة أبطال</strong> لمجرد فتح Weapon للجميع. ركزها على Core heroes.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §10 — Skill Medals
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-purple">🎖️ Skill Medals — اختر حسب الدور</div>
+  <div class="section-body">
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">DPS</span>
+        <span class="row-val t-purple">الأولوية للمهارات التي تؤثر مباشرة على Damage</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Tank / Defense</span>
+        <span class="row-val t-orange">الأولوية للمهارات التي ترفع البقاء أو تقلل Damage المتلقى</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Support</span>
+        <span class="row-val t-blue">الأولوية حسب قيمة Buff الذي يقدمه للفريق</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">❌ لا تفعل</span>
+        <span class="row-val t-muted">توزيع Skill Medals بالتساوي على كل الأبطال</span>
+      </div>
+    </div>
+
+    <div class="alert alert-purple" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div>لا ترفع كل Skills بالتساوي. <strong class="t-purple">اختر Skill التي تعطي أفضل نتيجة قتالية في دور البطل الحالي.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §11 — Bottleneck / Breakpoint
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🔎 أين Bottleneck حسابك؟</div>
+  <div class="section-body">
+
+    <div class="alert alert-gold">
+      <span class="alert-icon">🎯</span>
+      <div><strong class="t-gold">لا تبحث دائماً عن أقوى Upgrade. ابحث عن أضعف نظام يحدّ من قوة الفريق.</strong></div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">نجوم ممتازة + Gear ضعيفة</span>
+        <span class="row-val t-orange">→ Gear هي الـBottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Gear ممتازة + Skills ضعيفة</span>
+        <span class="row-val t-purple">→ Skills هي الـBottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Heroes ممتازون + T7 فقط</span>
+        <span class="row-val t-blue">→ Troops هي الـBottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">كل شيء جيد لكن T10 بعيد</span>
+        <span class="row-val t-purple">→ Special Forces / Research هي الـBottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">كل شيء متوازن لكن Drone متأخر</span>
+        <span class="row-val t-steel">→ Drone هو الـBottleneck طويل المدى</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §12 — الجنود
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">🪖 الجنود — T7 إلى T10</div>
+  <div class="section-body">
+
+    <div class="tier-row">
+      <div class="tier-badge tb-green"><span class="tier-num">T7</span><div class="tier-sub">ثكنة Lv.20<br>نقطة البداية</div></div>
+      <div class="tier-badge tb-blue"><span class="tier-num">T8</span><div class="tier-sub">ثكنة Lv.24<br>الحد الأدنى</div></div>
+      <div class="tier-badge tb-orange"><span class="tier-num">T9</span><div class="tier-sub">ثكنة Lv.27<br>هدف رئيسي</div></div>
+      <div class="tier-badge tb-gold"><span class="tier-num">T10</span><div class="tier-sub">ثكنة Lv.30<br>+ متطلبات T10<br>ضمن Special Forces</div></div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">🏆</span>
+      <div>
+        <strong class="t-gold">متطلبات T10 — كلها مطلوبة معاً:</strong>
+        <div class="row-list" style="margin-top:8px;">
+          <div class="row-item"><span class="row-label">HQ</span><span class="row-val t-gold">المقر الرئيسي Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Tech Center</span><span class="row-val t-blue">مركز التقنية Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Barracks</span><span class="row-val t-orange">الثكنة Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Special Forces</span><span class="row-val t-purple">أبحاث Unit محددة داخل شجرة Special Forces — تحتاج Valor Badges</span></div>
+        </div>
+        <div style="margin-top:8px; color:var(--steel); font-size:.8rem;">⚠️ الوصول إلى HQ30 وحده لا يكفي — أبحاث Special Forces تأخذ وقتاً طويلاً. ابدأ بها مبكراً حتى قبل أن تصل إلى HQ30.</div>
+      </div>
+    </div>
+
+    <div class="divider">متى يصبح Troop Tier هو المشكلة؟</div>
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">🔍</span>
+      <div>إذا كان أبطالك قوية وGear ممتازة وTech جيدة، لكن تخسر أمام لاعبين مشابهين لديهم Tier أعلى — الجنود أصبحوا الـBottleneck.<br>
+      <strong>نفس الفريق مع Tier أعلى يعطي أداء أفضل.</strong></div>
+    </div>
+
+    <a href="waterfall.html" class="inner-link il-blue">💧 استراتيجية الشلال — مضاعفة نقاط VS يوم الجمعة</a>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §13 — التقنية
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-purple">🔬 التقنية (Research) — حسب هدفك</div>
+  <div class="section-body">
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">🏆</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">إذا هدفك الحالي هو T10</div>
+        <div class="dc-desc">→ Special Forces تصبح أولوية كبيرة — هي الطريق الوحيد<br><span style="font-size:.78rem; color:var(--steel);">T10 يتطلب: HQ30 + Tech Center 30 + Barracks 30 + أبحاث Unit في Special Forces</span></div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">⚖️</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">إذا ما زلت بعيداً عن HQ30 / T10</div>
+        <div class="dc-desc">وازن بين: Combat Tech · Type Tech · Unit Tech · Progression Requirements<br><span style="font-size:.78rem; color:var(--orange);">⚠️ ابدأ أبحاث Special Forces مبكراً — تستغرق وقتاً طويلاً وستحتاجها حتماً</span></div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">⚔️</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">إذا تخسر بسبب ضعف القتال</div>
+        <div class="dc-desc">→ ركز على ATK / DEF / HP / Unit stats المناسبة لنوع فريقك</div>
+      </div>
+    </div>
+
+    <div class="alert alert-purple" style="margin-top:2px;">
+      <span class="alert-icon">📝</span>
+      <div>Special Forces مهمة جدًا، لكنها <strong>ليست دائماً أول Research لكل لاعب في كل مرحلة.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §14 — المباني
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">🏗️ المباني — اسأل "لماذا أرفع هذا الآن؟"</div>
+  <div class="section-body">
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">🏛️ HQ</span>
+        <span class="row-val t-muted">ارفعه إذا المستوى التالي يفتح: Hero Level / Barracks / Building / Research</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🚗 Tank Center</span>
+        <span class="row-val t-orange">Buffs مباشرة لفريق الدبابات — ارفعه حسب أولوية فريقك</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">✈️/🚀 Other Centers</span>
+        <span class="row-val t-muted">لا ترفع Aircraft/Missile Center بنفس السرعة إذا لا تستخدمهم بعد</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🏠 Barracks</span>
+        <span class="row-val t-blue">ارفعها عندما تحتاج Troop Tier أعلى أو استراتيجية Waterfall</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🔬 Tech Center</span>
+        <span class="row-val t-purple">ارفعه عندما Research الحالية أصبحت مقيدة بمستواه</span>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div><strong class="t-gold">لا تطور المبنى لأنه "مهم"، بل لأن المستوى التالي يخدم هدفاً واضحاً.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §15 — Drone
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">🤖 الطائرة المسيّرة (Drone)</div>
+  <div class="section-body">
+
+    <div class="divider">الأنظمة الأربعة للـDrone</div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">1 — Drone Level</span>
+        <span class="row-val t-steel">Combat Data (يرفع المستوى) + Drone Parts (ضرورية لبعض الترقيات) — المستوى يقوي بقية الأنظمة</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">2 — Components</span>
+        <span class="row-val t-blue">تتطور بنظامها الخاص (صناديق Components) — تعطي Buffs إضافية للفريق</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">3 — Skill Chips</span>
+        <span class="row-val t-purple">تضيف Effects قتالية متخصصة — بعضها موجّه لأنواع فرق محددة</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">4 — Combat Boost</span>
+        <span class="row-val t-gold">مكافآت تراكمية للفريق كله — تُفعَّل عند الوصول لنقاط محورية</span>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">🏆</span>
+      <div><strong class="t-gold">نقاط Combat Boost المحورية:</strong><br>
+      <strong class="t-steel">Lv 150</strong> → إجمالي +1 Chip Skill Boost &nbsp;·&nbsp;
+      <strong class="t-steel">Lv 300</strong> → إجمالي +2 &nbsp;·&nbsp;
+      <strong class="t-steel">Lv 450</strong> → إجمالي +3<br>
+      <span style="font-size:.8rem; color:var(--muted);">هذه مجاميع تراكمية عند كل نقطة محورية، لا إضافات تُجمع على بعضها — خطّط للوصول إلى النقطة التالية.</span></div>
+    </div>
+
+    <div class="divider">متى أستخدم ومتى أخزن؟</div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">VS Day قريب</span>
+        <span class="row-val t-gold">الأفضل حفظ الموارد القابلة للتسجيل في VS</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Drone متأخر جداً</span>
+        <span class="row-val t-orange">لا تؤجل كل التطوير — طوّره تدريجياً منذ الفتح</span>
+      </div>
+    </div>
+
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <span class="alert-icon">📈</span>
+      <div><strong class="t-blue">طوّر الـDrone بانتظام منذ فتحه.</strong> الـBuffs تشمل الفريق كله — التأخير الطويل يصعب تعويضه لاحقاً. الاستثمار الكبير يُقيَّم حسب النقطة المحورية التالية والموارد المتاحة، لا يُبنى على قاعدة مطلقة.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §16 — Counter
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">⚔️ نظام الكاونتر</div>
+  <div class="section-body">
+    <div class="tier-row">
+      <div class="tier-badge tb-orange" style="text-align:center;">
+        <span class="tier-num">🚗</span>
+        <div style="font-weight:900; font-size:.8rem;">دبابة</div>
+        <div class="tier-sub">قوي ضد → صاروخ<br>ضعيف ضد → طائرة</div>
+      </div>
+      <div class="tier-badge tb-blue" style="text-align:center;">
+        <span class="tier-num">✈️</span>
+        <div style="font-weight:900; font-size:.8rem;">طائرة</div>
+        <div class="tier-sub">قوي ضد → دبابة<br>ضعيف ضد → صاروخ</div>
+      </div>
+      <div class="tier-badge tb-green" style="text-align:center;">
+        <span class="tier-num">🚀</span>
+        <div style="font-weight:900; font-size:.8rem;">صاروخ</div>
+        <div class="tier-sub">قوي ضد → طائرة<br>ضعيف ضد → دبابة</div>
+      </div>
+    </div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">🧭</span>
+      <div>إذا فريقك Tank، الـMissile خيار منطقي كفريق ثانٍ لمواجهة Aircraft — وهو ما يكثر استخدامه ضد لاعبي الدبابات.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §17 — الفريق الثاني
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">🔄 الفريق الثاني — بناؤه بدون إضعاف الأول</div>
+  <div class="section-body">
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">🎯</span>
+      <div>الهدف: <strong class="t-blue">بناء Squad 2 بدون إضعاف Squad 1.</strong> كل مورد له توقيته الصحيح للانتقال.</div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item"><span class="row-label">Universal Shards</span><span class="row-val t-gold">بشكل عام بعد 5×5 لـSquad 1 → Squad 2 (أعد التقييم حسب الفائدة الفعلية لكل ترقية)</span></div>
+      <div class="row-item"><span class="row-label">Hero EXP</span><span class="row-val t-blue">بعد Squad 1 Max → Squad 2</span></div>
+      <div class="row-item"><span class="row-label">Skill Medals</span><span class="row-val t-purple">Squad 1 Core تبقى أولوية حتى تستقر أولاً</span></div>
+      <div class="row-item"><span class="row-label">Gear</span><span class="row-val t-orange">يبقى غالباً Squad 1 أولوية فترة أطول</span></div>
+      <div class="row-item"><span class="row-label">Type Tech</span><span class="row-val t-muted">Squad 2 تدريجياً عندما يصبح استثماراً حقيقياً</span></div>
+      <div class="row-item"><span class="row-label">Type Center</span><span class="row-val t-muted">نفس الشيء — حسب الأولوية</span></div>
+      <div class="row-item"><span class="row-label">Drone</span><span class="row-val t-steel">مورد مشترك وليس خاصاً بـSquad 2</span></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §18 — لا تبنِ 3 فرق
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">🚫 لا تبنِ 3 فرق في نفس الوقت</div>
+  <div class="section-body">
+    <div class="compare-wrap">
+      <div class="compare-col cc-bad">
+        <div class="compare-label t-red">❌ الخطأ</div>
+        <div class="compare-items">Tank متوسط<br>Aircraft متوسط<br>Missile متوسط<br><strong class="t-red">= 3 فرق ضعيفة</strong></div>
+      </div>
+      <div class="compare-col cc-good">
+        <div class="compare-label t-green">✅ الصح</div>
+        <div class="compare-items">Squad 1 قوي جداً<br>Squad 2 في البناء<br>Squad 3 لاحقاً<br><strong class="t-green">= فريقان قويان</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §19 — 3 سيناريوهات كاملة
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">🎮 سيناريوهات واقعية — ماذا أفعل الآن؟</div>
+  <div class="section-body">
+
+    <div class="scenario sc-1">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green);">سيناريو 1</span>
+        <span class="t-muted" style="font-size:.78rem;">حساب في طور البناء</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Tank Squad</span><span class="si-val t-orange">4★ متوسط</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-red">ضعيفة</span></div>
+        <div class="si-stat"><span class="si-label">Troop Tier</span><span class="si-val t-blue">T8</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-green bold" style="font-size:.82rem;">القرار:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Shards</span><span class="si-val t-gold">→ Squad 1 حتى 5×5</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-gold">→ Squad 1 حسب الـDiagnosis</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2</span><span class="si-val t-red">→ لا تبدأ الآن</span></div>
+        <div class="si-stat"><span class="si-label">Tech/Troops</span><span class="si-val t-blue">→ تدريجياً حسب المرحلة</span></div>
+      </div>
+    </div>
+
+    <div class="scenario sc-2">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); color:#60a5fa;">سيناريو 2</span>
+        <span class="t-muted" style="font-size:.78rem;">Squad 1 مكتمل</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Tank Squad</span><span class="si-val t-green">5×5</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-orange">متوسطة</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2</span><span class="si-val t-muted">ضعيف</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-blue bold" style="font-size:.82rem;">القرار:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Shards</span><span class="si-val t-gold">→ Squad 2 يبدأ</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-orange">→ يبقى Squad 1 أولوية</span></div>
+        <div class="si-stat"><span class="si-label">Hero EXP</span><span class="si-val t-blue">→ يبدأ Squad 2 عند توفره</span></div>
+        <div class="si-stat"><span class="si-label">Tech Squad 2</span><span class="si-val t-muted">→ تدريجياً</span></div>
+      </div>
+    </div>
+
+    <div class="scenario sc-3">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(232,57,74,0.12); border:1px solid rgba(232,57,74,0.3); color:var(--red);">سيناريو 3</span>
+        <span class="t-muted" style="font-size:.78rem;">أخسر أمام خصم أقل Power</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">الوضع</span><span class="si-val t-red">Power عالية لكن خسائر أمام Aircraft أقل Power</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-red bold" style="font-size:.82rem;">التشخيص:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">أول ما يفحص</span><span class="si-val t-purple">Counter — Aircraft ضد Tank يعطي ميزة</span></div>
+        <div class="si-stat"><span class="si-label">لا يعني</span><span class="si-val t-muted">أن كل Gear أو Heroes ضعيفة</span></div>
+        <div class="si-stat"><span class="si-label">الحل مستقبلاً</span><span class="si-val t-green">Missile Squad يغطي نقطة الضعف</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §20 — ماذا أفعل اليوم؟
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚡ ماذا أفعل اليوم؟ — الإجابة في دقيقة</div>
+  <div class="section-body">
+
+    <div class="today-grid">
+
+      <div class="today-item ti-gold">
+        <div class="today-icon">🔷</div>
+        <div>
+          <div class="today-q">عندي Universal Shards</div>
+          <div class="today-a">هل Squad 1 = 5×5؟<br>
+          <strong class="t-red">لا</strong> → Squad 1 · <strong class="t-green">نعم</strong> → Squad 2</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-orange">
+        <div class="today-icon">⚙️</div>
+        <div>
+          <div class="today-q">عندي Gear Ore / Materials</div>
+          <div class="today-a">افتح Battle Report — من يموت أولاً؟<br>
+          <strong class="t-red">Frontline</strong> → افحص: الاستهداف (Targeting) + الـDamage المتلقّى + Defense Gear + توزيع الـGear<br>
+          <strong class="t-orange">DPS</strong> → افحص: الاستهداف (Targeting) + الـDamage المتلقّى + Armor/Radar + توزيع الـGear<br>
+          <strong class="t-blue">كلاهما يعيش لكن Damage ضعيف</strong> → Cannon/Chip</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-purple">
+        <div class="today-icon">🎖️</div>
+        <div>
+          <div class="today-q">عندي Skill Medals</div>
+          <div class="today-a">من هو Core Hero / Main DPS؟<br>
+          → الأولوية للـSkill التي تؤثر أكثر على أداء دوره</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-blue">
+        <div class="today-icon">🔬</div>
+        <div>
+          <div class="today-q">عندي Valor Badges / Research Resources</div>
+          <div class="today-a">هل هدفي T10 قريب؟<br>
+          <strong class="t-gold">نعم</strong> → Special Forces أولاً<br>
+          <strong class="t-muted">لا</strong> → Combat/Progression Tech حسب الـBottleneck</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-steel">
+        <div class="today-icon">🤖</div>
+        <div>
+          <div class="today-q">عندي Drone Resources</div>
+          <div class="today-a">هل VS Day قريب (يوم يعطي نقاطاً عند صرف موارد Drone)؟<br>
+          <strong class="t-gold">نعم</strong> → احتفظ بالموارد التي تعطي نقاط VS حتى اليوم المناسب<br>
+          <strong class="t-muted">Drone متأخر جداً</strong> → طوّر تدريجياً، لا تؤجل كل شيء</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-green">
+        <div class="today-icon">🏗️</div>
+        <div>
+          <div class="today-q">عندي Resources للمباني</div>
+          <div class="today-a">أي Upgrade يفتح لي شيئاً مهماً؟<br>
+          → HQ + Type Center + Barracks حسب الهدف الحالي</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §21 — Diagnostic Checklist
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">📋 Diagnostic Checklist — سؤال + ماذا يعني + ماذا أفعل</div>
+  <div class="section-body">
+
+    <div class="diag-item di-red">
+      <div class="diag-q">🛡️ هل الـFrontline يموت أولاً في Battle Report؟</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">نعم — ابدأ بفحص</div><div class="da-val">الاستهداف (Targeting) + الـDamage المتلقّى + Defense Gear + Stars + Tech للـFront — قبل أي استثمار</div></div>
+        <div class="diag-ans da-no"><div class="da-label">لا — جيد</div><div class="da-val">انتقل للسؤال التالي</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-orange" style="margin-top:8px;">
+      <div class="diag-q">💥 هل الـDPS يموت أولاً رغم أن Front حي؟</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">نعم — ابدأ بفحص</div><div class="da-val">الاستهداف (Targeting) + الـDamage المتلقّى + الـSkills + توزيع الـGear الحالي — قبل أي استثمار</div></div>
+        <div class="diag-ans da-no"><div class="da-label">لا — جيد</div><div class="da-val">انتقل للسؤال التالي</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-blue" style="margin-top:8px;">
+      <div class="diag-q">⚔️ هل Damage ضعيف رغم أن الجميع يعيش؟</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">نعم — مشكلة</div><div class="da-val">Cannon / Chip / Skills / Exclusive Weapon</div></div>
+        <div class="diag-ans da-no"><div class="da-label">لا — جيد</div><div class="da-val">انتقل للسؤال التالي</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">✈️ هل تخسر فقط أمام Aircraft؟</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">نعم — Counter</div><div class="da-val">ابنِ Missile Squad مستقبلاً كـSquad 2</div></div>
+        <div class="diag-ans da-no"><div class="da-label">لا</div><div class="da-val">المشكلة في مكان آخر</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-green" style="margin-top:8px;">
+      <div class="diag-q">🔷 هل Squad 1 = 5×5؟</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-no"><div class="da-label">لا — ناقص</div><div class="da-val">لا تنقل Shards إلى Squad 2</div></div>
+        <div class="diag-ans da-yes"><div class="da-label">نعم — ✅</div><div class="da-val">يمكن بدء Squad 2 تدريجياً</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">🔬 هل Tech ضعيفة رغم أن Heroes وGear جيدة؟</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">نعم — Bottleneck</div><div class="da-val">Tech هي الـBottleneck — ركز على Special Forces / Combat</div></div>
+        <div class="diag-ans da-no"><div class="da-label">لا — جيد</div><div class="da-val">ابحث عن الـBottleneck في مكان آخر</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §22 — جدول القرار السريع (Yes/No)
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚡ جدول القرار — السؤال الأول يقرر</div>
+  <div class="section-body">
+
+    <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+    <table class="prio-table" style="min-width:480px;">
+      <thead>
+        <tr>
+          <th>المورد</th>
+          <th>السؤال</th>
+          <th>نعم →</th>
+          <th>لا →</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong class="t-gold">Universal Shards</strong></td>
+          <td class="t-muted">Squad 1 = 5×5؟</td>
+          <td><span class="pill pill-blue">Squad 2</span></td>
+          <td><span class="pill pill-gold">Squad 1</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-orange">Gear Ore</strong></td>
+          <td class="t-muted">Frontline تموت بسرعة؟</td>
+          <td><span class="pill pill-orange">Armor/Radar للأمامي</span></td>
+          <td><span class="pill pill-blue">افحص DPS</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-purple">Valor Badges</strong></td>
+          <td class="t-muted">هدف T10 قريب؟</td>
+          <td><span class="pill pill-purple">Special Forces</span></td>
+          <td><span class="pill pill-steel">Combat/Progression Tech</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-cyan">Hero EXP</strong></td>
+          <td class="t-muted">Squad 1 Max Level؟</td>
+          <td><span class="pill pill-blue">Squad 2</span></td>
+          <td><span class="pill pill-cyan">Squad 1 أولاً</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-cyan">Exclusive Weapon Shards</strong></td>
+          <td class="t-muted">البطل Core hero طويل المدى؟</td>
+          <td><span class="pill pill-cyan">استثمر فيه</span></td>
+          <td><span class="pill pill-steel">احتفظ بها</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-steel">Drone Resources</strong></td>
+          <td class="t-muted">VS Day يعطي نقاطاً عند صرف Drone قريب؟</td>
+          <td><span class="pill pill-gold">احتفظ حتى اليوم المناسب</span></td>
+          <td><span class="pill pill-steel">طوّر تدريجياً</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-green">تدريب جنود</strong></td>
+          <td class="t-muted">يوم الجمعة (VS)؟</td>
+          <td><span class="pill pill-orange">T7→T8→T9 الشلال</span></td>
+          <td><span class="pill pill-green">جمّع T7</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-blue">موارد مباني</strong></td>
+          <td class="t-muted">المستوى التالي يفتح شيئاً مهماً؟</td>
+          <td><span class="pill pill-blue">ارفع المبنى</span></td>
+          <td><span class="pill pill-steel">أخّر حتى تحتاجه</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §23 — القواعد الذهبية
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🏆 القواعد الذهبية — احفظها</div>
+  <div class="section-body">
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">1️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">لا تشتت مواردك على 3 فرق</div>
+        <div class="dc-desc">فريقان قويان أفضل من ثلاثة فرق غير مكتملة.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-orange">
+      <div class="dc-icon">2️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-orange">بشكل عام: الشظايا → Squad 1 حتى 5×5</div>
+        <div class="dc-desc">5 أبطال × 5 نجوم — هذا هو الخط الفاصل في الحالة العامة. إذا كانت الترقية التالية لـSquad 1 ذات فائدة محدودة مقارنة بترقية أساسية في Squad 2، أعد تقييم القرار حسب الفائدة الفعلية.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-cyan">
+      <div class="dc-icon">3️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-cyan">Gear لا تتطور حسب اسم البطل — حسب ما يظهر في القتال</div>
+        <div class="dc-desc">افتح Battle Report أولاً — من يموت أولاً يعطيك <em>خيطاً للفحص</em>، لا قراراً نهائياً. تحقق من الـDamage المتلقّى والـSkills والاستهداف (Targeting) قبل أي استثمار.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">4️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">لا تبحث عن أقوى Upgrade — ابحث عن أضعف Bottleneck</div>
+        <div class="dc-desc">أكبر تحسن قتالي يأتي من إصلاح أضعف نقطة، وليس من تقوية ما هو قوي أصلاً.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-purple">
+      <div class="dc-icon">5️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-purple">Tech وSpecial Forces — ابدأهما مبكراً إذا هدفك T10</div>
+        <div class="dc-desc">القوات الخاصة هي الطريق الوحيد لـT10 — التأخر يكلف كثيراً.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-steel">
+      <div class="dc-icon">6️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-steel">Drone ليس "نهاية اللعبة" — طوّره تدريجياً</div>
+        <div class="dc-desc">في أيام VS، احتفظ بالموارد التي تعطي نقاطاً عند صرفها — موارد Drone من هذه الموارد. نوازن بين القوة اليومية وتراكم نقاط VS.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">7️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">Gear وShards لهما توقيت مختلف للانتقال إلى Squad 2</div>
+        <div class="dc-desc">الشظايا تنتقل بعد 5×5 — لكن Gear قد يبقى أولوية للفريق الأول فترة أطول.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">8️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">القوة الحقيقية هي الأداء في القتال، وليس الرقم وحده</div>
+        <div class="dc-desc">التركيز على حل الـBottleneck يعطي نتيجة قتالية أفضل من تشتيت الموارد.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════ FOOTER ════════ -->
+<div class="footer">
+  🛡️ <strong>[NWH] Night Watch</strong><br>
+  إعداد: MSBKH · آخر تحديث: 20/10/2026<br>
+  <span style="font-size:0.7rem;">دليل داخلي للتحالف — تشخيص قوة الفريق وقرارات الموارد</span>
+</div>
+
+</body>
+</html>
