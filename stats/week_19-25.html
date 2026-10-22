@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] VS Week 19–25 Oct 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #06080e;
+    --card:     #0c1018;
+    --border:   #181f2e;
+    --gold:     #f5c518;
+    --gold-dim: rgba(245,197,24,0.12);
+    --red:      #e8394a;
+    --blue:     #3b82f6;
+    --cyan:     #06b6d4;
+    --green:    #22c55e;
+    --orange:   #f97316;
+    --purple:   #a855f7;
+    --steel:    #94a3b8;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    text-align: center;
+    padding: 22px 16px 18px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #0e1419 0%, #0c1018 100%);
+    border: 1px solid var(--gold-dim);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.07) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .header-tag {
+    display: inline-block;
+    background: var(--gold-dim);
+    color: var(--gold);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(245,197,24,0.25);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .header-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(245,197,24,0.45);
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .header-badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .badge span { color: var(--text); font-weight: 700; }
+
+  /* ── PODIUM ── */
+  .podium-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .podium-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .podium-card.rank-1 { border-color: #f5c518; box-shadow: 0 0 18px rgba(245,197,24,0.18); }
+  .podium-card.rank-2 { border-color: #94a3b8; }
+  .podium-card.rank-3 { border-color: #f97316; }
+  .podium-medal { font-size: 1.6rem; margin-bottom: 4px; }
+  .podium-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .podium-score {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--gold);
+  }
+  .podium-id { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── SEARCH / FILTER BAR ── */
+  .search-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .search-bar input {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    outline: none;
+  }
+  .search-bar input:focus { border-color: var(--gold-dim); }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .table-head {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .table-head-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--gold);
+  }
+  .table-count {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  thead th {
+    background: rgba(0,0,0,0.35);
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 9px 10px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th:hover { color: var(--gold); }
+  thead th.active { color: var(--gold); }
+  thead th .sort-icon { opacity: 0.4; margin-left: 3px; }
+  thead th.active .sort-icon { opacity: 1; }
+  tbody tr {
+    border-bottom: 1px solid rgba(24,31,46,0.7);
+    transition: background 0.1s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+  tbody tr.top-3 { background: rgba(245,197,24,0.04); }
+  tbody tr.inactive { opacity: 0.45; }
+  td { padding: 8px 10px; vertical-align: middle; }
+  .td-rank {
+    width: 36px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.75rem;
+  }
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .rank-1 .rank-badge { background: rgba(245,197,24,0.2); color: #f5c518; }
+  .rank-2 .rank-badge { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+  .rank-3 .rank-badge { background: rgba(249,115,22,0.2); color: #f97316; }
+  .rank-badge.normal { background: rgba(255,255,255,0.06); color: var(--muted); }
+  .td-id { color: var(--muted); font-size: 0.68rem; white-space: nowrap; }
+  .td-pseudo { font-weight: 700; color: var(--text); max-width: 130px; }
+  .pseudo-txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 130px; }
+  .td-day { text-align: right; white-space: nowrap; color: var(--steel); font-variant-numeric: tabular-nums; }
+  .td-total { text-align: right; font-weight: 900; color: var(--gold); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .td-avg { text-align: right; white-space: nowrap; color: var(--cyan); font-variant-numeric: tabular-nums; }
+  .td-bar { width: 80px; padding-right: 14px; }
+  .bar-bg {
+    width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold), #fde68a);
+    transition: width 0.3s;
+  }
+  .zero-row td { color: var(--muted) !important; opacity: 0.35; }
+  .zero-row .td-total { color: var(--muted) !important; }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .sum-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+  }
+  .sum-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .sum-value {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .sum-sub { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── FOOTER ── */
+  .nwh-footer {
+    text-align: center;
+    padding: 18px 12px;
+    background: linear-gradient(135deg, #0e1419, #0c1018);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-top: 12px;
+  }
+  .footer-shield { font-size: 1.5rem; margin-bottom: 4px; }
+  .footer-name { font-weight: 900; font-size: 0.95rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 3px; }
+  .footer-credit { color: var(--muted); font-size: 0.75rem; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-decoration: none;
+    margin-bottom: 14px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  /* responsive */
+  @media (max-width: 480px) {
+    .td-day { display: none; }
+    .td-bar { display: none; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html" class="back-link">← Back to Guide</a>
+
+<div class="page-header">
+  <div class="header-tag">VS — Alliance Duel</div>
+  <div class="header-title">19–25</div>
+  <div class="header-sub">Week of October 19–25, 2026 · [NWH] Night Watch</div>
+  <div class="header-badge-row">
+    <div class="badge">📅 Days played <span>3 / 5</span></div>
+    <div class="badge">👥 Active <span id="active-count">—</span></div>
+    <div class="badge">⚔️ Alliance Total <span id="alliance-total">—</span></div>
+  </div>
+</div>
+
+<!-- Podium -->
+<div class="podium-section" id="podium"></div>
+
+<!-- Search -->
+<div class="search-bar">
+  <input type="text" id="search-input" placeholder="🔍  Search player…" oninput="filterTable()">
+</div>
+
+
+<!-- Main table -->
+<div class="table-wrap">
+  <div class="table-head">
+    <span class="table-head-title">⚔️ Weekly Leaderboard</span>
+    <span class="table-count" id="row-count"></span>
+  </div>
+  <div style="overflow-x:auto;">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th class="td-rank" onclick="sortTable('rank')">#<span class="sort-icon">↕</span></th>
+        <th style="width:56px" onclick="sortTable('id')">ID<span class="sort-icon">↕</span></th>
+        <th onclick="sortTable('pseudo')">Player<span class="sort-icon">↕</span></th>
+        <th class="td-day" onclick="sortTable('d0')">19/10<span class="sort-icon">↕</span></th>
+        <th class="td-day" onclick="sortTable('d1')">20/10<span class="sort-icon">↕</span></th>
+        <th class="td-day" onclick="sortTable('d2')">21/10<span class="sort-icon">↕</span></th>
+        <th onclick="sortTable('total')">Total<span class="sort-icon">↕</span></th>
+        <th class="td-avg" onclick="sortTable('avg')">Avg/5d<span class="sort-icon">↕</span></th>
+        <th class="td-bar"></th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Stats: MSBKH · Week 19–25 Oct 2026</div>
+</div>
+
+<script>
+const RAW = [
+  {id:"NWH-001",pseudo:"LordZAIN",d:[60477147,12239852,28778437],total:101495436,avg:16915906},
+  {id:"NWH-002",pseudo:"MOHAMMED BAKILY",d:[49966190,20174850,22788250],total:92929290,avg:15488215},
+  {id:"NWH-003",pseudo:"قيصر",d:[46432437,3070775,2412750],total:51915962,avg:8652660},
+  {id:"NWH-004",pseudo:"AD commander",d:[45740907,8490130,10561693],total:64792730,avg:10798788},
+  {id:"NWH-005",pseudo:"EsRa28",d:[42786702,9635340,18720620],total:71142662,avg:11857110},
+  {id:"NWH-006",pseudo:"Unconscionable",d:[42305515,13971400,17428953],total:73705868,avg:12284311},
+  {id:"NWH-007",pseudo:"أبو هذال",d:[38712633,13112400,10012000],total:61837033,avg:10306172},
+  {id:"NWH-008",pseudo:"Fandaam",d:[37045408,2944275,12622183],total:52611866,avg:8768644},
+  {id:"NWH-009",pseudo:"Yamakasi31",d:[36946333,3716230,8546360],total:49208923,avg:8201487},
+  {id:"NWH-010",pseudo:"Fahed NWH",d:[35118849,10500300,12217650],total:57836799,avg:9639467},
+  {id:"NWH-011",pseudo:"الأرغواني",d:[33221565,4251900,11957910],total:49431375,avg:8238563},
+  {id:"NWH-012",pseudo:"نايرون",d:[32959313,6010176,3852688],total:42822177,avg:7137030},
+  {id:"NWH-013",pseudo:"TOSSUN",d:[32669264,7219915,27757770],total:67646949,avg:11274492},
+  {id:"NWH-014",pseudo:"Daedric Prince",d:[30651805,12627973,10968359],total:54248137,avg:9041356},
+  {id:"NWH-015",pseudo:"Moktar goaws77777777",d:[28228424,15447820,17930549],total:61606793,avg:10267799},
+  {id:"NWH-016",pseudo:"SUSKUNN44",d:[26912212,2000000,2594600],total:31506812,avg:5251135},
+  {id:"NWH-017",pseudo:"جعبلي1",d:[24739635,10384950,16725900],total:51850485,avg:8641748},
+  {id:"NWH-018",pseudo:"GhazwanB",d:[24604439,8257580,19546480],total:52408499,avg:8734750},
+  {id:"NWH-019",pseudo:"Hurricane8l",d:[22715394,9820070,12663630],total:45199094,avg:7533182},
+  {id:"NWH-020",pseudo:"Barkan Yazgan",d:[21744889,7546050,13856350],total:43147289,avg:7191215},
+  {id:"NWH-021",pseudo:"KHALED",d:[21312354,2303000,5300500],total:28915854,avg:4819309},
+  {id:"NWH-022",pseudo:"yassine24",d:[20715046,3274500,8100650],total:32090196,avg:5348366},
+  {id:"NWH-023",pseudo:"Wafi18",d:[20680849,12555450,10791250],total:44027549,avg:7337925},
+  {id:"NWH-024",pseudo:"Holinesskgz",d:[20004173,7255200,7923600],total:35182973,avg:5863829},
+  {id:"NWH-025",pseudo:"亗 I S S A M 亗",d:[19821736,9772800,12787250],total:42381786,avg:7063631},
+  {id:"NWH-026",pseudo:"abu khaled 94",d:[19642113,8960400,14628300],total:43230813,avg:7205136},
+  {id:"NWH-027",pseudo:"GÜLTEKİN",d:[19602614,8603067,7380082],total:35585763,avg:5930961},
+  {id:"NWH-028",pseudo:"Mikooto",d:[19368430,8759250,14484750],total:42612430,avg:7102072},
+  {id:"NWH-029",pseudo:"S A L E M 1",d:[18566000,11084100,15552650],total:45202750,avg:7533792},
+  {id:"NWH-030",pseudo:"XM7MD77",d:[18523240,7523614,19059362],total:45106216,avg:7517703},
+  {id:"NWH-031",pseudo:"omer Al nopei",d:[16832685,14267750,15923400],total:47023835,avg:7837306},
+  {id:"NWH-032",pseudo:"Khaled Abu Hasan",d:[16731722,11344210,9698970],total:37774902,avg:6295817},
+  {id:"NWH-033",pseudo:"yousefaj29",d:[16499863,8652550,12295450],total:37447863,avg:6241311},
+  {id:"NWH-034",pseudo:"Semsem81",d:[15998688,8894728,11740915],total:36634331,avg:6105722},
+  {id:"NWH-035",pseudo:"playeir",d:[15964604,9359550,11002950],total:36327104,avg:6054517},
+  {id:"NWH-036",pseudo:"Abo waleed 777",d:[14821279,4906650,11321700],total:31049629,avg:5174938},
+  {id:"NWH-037",pseudo:"1000ed",d:[14674292,7929270,7321250],total:29924812,avg:4987469},
+  {id:"NWH-038",pseudo:"Feel Sf",d:[14561329,7256500,13011150],total:34828979,avg:5804830},
+  {id:"NWH-039",pseudo:"SimSim Cool",d:[14238765,3614000,10276340],total:28129105,avg:4688184},
+  {id:"NWH-040",pseudo:"BilgeKagan43",d:[14026419,11534375,10887855],total:36448649,avg:6074775},
+  {id:"NWH-041",pseudo:"DÀHŠHÁN",d:[14007748,15600581,18002723],total:47611052,avg:7935175},
+  {id:"NWH-042",pseudo:"ابو ثائرا",d:[13943904,7854000,9606650],total:31404554,avg:5234092},
+  {id:"NWH-043",pseudo:"MSBKH",d:[13147092,12351600,31224850],total:56723542,avg:9453924},
+  {id:"NWH-044",pseudo:"عامر٢",d:[12138434,9583640,11709990],total:33432064,avg:5572011},
+  {id:"NWH-045",pseudo:"3SAAF",d:[11992742,3337500,10745114],total:26075356,avg:4345893},
+  {id:"NWH-046",pseudo:"CaptainJFlint",d:[11777177,8234291,12261759],total:32273227,avg:5378871},
+  {id:"NWH-047",pseudo:"oNaWaFo",d:[11760982,12103240,15309990],total:39174212,avg:6529035},
+  {id:"NWH-048",pseudo:"X Ninja X",d:[11718992,0,0],total:11718992,avg:1953165},
+  {id:"NWH-049",pseudo:"AdoRa",d:[11577907,7658350,9294600],total:28530857,avg:4755143},
+  {id:"NWH-050",pseudo:"abou baker 14",d:[11572858,7407450,24241400],total:43221708,avg:7203618},
+  {id:"NWH-051",pseudo:"Seseyanoo",d:[11441057,7394250,10921200],total:29756507,avg:4959418},
+  {id:"NWH-052",pseudo:"Jjjooojjoo",d:[11016719,6486450,11982000],total:29485169,avg:4914195},
+  {id:"NWH-053",pseudo:"Fearless 06",d:[10960572,8918700,7758580],total:27637852,avg:4606309},
+  {id:"NWH-054",pseudo:"AMROASSAf",d:[10913027,8329582,8604918],total:27847527,avg:4641255},
+  {id:"NWH-055",pseudo:"القناص1239",d:[10906457,20961150,15409050],total:47276657,avg:7879443},
+  {id:"NWH-056",pseudo:"Paliouka",d:[10667287,7243050,7880600],total:25790937,avg:4298490},
+  {id:"NWH-057",pseudo:"Mohamedkhaled225",d:[10415774,15849600,12702600],total:38967974,avg:6494662},
+  {id:"NWH-058",pseudo:"BelMo",d:[10173524,6286750,6592075],total:23052349,avg:3842058},
+  {id:"NWH-059",pseudo:"şøHąîß ĜŔ",d:[10058524,9026100,3097010],total:22181634,avg:3696939},
+  {id:"NWH-060",pseudo:"Komutan Logart52",d:[10044900,7945350,16495500],total:34485750,avg:5747625},
+  {id:"NWH-061",pseudo:"melodY",d:[9961859,7226200,21352650],total:38540709,avg:6423452},
+  {id:"NWH-062",pseudo:"Abood个1v99个",d:[9679253,4318250,10468795],total:24466298,avg:4077716},
+  {id:"NWH-063",pseudo:"Diddÿ",d:[9555339,6579090,9949085],total:26083514,avg:4347252},
+  {id:"NWH-064",pseudo:"K r M",d:[9247807,6066075,8529230],total:23843112,avg:3973852},
+  {id:"NWH-065",pseudo:"مارشل محمد",d:[9153554,1644220,15255196],total:26052970,avg:4342162},
+  {id:"NWH-066",pseudo:"BaiLeyS",d:[8975334,13193255,13602528],total:35771117,avg:5961853},
+  {id:"NWH-067",pseudo:"ayoucha",d:[8880026,4969462,15253103],total:29102591,avg:4850432},
+  {id:"NWH-068",pseudo:"بوبي",d:[8742349,11411700,14980350],total:35134399,avg:5855733},
+  {id:"NWH-069",pseudo:"Süper Türkiye",d:[8690916,16574100,8738700],total:34003716,avg:5667286},
+  {id:"NWH-070",pseudo:"أجوود",d:[8416445,3651000,1922250],total:13989695,avg:2331616},
+  {id:"NWH-071",pseudo:"Mohammed096",d:[8246101,8301120,7480505],total:24027726,avg:4004621},
+  {id:"NWH-072",pseudo:"Mr Kyrgyz",d:[8049995,10355170,14016252],total:32421417,avg:5403570},
+  {id:"NWH-073",pseudo:"مشاكل111",d:[7831595,9072900,7831500],total:24735995,avg:4122666},
+  {id:"NWH-074",pseudo:"Bo EssA",d:[7714832,8730150,7971300],total:24416282,avg:4069380},
+  {id:"NWH-075",pseudo:"VΞNØMᴺᵂᴴ",d:[7666822,8646395,12589860],total:28903077,avg:4817180},
+  {id:"NWH-076",pseudo:"Laylalayla",d:[7642782,8322000,8059100],total:24023882,avg:4003980},
+  {id:"NWH-077",pseudo:"فـك وافك",d:[7551570,26885876,11820098],total:46257544,avg:7709591},
+  {id:"NWH-078",pseudo:"D 3 s",d:[7507911,2554500,9147850],total:19210261,avg:3201710},
+  {id:"NWH-079",pseudo:"shgmoom2",d:[7468866,14262780,8141977],total:29873623,avg:4978937},
+  {id:"NWH-080",pseudo:"محمد حسن١٧",d:[7411594,8348695,14713920],total:30474209,avg:5079035},
+  {id:"NWH-081",pseudo:"Abdou07dz",d:[7375962,9143850,14022300],total:30542112,avg:5090352},
+  {id:"NWH-082",pseudo:"mafia forever",d:[7212710,7262787,9205903],total:23681400,avg:3946900},
+  {id:"NWH-083",pseudo:"ahmettemre",d:[6084394,8774043,12606486],total:27464923,avg:4577487},
+  {id:"NWH-084",pseudo:"BNDR112",d:[5588481,3761100,3791650],total:13141231,avg:2190205},
+  {id:"NWH-085",pseudo:"Fasuly",d:[5573014,7401465,6589776],total:19564255,avg:3260709},
+  {id:"NWH-086",pseudo:"Abdulbare",d:[5501274,9411002,3849480],total:18761756,avg:3126959},
+  {id:"NWH-087",pseudo:"SALIH 06",d:[5433289,3994805,7649995],total:17078089,avg:2846348},
+  {id:"NWH-088",pseudo:"sualsiz",d:[5419438,8238000,2925000],total:16582438,avg:2763740},
+  {id:"NWH-089",pseudo:"fahad 666",d:[5349592,2674450,4467700],total:12491742,avg:2081957},
+  {id:"NWH-090",pseudo:"BLACKxNiNJA",d:[5155001,13422600,0],total:18577601,avg:3096267},
+  {id:"NWH-091",pseudo:"بين كيلار",d:[5004006,3984897,4527140],total:13516043,avg:2252674},
+  {id:"NWH-092",pseudo:"Ameen Aldossary",d:[4952400,5374500,2887767],total:13214667,avg:2202445},
+  {id:"NWH-093",pseudo:"asfalderr",d:[4913603,7711600,8515850],total:21141053,avg:3523509},
+  {id:"NWH-094",pseudo:"Banshee9",d:[4904352,2924371,5436557],total:13265280,avg:2210880},
+  {id:"NWH-095",pseudo:"رايد عايض",d:[4503774,7731590,10843574],total:23078938,avg:3846490},
+  {id:"NWH-096",pseudo:"Emran Smaik",d:[4154095,8283179,4190796],total:16628070,avg:2771345},
+  {id:"NWH-097",pseudo:"stalker277",d:[3877364,3495550,2220180],total:9593094,avg:1598849},
+  {id:"NWH-098",pseudo:"Talal079",d:[2398214,7848205,10028093],total:20274512,avg:3379085},
+  {id:"NWH-099",pseudo:"YUSUF İ",d:[153000,7948669,1277700],total:9379369,avg:1563228},
+  {id:"NWH-100",pseudo:"Bąnder",d:[0,0,0],total:0,avg:0},
+];
+
+// Sort by total descending initially, assign rank
+let sorted = [...RAW].sort((a,b)=>b.total-a.total);
+sorted.forEach((p,i)=>p.rank = i+1);
+
+const maxTotal = sorted[0].total;
+const allianceTotal = RAW.reduce((s,p)=>s+p.total,0);
+const activePlayers = RAW.filter(p=>p.total>0).length;
+
+// Populate badges
+document.getElementById('active-count').textContent = activePlayers;
+document.getElementById('alliance-total').textContent = fmtM(allianceTotal);
+
+// Podium
+const podiumEl = document.getElementById('podium');
+const medals = ['🥇','🥈','🥉'];
+sorted.slice(0,3).forEach((p,i)=>{
+  podiumEl.innerHTML += `
+  <div class="podium-card rank-${i+1}">
+    <div class="podium-medal">${medals[i]}</div>
+    <div class="podium-name">${esc(p.pseudo)}</div>
+    <div class="podium-score">${fmtK(p.total)}</div>
+    <div class="podium-id">${p.id}</div>
+  </div>`;
+});
+
+// Table render
+let currentSort = 'rank';
+let sortAsc = true;
+let filterStr = '';
+
+function renderTable() {
+  let data = [...sorted];
+  if (filterStr) {
+    data = data.filter(p=>
+      p.pseudo.toLowerCase().includes(filterStr) ||
+      p.id.toLowerCase().includes(filterStr)
+    );
+  }
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+  data.forEach(p=>{
+    const pct = maxTotal > 0 ? (p.total/maxTotal*100).toFixed(1) : 0;
+    const isZero = p.total === 0;
+    const rowClass = isZero ? 'zero-row' : (p.rank<=3 ? 'top-3' : '');
+    const badgeClass = p.rank===1?'rank-1':p.rank===2?'rank-2':p.rank===3?'rank-3':'normal';
+    tbody.innerHTML += `
+    <tr class="${rowClass}">
+      <td class="td-rank"><span class="rank-badge ${badgeClass}">${p.rank}</span></td>
+      <td class="td-id">${p.id}</td>
+      <td class="td-pseudo"><span class="pseudo-txt" title="${esc(p.pseudo)}">${esc(p.pseudo)}</span></td>
+      <td class="td-day">${p.d[0]?fmtK(p.d[0]):'—'}</td>
+      <td class="td-day">${p.d[1]?fmtK(p.d[1]):'—'}</td>
+      <td class="td-day">${p.d[2]?fmtK(p.d[2]):'—'}</td>
+      <td class="td-total">${isZero?'—':fmtK(p.total)}</td>
+      <td class="td-avg">${isZero?'—':fmtK(p.avg)}</td>
+      <td class="td-bar"><div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div></td>
+    </tr>`;
+  });
+  document.getElementById('row-count').textContent = `${data.length} players`;
+}
+
+function filterTable() {
+  filterStr = document.getElementById('search-input').value.toLowerCase().trim();
+  renderTable();
+}
+
+function sortTable(col) {
+  if (currentSort === col) { sortAsc = !sortAsc; } else { currentSort = col; sortAsc = col==='rank'; }
+  sorted.sort((a,b)=>{
+    let va, vb;
+    if(col==='rank') { va=a.rank; vb=b.rank; }
+    else if(col==='id') { va=a.id; vb=b.id; }
+    else if(col==='pseudo') { va=a.pseudo.toLowerCase(); vb=b.pseudo.toLowerCase(); }
+    else if(col==='d0') { va=a.d[0]; vb=b.d[0]; }
+    else if(col==='d1') { va=a.d[1]; vb=b.d[1]; }
+    else if(col==='d2') { va=a.d[2]; vb=b.d[2]; }
+    else if(col==='total') { va=a.total; vb=b.total; }
+    else if(col==='avg') { va=a.avg; vb=b.avg; }
+    if(typeof va==='string') return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return sortAsc ? va-vb : vb-va;
+  });
+  document.querySelectorAll('thead th').forEach(th=>th.classList.remove('active'));
+  renderTable();
+}
+
+function fmtK(n) {
+  if(n>=1e9) return (n/1e9).toFixed(2)+'B';
+  if(n>=1e6) return (n/1e6).toFixed(2)+'M';
+  if(n>=1e3) return (n/1e3).toFixed(1)+'K';
+  return n.toString();
+}
+function fmtM(n) {
+  if(n>=1e9) return (n/1e9).toFixed(2)+'B';
+  if(n>=1e6) return (n/1e6).toFixed(1)+'M';
+  return fmtK(n);
+}
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+renderTable();
+</script>
+</body>
+</html>

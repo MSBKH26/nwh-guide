@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Tech Day 21/10/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #06080e;
+    --card:     #0c1018;
+    --border:   #181f2e;
+    --gold:     #f5c518;
+    --gold-dim: rgba(245,197,24,0.12);
+    --red:      #e8394a;
+    --blue:     #3b82f6;
+    --cyan:     #06b6d4;
+    --green:    #22c55e;
+    --orange:   #f97316;
+    --purple:   #a855f7;
+    --steel:    #94a3b8;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    text-align: center;
+    padding: 22px 16px 18px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #0e1419 0%, #0c1018 100%);
+    border: 1px solid rgba(6,182,212,0.2);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .header-tag {
+    display: inline-block;
+    background: rgba(6,182,212,0.12);
+    color: var(--cyan);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(6,182,212,0.25);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .header-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(6,182,212,0.4);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .header-badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .badge span { color: var(--text); font-weight: 700; }
+
+
+  /* ── SEARCH ── */
+  .search-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .search-bar input {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    outline: none;
+  }
+  .search-bar input:focus { border-color: var(--cyan); }
+  .search-bar input::placeholder { color: var(--muted); }
+
+  /* ── PODIUM ── */
+  .podium-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .podium-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .podium-card.rank-1 { border-color: var(--gold); box-shadow: 0 0 18px rgba(245,197,24,0.15); }
+  .podium-card.rank-2 { border-color: #94a3b8; }
+  .podium-card.rank-3 { border-color: var(--orange); }
+  .podium-medal { font-size: 1.6rem; margin-bottom: 4px; }
+  .podium-name { font-size: 0.78rem; font-weight: 700; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .podium-score { font-size: 0.85rem; font-weight: 900; color: var(--gold); }
+  .podium-id { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .table-head {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .table-head-title { font-weight: 700; font-size: 0.85rem; color: var(--cyan); }
+  .table-count { font-size: 0.72rem; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  thead th {
+    background: rgba(0,0,0,0.35);
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 9px 10px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th:hover { color: var(--cyan); }
+  thead th.active { color: var(--cyan); }
+  thead th.th-snap { text-align: right; }
+  thead th.th-final { text-align: center; }
+  tbody tr { border-bottom: 1px solid rgba(24,31,46,0.7); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+  tbody tr.top-3 { background: rgba(245,197,24,0.03); }
+  td { padding: 8px 10px; vertical-align: middle; }
+
+  .td-rank { width: 36px; text-align: center; }
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .rank-badge.r1 { background: rgba(245,197,24,0.2); color: #f5c518; }
+  .rank-badge.r2 { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+  .rank-badge.r3 { background: rgba(249,115,22,0.2); color: #f97316; }
+  .rank-badge.rn { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+  .td-id { color: var(--muted); font-size: 0.68rem; white-space: nowrap; }
+  .td-pseudo { font-weight: 700; color: var(--text); }
+  .pseudo-txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 130px; }
+
+  .td-snap { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--steel); }
+  .td-final { text-align: center; font-weight: 900; color: var(--gold); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .td-gain {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+  }
+  .gain-pos { color: var(--green); }
+  .gain-zero { color: var(--muted); }
+  .td-bar { width: 80px; padding-right: 14px; }
+  .bar-bg { width: 100%; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--gold), #fde68a); }
+
+  .zero-row td { opacity: 0.35; }
+  .zero-row .td-final { color: var(--muted) !important; }
+
+  /* ── SUMMARY ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .sum-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 14px 12px; }
+  .sum-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+  .sum-value { font-size: 1.1rem; font-weight: 900; color: var(--cyan); line-height: 1; }
+  .sum-value.gold { color: var(--gold); }
+  .sum-sub { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── TIMELINE ── */
+  .timeline-section { margin-bottom: 16px; }
+  .timeline-title { font-size: 0.82rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+  .timeline-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .tl-step {
+    flex: 1;
+    padding: 12px 10px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .tl-step:last-child { border-right: none; }
+  .tl-step.active { background: rgba(6,182,212,0.07); }
+  .tl-step.final { background: rgba(245,197,24,0.06); }
+  .tl-time { font-size: 0.75rem; font-weight: 900; color: var(--cyan); margin-bottom: 4px; }
+  .tl-step.final .tl-time { color: var(--gold); }
+  .tl-label { font-size: 0.62rem; color: var(--muted); margin-bottom: 6px; }
+  .tl-value { font-size: 0.85rem; font-weight: 900; color: var(--text); }
+  .tl-sub { font-size: 0.65rem; color: var(--green); margin-top: 2px; }
+
+  /* ── FOOTER ── */
+  .nwh-footer {
+    text-align: center;
+    padding: 18px 12px;
+    background: linear-gradient(135deg, #0e1419, #0c1018);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-top: 12px;
+  }
+  .footer-shield { font-size: 1.5rem; margin-bottom: 4px; }
+  .footer-name { font-weight: 900; font-size: 0.95rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 3px; }
+  .footer-credit { color: var(--muted); font-size: 0.75rem; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-decoration: none;
+    margin-bottom: 14px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .td-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html" class="back-link">← Back to Guide</a>
+
+<div class="page-header">
+  <div class="header-tag">Tech Day · VS</div>
+  <div class="header-title">Wednesday 21/10</div>
+  <div class="header-sub">Technical Day · October 21, 2026 · [NWH] Night Watch</div>
+  <div class="header-badge-row">
+    <div class="badge">🕐 Snapshots <span>4</span></div>
+    <div class="badge">👥 Active <span id="active-count">—</span></div>
+    <div class="badge">⚔️ Final Total <span id="final-total">—</span></div>
+  </div>
+</div>
+
+<!-- Timeline overview -->
+<div class="timeline-section">
+  <div class="timeline-title">📊 Day Progression</div>
+  <div class="timeline-row">
+    <div class="tl-step" id="tl-0">
+      <div class="tl-time">17:00</div>
+      <div class="tl-label">Snapshot 1</div>
+      <div class="tl-value" id="tl-v0">—</div>
+      <div class="tl-sub" id="tl-s0"></div>
+    </div>
+    <div class="tl-step" id="tl-1">
+      <div class="tl-time">19:20</div>
+      <div class="tl-label">Snapshot 2</div>
+      <div class="tl-value" id="tl-v1">—</div>
+      <div class="tl-sub" id="tl-s1"></div>
+    </div>
+    <div class="tl-step" id="tl-2">
+      <div class="tl-time">00:25</div>
+      <div class="tl-label">Snapshot 3</div>
+      <div class="tl-value" id="tl-v2">—</div>
+      <div class="tl-sub" id="tl-s2"></div>
+    </div>
+    <div class="tl-step final" id="tl-3">
+      <div class="tl-time">03:00 ✓</div>
+      <div class="tl-label">Final</div>
+      <div class="tl-value" id="tl-v3">—</div>
+      <div class="tl-sub" id="tl-s3"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="search-bar">
+  <input type="text" id="search-input" placeholder="🔍  Search player…" oninput="filterTable()">
+</div>
+
+<!-- Podium (final) -->
+<div class="podium-section" id="podium"></div>
+
+<!-- Summary -->
+<div class="summary-grid">
+  <div class="sum-card">
+    <div class="sum-label">Final Total</div>
+    <div class="sum-value gold" id="s-total">—</div>
+    <div class="sum-sub">03:00 snapshot</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Day Growth</div>
+    <div class="sum-value" id="s-growth">—</div>
+    <div class="sum-sub">17h → 03h</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Top Score</div>
+    <div class="sum-value gold" id="s-top">—</div>
+    <div class="sum-sub" id="s-top-name">—</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Active Players</div>
+    <div class="sum-value" id="s-active">—</div>
+    <div class="sum-sub">scored > 0</div>
+  </div>
+</div>
+
+<!-- Table — all 4 snapshots side by side -->
+<div class="table-wrap">
+  <div class="table-head">
+    <span class="table-head-title">📅 Tech Day — All Snapshots</span>
+    <span class="table-count" id="row-count"></span>
+  </div>
+  <div style="overflow-x:auto;">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th class="td-rank" onclick="sortTable('rank')">#</th>
+        <th style="width:56px" onclick="sortTable('id')">ID</th>
+        <th onclick="sortTable('pseudo')">Player</th>
+        <th class="th-snap" onclick="sortTable('s0')">17:00</th>
+        <th class="th-snap" onclick="sortTable('s1')">19:20</th>
+        <th class="th-snap" onclick="sortTable('s2')">00:25</th>
+        <th class="th-final" onclick="sortTable('s3')">03:00 ★</th>
+        <th class="td-bar"></th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Tech Day 21 Oct 2026 · Stats: MSBKH</div>
+</div>
+
+<script>
+// snapshots: [17h, 19h20, 00h25, 3h]
+const RAW = [
+  {id:"NWH-001",pseudo:"LordZAIN",s:[26647887,27054887,28778437,28778437]},
+  {id:"NWH-002",pseudo:"MOHAMMED BAKILY",s:[10513200,12984000,21606400,22788250]},
+  {id:"NWH-003",pseudo:"قيصر",s:[0,2412750,2412750,2412750]},
+  {id:"NWH-004",pseudo:"AD commander",s:[10559108,10559108,10561693,10561693]},
+  {id:"NWH-005",pseudo:"EsRa28",s:[14366000,15713480,18720620,18720620]},
+  {id:"NWH-006",pseudo:"Unconscionable",s:[14670453,14673453,17068953,17428953]},
+  {id:"NWH-007",pseudo:"أبو هذال",s:[8030950,8393700,9379700,10012000]},
+  {id:"NWH-008",pseudo:"Fandaam",s:[4960010,7627283,11602703,12622183]},
+  {id:"NWH-009",pseudo:"Yamakasi31",s:[4564680,4606260,8546360,8546360]},
+  {id:"NWH-010",pseudo:"Fahed NWH",s:[6573900,6999150,12217650,12217650]},
+  {id:"NWH-011",pseudo:"الأرغواني",s:[11566910,11957910,11957910,11957910]},
+  {id:"NWH-012",pseudo:"نايرون",s:[3852688,3852688,3852688,3852688]},
+  {id:"NWH-013",pseudo:"TOSSUN",s:[20728870,23261925,27757770,27757770]},
+  {id:"NWH-014",pseudo:"Daedric Prince",s:[10634359,10968359,10968359,10968359]},
+  {id:"NWH-015",pseudo:"Moktar goaws77777777",s:[12379840,15554130,17605914,17930549]},
+  {id:"NWH-016",pseudo:"SUSKUNN44",s:[1813400,1813400,2594600,2594600]},
+  {id:"NWH-017",pseudo:"جعبلي1",s:[7287150,7287150,16725900,16725900]},
+  {id:"NWH-018",pseudo:"GhazwanB",s:[16618520,16620940,19534380,19546480]},
+  {id:"NWH-019",pseudo:"Hurricane8l",s:[9028855,11187550,11549710,12663630]},
+  {id:"NWH-020",pseudo:"Barkan Yazgan",s:[13181350,13856350,13856350,13856350]},
+  {id:"NWH-021",pseudo:"KHALED",s:[1500000,1500000,5300500,5300500]},
+  {id:"NWH-022",pseudo:"yassine24",s:[7770650,8100650,8100650,8100650]},
+  {id:"NWH-023",pseudo:"Wafi18",s:[6966000,9426000,9426000,10791250]},
+  {id:"NWH-024",pseudo:"Holinesskgz",s:[2444850,4463850,7923600,7923600]},
+  {id:"NWH-025",pseudo:"亗 I S S A M 亗",s:[9496000,9496000,12787250,12787250]},
+  {id:"NWH-026",pseudo:"abu khaled 94",s:[12979300,13321150,14628300,14628300]},
+  {id:"NWH-027",pseudo:"GÜLTEKİN",s:[6559522,6559522,7380082,7380082]},
+  {id:"NWH-028",pseudo:"Mikooto",s:[14484750,14484750,14484750,14484750]},
+  {id:"NWH-029",pseudo:"S A L E M 1",s:[14821650,15181650,15552650,15552650]},
+  {id:"NWH-030",pseudo:"XM7MD77",s:[11341339,15024880,19059362,19059362]},
+  {id:"NWH-031",pseudo:"omer Al nopei",s:[6206650,6566650,15923400,15923400]},
+  {id:"NWH-032",pseudo:"Khaled Abu Hasan",s:[6248640,7479975,9698970,9698970]},
+  {id:"NWH-033",pseudo:"yousefaj29",s:[11125450,11125450,12295450,12295450]},
+  {id:"NWH-034",pseudo:"Semsem81",s:[8441439,8441439,11740915,11740915]},
+  {id:"NWH-035",pseudo:"playeir",s:[9147200,9147200,9852200,11002950]},
+  {id:"NWH-036",pseudo:"Abo waleed 777",s:[7457500,7457500,11321700,11321700]},
+  {id:"NWH-037",pseudo:"1000ed",s:[5013015,5013015,7321250,7321250]},
+  {id:"NWH-038",pseudo:"Feel Sf",s:[6866100,8404750,10120950,13011150]},
+  {id:"NWH-039",pseudo:"SimSim Cool",s:[9968340,9968340,10276340,10276340]},
+  {id:"NWH-040",pseudo:"BilgeKagan43",s:[9793320,9793320,10887855,10887855]},
+  {id:"NWH-041",pseudo:"DÀHŠHÁN",s:[9313283,16585823,18002723,18002723]},
+  {id:"NWH-042",pseudo:"ابو ثائرا",s:[6558950,6929950,9506650,9606650]},
+  {id:"NWH-043",pseudo:"MSBKH",s:[7873250,8953250,29976950,31224850]},
+  {id:"NWH-044",pseudo:"عامر٢",s:[9693980,10042940,11393370,11709990]},
+  {id:"NWH-045",pseudo:"3SAAF",s:[2588850,2588850,10745114,10745114]},
+  {id:"NWH-046",pseudo:"CaptainJFlint",s:[11942759,11942759,12261759,12261759]},
+  {id:"NWH-047",pseudo:"oNaWaFo",s:[9157520,14442100,15309990,15309990]},
+  {id:"NWH-048",pseudo:"X Ninja X",s:[0,0,0,0]},
+  {id:"NWH-049",pseudo:"AdoRa",s:[7381500,8934600,9294600,9294600]},
+  {id:"NWH-050",pseudo:"abou baker 14",s:[22946900,22946900,24241400,24241400]},
+  {id:"NWH-051",pseudo:"Seseyanoo",s:[10550200,10921200,10921200,10921200]},
+  {id:"NWH-052",pseudo:"Jjjooojjoo",s:[6572250,6572250,6902250,11982000]},
+  {id:"NWH-053",pseudo:"Fearless 06",s:[7659035,7758580,7758580,7758580]},
+  {id:"NWH-054",pseudo:"AMROASSAf",s:[8240138,8240138,8604918,8604918]},
+  {id:"NWH-055",pseudo:"القناص1239",s:[10089200,15090000,15409050,15409050]},
+  {id:"NWH-056",pseudo:"Paliouka",s:[7880600,7880600,7880600,7880600]},
+  {id:"NWH-057",pseudo:"Mohamedkhaled225",s:[8409650,8409650,12702600,12702600]},
+  {id:"NWH-058",pseudo:"BelMo",s:[4547125,4751125,6592075,6592075]},
+  {id:"NWH-059",pseudo:"şøHąîß ĜŔ",s:[531000,2011500,3097010,3097010]},
+  {id:"NWH-060",pseudo:"Komutan Logart52",s:[14296700,16495500,16495500,16495500]},
+  {id:"NWH-061",pseudo:"melodY",s:[12554700,14574000,16094700,21352650]},
+  {id:"NWH-062",pseudo:"Abood个1v99个",s:[9234625,9237210,9237210,10468795]},
+  {id:"NWH-063",pseudo:"Diddÿ",s:[8540268,9567128,9910835,9949085]},
+  {id:"NWH-064",pseudo:"K r M",s:[6237700,6237700,8529230,8529230]},
+  {id:"NWH-065",pseudo:"مارشل محمد",s:[15255196,15255196,15255196,15255196]},
+  {id:"NWH-066",pseudo:"BaiLeyS",s:[3361770,9107100,13602528,13602528]},
+  {id:"NWH-067",pseudo:"ayoucha",s:[8137332,8137332,15253103,15253103]},
+  {id:"NWH-068",pseudo:"بوبي",s:[10630150,11671650,14099550,14980350]},
+  {id:"NWH-069",pseudo:"Süper Türkiye",s:[8522700,8522700,8738700,8738700]},
+  {id:"NWH-070",pseudo:"أجوود",s:[1922250,1922250,1922250,1922250]},
+  {id:"NWH-071",pseudo:"Mohammed096",s:[7480505,7480505,7480505,7480505]},
+  {id:"NWH-072",pseudo:"Mr Kyrgyz",s:[12384584,12968202,13936752,14016252]},
+  {id:"NWH-073",pseudo:"مشاكل111",s:[3915000,7831500,7831500,7831500]},
+  {id:"NWH-074",pseudo:"Bo EssA",s:[6596400,6596400,7971300,7971300]},
+  {id:"NWH-075",pseudo:"VΞNØMᴺᵂᴴ",s:[11241835,12212620,12589860,12589860]},
+  {id:"NWH-076",pseudo:"Laylalayla",s:[5686600,5686600,7699100,8059100]},
+  {id:"NWH-077",pseudo:"فـك وافك",s:[9024149,9371962,11105943,11820098]},
+  {id:"NWH-078",pseudo:"D 3 s",s:[2761500,3421500,9147850,9147850]},
+  {id:"NWH-079",pseudo:"shgmoom2",s:[7445977,7445977,8141977,8141977]},
+  {id:"NWH-080",pseudo:"محمد حسن١٧",s:[12877370,14713920,14713920,14713920]},
+  {id:"NWH-081",pseudo:"Abdou07dz",s:[7754400,7806650,13285350,14022300]},
+  {id:"NWH-082",pseudo:"mafia forever",s:[8303203,8303203,8303203,9205903]},
+  {id:"NWH-083",pseudo:"ahmettemre",s:[10519873,10519873,12606486,12606486]},
+  {id:"NWH-084",pseudo:"BNDR112",s:[702900,702900,3791650,3791650]},
+  {id:"NWH-085",pseudo:"Fasuly",s:[4530138,4530138,6589776,6589776]},
+  {id:"NWH-086",pseudo:"Abdulbare",s:[2732240,2732240,2733240,3849480]},
+  {id:"NWH-087",pseudo:"SALIH 06",s:[5106720,5164770,7649995,7649995]},
+  {id:"NWH-088",pseudo:"sualsiz",s:[0,1400000,2925000,2925000]},
+  {id:"NWH-089",pseudo:"fahad 666",s:[662500,1033500,4467700,4467700]},
+  {id:"NWH-090",pseudo:"BLACKxNiNJA",s:[0,0,0,0]},
+  {id:"NWH-091",pseudo:"بين كيلار",s:[3781245,4467140,4527140,4527140]},
+  {id:"NWH-092",pseudo:"Ameen Aldossary",s:[2887767,2887767,2887767,2887767]},
+  {id:"NWH-093",pseudo:"asfalderr",s:[8227850,8515850,8515850,8515850]},
+  {id:"NWH-094",pseudo:"Banshee9",s:[4826057,4826057,5436557,5436557]},
+  {id:"NWH-095",pseudo:"رايد عايض",s:[10297287,10297287,10639287,10843574]},
+  {id:"NWH-096",pseudo:"Emran Smaik",s:[3435333,3435333,4190796,4190796]},
+  {id:"NWH-097",pseudo:"stalker277",s:[2220180,2220180,2220180,2220180]},
+  {id:"NWH-098",pseudo:"Talal079",s:[10028093,10028093,10028093,10028093]},
+  {id:"NWH-099",pseudo:"YUSUF İ",s:[457500,457500,457500,1277700]},
+  {id:"NWH-100",pseudo:"Bąnder",s:[0,0,0,0]},
+];
+
+let currentSort = 'rank';
+let sortAsc = true;
+let filterStr = '';
+
+// Timeline totals
+const tls = [0,1,2,3].map(i => RAW.reduce((s,p)=>s+p.s[i],0));
+[0,1,2,3].forEach(i=>{
+  document.getElementById('tl-v'+i).textContent = fmtM(tls[i]);
+  if(i>0){
+    const gain = tls[i]-tls[i-1];
+    document.getElementById('tl-s'+i).textContent = gain>0 ? '+'+fmtK(gain) : '';
+  }
+});
+
+// Summary from final (snap 3)
+const finalData = RAW.filter(p=>p.s[3]>0).sort((a,b)=>b.s[3]-a.s[3]);
+const allianceFinal = RAW.reduce((s,p)=>s+p.s[3],0);
+const activePlayers = RAW.filter(p=>p.s[3]>0).length;
+const growthTotal = tls[3]-tls[0];
+
+document.getElementById('active-count').textContent = activePlayers;
+document.getElementById('final-total').textContent = fmtM(allianceFinal);
+document.getElementById('s-total').textContent = fmtM(allianceFinal);
+document.getElementById('s-growth').textContent = '+'+fmtM(growthTotal);
+document.getElementById('s-top').textContent = fmtK(finalData[0].s[3]);
+document.getElementById('s-top-name').textContent = finalData[0].pseudo;
+document.getElementById('s-active').textContent = activePlayers + ' / 100';
+
+// Podium
+const pd = document.getElementById('podium');
+const medals=['🥇','🥈','🥉'];
+finalData.slice(0,3).forEach((p,i)=>{
+  pd.innerHTML+=`
+  <div class="podium-card rank-${i+1}">
+    <div class="podium-medal">${medals[i]}</div>
+    <div class="podium-name">${esc(p.pseudo)}</div>
+    <div class="podium-score">${fmtK(p.s[3])}</div>
+    <div class="podium-id">${p.id}</div>
+  </div>`;
+});
+
+// Working data sorted by final score
+let workingData = RAW.map(p=>({...p}));
+workingData.sort((a,b)=>b.s[3]-a.s[3]);
+workingData.forEach((p,i)=>p.rank=i+1);
+
+function sortTable(col){
+  if(currentSort===col){ sortAsc=!sortAsc; } else { currentSort=col; sortAsc=(col==='rank'); }
+  workingData.sort((a,b)=>{
+    let va,vb;
+    if(col==='rank'){va=a.rank;vb=b.rank;}
+    else if(col==='id'){va=a.id;vb=b.id;}
+    else if(col==='pseudo'){va=a.pseudo.toLowerCase();vb=b.pseudo.toLowerCase();}
+    else if(col==='s0'){va=a.s[0];vb=b.s[0];}
+    else if(col==='s1'){va=a.s[1];vb=b.s[1];}
+    else if(col==='s2'){va=a.s[2];vb=b.s[2];}
+    else if(col==='s3'){va=a.s[3];vb=b.s[3];}
+    if(typeof va==='string') return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
+    return sortAsc?va-vb:vb-va;
+  });
+  renderTable();
+}
+
+function filterTable(){
+  filterStr = document.getElementById('search-input').value.toLowerCase().trim();
+  renderTable();
+}
+
+function renderTable(){
+  let data = [...workingData];
+  if(filterStr) data=data.filter(p=>p.pseudo.toLowerCase().includes(filterStr)||p.id.toLowerCase().includes(filterStr));
+
+  const maxFinal = workingData.reduce((m,p)=>Math.max(m,p.s[3]),0) || 1;
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML='';
+  data.forEach(p=>{
+    const isZero = p.s[3]===0;
+    const rowCls = isZero?'zero-row':(p.rank<=3?'top-3':'');
+    const bc = p.rank===1?'r1':p.rank===2?'r2':p.rank===3?'r3':'rn';
+    const pct = (p.s[3]/maxFinal*100).toFixed(1);
+    const c = i => p.s[i]>0 ? fmtK(p.s[i]) : '—';
+    tbody.innerHTML+=`
+    <tr class="${rowCls}">
+      <td class="td-rank"><span class="rank-badge ${bc}">${p.rank}</span></td>
+      <td class="td-id">${p.id}</td>
+      <td class="td-pseudo"><span class="pseudo-txt" title="${esc(p.pseudo)}">${esc(p.pseudo)}</span></td>
+      <td class="td-snap">${c(0)}</td>
+      <td class="td-snap">${c(1)}</td>
+      <td class="td-snap">${c(2)}</td>
+      <td class="td-final">${isZero?'—':fmtK(p.s[3])}</td>
+      <td class="td-bar"><div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div></td>
+    </tr>`;
+  });
+  document.getElementById('row-count').textContent=`${data.length} players`;
+}
+
+function fmtK(n){
+  if(n>=1e9) return (n/1e9).toFixed(2)+'B';
+  if(n>=1e6) return (n/1e6).toFixed(2)+'M';
+  if(n>=1e3) return (n/1e3).toFixed(1)+'K';
+  return n.toString();
+}
+function fmtM(n){
+  if(n>=1e9) return (n/1e9).toFixed(2)+'B';
+  if(n>=1e6) return (n/1e6).toFixed(1)+'M';
+  return fmtK(n);
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+renderTable();
+</script>
+</body>
+</html>
