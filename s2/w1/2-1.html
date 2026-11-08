@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] الموسم الثاني — الأسبوع الأول | العاصفة القطبية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --orange:#f97316; --blue:#3b82f6; --green:#22c55e;
+    --purple:#a855f7; --cyan:#06b6d4; --ice:#7dd3fc;
+    --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+
+  /* ── HEADER ── */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:20px 16px 16px; margin-bottom:16px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(125,211,252,0.10),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.3rem; font-weight:900; color:var(--ice); letter-spacing:1px; text-shadow:0 0 20px rgba(125,211,252,0.35); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+  .season-badge { display:inline-block; margin-top:10px; padding:5px 14px; border-radius:16px; background:rgba(125,211,252,0.12); border:1px solid rgba(125,211,252,0.35); color:var(--ice); font-weight:900; font-size:0.78rem; }
+
+  /* ── INFO / SUMMARY BOX ── */
+  .info-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; margin-bottom:14px; font-size:0.86rem; line-height:1.9; }
+  .info-box .info-title { font-weight:900; font-size:1rem; color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .info-box.exec { border-color:rgba(125,211,252,0.35); background:linear-gradient(135deg,#0e1419,#131b24); }
+  .exec-list { list-style:none; padding:0; }
+  .exec-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; gap:8px; align-items:flex-start; color:#cbd5e1; }
+  .exec-list li:last-child { border-bottom:none; }
+  .exec-list li::before { content:'🔹'; flex-shrink:0; }
+  .toc-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:4px; }
+  .toc-list a { color:#93c5fd; text-decoration:none; font-size:0.85rem; display:block; padding:6px 10px; border-radius:8px; background:rgba(255,255,255,0.02); }
+  .toc-list a:active { background:rgba(255,255,255,0.06); }
+
+  /* ── TYPE BADGES ── */
+  .badges { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
+  .tbadge { font-size:0.72rem; font-weight:900; padding:3px 10px; border-radius:12px; white-space:nowrap; }
+  .tb-official { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.3); }
+  .tb-collective { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); }
+  .tb-nwh { background:rgba(245,197,24,0.15); color:var(--gold); border:1px solid rgba(245,197,24,0.3); }
+  .tb-verify { background:rgba(249,115,22,0.15); color:var(--orange); border:1px solid rgba(249,115,22,0.3); }
+  .tb-warn { background:rgba(232,57,74,0.15); color:#fca5a5; border:1px solid rgba(232,57,74,0.3); }
+
+  /* ── SECTION ── */
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); scroll-margin-top:12px; }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.98rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-ice { background:linear-gradient(90deg,rgba(125,211,252,0.12),transparent); color:var(--ice); border-bottom-color:rgba(125,211,252,0.25); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-orange { background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent); color:var(--orange); border-bottom-color:rgba(249,115,22,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .sh-purple { background:linear-gradient(90deg,rgba(168,85,247,0.12),transparent); color:var(--purple); border-bottom-color:rgba(168,85,247,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x:auto; }
+  table.data-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:420px; }
+  table.data-table th { background:rgba(0,0,0,0.35); padding:8px 10px; font-weight:700; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; color:var(--muted); font-size:0.72rem; }
+  table.data-table td { padding:8px 10px; text-align:right; border-bottom:1px solid rgba(24,31,46,0.6); white-space:nowrap; }
+  table.data-table tr:last-child td { border-bottom:none; }
+
+  /* ── HIGHLIGHT / NOTE BOXES ── */
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.86rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.86rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.86rem; }
+  .highlight-blue { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#93c5fd; font-size:0.86rem; line-height:1.9; }
+  .highlight-warn { background:rgba(249,115,22,0.09); border:1px solid rgba(249,115,22,0.3); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fdba74; font-size:0.85rem; line-height:1.9; }
+  .note-box { padding:10px 14px; font-size:0.78rem; color:var(--muted); border-top:1px dashed var(--border); background:rgba(0,0,0,0.15); }
+  .source-note { padding:10px 14px; font-size:0.76rem; color:#64748b; border-top:1px solid var(--border); background:rgba(0,0,0,0.1); }
+  .source-note a { color:#60a5fa; }
+
+  /* ── LISTS ── */
+  .checklist, .use-list, .claim-list, .warning-list { list-style:none; padding:0; }
+  .checklist li, .use-list li, .claim-list li, .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.6); display:flex; align-items:flex-start; gap:8px; font-size:0.86rem; }
+  .checklist li:last-child, .use-list li:last-child, .claim-list li:last-child, .warning-list li:last-child { border-bottom:none; }
+  .use-list li { color:#86efac; }
+  .claim-list li { color:#fde68a; }
+  .warning-list li { color:#fca5a5; }
+
+  /* ── DETAILS (collapsible) ── */
+  details.explain { margin-top:10px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:rgba(0,0,0,0.15); }
+  details.explain summary { padding:10px 12px; cursor:pointer; font-weight:700; color:var(--ice); font-size:0.85rem; list-style:none; display:flex; align-items:center; gap:6px; }
+  details.explain summary::-webkit-details-marker { display:none; }
+  details.explain summary::before { content:'▸'; transition:transform 0.2s; }
+  details.explain[open] summary::before { transform:rotate(90deg); }
+  details.explain .explain-body { padding:0 12px 12px; font-size:0.84rem; color:#cbd5e1; line-height:1.9; }
+
+  /* ── DAY-1 TASK CARDS ── */
+  .task-card { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+  .task-card:last-child { margin-bottom:0; }
+  .task-num { display:inline-flex; width:22px; height:22px; border-radius:50%; background:var(--ice); color:#0b0e12; font-weight:900; font-size:0.78rem; align-items:center; justify-content:center; margin-left:6px; }
+  .task-title { font-weight:700; color:#e2e8f0; font-size:0.88rem; }
+  .task-why { margin-top:6px; font-size:0.82rem; color:var(--muted); }
+
+  /* ── EVENT CARD ── */
+  .event-card { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+  .event-card:last-child { margin-bottom:0; }
+  .event-title { font-weight:900; color:var(--ice); font-size:0.92rem; margin-bottom:4px; }
+  .event-meta { font-size:0.76rem; color:var(--muted); margin-bottom:6px; }
+  .event-row { font-size:0.84rem; color:#cbd5e1; margin-top:4px; }
+  .event-row b { color:#e2e8f0; }
+
+  /* ── BASE GRID SVG ── */
+  .grid-wrap { display:flex; justify-content:center; overflow-x:auto; padding:6px 0; }
+  .grid-legend { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:10px; font-size:0.78rem; }
+  .legend-item { display:flex; align-items:center; gap:6px; color:#cbd5e1; }
+  .legend-swatch { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
+
+  /* ── TIMELINE ── */
+  .timeline { position:relative; padding-right:18px; border-right:2px solid var(--border); margin:6px 4px; }
+  .timeline-day { position:relative; margin-bottom:16px; }
+  .timeline-day:last-child { margin-bottom:0; }
+  .timeline-day::before { content:''; position:absolute; right:-24px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--ice); box-shadow:0 0 8px rgba(125,211,252,0.6); }
+  .timeline-day-title { font-weight:900; color:var(--ice); font-size:0.92rem; margin-bottom:6px; }
+  .timeline-items { list-style:none; padding:0; }
+  .timeline-items li { font-size:0.84rem; color:#cbd5e1; padding:4px 0; }
+
+  /* ── FOOTER ── */
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top { position:fixed; bottom:20px; left:16px; width:48px; height:48px; background:linear-gradient(135deg, var(--ice), #38bdf8); border:2px solid #e0f2fe; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,0.4); opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; z-index:999; }
+  .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+</style>
+</head>
+<body id="top">
+
+<a href="https://msbkh26.github.io/nwh-guide/">
+  <div class="alliance-logo-wrap">
+    <img src="../../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>❄️ الموسم الثاني — الأسبوع الأول</h1>
+  <p class="subtitle">العاصفة القطبية (Polar Storm) — دليل NWH الكامل</p>
+  <span class="season-badge">Season 2 · Week 1</span>
+</div>
+
+<!-- ══════ ملخص تنفيذي ══════ -->
+<div class="info-box exec">
+  <div class="info-title">⚡ ملخص تنفيذي — ماذا أفعل الآن؟</div>
+  <ul class="exec-list">
+    <li>اليوم الأول: شغّل الفرن الشخصي 600 ثانية + وضع Overdrive 600 ثانية + تبرّع بالفحم مرة واحدة + ساعد 3 حلفاء على رفع حرارتهم.</li>
+    <li>افتح الفرن عالي الحرارة وابدأ تطوير أول مصنع سبائك تيتانيوم.</li>
+    <li>ابحث عن أول موقع حفر (Dig Site) من المستوى 1 لتبدأ به امتلاك الأراضي.</li>
+    <li>لا تنزل حرارة قاعدتك تحت -20°م لأكثر من 5 دقائق (خطر التجمّد).</li>
+    <li>التزم بمخطط التموضع الخاص بـ NWH: كل قاعدة 3×3 خانات، مع خانتين فارغتين بين كل قاعدتين متجاورتين.</li>
+    <li>احفظ شحنات الفحم ليوم التفعيل بدل تبذيرها مبكرًا.</li>
+  </ul>
+  <div class="badges">
+    <span class="tbadge tb-official">مهمة رسمية</span>
+    <span class="tbadge tb-collective">هدف جماعي</span>
+    <span class="tbadge tb-nwh">استراتيجية NWH</span>
+    <span class="tbadge tb-verify">بحاجة للتحقق</span>
+    <span class="tbadge tb-warn">تضارب بين المصادر</span>
+  </div>
+</div>
+
+<!-- ══════ سمومار / جدول المحتويات ══════ -->
+<div class="info-box">
+  <div class="info-title">📑 محتويات الدليل</div>
+  <ul class="toc-list">
+    <li><a href="#intro">1. مقدمة الموسم الثاني</a></li>
+    <li><a href="#day1">2. اليوم الأول — التأسيس</a></li>
+    <li><a href="#grid">3. تنظيم مواقع القواعد</a></li>
+    <li><a href="#temp">4. الحرارة والعواصف</a></li>
+    <li><a href="#coal">5. الفحم والموارد</a></li>
+    <li><a href="#titanium">6. مصانع سبائك التيتانيوم</a></li>
+    <li><a href="#furnace">7. فرن التحالف</a></li>
+    <li><a href="#events">8. أحداث الأسبوع الأول</a></li>
+    <li><a href="#territory">9. مواقع الحفر والمدن</a></li>
+    <li><a href="#timeline">10. جدول الأيام 1-7</a></li>
+    <li><a href="#checklist">11. قائمة التحقق العملية</a></li>
+    <li><a href="#mistakes">12. الأخطاء الشائعة</a></li>
+    <li><a href="#sources">13. المصادر</a></li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 1. مقدمة -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="intro">
+  <div class="section-head sh-ice">❄️ 1. مقدمة الموسم الثاني</div>
+  <div class="section-body">
+    <p>الموسم الثاني يقدّم نظامًا جديدًا بالكامل مبنيًا على <strong>الحرارة</strong>. قاعدتك لها درجة حرارة خاصة بها، والخريطة من حولك لها حرارة بيئية تنخفض كلما اقتربت من المركز (حتى -80°م عند العاصمة). قاعدتك تتجه تدريجيًا نحو حرارة البيئة المحيطة بها.</p>
+    <p>إذا بقيت قاعدتك تحت -20°م لأكثر من 5 دقائق، <strong style="color:var(--red)">تتجمّد</strong> — ويُمنع عندها النقل والتجمّعات (Rallies)، وتبقى فقط التيليبورتات العشوائية ونقل التحالف ممكنة.</p>
+    <p>لمواجهة هذا، تملك:</p>
+    <ul class="checklist">
+      <li>🔥 <strong>فرن شخصي عالي الحرارة</strong> — يرفع حرارتك ومقاومتك للفيروس، يستهلك فحمًا أكثر في وضع Overdrive.</li>
+      <li>🏛️ <strong>فرن التحالف</strong> — يُبنى على أرض من المستوى 1، يُدفّئ القواعد ضمن نطاقه، ويحتاج فحمًا من الأعضاء.</li>
+      <li>🏭 <strong>مصانع سبائك التيتانيوم</strong> — تنتج سبائك التيتانيوم اللازمة لتطوير الفرن الشخصي والمنشآت الموسمية.</li>
+      <li>⛏️ <strong>مواقع الحفر (Dig Sites)</strong> — مصدر الفحم المستمر وأول أراضيك المملوكة.</li>
+    </ul>
+    <p>هذه الأنظمة مترابطة: الفحم من مواقع الحفر يُستخدم لبناء وترقية الأفران والمصانع، وهذه بدورها تحميك من التجمّد وتفتح مقاومة الفيروس اللازمة لمحاربة وحوش القطب والسيطرة على مزيد من الأراضي.</p>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 2. اليوم الأول -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="day1">
+  <div class="section-head sh-gold">🥇 2. اليوم الأول — التأسيس | الأولوية القصوى</div>
+  <div class="section-body">
+    <p>هذه هي المهام التي يجب إنجازها في أول يوم من الموسم. كل مهمة مرفقة بنوعها (رسمية من اللعبة أو استراتيجية داخلية لـNWH).</p>
+
+    <div class="task-card">
+      <span class="task-num">1</span><span class="task-title">تحديد منطقة تجمّع الأعضاء قرب فرن التحالف</span>
+      <div class="badges"><span class="tbadge tb-nwh">استراتيجية NWH</span></div>
+      <div class="task-why">يسهّل التدفئة الجماعية والدفاع المشترك عن الفرن منذ اليوم الأول.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">2</span><span class="task-title">وضع وإصلاح فرن التحالف بمشاركة الأعضاء</span>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="task-why">الإصلاح يحتاج حتى 20 تعزيزًا، ولا يقوم به سوى R4/R5. بدونه، لا تدفئة جماعية لنطاق التحالف.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">3</span><span class="task-title">مطالبة جميع الأعضاء ببناء الفرن عالي الحرارة</span>
+      <div class="badges"><span class="tbadge tb-nwh">استراتيجية NWH</span></div>
+      <div class="task-why">بدون هذا الفرن، لا مقاومة فيروس ولا قدرة على تفعيل Overdrive فرديًا.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">4</span><span class="task-title">تشغيل الفرن الشخصي لمدة 600 ثانية على الأقل</span>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span> <span class="tbadge tb-collective">هدف Cold Wave Alert</span></div>
+      <div class="task-why">أحد أهداف مهمة Cold Wave Alert المتاحة فورًا في اليوم الأول.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">5</span><span class="task-title">تفعيل وضع Overdrive لمدة 600 ثانية</span>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="task-why">يستهلك فحمًا أكبر مقابل حرارة أعلى، وهو هدف محدد ضمن Cold Wave Alert.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">6</span><span class="task-title">التبرّع بالفحم لفرن التحالف</span>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="task-why">يساهم في هدف التحالف الجماعي (5,000,000 فحم عبر جميع مناطق الحرب).</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">7</span><span class="task-title">مساعدة الحلفاء على رفع حرارتهم 3 مرات</span>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="task-why">عبر إرسال Recon Plane (يضيف تقريبًا +2°م لكل ضربة)، أو كسر الجليد يدويًا.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">8</span><span class="task-title">بدء تطوير أول مصنع سبائك تيتانيوم</span>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="task-why">المصنع الثاني يُفتح فقط عند وصول الأول للمستوى 15 — ابدأ بأسرع وقت ممكن.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">9</span><span class="task-title">جمع الفحم من الأنشطة المناسبة (الرادار، الناجون المحاصرون...)</span>
+      <div class="badges"><span class="tbadge tb-verify">بحاجة للتحقق</span></div>
+      <div class="task-why">المصادر تؤكد أن الفحم يأتي من مهام الرادار ومصادر أخرى، لكن قائمة الأنشطة الدقيقة لكل خادم قد تختلف — تحقق داخل اللعبة.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">10</span><span class="task-title">قتل أعلى زومبي موسمي ممكن للوصول إليه (Purge Action)</span>
+      <div class="badges"><span class="tbadge tb-collective">تصنيف فردي</span></div>
+      <div class="task-why">الترتيب في Purge Action يعتمد على مستوى الزومبي الأول الذي تقتله هذا الموسم — الأعلى مستوى يمنح ترتيبًا أفضل.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">11</span><span class="task-title">تحديد أول موقع حفر (Dig Site) مستهدف</span>
+      <div class="badges"><span class="tbadge tb-nwh">استراتيجية NWH</span></div>
+      <div class="task-why">أول أرض يجب امتلاكها هي موقع حفر من المستوى 1 — يحدد نقطة انطلاق توسّع التحالف بأكمله.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ لا تخلط بين مهمة رسمية من اللعبة (مثل تشغيل الفرن 600 ثانية) وبين تعليمة إدارية من NWH (مثل منطقة التجمّع) — النوع موضّح في كل بطاقة أعلاه.</div>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> + استراتيجية داخلية NWH</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 3. تنظيم مواقع القواعد -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="grid">
+  <div class="section-head sh-gold">🧱 3. تنظيم مواقع القواعد — استراتيجية NWH</div>
+  <div class="section-body">
+    <div class="badges"><span class="tbadge tb-nwh">استراتيجية NWH داخلية — ليست قاعدة رسمية في اللعبة</span></div>
+    <p>كل قاعدة تشغل <strong>3×3 خانات</strong> (9 خانات). التوزيع المعتمد في NWH يترك <strong>خانتين فارغتين بالضبط</strong> بين حدود كل قاعدتين متجاورتين، أفقيًا وعموديًا: 3 خانات مشغولة + خانتان فارغتان + 3 خانات مشغولة.</p>
+    <p>الأهداف: توسيع مساحة نفوذ NWH، تنظيم التحركات، تقليل الأماكن المتاحة للعدو، وتجهيز منطقة خلفية محمية لفرن التحالف.</p>
+
+    <div class="grid-wrap">
+      <svg width="310" height="310" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg">
+        <!-- خلفية شبكية خفيفة -->
+        <rect x="0" y="0" width="310" height="310" fill="#0b1118" rx="8"/>
+        <!-- دالة توليد حتمية: خطوة = 3 مشغول + 2 فارغ = 5 خانات، حجم الخانة 22px -->
+        <!-- رسم 3×3 قواعد (كل قاعدة 3x3 خانات) بفاصل خانتين -->
+        <g stroke="#1e2d3d" stroke-width="1">
+          <!-- شبكة خانات خفيفة كل 22px -->
+        </g>
+        <!-- القواعد: صف×عمود = 3×3 قواعد -->
+        <g>
+          <!-- base (0,0) -->
+          <rect x="10"  y="10"  width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="120" y="10"  width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="230" y="10"  width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+
+          <rect x="10"  y="120" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <!-- center: alliance furnace zone -->
+          <rect x="120" y="120" width="66" height="66" fill="rgba(245,197,24,0.22)" stroke="#f5c518" stroke-width="2" rx="3"/>
+          <rect x="230" y="120" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+
+          <rect x="10"  y="230" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="120" y="230" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="230" y="230" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+        </g>
+        <!-- خطوط الخانات داخل كل قاعدة (3x3 subgrid) -->
+        <g stroke="rgba(148,163,184,0.25)" stroke-width="1">
+          <!-- عمودية -->
+          <line x1="32"  y1="10" x2="32"  y2="76"/><line x1="54"  y1="10" x2="54"  y2="76"/>
+          <line x1="142" y1="10" x2="142" y2="76"/><line x1="164" y1="10" x2="164" y2="76"/>
+          <line x1="252" y1="10" x2="252" y2="76"/><line x1="274" y1="10" x2="274" y2="76"/>
+          <line x1="32"  y1="120" x2="32"  y2="186"/><line x1="54"  y1="120" x2="54"  y2="186"/>
+          <line x1="142" y1="120" x2="142" y2="186"/><line x1="164" y1="120" x2="164" y2="186"/>
+          <line x1="252" y1="120" x2="252" y2="186"/><line x1="274" y1="120" x2="274" y2="186"/>
+          <line x1="32"  y1="230" x2="32"  y2="296"/><line x1="54"  y1="230" x2="54"  y2="296"/>
+          <line x1="142" y1="230" x2="142" y2="296"/><line x1="164" y1="230" x2="164" y2="296"/>
+          <line x1="252" y1="230" x2="252" y2="296"/><line x1="274" y1="230" x2="274" y2="296"/>
+          <!-- أفقية -->
+          <line x1="10" y1="32"  x2="76" y2="32"/><line x1="10" y1="54"  x2="76" y2="54"/>
+          <line x1="120" y1="32"  x2="186" y2="32"/><line x1="120" y1="54"  x2="186" y2="54"/>
+          <line x1="230" y1="32"  x2="296" y2="32"/><line x1="230" y1="54"  x2="296" y2="54"/>
+          <line x1="10" y1="142" x2="76" y2="142"/><line x1="10" y1="164" x2="76" y2="164"/>
+          <line x1="120" y1="142" x2="186" y2="142"/><line x1="120" y1="164" x2="186" y2="164"/>
+          <line x1="230" y1="142" x2="296" y2="142"/><line x1="230" y1="164" x2="296" y2="164"/>
+          <line x1="10" y1="252" x2="76" y2="252"/><line x1="10" y1="274" x2="76" y2="274"/>
+          <line x1="120" y1="252" x2="186" y2="252"/><line x1="120" y1="274" x2="186" y2="274"/>
+          <line x1="230" y1="252" x2="296" y2="252"/><line x1="230" y1="274" x2="296" y2="274"/>
+        </g>
+        <!-- تسمية الفراغات -->
+        <text x="98"  y="48" fill="#64748b" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان</text>
+        <text x="40"  y="108" fill="#64748b" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان</text>
+        <text x="153" y="153" fill="#f5c518" font-size="10" text-anchor="middle" font-weight="900" font-family="Cairo, sans-serif">فرن</text>
+      </svg>
+    </div>
+    <div class="grid-legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:rgba(59,130,246,0.5); border:1px solid #3b82f6;"></span> قاعدة عضو (3×3 خانات)</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:rgba(245,197,24,0.4); border:1px solid #f5c518;"></span> منطقة فرن التحالف</div>
+    </div>
+    <div class="note-box">المخطط أعلاه رسم بـSVG بدقة رياضية (كل قاعدة = مربع 66×66 بكسل يمثل 3×3 خانات، والفراغ بينها 44 بكسل يمثل خانتين) — وليس صورة مولّدة بالذكاء الاصطناعي. يمكن إدراج صوراتكم المعتمدة (لقطات شاشة فعلية من اللعبة) في مكان مخصص بجانب هذا المخطط لاحقًا.</div>
+    <div class="highlight-box">هذه استراتيجية تنظيمية داخلية لـNWH، وليست قاعدة مفروضة رسميًا من اللعبة أو من الدليل المجتمعي.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 4. الحرارة والعواصف -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="temp">
+  <div class="section-head sh-ice">🌡️ 4. الحرارة والعواصف</div>
+  <div class="section-body">
+    <p>نطاق الحرارة يمتد من -270°م إلى +300°م. حرارة قاعدتك تتجه تدريجيًا نحو حرارة البيئة المحيطة.</p>
+    <ul class="checklist">
+      <li>⏳ <strong>إنذار التجمّد:</strong> البقاء تحت -20°م يبدأ عدًا تنازليًا مدته 5 دقائق.</li>
+      <li>🧊 <strong>التجمّد الكامل:</strong> بعد 5 دقائق متواصلة تحت -20°م — يُمنع النقل والتجمعات (التيليبورت العشوائي ونقل التحالف يبقيان متاحين).</li>
+      <li>🔥 <strong>الذوبان:</strong> البقاء فوق -20°م لمدة 5 دقائق يزيل التجمّد. أي نزول تحت -20°م ولو للحظة يعيد العدّ من جديد.</li>
+      <li>🧨 <strong>كسر الجليد:</strong> يمكن للحلفاء كسر الجليد يدويًا (5 ضربات، 5 نقاط طاقة لكل ضربة).</li>
+      <li>✈️ <strong>Recon Plane:</strong> يضيف تقريبًا +2°م لكل ضربة، لكن أثره مؤقت وسريع الزوال.</li>
+    </ul>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>مستوى العاصفة الثلجية (Blizzard)</th><th>انخفاض الحرارة</th></tr></thead>
+        <tbody>
+          <tr><td>المستوى 1</td><td>-10°م</td></tr>
+          <tr><td>المستوى 2</td><td>-15°م</td></tr>
+          <tr><td>المستوى 3</td><td>-20°م</td></tr>
+          <tr><td>المستوى 4</td><td>-25°م</td></tr>
+          <tr><td>المستوى 5</td><td>-30°م</td></tr>
+          <tr><td>المستوى 7</td><td>-45°م</td></tr>
+          <tr><td>المستوى 8</td><td>-50°م</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-warn">تضارب بين المصادر</span></div>
+    <div class="highlight-warn">⚠️ النص الوصفي في المصدر يذكر أن "العاصفة الأولى هي من المستوى 1 بانخفاض -15°م، وتصل بعد 7 ساعات من بداية الموسم" — بينما الجدول في نفس المصدر يذكر أن المستوى 1 = -10°م فقط. لم نتمكن من حسم هذا التضارب، فنعرضه كما هو. أيضًا مدة المستوى 2 مذكورة بـ3 ساعات، لكن مدد المستويات الأخرى غير مؤكدة، وتوقيت وصول العاصفة الأولى قد يكون عشوائيًا حسب الخادم.</div>
+
+    <details class="explain">
+      <summary>مصادر التدفئة الأخرى</summary>
+      <div class="explain-body">
+        <p><strong>فرن المدينة</strong> (للمدن التي تسيطر عليها، يدفّئ كامل بلاطة المدينة): المستوى 1 = +5°م، المستوى 2 = +20°م، المستوى 3 = +30°م، المستوى 4 = +40°م، المستوى 5 = +50°م، المستوى 6 = +60°م.</p>
+        <p><strong>الفرن النووي</strong> (في العاصمة): يُدفّئ الخريطة بأكملها بعد تفعيله، بزيادة تقارب +10°م على مستوى الخريطة.</p>
+      </div>
+    </details>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> و<a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 5. الفحم والموارد -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="coal">
+  <div class="section-head sh-orange">⛏️ 5. الفحم والموارد</div>
+  <div class="section-body">
+    <p><strong>مصادر الفحم:</strong> مواقع الحفر (إنتاج مستمر)، باقة الموسم وباقة الأسبوع، صناديق الإمدادات المتناثرة (Supply Collections — تظهر فقط عندما تصل حرارة الأرض إلى 0°م)، مهام الموسم، مهام الرادار، وأول عملية احتلال لمدينة أو موقع حفر.</p>
+    <p><strong>الاستخدامات:</strong> بناء وترقية المنشآت الموسمية، تشغيل الفرن الشخصي، التبرّع لفرن التحالف.</p>
+    <div class="highlight-box">💡 نصيحة: استخدم زر "المطالبة بالكل كل ساعة" (Claim all hourly) في تبويب مواقع الحفر لعدم تفويت إنتاج الفحم التراكمي.</div>
+    <div class="highlight-box">💡 نصيحة: نظّم بين الاحتياج الشخصي (فرن فردي) والاحتياج الجماعي (فرن التحالف) — لا تُفرغ مخزونك الشخصي في التحالف قبل تأمين حرارتك الخاصة، والعكس صحيح عند اقتراب عاصفة قوية.</div>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 6. مصانع سبائك التيتانيوم -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="titanium">
+  <div class="section-head sh-purple">🏭 6. مصانع سبائك التيتانيوم</div>
+  <div class="section-body">
+    <p>الإنتاج يبدأ من 720/ساعة في المستوى 1 ويصل إلى 21,600/ساعة في المستوى 30 — كل مستوى يضيف 720/ساعة ثابتة.</p>
+    <p>يُفتح مصنع جديد فقط عند وصول المصنع السابق إلى <strong>المستوى 15</strong>. باقة الأسبوع (Weekly Pass) تمنح مصنعًا إضافيًا فورًا.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>المستوى</th><th>الإنتاج/ساعة</th><th>تكلفة الترقية (فحم، تقريبي)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>720</td><td>—</td></tr>
+          <tr><td>2</td><td>1,440</td><td>≈ 1,400</td></tr>
+          <tr><td>30</td><td>21,600</td><td>≈ 359,300 (قبل التخفيضات)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box">🎯 استراتيجية استثمار: طوّر كل مصانعك إلى المستوى 15 أولًا (لفتح المصنع التالي)، ثم بعد توفر 4 مصانع أساسية + 1 من باقة الأسبوع، ارفعها جميعًا إلى 16 ثم 17 وهكذا — طالما كل مستوى يمنح نفس الزيادة في الإنتاج، رقّي الأرخص تكلفة أولًا.</div>
+    <div class="note-box">تخفيضات التكلفة الممكنة: تقنية "Master Craftsman"، مهارة المهندس مستوى 35 "توفير الموارد" (حتى -5%)، وتقنية تحالف "Veteran Craftsman".</div>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> و<a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">دليل الاستراتيجية الشامل</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 7. فرن التحالف -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="furnace">
+  <div class="section-head sh-gold">🏛️ 7. فرن التحالف</div>
+  <div class="section-body">
+    <p>يُبنى على أرض من المستوى 1. الإصلاح يحتاج حتى 20 تعزيزًا، ولا يستطيع تنفيذ ذلك سوى أعضاء R4/R5. يُدفّئ فقط القواعد الواقعة ضمن نطاقه — لذلك يجب تجمّع الأعضاء بالقرب منه.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>المستوى</th><th>فحم/دقيقة</th><th>الحرارة</th><th>حرارة Overdrive</th><th>فحم/دقيقة (Overdrive)</th><th>التخزين</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>300</td><td>3°م</td><td>6°م</td><td>1,200</td><td>200K</td></tr>
+          <tr><td>10</td><td>840</td><td>7.5°م</td><td>15°م</td><td>3,360</td><td>1,450K</td></tr>
+          <tr><td>20</td><td>1,440</td><td>12.5°م</td><td>25°م</td><td>5,760</td><td>4,150K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-verify">بيانات جزئية — عرضنا فقط المستويات 1، 10، 20 المؤكدة من المصدر</span></div>
+    <p>المتانة (Durability) تتراوح من 205K في المستوى 1 إلى 300K في المستوى 20.</p>
+    <p><strong>صناديق الإمدادات (Supply Collections):</strong> تظهر فقط عندما تصل الأرض إلى 0°م. إذا كانت متجمدة، تحتاج حرارة فرن التحالف أو كسر الجليد (1,000 متانة لكل ضربة، 5 نقاط طاقة).</p>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 8. أحداث الأسبوع الأول -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="events">
+  <div class="section-head sh-blue">🎉 8. أحداث الأسبوع الأول</div>
+  <div class="section-body">
+
+    <div class="event-card">
+      <div class="event-title">❄️ Cold Wave Alert</div>
+      <div class="event-meta">يبدأ اليوم 1 — يستمر 7 أيام</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span> <span class="tbadge tb-collective">هدف جماعي</span></div>
+      <div class="event-row"><b>أهداف المهمة الفردية:</b> فرن شخصي 600 ثانية + Overdrive 600 ثانية + تبرّع فحم مرة واحدة + مساعدة 3 حلفاء على التدفئة.</div>
+      <div class="event-row"><b>هدف صندوق المكافأة الجماعي:</b> قتل 800 Doom Elite عبر جميع مناطق الحرب مجتمعة.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🔥 الفرن عالي الحرارة</div>
+      <div class="event-meta">اليوم 1</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span> <span class="tbadge tb-collective">هدف جماعي</span></div>
+      <div class="event-row"><b>المهمة:</b> فتح الفرن عالي الحرارة.</div>
+      <div class="event-row"><b>هدف الصندوق الجماعي:</b> التبرّع بـ3,000,000 حديد عبر جميع مناطق الحرب، مع ترتيب فردي إضافي حسب التبرعات.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏭 فتح مصنع سبائك التيتانيوم</div>
+      <div class="event-meta">اليوم 1</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="event-row"><b>المهمة:</b> فتح وترقية المصانع من 1 إلى 5 — كل مصنع يُفتح عند ترقية السابق، ويحتاج الفحم.</div>
+      <div class="event-row"><b>هدف الصندوق الجماعي:</b> نفس هدف 3,000,000 حديد.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏛️ فرن التحالف</div>
+      <div class="event-meta">اليوم 1</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="event-row"><b>المهمة:</b> بناء/إصلاح فرن التحالف عبر: التحالف ← فرن التحالف ← الإحداثيات، ثم إرسال فرقة (مشابه لمعاقل الموسم الأول).</div>
+      <div class="event-row"><b>هدف الصندوق الجماعي:</b> التبرّع بـ5,000,000 فحم عبر جميع مناطق الحرب، مع ترتيب فردي.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏘️ فتح المدينة — قرية (المستوى 1)</div>
+      <div class="event-meta">اليوم 3 (هدف الصندوق فوري، هدف المهمة يبدأ بعد 12 ساعة إضافية)</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="event-row"><b>المهمة:</b> احتلال مدن من المستوى 1.</div>
+      <div class="event-row"><b>هدف الصندوق الجماعي:</b> احتلال 80 موقع حفر إجمالًا عبر مناطق الحرب.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏙️ فتح المدينة — بلدة (المستوى 2)</div>
+      <div class="event-meta">اليوم 6 (هدف الصندوق فوري، هدف المهمة يبدأ بعد 12 ساعة إضافية)</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="event-row"><b>المهمة:</b> احتلال مدن من المستوى 2.</div>
+      <div class="event-row"><b>هدف الصندوق الجماعي:</b> نفس هدف 80 موقع حفر.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">⚔️ City Clash S2</div>
+      <div class="event-meta">يبدأ اليوم 3 الساعة 12:00 ظهرًا بتوقيت السيرفر</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="event-row">يجب امتلاك موقع حفر من المستوى 1 أولًا قبل أن يتمكن R4/R5 من إعلان الحرب على المدن. كل تحالف يستهدف مدينة واحدة في كل مرة. الجنود يتعرضون لضرر السموم أثناء الحصار (تقلله مقاومة الفيروس). المدن المحتلة تحصل على حماية تقارب 6 أيام؛ بعد التخلي عن مدينة، فترة انتظار تقارب 5 أيام.</div>
+      <div class="badges"><span class="tbadge tb-verify">حدود الإعلان اليومية وعدد مواقع الحفر القصوى مذكورة في تعليقات القراء وليست مؤكدة رسميًا من المقال</span></div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">⚔️ سلاح ميرفي الحصري (Murphy's Exclusive Weapon)</div>
+      <div class="event-meta">متاح من اليوم 4</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="event-row">يتطلب بطل ميرفي بـ5 نجوم. التفعيل يحتاج 50 شظية؛ باقة سلاح ميرفي الحصري تمنح 70 شظية (كافية للتفعيل + المستوى 2)، ومتاحة حتى اليوم 3 من الأسبوع الثاني. الترقيات تستخدم شظايا السلاح الحصري العامة (تتوفر في بعض صناديق دوري المبارزة). الحد الأقصى: المستوى 30.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🧟 Purge Action</div>
+      <div class="event-meta">اليوم 1 — يستمر 7 أيام</div>
+      <div class="badges"><span class="tbadge tb-collective">تصنيف فردي</span></div>
+      <div class="event-row">يرتّب القادة حسب أول زومبي من الموسم الجديد يقتله كل واحد منهم — مستوى الزومبي الأعلى يمنح ترتيبًا أفضل، وعند التساوي، الأسرع في القتل يتقدم. تسويات يومية، والمكافآت تُرسل بالبريد.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">☣️ Purge the Polluted Area</div>
+      <div class="event-meta">اليوم 1 — يستمر 13 يومًا</div>
+      <div class="badges"><span class="tbadge tb-collective">تصنيف تحالف</span></div>
+      <div class="event-row">يرتّب التحالفات حسب الوقت المستغرق لاحتلال مواقع الحفر — المستوى الأعلى يمنح ترتيبًا أفضل، وعند التساوي، الأسرع يتقدم. تسويات يومية، والمكافآت تُرسل بالبريد.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ لا تخلط بين Purge Action (تصنيف فردي، 7 أيام) وPurge the Polluted Area (تصنيف تحالف، 13 يومًا) — مدتاهما وطبيعة تصنيفهما مختلفتان تمامًا.</div>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 9. مواقع الحفر والمدن -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="territory">
+  <div class="section-head sh-green">🗺️ 9. مواقع الحفر والمدن</div>
+  <div class="section-body">
+    <p>أول أرض يجب امتلاكها هي <strong>موقع حفر من المستوى 1</strong>. التوسّع بعدها يتبع مبدأ التجاور (بما في ذلك الاتصال القطري من الزوايا).</p>
+    <ul class="checklist">
+      <li>📊 الحد الأقصى: 4 مواقع حفر لكل تحالف، بغض النظر عن عدد المدن.</li>
+      <li>📅 سقف يومي: احتلالان فقط في اليوم. بعد بلوغه، لا يمكن مهاجمة المواقع المحايدة أو المملوكة.</li>
+      <li>⏱️ نافذة الاحتلال: يجب على التحالف الوصول إلى 100% خلال 4 ساعات، وإلا تفشل المحاولة.</li>
+      <li>🛡️ حماية بعد الاحتلال: 36 ساعة، يحرسها حراس الموقع.</li>
+      <li>🦣 المتطلبات: يجب أن تكون الوحوش غير متجمدة، وتُهزم بمقاومة فيروس كافية، وتحتاج تجمعات متعددة.</li>
+      <li>🚪 التخلي: يستغرق ساعة واحدة؛ يجب انتهاء فترة الحماية قبل أن يتمكن أي تحالف آخر من إعادة الاحتلال.</li>
+    </ul>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>مستوى موقع الحفر</th><th>مقاومة الفيروس المطلوبة (تقريبية)</th></tr></thead>
+        <tbody>
+          <tr><td>المستوى 1</td><td>4,000</td></tr>
+          <tr><td>المستوى 2</td><td>6,500</td></tr>
+          <tr><td>المستوى 3</td><td>8,500</td></tr>
+          <tr><td>المستوى 4</td><td>9,500</td></tr>
+          <tr><td>المستوى 6</td><td>10,500</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-verify">قيمة المستوى 5 غير واضحة في المصدر (خطأ مطبعي محتمل) — لم نذكرها لتفادي نشر رقم خاطئ</span></div>
+
+    <p><strong>تطابق الوحدات مع الوحوش:</strong> الغوريلا (طيران) ضعيفة أمام المركبات الصاروخية، الدب (صاروخي) ضعيف أمام الدبابات، الماموث (دبابات) ضعيف أمام الطيران. التحالفات ذات القوة الدبابية يُنصح لها باستهداف الدببة القطبية أولًا.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>مستوى المدينة</th><th>موعد الفتح</th></tr></thead>
+        <tbody>
+          <tr><td>المستوى 1</td><td>الأسبوع 1، اليوم 3 + 12 ساعة</td></tr>
+          <tr><td>المستوى 2</td><td>الأسبوع 1، اليوم 6 + 12 ساعة</td></tr>
+          <tr><td>المستوى 3</td><td>الأسبوع 2، اليوم 3 + 12 ساعة</td></tr>
+          <tr><td>المستوى 4</td><td>الأسبوع 2، اليوم 6 + 12 ساعة</td></tr>
+          <tr><td>المستوى 5</td><td>الأسبوع 3، اليوم 3 + 12 ساعة</td></tr>
+          <tr><td>المستوى 6</td><td>الأسبوع 3، اليوم 6 + 12 ساعة</td></tr>
+          <tr><td>المستوى 7</td><td>الأسبوع 4، اليوم 7 + 12 ساعة</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>الحد الأقصى لامتلاك المدن: 6 مدن. مدن المستوى 6 هي الأكثر قيمة، وتقع شمال وشرق وجنوب وغرب العاصمة.</p>
+    <div class="highlight-box">🎯 استراتيجية NWH: اختر أول موقع حفر بما يتناسب مع تركيبة جيشك (نوع الوحش مقابل نوع قواتك)، وجهّز خط توسّع نحو مدن المستوى 6 دون الكشف عن إحداثيات أو أهداف محددة قبل أوانها.</div>
+  </div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a>، <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> و<a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">دليل الاستراتيجية الشامل</a> (دليل مجتمعي غير رسمي)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 10. جدول الأيام -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="timeline">
+  <div class="section-head sh-ice">📅 10. جدول الأيام 1 إلى 7</div>
+  <div class="section-body">
+    <div class="highlight-blue">ملاحظة: "اليوم" هنا يعني يوم الموسم (Day 1 = أول يوم من الموسم)، وليس بالضرورة يوم التقويم. المواعيد المرفقة بـ"توقيت السيرفر" هي فقط التي أكدها المصدر بدقة.</div>
+
+    <div class="timeline">
+      <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 1</div>
+        <ul class="timeline-items">
+          <li>✅ متاح فورًا: Cold Wave Alert، فتح الفرن عالي الحرارة، فتح مصنع التيتانيوم الأول، فرن التحالف، Purge Action، Purge the Polluted Area.</li>
+          <li>🎯 أولوية فردية: 600 ثانية فرن + 600 ثانية Overdrive + تبرّع فحم + مساعدة 3 حلفاء.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 2</div>
+        <ul class="timeline-items">
+          <li>🔄 استمرار: تطوير مصانع التيتانيوم، تجميع الفحم من مواقع الحفر المملوكة.</li>
+          <li>📌 عادة لا يُتاح إلا موقع حفر واحد من المستوى 1 حتى الآن (حسب الدليل الاستراتيجي).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 3</div>
+        <ul class="timeline-items">
+          <li>🏘️ فتح المدينة (قرية، المستوى 1) — هدف الصندوق فوري، هدف المهمة بعد 12 ساعة.</li>
+          <li>⚔️ بداية City Clash S2 الساعة 12:00 ظهرًا بتوقيت السيرفر.</li>
+          <li>📌 نهاية يوم نموذجية لتحالف متوسط: نحو 3 مواقع حفر من المستوى 1 ومدينتان من المستوى 1 (حسب نقطة الانطلاق).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 4</div>
+        <ul class="timeline-items">
+          <li>⚔️ يتوفر سلاح ميرفي الحصري (يتطلب ميرفي 5 نجوم).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 6</div>
+        <ul class="timeline-items">
+          <li>🏙️ فتح المدينة (بلدة، المستوى 2) — هدف الصندوق فوري، هدف المهمة بعد 12 ساعة.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 7</div>
+        <ul class="timeline-items">
+          <li>⏳ نهاية Cold Wave Alert (7 أيام من بدايتها).</li>
+          <li>☣️ Purge the Polluted Area يتواصل حتى اليوم 13 (يتجاوز نهاية الأسبوع الأول).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-box">باقة سلاح ميرفي الحصري تبقى متاحة حتى اليوم 3 من الأسبوع الثاني — تجاوز نطاق هذا الأسبوع، مذكورة هنا للتذكير فقط.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 11. قائمة التحقق -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="checklist">
+  <div class="section-head sh-green">✅ 11. قائمة التحقق العملية (فردية)</div>
+  <div class="section-body">
+    <div class="note-box">هذه القائمة لتتبعك الشخصي فقط داخل هذه الصفحة — لا تُزامن مع التحالف ولا تمثل بيانات جماعية حقيقية.</div>
+    <ul class="checklist">
+      <li>⬜ تشغيل الفرن الشخصي 600 ثانية</li>
+      <li>⬜ تفعيل Overdrive 600 ثانية</li>
+      <li>⬜ التبرّع بالفحم لفرن التحالف مرة واحدة على الأقل</li>
+      <li>⬜ مساعدة 3 حلفاء على رفع حرارتهم</li>
+      <li>⬜ فتح الفرن عالي الحرارة</li>
+      <li>⬜ بدء تطوير أول مصنع سبائك تيتانيوم</li>
+      <li>⬜ تحديد موقع الحفر المستهدف بالتنسيق مع R4/R5</li>
+      <li>⬜ الالتزام بموقع القاعدة المحدد ضمن مخطط NWH (3×3 + خانتان فارغتان)</li>
+      <li>⬜ متابعة حرارة القاعدة بانتظام لتفادي التجمّد</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 12. الأخطاء الشائعة -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="mistakes">
+  <div class="section-head sh-red">⚠️ 12. الأخطاء الشائعة</div>
+  <div class="section-body">
+    <ul class="warning-list">
+      <li>🪨 <strong>سوء إدارة الفحم:</strong> صرف الفحم بشكل عشوائي بدل حفظه لترقية المصانع والفرن — يبطئ تقدمك بشكل كبير خلال الأسبوع الأول.</li>
+      <li>🐌 <strong>التطوير المتأخر:</strong> تأجيل بناء الفرن عالي الحرارة أو مصنع التيتانيوم الأول — كل يوم تأخير يؤخر فتح باقي المنشآت المتسلسلة.</li>
+      <li>🔥 <strong>فرن غير مُستخدم:</strong> امتلاك فرن شخصي دون تشغيله بانتظام — يفوّت أهداف المهام ويعرضك لخطر التجمّد.</li>
+      <li>🧊 <strong>غياب التدفئة أثناء العاصفة:</strong> عدم الاستعداد قبل وصول عاصفة ثلجية يؤدي للتجمّد ومنع التنقل والتجمعات.</li>
+      <li>🤝 <strong>سوء تنسيق الأعضاء:</strong> عدم التجمّع قرب فرن التحالف يجعل بعض الأعضاء خارج نطاق التدفئة الجماعية.</li>
+      <li>🧱 <strong>تموضع غير منظم للقواعد:</strong> عدم احترام مخطط 3×3 + خانتين فارغتين يصعّب الدفاع الجماعي ويترك ثغرات للعدو.</li>
+      <li>⚔️ <strong>هجوم غير مجهّز:</strong> محاولة احتلال موقع حفر أو مدينة دون مقاومة فيروس كافية أو دون تجمعات كافية يؤدي لخسائر غير ضرورية.</li>
+      <li>🔀 <strong>الخلط بين الأحداث الفردية والجماعية:</strong> مثل الخلط بين Purge Action (فردي) وPurge the Polluted Area (تحالف) — يؤدي لتوقعات خاطئة حول المكافآت والترتيب.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 13. المصادر -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="sources">
+  <div class="section-head sh-gold">📚 13. المصادر</div>
+  <div class="section-body">
+    <p>هذا الدليل مبني على تحليل وتوليف المصادر التالية، وهي أدلة مجتمعية غير رسمية (ليست صادرة عن الناشر الرسمي للعبة). الأرقام قد تتغير مع تحديثات اللعبة — تحقق دائمًا داخل اللعبة قبل اتخاذ قرارات مهمة.</p>
+    <ul class="checklist">
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — Season 2: Polar Storm</a></li>
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — Season 2 Week 1</a></li>
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — The Ultimate Strategy Guide for Season 2</a></li>
+    </ul>
+    <div class="highlight-warn">⚠️ رابط نقاش استراتيجي إضافي من أحد مسؤولي R4 في NWH تم تزويدنا به لم يكن بالإمكان الوصول إليه من بيئة العمل الحالية، فلم يُستخدم محتواه في هذا الدليل. إذا أردت تضمينه، يُرجى إرسال نصه مباشرة.</div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">إعداد: MSBKH</div>
+  <div class="footer-credit">آخر تحديث: 08/11/2026</div>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">🔝</a>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
