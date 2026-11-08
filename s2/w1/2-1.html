@@ -81,6 +81,9 @@
   /* ── LISTS ── */
   .checklist, .use-list, .claim-list, .warning-list { list-style:none; padding:0; }
   .checklist li, .use-list li, .claim-list li, .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.6); display:flex; align-items:flex-start; gap:8px; font-size:0.86rem; }
+  .checklist label { display:flex; align-items:center; gap:8px; cursor:pointer; width:100%; }
+  .checklist input[type="checkbox"] { width:18px; height:18px; flex-shrink:0; accent-color:var(--green); cursor:pointer; }
+  .checklist li:has(input:checked) label { color:#86efac; text-decoration:line-through; text-decoration-color:rgba(134,239,172,0.5); }
   .checklist li:last-child, .use-list li:last-child, .claim-list li:last-child, .warning-list li:last-child { border-bottom:none; }
   .use-list li { color:#86efac; }
   .claim-list li { color:#fde68a; }
@@ -162,7 +165,7 @@
     <li>احفظ شحنات الفحم ليوم التفعيل بدل تبذيرها مبكرًا.</li>
   </ul>
   <div class="badges">
-    <span class="tbadge tb-official">مهمة رسمية</span>
+    <span class="tbadge tb-official">مهمة موسمية</span>
     <span class="tbadge tb-collective">هدف جماعي</span>
     <span class="tbadge tb-nwh">استراتيجية NWH</span>
     <span class="tbadge tb-verify">بحاجة للتحقق</span>
@@ -205,6 +208,14 @@
       <li>🏭 <strong>مصانع سبائك التيتانيوم</strong> — تنتج سبائك التيتانيوم اللازمة لتطوير الفرن الشخصي والمنشآت الموسمية.</li>
       <li>⛏️ <strong>مواقع الحفر (Dig Sites)</strong> — مصدر الفحم المستمر وأول أراضيك المملوكة.</li>
     </ul>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: واجهة الفرن الشخصي عالي الحرارة ووضع Overdrive
+         Suggested filename: s2-w1-high-heat-furnace-ui.webp
+         Suggested path: ../../images/s2-w1-high-heat-furnace-ui.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-high-heat-furnace-ui.webp" alt="واجهة الفرن الشخصي عالي الحرارة" width="600" height="400" loading="lazy">
+    -->
+
     <p>هذه الأنظمة مترابطة: الفحم من مواقع الحفر يُستخدم لبناء وترقية الأفران والمصانع، وهذه بدورها تحميك من التجمّد وتفتح مقاومة الفيروس اللازمة لمحاربة وحوش القطب والسيطرة على مزيد من الأراضي.</p>
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
@@ -216,7 +227,7 @@
 <div class="section" id="day1">
   <div class="section-head sh-gold">🥇 2. اليوم الأول — التأسيس | الأولوية القصوى</div>
   <div class="section-body">
-    <p>هذه هي المهام التي يجب إنجازها في أول يوم من الموسم. كل مهمة مرفقة بنوعها (رسمية من اللعبة أو استراتيجية داخلية لـNWH).</p>
+    <p>هذه هي المهام التي يجب إنجازها في أول يوم من الموسم. كل مهمة مرفقة بنوعها (موسمية من اللعبة حسب الدليل المجتمعي، أو استراتيجية داخلية لـNWH).</p>
 
     <div class="task-card">
       <span class="task-num">1</span><span class="task-title">تحديد منطقة تجمّع الأعضاء قرب فرن التحالف</span>
@@ -226,8 +237,8 @@
 
     <div class="task-card">
       <span class="task-num">2</span><span class="task-title">وضع وإصلاح فرن التحالف بمشاركة الأعضاء</span>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
-      <div class="task-why">الإصلاح يحتاج حتى 20 تعزيزًا، ولا يقوم به سوى R4/R5. بدونه، لا تدفئة جماعية لنطاق التحالف.</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
+      <div class="task-why">بدء وإدارة عملية الإصلاح (التحالف ← فرن التحالف ← الإحداثيات) مقصورة على R4/R5، أما المشاركة الفعلية في الإصلاح فتتم بإرسال الأعضاء لإسكواداتهم لتعزيز الفرن، حيث يمكن أن يشارك فيها حتى 20 تعزيزًا (آلية مشابهة لإصلاح المعاقل في الموسم الأول). بدونه، لا تدفئة جماعية لنطاق التحالف.</div>
     </div>
 
     <div class="task-card">
@@ -238,31 +249,31 @@
 
     <div class="task-card">
       <span class="task-num">4</span><span class="task-title">تشغيل الفرن الشخصي لمدة 600 ثانية على الأقل</span>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span> <span class="tbadge tb-collective">هدف Cold Wave Alert</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span> <span class="tbadge tb-collective">هدف Cold Wave Alert</span></div>
       <div class="task-why">أحد أهداف مهمة Cold Wave Alert المتاحة فورًا في اليوم الأول.</div>
     </div>
 
     <div class="task-card">
       <span class="task-num">5</span><span class="task-title">تفعيل وضع Overdrive لمدة 600 ثانية</span>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="task-why">يستهلك فحمًا أكبر مقابل حرارة أعلى، وهو هدف محدد ضمن Cold Wave Alert.</div>
     </div>
 
     <div class="task-card">
       <span class="task-num">6</span><span class="task-title">التبرّع بالفحم لفرن التحالف</span>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
-      <div class="task-why">يساهم في هدف التحالف الجماعي (5,000,000 فحم عبر جميع مناطق الحرب).</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
+      <div class="task-why">يساهم في هدف الصندوق الجماعي المشترك بين جميع مناطق الحرب مجتمعة (5,000,000 فحم إجمالًا، وليس هدفًا خاصًا بتحالفك وحده) — مع وجود ترتيب فردي منفصل حسب كمية تبرعك الشخصي.</div>
     </div>
 
     <div class="task-card">
       <span class="task-num">7</span><span class="task-title">مساعدة الحلفاء على رفع حرارتهم 3 مرات</span>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="task-why">عبر إرسال Recon Plane (يضيف تقريبًا +2°م لكل ضربة)، أو كسر الجليد يدويًا.</div>
     </div>
 
     <div class="task-card">
       <span class="task-num">8</span><span class="task-title">بدء تطوير أول مصنع سبائك تيتانيوم</span>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="task-why">المصنع الثاني يُفتح فقط عند وصول الأول للمستوى 15 — ابدأ بأسرع وقت ممكن.</div>
     </div>
 
@@ -284,9 +295,16 @@
       <div class="task-why">أول أرض يجب امتلاكها هي موقع حفر من المستوى 1 — يحدد نقطة انطلاق توسّع التحالف بأكمله.</div>
     </div>
 
-    <div class="highlight-warn">⚠️ لا تخلط بين مهمة رسمية من اللعبة (مثل تشغيل الفرن 600 ثانية) وبين تعليمة إدارية من NWH (مثل منطقة التجمّع) — النوع موضّح في كل بطاقة أعلاه.</div>
+    <div class="task-card">
+      <span class="task-num">12</span><span class="task-title">توقيت أول Doom Walker يومي بعناية</span>
+      <div class="badges"><span class="tbadge tb-nwh">استراتيجية NWH</span></div>
+      <div class="task-why">تجنّب قتل Doom Walker اليومي الأول في يوم إعادة التصفير الذي يسبق بدء الموسم الثاني فعليًا (إن سمح توقيت الخادم بذلك) — بل انتظر بداية الموسم فعليًا، ثم هاجم أعلى مستوى يمكنك الوصول إليه كل يوم للحصول على مكافآت "أول قتل" اليومية. لا تخلط بين Doom Walker (مكافأة يومية فردية)، Doom Elite (هدف صندوق جماعي ضمن Cold Wave Alert، 800 عبر جميع مناطق الحرب)، والزومبي العادي الأول في الموسم (أساس تصنيف Purge Action) — الثلاثة مكافآتها وشروطها مختلفة تمامًا.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ لا تخلط بين مهمة موسمية من اللعبة (مثل تشغيل الفرن 600 ثانية) وبين تعليمة إدارية من NWH (مثل منطقة التجمّع) — النوع موضّح في كل بطاقة أعلاه.</div>
+    <div class="highlight-blue">💡 مكافآت فردية متعلّقة بتقدّم الفرن يمكن جمعها من: الموسم الثاني ← الأهداف ← فردي (Season 2 → Goals → Individual). ولأحداث Cold Wave Alert: Cold Wave Event ← الأهداف (Goals). بعض هذه المكافآت لا تُظهر نقطة إشعار حمراء، لذلك راجع هذه القوائم يدويًا بانتظام ولا تعتمد فقط على الإشعارات.</div>
   </div>
-  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> + استراتيجية داخلية NWH</div>
+  <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> + استراتيجية داخلية NWH + خبرة لاعبين داخل اللعبة (مسار استلام المكافآت)</div>
 </div>
 
 <!-- ══════════════════════════════════════ -->
@@ -301,63 +319,94 @@
 
     <div class="grid-wrap">
       <svg width="310" height="310" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg">
-        <!-- خلفية شبكية خفيفة -->
+        <!-- خلفية -->
         <rect x="0" y="0" width="310" height="310" fill="#0b1118" rx="8"/>
-        <!-- دالة توليد حتمية: خطوة = 3 مشغول + 2 فارغ = 5 خانات، حجم الخانة 22px -->
-        <!-- رسم 3×3 قواعد (كل قاعدة 3x3 خانات) بفاصل خانتين -->
-        <g stroke="#1e2d3d" stroke-width="1">
-          <!-- شبكة خانات خفيفة كل 22px -->
+
+        <!-- شبكة كاملة بخانات 22×22 بكسل، مرسومة على كامل المساحة (قواعد + فراغات) -->
+        <!-- خطوط عمودية: x = 10, 32, 54 ... 296 (14 خطًا، كل 22px) -->
+        <g stroke="rgba(148,163,184,0.22)" stroke-width="1">
+          <line x1="10" y1="10" x2="10" y2="296"/><line x1="32" y1="10" x2="32" y2="296"/>
+          <line x1="54" y1="10" x2="54" y2="296"/><line x1="76" y1="10" x2="76" y2="296"/>
+          <line x1="98" y1="10" x2="98" y2="296"/><line x1="120" y1="10" x2="120" y2="296"/>
+          <line x1="142" y1="10" x2="142" y2="296"/><line x1="164" y1="10" x2="164" y2="296"/>
+          <line x1="186" y1="10" x2="186" y2="296"/><line x1="208" y1="10" x2="208" y2="296"/>
+          <line x1="230" y1="10" x2="230" y2="296"/><line x1="252" y1="10" x2="252" y2="296"/>
+          <line x1="274" y1="10" x2="274" y2="296"/><line x1="296" y1="10" x2="296" y2="296"/>
+          <!-- خطوط أفقية مماثلة -->
+          <line x1="10" y1="10" x2="296" y2="10"/><line x1="10" y1="32" x2="296" y2="32"/>
+          <line x1="10" y1="54" x2="296" y2="54"/><line x1="10" y1="76" x2="296" y2="76"/>
+          <line x1="10" y1="98" x2="296" y2="98"/><line x1="10" y1="120" x2="296" y2="120"/>
+          <line x1="10" y1="142" x2="296" y2="142"/><line x1="10" y1="164" x2="296" y2="164"/>
+          <line x1="10" y1="186" x2="296" y2="186"/><line x1="10" y1="208" x2="296" y2="208"/>
+          <line x1="10" y1="230" x2="296" y2="230"/><line x1="10" y1="252" x2="296" y2="252"/>
+          <line x1="10" y1="274" x2="296" y2="274"/><line x1="10" y1="296" x2="296" y2="296"/>
         </g>
-        <!-- القواعد: صف×عمود = 3×3 قواعد -->
+
+        <!-- القواعد: 3×3 قواعد متطابقة (9 قواعد، بدون أي تمييز لفرن التحالف هنا) -->
         <g>
-          <!-- base (0,0) -->
-          <rect x="10"  y="10"  width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="120" y="10"  width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="230" y="10"  width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="10"  y="10"  width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="120" y="10"  width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="230" y="10"  width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
 
-          <rect x="10"  y="120" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <!-- center: alliance furnace zone -->
-          <rect x="120" y="120" width="66" height="66" fill="rgba(245,197,24,0.22)" stroke="#f5c518" stroke-width="2" rx="3"/>
-          <rect x="230" y="120" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="10"  y="120" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="120" y="120" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="230" y="120" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
 
-          <rect x="10"  y="230" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="120" y="230" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="230" y="230" width="66" height="66" fill="rgba(59,130,246,0.25)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="10"  y="230" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="120" y="230" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
+          <rect x="230" y="230" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
         </g>
-        <!-- خطوط الخانات داخل كل قاعدة (3x3 subgrid) -->
-        <g stroke="rgba(148,163,184,0.25)" stroke-width="1">
-          <!-- عمودية -->
-          <line x1="32"  y1="10" x2="32"  y2="76"/><line x1="54"  y1="10" x2="54"  y2="76"/>
-          <line x1="142" y1="10" x2="142" y2="76"/><line x1="164" y1="10" x2="164" y2="76"/>
-          <line x1="252" y1="10" x2="252" y2="76"/><line x1="274" y1="10" x2="274" y2="76"/>
-          <line x1="32"  y1="120" x2="32"  y2="186"/><line x1="54"  y1="120" x2="54"  y2="186"/>
-          <line x1="142" y1="120" x2="142" y2="186"/><line x1="164" y1="120" x2="164" y2="186"/>
-          <line x1="252" y1="120" x2="252" y2="186"/><line x1="274" y1="120" x2="274" y2="186"/>
-          <line x1="32"  y1="230" x2="32"  y2="296"/><line x1="54"  y1="230" x2="54"  y2="296"/>
-          <line x1="142" y1="230" x2="142" y2="296"/><line x1="164" y1="230" x2="164" y2="296"/>
-          <line x1="252" y1="230" x2="252" y2="296"/><line x1="274" y1="230" x2="274" y2="296"/>
-          <!-- أفقية -->
-          <line x1="10" y1="32"  x2="76" y2="32"/><line x1="10" y1="54"  x2="76" y2="54"/>
-          <line x1="120" y1="32"  x2="186" y2="32"/><line x1="120" y1="54"  x2="186" y2="54"/>
-          <line x1="230" y1="32"  x2="296" y2="32"/><line x1="230" y1="54"  x2="296" y2="54"/>
-          <line x1="10" y1="142" x2="76" y2="142"/><line x1="10" y1="164" x2="76" y2="164"/>
-          <line x1="120" y1="142" x2="186" y2="142"/><line x1="120" y1="164" x2="186" y2="164"/>
-          <line x1="230" y1="142" x2="296" y2="142"/><line x1="230" y1="164" x2="296" y2="164"/>
-          <line x1="10" y1="252" x2="76" y2="252"/><line x1="10" y1="274" x2="76" y2="274"/>
-          <line x1="120" y1="252" x2="186" y2="252"/><line x1="120" y1="274" x2="186" y2="274"/>
-          <line x1="230" y1="252" x2="296" y2="252"/><line x1="230" y1="274" x2="296" y2="274"/>
+
+        <!-- إعادة رسم نفس خطوط الشبكة فوق تعبئة القواعد الزرقاء، لتبقى تقسيمات 3×3 الداخلية ظاهرة بوضوح -->
+        <g stroke="rgba(226,232,240,0.45)" stroke-width="1">
+          <line x1="10" y1="10" x2="10" y2="296"/><line x1="32" y1="10" x2="32" y2="296"/>
+          <line x1="54" y1="10" x2="54" y2="296"/><line x1="76" y1="10" x2="76" y2="296"/>
+          <line x1="98" y1="10" x2="98" y2="296"/><line x1="120" y1="10" x2="120" y2="296"/>
+          <line x1="142" y1="10" x2="142" y2="296"/><line x1="164" y1="10" x2="164" y2="296"/>
+          <line x1="186" y1="10" x2="186" y2="296"/><line x1="208" y1="10" x2="208" y2="296"/>
+          <line x1="230" y1="10" x2="230" y2="296"/><line x1="252" y1="10" x2="252" y2="296"/>
+          <line x1="274" y1="10" x2="274" y2="296"/><line x1="296" y1="10" x2="296" y2="296"/>
+          <line x1="10" y1="10" x2="296" y2="10"/><line x1="10" y1="32" x2="296" y2="32"/>
+          <line x1="10" y1="54" x2="296" y2="54"/><line x1="10" y1="76" x2="296" y2="76"/>
+          <line x1="10" y1="98" x2="296" y2="98"/><line x1="10" y1="120" x2="296" y2="120"/>
+          <line x1="10" y1="142" x2="296" y2="142"/><line x1="10" y1="164" x2="296" y2="164"/>
+          <line x1="10" y1="186" x2="296" y2="186"/><line x1="10" y1="208" x2="296" y2="208"/>
+          <line x1="10" y1="230" x2="296" y2="230"/><line x1="10" y1="252" x2="296" y2="252"/>
+          <line x1="10" y1="274" x2="296" y2="274"/><line x1="10" y1="296" x2="296" y2="296"/>
         </g>
-        <!-- تسمية الفراغات -->
-        <text x="98"  y="48" fill="#64748b" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان</text>
-        <text x="40"  y="108" fill="#64748b" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان</text>
-        <text x="153" y="153" fill="#f5c518" font-size="10" text-anchor="middle" font-weight="900" font-family="Cairo, sans-serif">فرن</text>
+
+        <!-- حدود القواعد مُعاد رسمها فوق الكل لتبقى واضحة التمييز عن خطوط الشبكة الداخلية -->
+        <g fill="none" stroke="#3b82f6" stroke-width="2">
+          <rect x="10"  y="10"  width="66" height="66" rx="3"/>
+          <rect x="120" y="10"  width="66" height="66" rx="3"/>
+          <rect x="230" y="10"  width="66" height="66" rx="3"/>
+          <rect x="10"  y="120" width="66" height="66" rx="3"/>
+          <rect x="120" y="120" width="66" height="66" rx="3"/>
+          <rect x="230" y="120" width="66" height="66" rx="3"/>
+          <rect x="10"  y="230" width="66" height="66" rx="3"/>
+          <rect x="120" y="230" width="66" height="66" rx="3"/>
+          <rect x="230" y="230" width="66" height="66" rx="3"/>
+        </g>
+
+        <!-- تسمية توضيحية لعيّنة من الخانات الفارغة -->
+        <text x="98"  y="48" fill="#94a3b8" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان فارغتان</text>
+        <text x="40"  y="108" fill="#94a3b8" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان فارغتان</text>
       </svg>
     </div>
     <div class="grid-legend">
       <div class="legend-item"><span class="legend-swatch" style="background:rgba(59,130,246,0.5); border:1px solid #3b82f6;"></span> قاعدة عضو (3×3 خانات)</div>
-      <div class="legend-item"><span class="legend-swatch" style="background:rgba(245,197,24,0.4); border:1px solid #f5c518;"></span> منطقة فرن التحالف</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:transparent; border:1px solid rgba(148,163,184,0.4);"></span> خانة فارغة (22×22)</div>
     </div>
-    <div class="note-box">المخطط أعلاه رسم بـSVG بدقة رياضية (كل قاعدة = مربع 66×66 بكسل يمثل 3×3 خانات، والفراغ بينها 44 بكسل يمثل خانتين) — وليس صورة مولّدة بالذكاء الاصطناعي. يمكن إدراج صوراتكم المعتمدة (لقطات شاشة فعلية من اللعبة) في مكان مخصص بجانب هذا المخطط لاحقًا.</div>
+    <div class="note-box">فرن التحالف غير ممثّل في هذا المخطط عمدًا — تنظيم القواعد هنا مستقل عن موقع الفرن، الذي يُشرح بتفصيل في القسم 7 أدناه.</div>
+    <div class="note-box">المخطط أعلاه رسم بـSVG بدقة رياضية (كل قاعدة = مربع 66×66 بكسل يمثل 3×3 خانات، والفراغ بينها 44 بكسل يمثل خانتين) — وليس صورة مولّدة بالذكاء الاصطناعي. الهندسة هنا نهائية ولن تتغيّر عند إضافة صور توضيحية إضافية لاحقًا.</div>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: لقطة فعلية لتوزيع قواعد NWH على الخريطة
+         Suggested filename: s2-w1-base-grid-example.webp
+         Suggested path: ../../images/s2-w1-base-grid-example.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-base-grid-example.webp" alt="لقطة فعلية لتوزيع قواعد NWH" width="600" height="400" loading="lazy">
+    -->
+
     <div class="highlight-box">هذه استراتيجية تنظيمية داخلية لـNWH، وليست قاعدة مفروضة رسميًا من اللعبة أو من الدليل المجتمعي.</div>
   </div>
 </div>
@@ -376,6 +425,16 @@
       <li>🧨 <strong>كسر الجليد:</strong> يمكن للحلفاء كسر الجليد يدويًا (5 ضربات، 5 نقاط طاقة لكل ضربة).</li>
       <li>✈️ <strong>Recon Plane:</strong> يضيف تقريبًا +2°م لكل ضربة، لكن أثره مؤقت وسريع الزوال.</li>
     </ul>
+
+    <div class="highlight-blue">💡 استخدم تبويب "Warm Up" لمعرفة الحلفاء الذين انخفضت حرارتهم بشكل خطير بسرعة، بدل تفقّد كل عضو يدويًا. كما يمكن تفعيل ضبط تلقائي لتشغيل الفرن الشخصي عند بداية عاصفة ثلجية (Blizzard)، لتجنّب التجمّد في حال غيابك عن اللعبة لحظة الوصول.</div>
+    <div class="note-box">تنبيه: حرارة القاعدة لا تؤثر فقط على خطر التجمّد — فهي تؤثر أيضًا على إحصائيات وميزات/أضرار إضافية للقاعدة (Buffs/Debuffs). المصدر لا يذكر نسبًا دقيقة لهذا التأثير، لذلك لا نذكر أي رقم محدد هنا.</div>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: آلية التجمد والذوبان خطوة بخطوة
+         Suggested filename: s2-w1-freeze-thaw-diagram.webp
+         Suggested path: ../../images/s2-w1-freeze-thaw-diagram.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-freeze-thaw-diagram.webp" alt="آلية التجمد والذوبان" width="600" height="360" loading="lazy">
+    -->
 
     <div class="table-wrap">
       <table class="data-table">
@@ -411,10 +470,17 @@
 <div class="section" id="coal">
   <div class="section-head sh-orange">⛏️ 5. الفحم والموارد</div>
   <div class="section-body">
-    <p><strong>مصادر الفحم:</strong> مواقع الحفر (إنتاج مستمر)، باقة الموسم وباقة الأسبوع، صناديق الإمدادات المتناثرة (Supply Collections — تظهر فقط عندما تصل حرارة الأرض إلى 0°م)، مهام الموسم، مهام الرادار، وأول عملية احتلال لمدينة أو موقع حفر.</p>
+    <p><strong>مصادر الفحم:</strong> مواقع الحفر (إنتاج مستمر)، باقة الموسم وباقة الأسبوع، صناديق الإمدادات المتناثرة (Supply Collections — تظهر فقط عندما تصل حرارة الأرض إلى 0°م)، مهام الموسم، الأهداف (Goals)، مهام الرادار، مكافآت قتل الزومبي، تذاكر Hero's Return، وأول عملية احتلال لمدينة أو موقع حفر. <span style="color:var(--muted); font-size:0.82rem;">(حدث Polar Dishes/تغذية Snowflake يُضيف مصدرًا إضافيًا للفحم لكنه يبدأ من الأسبوع الثاني، خارج نطاق هذا الدليل).</span></p>
     <p><strong>الاستخدامات:</strong> بناء وترقية المنشآت الموسمية، تشغيل الفرن الشخصي، التبرّع لفرن التحالف.</p>
     <div class="highlight-box">💡 نصيحة: استخدم زر "المطالبة بالكل كل ساعة" (Claim all hourly) في تبويب مواقع الحفر لعدم تفويت إنتاج الفحم التراكمي.</div>
     <div class="highlight-box">💡 نصيحة: نظّم بين الاحتياج الشخصي (فرن فردي) والاحتياج الجماعي (فرن التحالف) — لا تُفرغ مخزونك الشخصي في التحالف قبل تأمين حرارتك الخاصة، والعكس صحيح عند اقتراب عاصفة قوية.</div>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: مصادر الفحم الرئيسية واستخداماتها
+         Suggested filename: s2-w1-coal-sources.webp
+         Suggested path: ../../images/s2-w1-coal-sources.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-coal-sources.webp" alt="مصادر واستخدامات الفحم" width="600" height="400" loading="lazy">
+    -->
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -426,7 +492,7 @@
   <div class="section-head sh-purple">🏭 6. مصانع سبائك التيتانيوم</div>
   <div class="section-body">
     <p>الإنتاج يبدأ من 720/ساعة في المستوى 1 ويصل إلى 21,600/ساعة في المستوى 30 — كل مستوى يضيف 720/ساعة ثابتة.</p>
-    <p>يُفتح مصنع جديد فقط عند وصول المصنع السابق إلى <strong>المستوى 15</strong>. باقة الأسبوع (Weekly Pass) تمنح مصنعًا إضافيًا فورًا.</p>
+    <p>يُفتح مصنع جديد فقط عند وصول المصنع السابق إلى <strong>المستوى 15</strong>. باقة الأسبوع (Weekly Pass) تمنح مصنعًا إضافيًا فورًا، وهذا المصنع يستمر بالإنتاج طوال فترة صلاحية الباقة فقط — وهي <strong>ميزة مدفوعة واختيارية</strong>، تنتهي بانتهاء الباقة وليست مكسبًا دائمًا، وليست ضرورية لإتمام تقدّم الأسبوع الأول.</p>
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr><th>المستوى</th><th>الإنتاج/ساعة</th><th>تكلفة الترقية (فحم، تقريبي)</th></tr></thead>
@@ -439,6 +505,13 @@
     </div>
     <div class="highlight-box">🎯 استراتيجية استثمار: طوّر كل مصانعك إلى المستوى 15 أولًا (لفتح المصنع التالي)، ثم بعد توفر 4 مصانع أساسية + 1 من باقة الأسبوع، ارفعها جميعًا إلى 16 ثم 17 وهكذا — طالما كل مستوى يمنح نفس الزيادة في الإنتاج، رقّي الأرخص تكلفة أولًا.</div>
     <div class="note-box">تخفيضات التكلفة الممكنة: تقنية "Master Craftsman"، مهارة المهندس مستوى 35 "توفير الموارد" (حتى -5%)، وتقنية تحالف "Veteran Craftsman".</div>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: منحنى إنتاج مصانع سبائك التيتانيوم حسب المستوى
+         Suggested filename: s2-w1-titanium-factory-progress.webp
+         Suggested path: ../../images/s2-w1-titanium-factory-progress.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-titanium-factory-progress.webp" alt="تطور إنتاج مصانع سبائك التيتانيوم" width="600" height="360" loading="lazy">
+    -->
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> و<a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">دليل الاستراتيجية الشامل</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -449,20 +522,34 @@
 <div class="section" id="furnace">
   <div class="section-head sh-gold">🏛️ 7. فرن التحالف</div>
   <div class="section-body">
-    <p>يُبنى على أرض من المستوى 1. الإصلاح يحتاج حتى 20 تعزيزًا، ولا يستطيع تنفيذ ذلك سوى أعضاء R4/R5. يُدفّئ فقط القواعد الواقعة ضمن نطاقه — لذلك يجب تجمّع الأعضاء بالقرب منه.</p>
+    <p>يُبنى على أرض من المستوى 1. بدء وإدارة عملية الإصلاح (عبر: التحالف ← فرن التحالف ← الإحداثيات) مقصورة على R4/R5 فقط. أما المشاركة الفعلية في الإصلاح فتتم بإرسال أي عضو لإسكواداته لتعزيز الفرن — بنفس آلية إصلاح المعاقل في الموسم الأول — حيث يمكن أن يشارك فيها <strong>حتى 20 تعزيزًا</strong> (وليس عددًا إلزاميًا لإتمام العملية). يُدفّئ فقط القواعد الواقعة ضمن نطاقه — لذلك يجب تجمّع الأعضاء بالقرب منه.</p>
+    <div class="badges"><span class="tbadge tb-nwh">استراتيجية NWH</span></div>
+    <p>الأعضاء ذوو الحرارة الشخصية المنخفضة أو الفرن الشخصي الأقل تطورًا يمكن تموضعهم بشكل أقرب لفرن التحالف للاستفادة من نطاق تدفئته، ضمن حدود هذا النطاق وبما يتوافق مع قرارات تموضع NWH العامة (القسم 3).</p>
     <div class="table-wrap">
       <table class="data-table">
         <thead><tr><th>المستوى</th><th>فحم/دقيقة</th><th>الحرارة</th><th>حرارة Overdrive</th><th>فحم/دقيقة (Overdrive)</th><th>التخزين</th></tr></thead>
         <tbody>
           <tr><td>1</td><td>300</td><td>3°م</td><td>6°م</td><td>1,200</td><td>200K</td></tr>
+          <tr><td>5</td><td>540</td><td>5°م</td><td>10°م</td><td>2,160</td><td>600K</td></tr>
           <tr><td>10</td><td>840</td><td>7.5°م</td><td>15°م</td><td>3,360</td><td>1,450K</td></tr>
           <tr><td>20</td><td>1,440</td><td>12.5°م</td><td>25°م</td><td>5,760</td><td>4,150K</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="badges"><span class="tbadge tb-verify">بيانات جزئية — عرضنا فقط المستويات 1، 10، 20 المؤكدة من المصدر</span></div>
-    <p>المتانة (Durability) تتراوح من 205K في المستوى 1 إلى 300K في المستوى 20.</p>
-    <p><strong>صناديق الإمدادات (Supply Collections):</strong> تظهر فقط عندما تصل الأرض إلى 0°م. إذا كانت متجمدة، تحتاج حرارة فرن التحالف أو كسر الجليد (1,000 متانة لكل ضربة، 5 نقاط طاقة).</p>
+    <div class="badges"><span class="tbadge tb-verify">بيانات جزئية — عرضنا فقط المستويات 1، 5، 10، 20 المؤكدة من المصدر</span></div>
+    <p>المتانة (Durability) تتراوح من 205K في المستوى 1 إلى 300K في المستوى 20. المصدر يذكر قيمة 340K للمستوى 8 — بينما المستوى 7 يقارب 235K والمستوى 9 يقارب 245K — أي أن قيمة المستوى 8 أعلى بشكل غير منطقي من المستويين المحيطين بها. نُبقي هذا التضارب كما ورد في المصدر دون تصحيحه بالاستقراء، ونشير إليه فقط كاحتمال خطأ مطبعي محتمل في الجدول المرجعي.</p>
+    <p><strong>صناديق الإمدادات (Supply Collections):</strong> تظهر فقط عندما تصل الأرض إلى 0°م، وبحد أقصى 5 محاولات استلام يوميًا. إذا كانت متجمدة، تحتاج حرارة فرن التحالف أو كسر الجليد (1,000 متانة لكل ضربة، 5 نقاط طاقة).</p>
+
+    <div class="badges"><span class="tbadge tb-nwh">توصية NWH — ليست قاعدة إلزامية</span></div>
+    <div class="highlight-box">🔥 يُفضَّل تنظيم تبرعات الفحم بين الأعضاء بشكل دوري للحفاظ على تشغيل فرن التحالف باستمرار قدر الإمكان، بدل تركه يتوقف بين فترات التبرع. هذه توصية تنظيمية من NWH، وليست قاعدة إلزامية من اللعبة.</div>
+    <p>لمتابعة تقدّم الأهداف الجماعية لفرن التحالف (وغيرها من الأهداف الجماعية)، يمكن التحقق من: الموسم الثاني ← الأهداف ← التحالف (Season 2 → Goals → Alliance).</p>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: تموضع فرن التحالف ونطاق تدفئته
+         Suggested filename: s2-w1-alliance-furnace-layout.webp
+         Suggested path: ../../images/s2-w1-alliance-furnace-layout.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-alliance-furnace-layout.webp" alt="تموضع فرن التحالف ونطاق تدفئته" width="600" height="400" loading="lazy">
+    -->
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -473,11 +560,19 @@
 <div class="section" id="events">
   <div class="section-head sh-blue">🎉 8. أحداث الأسبوع الأول</div>
   <div class="section-body">
+    <p>الأسبوع الأول يتضمن <strong>6 مهام موسمية رئيسية</strong> (Cold Wave Alert، الفرن عالي الحرارة، مصنع التيتانيوم، فرن التحالف، فتح القرية، فتح البلدة) إلى جانب أحداث مكمّلة. لتجنّب الخلط، كل بطاقة أدناه تفرّق بوضوح بين:</p>
+    <ul class="checklist">
+      <li>🎯 <strong>هدف المهمة (Mission Goal):</strong> إنجاز فردي محدد (مثل تشغيل الفرن 600 ثانية) — قد يُفتح فقط بعد تحقّق هدف الصندوق الجماعي (بفارق 12 ساعة في بعض الحالات).</li>
+      <li>📦 <strong>هدف صندوق المكافأة الجماعي (Reward Chest Goal):</strong> إنجاز تراكمي تحقّقه منطقة الحرب أو مناطق الحرب مجتمعة (وليس تحالفك وحده).</li>
+      <li>🏅 <strong>الترتيب الفردي:</strong> تصنيف شخصي بين اللاعبين حسب المساهمة أو السرعة.</li>
+      <li>🤝 <strong>الترتيب بين التحالفات:</strong> تصنيف جماعي بين التحالفات (ليس بين الأفراد).</li>
+      <li>🛠️ <strong>تعليمة NWH داخلية:</strong> قرار تنظيمي من قيادة التحالف، لا علاقة له بأي نظام مكافآت في اللعبة.</li>
+    </ul>
 
     <div class="event-card">
       <div class="event-title">❄️ Cold Wave Alert</div>
       <div class="event-meta">يبدأ اليوم 1 — يستمر 7 أيام</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span> <span class="tbadge tb-collective">هدف جماعي</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span> <span class="tbadge tb-collective">هدف جماعي</span></div>
       <div class="event-row"><b>أهداف المهمة الفردية:</b> فرن شخصي 600 ثانية + Overdrive 600 ثانية + تبرّع فحم مرة واحدة + مساعدة 3 حلفاء على التدفئة.</div>
       <div class="event-row"><b>هدف صندوق المكافأة الجماعي:</b> قتل 800 Doom Elite عبر جميع مناطق الحرب مجتمعة.</div>
     </div>
@@ -485,7 +580,7 @@
     <div class="event-card">
       <div class="event-title">🔥 الفرن عالي الحرارة</div>
       <div class="event-meta">اليوم 1</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span> <span class="tbadge tb-collective">هدف جماعي</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span> <span class="tbadge tb-collective">هدف جماعي</span></div>
       <div class="event-row"><b>المهمة:</b> فتح الفرن عالي الحرارة.</div>
       <div class="event-row"><b>هدف الصندوق الجماعي:</b> التبرّع بـ3,000,000 حديد عبر جميع مناطق الحرب، مع ترتيب فردي إضافي حسب التبرعات.</div>
     </div>
@@ -493,7 +588,7 @@
     <div class="event-card">
       <div class="event-title">🏭 فتح مصنع سبائك التيتانيوم</div>
       <div class="event-meta">اليوم 1</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="event-row"><b>المهمة:</b> فتح وترقية المصانع من 1 إلى 5 — كل مصنع يُفتح عند ترقية السابق، ويحتاج الفحم.</div>
       <div class="event-row"><b>هدف الصندوق الجماعي:</b> نفس هدف 3,000,000 حديد.</div>
     </div>
@@ -501,7 +596,7 @@
     <div class="event-card">
       <div class="event-title">🏛️ فرن التحالف</div>
       <div class="event-meta">اليوم 1</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="event-row"><b>المهمة:</b> بناء/إصلاح فرن التحالف عبر: التحالف ← فرن التحالف ← الإحداثيات، ثم إرسال فرقة (مشابه لمعاقل الموسم الأول).</div>
       <div class="event-row"><b>هدف الصندوق الجماعي:</b> التبرّع بـ5,000,000 فحم عبر جميع مناطق الحرب، مع ترتيب فردي.</div>
     </div>
@@ -509,7 +604,7 @@
     <div class="event-card">
       <div class="event-title">🏘️ فتح المدينة — قرية (المستوى 1)</div>
       <div class="event-meta">اليوم 3 (هدف الصندوق فوري، هدف المهمة يبدأ بعد 12 ساعة إضافية)</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="event-row"><b>المهمة:</b> احتلال مدن من المستوى 1.</div>
       <div class="event-row"><b>هدف الصندوق الجماعي:</b> احتلال 80 موقع حفر إجمالًا عبر مناطق الحرب.</div>
     </div>
@@ -517,7 +612,7 @@
     <div class="event-card">
       <div class="event-title">🏙️ فتح المدينة — بلدة (المستوى 2)</div>
       <div class="event-meta">اليوم 6 (هدف الصندوق فوري، هدف المهمة يبدأ بعد 12 ساعة إضافية)</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
       <div class="event-row"><b>المهمة:</b> احتلال مدن من المستوى 2.</div>
       <div class="event-row"><b>هدف الصندوق الجماعي:</b> نفس هدف 80 موقع حفر.</div>
     </div>
@@ -525,16 +620,25 @@
     <div class="event-card">
       <div class="event-title">⚔️ City Clash S2</div>
       <div class="event-meta">يبدأ اليوم 3 الساعة 12:00 ظهرًا بتوقيت السيرفر</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
-      <div class="event-row">يجب امتلاك موقع حفر من المستوى 1 أولًا قبل أن يتمكن R4/R5 من إعلان الحرب على المدن. كل تحالف يستهدف مدينة واحدة في كل مرة. الجنود يتعرضون لضرر السموم أثناء الحصار (تقلله مقاومة الفيروس). المدن المحتلة تحصل على حماية تقارب 6 أيام؛ بعد التخلي عن مدينة، فترة انتظار تقارب 5 أيام.</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
+      <div class="event-row">يجب امتلاك موقع حفر من المستوى 1 أولًا قبل أن يتمكن R4/R5 من إعلان الحرب على المدن. كل تحالف يستهدف مدينة واحدة في كل مرة. الجنود يتعرضون لضرر السموم أثناء الحصار (تقلله مقاومة الفيروس) بالإضافة إلى خسائر مباشرة في الوحدات. المدن المحتلة تحصل على حماية تقارب 6 أيام؛ بعد التخلي عن مدينة، فترة انتظار تقارب 5 أيام.</div>
+      <div class="event-row"><b>المكافآت:</b> مكافآت أول احتلال تذهب للمشاركين فعليًا في المعركة، وجميع أعضاء التحالف يحصلون على مكافآت المدينة + تحسينات (Buffs) عامة، بينما يتم توزيع صناديق الغنائم عبر R5 أو مسؤول التوزيع (Butler).</div>
       <div class="badges"><span class="tbadge tb-verify">حدود الإعلان اليومية وعدد مواقع الحفر القصوى مذكورة في تعليقات القراء وليست مؤكدة رسميًا من المقال</span></div>
+
+      <!-- FUTURE IMAGE SLOT — صورة توضيحية: جدول مواعيد City Clash S2 لكل مستوى مدينة
+           Suggested filename: s2-w1-city-clash-schedule.webp
+           Suggested path: ../../images/s2-w1-city-clash-schedule.webp
+           Future markup once approved:
+           <img src="../../images/s2-w1-city-clash-schedule.webp" alt="جدول مواعيد فتح مستويات المدن في City Clash S2" width="600" height="340" loading="lazy">
+      -->
     </div>
 
     <div class="event-card">
       <div class="event-title">⚔️ سلاح ميرفي الحصري (Murphy's Exclusive Weapon)</div>
       <div class="event-meta">متاح من اليوم 4</div>
-      <div class="badges"><span class="tbadge tb-official">مهمة رسمية</span></div>
-      <div class="event-row">يتطلب بطل ميرفي بـ5 نجوم. التفعيل يحتاج 50 شظية؛ باقة سلاح ميرفي الحصري تمنح 70 شظية (كافية للتفعيل + المستوى 2)، ومتاحة حتى اليوم 3 من الأسبوع الثاني. الترقيات تستخدم شظايا السلاح الحصري العامة (تتوفر في بعض صناديق دوري المبارزة). الحد الأقصى: المستوى 30.</div>
+      <div class="badges"><span class="tbadge tb-official">مهمة موسمية</span></div>
+      <div class="event-row">يتطلب بطل ميرفي بـ5 نجوم. التفعيل يحتاج 50 شظية؛ باقة سلاح ميرفي الحصري تمنح 70 شظية (كافية للتفعيل + المستوى 2)، ومتاحة حتى اليوم 3 من الأسبوع الثاني. الترقيات تستخدم شظايا السلاح الحصري العامة (تتوفر في بعض صناديق دوري المبارزة). الحد الأقصى: المستوى 30. يرفع الحد الأقصى لمهارة ميرفي إلى المستوى 40.</div>
+      <div class="event-row"><b>التأثير:</b> يقلّل ضرر الهجوم التلقائي القادم فقط، ثم يُستهلك بعد هجوم تلقائي واحد، ويمكن تكديسه حتى 3 مرات.</div>
     </div>
 
     <div class="event-card">
@@ -568,9 +672,15 @@
       <li>📅 سقف يومي: احتلالان فقط في اليوم. بعد بلوغه، لا يمكن مهاجمة المواقع المحايدة أو المملوكة.</li>
       <li>⏱️ نافذة الاحتلال: يجب على التحالف الوصول إلى 100% خلال 4 ساعات، وإلا تفشل المحاولة.</li>
       <li>🛡️ حماية بعد الاحتلال: 36 ساعة، يحرسها حراس الموقع.</li>
-      <li>🦣 المتطلبات: يجب أن تكون الوحوش غير متجمدة، وتُهزم بمقاومة فيروس كافية، وتحتاج تجمعات متعددة.</li>
+      <li>🦣 المتطلبات: يجب أن تكون الوحوش غير متجمدة (إذاب الوحش المتجمد يحتاج إرسال إسكواد أولًا)، مع الحاجة لعدة تجمّعات (Rallies) لأن كل ضربة تُلحق نسبة من الضرر فقط.</li>
+      <li>🧱 التعزيز: يمكن إرسال حتى 10 إسكواد لتعزيز موقع الحفر بعد هزيمة الوحش.</li>
       <li>🚪 التخلي: يستغرق ساعة واحدة؛ يجب انتهاء فترة الحماية قبل أن يتمكن أي تحالف آخر من إعادة الاحتلال.</li>
     </ul>
+
+    <div class="highlight-green">🎁 <strong>مكافآت أول مشاركة</strong> (أي واحدة من الآتي تكفي لنيلها): الانضمام إلى تجمّع (Rally) عادي ضد وحش (Mutant Beast) بإسكواد قوي، أو بدء/الانضمام إلى "تجمّع مشاركة" بإسكواد بطل واحد ضعيف فقط، أو تعزيز موقع حفر خلال عملية احتلاله حتى لو لثوانٍ معدودة.</div>
+    <div class="note-box">⚠️ هذه قواعد الاحتلال والمشاركة كما وردت في الدليل الاستراتيجي — منفصلة عمدًا عن التوصيات التكتيكية لـNWH أدناه، ولا تضمن سرعة توسّع معينة للتحالف.</div>
+
+    <div class="highlight-blue">💡 <strong>توصية عامة من الدليل الاستراتيجي (وليست من جدول المقاومة أدناه):</strong> للمشاركة في قتال وحوش Mutant Beast بشكل عام، يُنصح بمقاومة فيروس لا تقل عن 2,500 تقريبًا وإسكواد بقوة 25 مليون تقريبًا أو أكثر. <strong>هذا رقم تقريبي وعام لا يضمن النجاح ضد موقع حفر من المستوى 1 تحديدًا</strong> — فالجدول أدناه يوضح أن موقع المستوى 1 نفسه يتطلب مقاومة تقارب 4,000، أي أعلى من التوصية العامة.</div>
 
     <div class="table-wrap">
       <table class="data-table">
@@ -585,6 +695,37 @@
       </table>
     </div>
     <div class="badges"><span class="tbadge tb-verify">قيمة المستوى 5 غير واضحة في المصدر (خطأ مطبعي محتمل) — لم نذكرها لتفادي نشر رقم خاطئ</span></div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>مستوى موقع الحفر</th><th>فحم/ساعة</th><th>تربة نادرة/ساعة</th></tr></thead>
+        <tbody>
+          <tr><td>المستوى 1</td><td>2,736</td><td>100</td></tr>
+          <tr><td>المستوى 2</td><td>2,880</td><td>110</td></tr>
+          <tr><td>المستوى 3</td><td>3,024</td><td>120</td></tr>
+          <tr><td>المستوى 4</td><td>3,168</td><td>130</td></tr>
+          <tr><td>المستوى 5</td><td>3,312</td><td>140</td></tr>
+          <tr><td>المستوى 6</td><td>3,456</td><td>150</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <details class="explain">
+      <summary>🧮 كيف تُطبَّق مقاومة الفيروس داخل التجمّع (Rally)؟</summary>
+      <div class="explain-body">
+        <p>مقاومة فيروس قائد التجمّع تنطبق على جميع المشاركين فيه، <strong>إلا</strong> من كانت مقاومته الخاصة أعلى من مقاومة القائد — فيحتفظ هذا العضو بقيمته الشخصية.</p>
+        <p><strong>مثال:</strong> القائد = 2,500 — العضو A = 3,000 — الأعضاء B وC وD = 1,000 لكل منهم.</p>
+        <p><strong>المقاومة المطبّقة فعليًا أثناء القتال:</strong> القائد = 2,500 — A = 3,000 (يحتفظ بقيمته لأنها أعلى) — B، C، D = 2,500 لكل منهم (ترتفع إلى مستوى القائد).</p>
+        <p>لذلك يُفضَّل أن يقود التجمّعات ضد مواقع الحفر أعضاء ذوو مقاومة فيروس مرتفعة — هذا يسمح لبقية المشاركين بالاستفادة من هذه المقاومة والوصول إلى احتلالات أسرع وأكثر أمانًا.</p>
+      </div>
+    </details>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية اختيارية: شرح آلية تطبيق مقاومة الفيروس داخل التجمّع (مثال القائد/الأعضاء)
+         Suggested filename: s2-w1-rally-virus-resistance-example.webp
+         Suggested path: ../../images/s2-w1-rally-virus-resistance-example.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-rally-virus-resistance-example.webp" alt="مثال تطبيق مقاومة الفيروس داخل التجمع" width="600" height="360" loading="lazy">
+    -->
 
     <p><strong>تطابق الوحدات مع الوحوش:</strong> الغوريلا (طيران) ضعيفة أمام المركبات الصاروخية، الدب (صاروخي) ضعيف أمام الدبابات، الماموث (دبابات) ضعيف أمام الطيران. التحالفات ذات القوة الدبابية يُنصح لها باستهداف الدببة القطبية أولًا.</p>
 
@@ -603,7 +744,28 @@
       </table>
     </div>
     <p>الحد الأقصى لامتلاك المدن: 6 مدن. مدن المستوى 6 هي الأكثر قيمة، وتقع شمال وشرق وجنوب وغرب العاصمة.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>مستوى المدينة</th><th>تربة نادرة/ساعة (تقريبي)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>350</td></tr>
+          <tr><td>2</td><td>400</td></tr>
+          <tr><td>3</td><td>450</td></tr>
+          <tr><td>4</td><td>800</td></tr>
+          <tr><td>5</td><td>900</td></tr>
+          <tr><td>6</td><td>1,000</td></tr>
+        </tbody>
+      </table>
+    </div>
     <div class="highlight-box">🎯 استراتيجية NWH: اختر أول موقع حفر بما يتناسب مع تركيبة جيشك (نوع الوحش مقابل نوع قواتك)، وجهّز خط توسّع نحو مدن المستوى 6 دون الكشف عن إحداثيات أو أهداف محددة قبل أوانها.</div>
+
+    <!-- FUTURE IMAGE SLOT — صورة توضيحية: مخطط توسّع الأراضي من موقع الحفر الأول نحو المدن
+         Suggested filename: s2-w1-territory-expansion-map.webp
+         Suggested path: ../../images/s2-w1-territory-expansion-map.webp
+         Future markup once approved:
+         <img src="../../images/s2-w1-territory-expansion-map.webp" alt="مخطط توسّع الأراضي ومواقع الحفر" width="600" height="400" loading="lazy">
+    -->
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a>، <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> و<a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">دليل الاستراتيجية الشامل</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -646,6 +808,13 @@
         </ul>
       </div>
       <div class="timeline-day">
+        <div class="timeline-day-title">اليوم 5</div>
+        <ul class="timeline-items">
+          <li>🔄 استمرار: لا حدث جديد مؤكد خاص باليوم 5 في المصادر المتوفرة — واصل أهداف City Clash S2، تطوير المصانع، وتجميع الفحم.</li>
+          <li>🧟 Purge Action يتواصل حتى نهايته في اليوم 7 — استمر في استهداف أعلى زومبي ممكن.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
         <div class="timeline-day-title">اليوم 6</div>
         <ul class="timeline-items">
           <li>🏙️ فتح المدينة (بلدة، المستوى 2) — هدف الصندوق فوري، هدف المهمة بعد 12 ساعة.</li>
@@ -669,17 +838,17 @@
 <div class="section" id="checklist">
   <div class="section-head sh-green">✅ 11. قائمة التحقق العملية (فردية)</div>
   <div class="section-body">
-    <div class="note-box">هذه القائمة لتتبعك الشخصي فقط داخل هذه الصفحة — لا تُزامن مع التحالف ولا تمثل بيانات جماعية حقيقية.</div>
-    <ul class="checklist">
-      <li>⬜ تشغيل الفرن الشخصي 600 ثانية</li>
-      <li>⬜ تفعيل Overdrive 600 ثانية</li>
-      <li>⬜ التبرّع بالفحم لفرن التحالف مرة واحدة على الأقل</li>
-      <li>⬜ مساعدة 3 حلفاء على رفع حرارتهم</li>
-      <li>⬜ فتح الفرن عالي الحرارة</li>
-      <li>⬜ بدء تطوير أول مصنع سبائك تيتانيوم</li>
-      <li>⬜ تحديد موقع الحفر المستهدف بالتنسيق مع R4/R5</li>
-      <li>⬜ الالتزام بموقع القاعدة المحدد ضمن مخطط NWH (3×3 + خانتان فارغتان)</li>
-      <li>⬜ متابعة حرارة القاعدة بانتظام لتفادي التجمّد</li>
+    <div class="note-box">هذه القائمة محفوظة فقط في متصفحك أنت (تخزين محلي فردي) — لا تُزامن مع التحالف، ولا يراها أي عضو آخر، ولا تمثل بيانات جماعية حقيقية. مسح بيانات المتصفح يصفّرها.</div>
+    <ul class="checklist" id="s2w1-checklist">
+      <li><label><input type="checkbox" data-task="furnace600"> تشغيل الفرن الشخصي 600 ثانية</label></li>
+      <li><label><input type="checkbox" data-task="overdrive600"> تفعيل Overdrive 600 ثانية</label></li>
+      <li><label><input type="checkbox" data-task="donate-coal"> التبرّع بالفحم لفرن التحالف مرة واحدة على الأقل</label></li>
+      <li><label><input type="checkbox" data-task="help-allies"> مساعدة 3 حلفاء على رفع حرارتهم</label></li>
+      <li><label><input type="checkbox" data-task="open-furnace"> فتح الفرن عالي الحرارة</label></li>
+      <li><label><input type="checkbox" data-task="titanium-factory"> بدء تطوير أول مصنع سبائك تيتانيوم</label></li>
+      <li><label><input type="checkbox" data-task="dig-site"> تحديد موقع الحفر المستهدف بالتنسيق مع R4/R5</label></li>
+      <li><label><input type="checkbox" data-task="base-layout"> الالتزام بموقع القاعدة المحدد ضمن مخطط NWH (3×3 + خانتان فارغتان)</label></li>
+      <li><label><input type="checkbox" data-task="monitor-temp"> متابعة حرارة القاعدة بانتظام لتفادي التجمّد</label></li>
     </ul>
   </div>
 </div>
@@ -723,7 +892,7 @@
   <div class="footer-shield">🛡️</div>
   <div class="footer-name">NWH Night Watch</div>
   <div class="footer-credit">إعداد: MSBKH</div>
-  <div class="footer-credit">آخر تحديث: 08/11/2026</div>
+  <div class="footer-credit">آخر تحديث: 09/11/2026</div>
 </div>
 
 <a href="#top" class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">🔝</a>
@@ -738,6 +907,27 @@
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  // قائمة التحقق — حفظ محلي فردي فقط (متصفح الزائر)، بدون أي مزامنة مع التحالف
+  (function() {
+    const STORAGE_KEY = 'nwh-s2w1-checklist';
+    const boxes = document.querySelectorAll('#s2w1-checklist input[type="checkbox"]');
+    let saved = {};
+    try {
+      saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (e) { saved = {}; }
+
+    boxes.forEach(box => {
+      if (saved[box.dataset.task]) box.checked = true;
+      box.addEventListener('change', () => {
+        try {
+          const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          state[box.dataset.task] = box.checked;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { /* تخزين محلي غير متاح — القائمة تبقى تعمل داخل الجلسة الحالية فقط */ }
+      });
+    });
+  })();
 </script>
 
 </body>
