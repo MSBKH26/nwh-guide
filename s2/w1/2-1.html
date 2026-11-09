@@ -209,7 +209,7 @@
       <li>⛏️ <strong>مواقع الحفر (Dig Sites)</strong> — مصدر الفحم المستمر وأول أراضيك المملوكة.</li>
     </ul>
 
-    <img src="../../images/s2-w1-high-heat-furnace-ui.webp" alt="واجهة الفرن الشخصي عالي الحرارة" width="600" height="400" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-high-heat-furnace-ui.webp" alt="واجهة الفرن الشخصي عالي الحرارة" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
 
     <p>هذه الأنظمة مترابطة: الفحم من مواقع الحفر يُستخدم لبناء وترقية الأفران والمصانع، وهذه بدورها تحميك من التجمّد وتفتح مقاومة الفيروس اللازمة لمحاربة وحوش القطب والسيطرة على مزيد من الأراضي.</p>
   </div>
@@ -313,89 +313,13 @@
     <p>الأهداف: توسيع مساحة نفوذ NWH، تنظيم التحركات، تقليل الأماكن المتاحة للعدو، وتجهيز منطقة خلفية محمية لفرن التحالف.</p>
 
     <div class="grid-wrap">
-      <svg width="310" height="310" viewBox="0 0 310 310" xmlns="http://www.w3.org/2000/svg">
-        <!-- خلفية -->
-        <rect x="0" y="0" width="310" height="310" fill="#0b1118" rx="8"/>
-
-        <!-- شبكة كاملة بخانات 22×22 بكسل، مرسومة على كامل المساحة (قواعد + فراغات) -->
-        <!-- خطوط عمودية: x = 10, 32, 54 ... 296 (14 خطًا، كل 22px) -->
-        <g stroke="rgba(148,163,184,0.22)" stroke-width="1">
-          <line x1="10" y1="10" x2="10" y2="296"/><line x1="32" y1="10" x2="32" y2="296"/>
-          <line x1="54" y1="10" x2="54" y2="296"/><line x1="76" y1="10" x2="76" y2="296"/>
-          <line x1="98" y1="10" x2="98" y2="296"/><line x1="120" y1="10" x2="120" y2="296"/>
-          <line x1="142" y1="10" x2="142" y2="296"/><line x1="164" y1="10" x2="164" y2="296"/>
-          <line x1="186" y1="10" x2="186" y2="296"/><line x1="208" y1="10" x2="208" y2="296"/>
-          <line x1="230" y1="10" x2="230" y2="296"/><line x1="252" y1="10" x2="252" y2="296"/>
-          <line x1="274" y1="10" x2="274" y2="296"/><line x1="296" y1="10" x2="296" y2="296"/>
-          <!-- خطوط أفقية مماثلة -->
-          <line x1="10" y1="10" x2="296" y2="10"/><line x1="10" y1="32" x2="296" y2="32"/>
-          <line x1="10" y1="54" x2="296" y2="54"/><line x1="10" y1="76" x2="296" y2="76"/>
-          <line x1="10" y1="98" x2="296" y2="98"/><line x1="10" y1="120" x2="296" y2="120"/>
-          <line x1="10" y1="142" x2="296" y2="142"/><line x1="10" y1="164" x2="296" y2="164"/>
-          <line x1="10" y1="186" x2="296" y2="186"/><line x1="10" y1="208" x2="296" y2="208"/>
-          <line x1="10" y1="230" x2="296" y2="230"/><line x1="10" y1="252" x2="296" y2="252"/>
-          <line x1="10" y1="274" x2="296" y2="274"/><line x1="10" y1="296" x2="296" y2="296"/>
-        </g>
-
-        <!-- القواعد: 3×3 قواعد متطابقة (9 قواعد، بدون أي تمييز لفرن التحالف هنا) -->
-        <g>
-          <rect x="10"  y="10"  width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="120" y="10"  width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="230" y="10"  width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-
-          <rect x="10"  y="120" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="120" y="120" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="230" y="120" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-
-          <rect x="10"  y="230" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="120" y="230" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-          <rect x="230" y="230" width="66" height="66" fill="rgba(59,130,246,0.3)" stroke="#3b82f6" stroke-width="2" rx="3"/>
-        </g>
-
-        <!-- إعادة رسم نفس خطوط الشبكة فوق تعبئة القواعد الزرقاء، لتبقى تقسيمات 3×3 الداخلية ظاهرة بوضوح -->
-        <g stroke="rgba(226,232,240,0.45)" stroke-width="1">
-          <line x1="10" y1="10" x2="10" y2="296"/><line x1="32" y1="10" x2="32" y2="296"/>
-          <line x1="54" y1="10" x2="54" y2="296"/><line x1="76" y1="10" x2="76" y2="296"/>
-          <line x1="98" y1="10" x2="98" y2="296"/><line x1="120" y1="10" x2="120" y2="296"/>
-          <line x1="142" y1="10" x2="142" y2="296"/><line x1="164" y1="10" x2="164" y2="296"/>
-          <line x1="186" y1="10" x2="186" y2="296"/><line x1="208" y1="10" x2="208" y2="296"/>
-          <line x1="230" y1="10" x2="230" y2="296"/><line x1="252" y1="10" x2="252" y2="296"/>
-          <line x1="274" y1="10" x2="274" y2="296"/><line x1="296" y1="10" x2="296" y2="296"/>
-          <line x1="10" y1="10" x2="296" y2="10"/><line x1="10" y1="32" x2="296" y2="32"/>
-          <line x1="10" y1="54" x2="296" y2="54"/><line x1="10" y1="76" x2="296" y2="76"/>
-          <line x1="10" y1="98" x2="296" y2="98"/><line x1="10" y1="120" x2="296" y2="120"/>
-          <line x1="10" y1="142" x2="296" y2="142"/><line x1="10" y1="164" x2="296" y2="164"/>
-          <line x1="10" y1="186" x2="296" y2="186"/><line x1="10" y1="208" x2="296" y2="208"/>
-          <line x1="10" y1="230" x2="296" y2="230"/><line x1="10" y1="252" x2="296" y2="252"/>
-          <line x1="10" y1="274" x2="296" y2="274"/><line x1="10" y1="296" x2="296" y2="296"/>
-        </g>
-
-        <!-- حدود القواعد مُعاد رسمها فوق الكل لتبقى واضحة التمييز عن خطوط الشبكة الداخلية -->
-        <g fill="none" stroke="#3b82f6" stroke-width="2">
-          <rect x="10"  y="10"  width="66" height="66" rx="3"/>
-          <rect x="120" y="10"  width="66" height="66" rx="3"/>
-          <rect x="230" y="10"  width="66" height="66" rx="3"/>
-          <rect x="10"  y="120" width="66" height="66" rx="3"/>
-          <rect x="120" y="120" width="66" height="66" rx="3"/>
-          <rect x="230" y="120" width="66" height="66" rx="3"/>
-          <rect x="10"  y="230" width="66" height="66" rx="3"/>
-          <rect x="120" y="230" width="66" height="66" rx="3"/>
-          <rect x="230" y="230" width="66" height="66" rx="3"/>
-        </g>
-
-        <!-- تسمية توضيحية لعيّنة من الخانات الفارغة -->
-        <text x="98"  y="48" fill="#94a3b8" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان فارغتان</text>
-        <text x="40"  y="108" fill="#94a3b8" font-size="9" text-anchor="middle" font-family="Cairo, sans-serif">خانتان فارغتان</text>
-      </svg>
+      <img src="../../images/s2-w1-base-grid-example.webp" alt="لقطة فعلية لتوزيع قواعد NWH" width="600" height="400" loading="lazy" style="width:100%; max-width:420px; height:auto; border-radius:10px; display:block; margin:0 auto;">
     </div>
     <div class="grid-legend">
       <div class="legend-item"><span class="legend-swatch" style="background:rgba(59,130,246,0.5); border:1px solid #3b82f6;"></span> قاعدة عضو (3×3 خانات)</div>
       <div class="legend-item"><span class="legend-swatch" style="background:transparent; border:1px solid rgba(148,163,184,0.4);"></span> خانة فارغة (22×22)</div>
     </div>
     <div class="note-box">فرن التحالف غير ممثّل في هذا المخطط عمدًا — تنظيم القواعد هنا مستقل عن موقع الفرن، الذي يُشرح بتفصيل في القسم 7 أدناه.</div>
-    <div class="note-box">المخطط أعلاه رسم بـSVG بدقة رياضية (كل قاعدة = مربع 66×66 بكسل يمثل 3×3 خانات، والفراغ بينها 44 بكسل يمثل خانتين) — وليس صورة مولّدة بالذكاء الاصطناعي. الهندسة هنا نهائية ولن تتغيّر عند إضافة صور توضيحية إضافية لاحقًا.</div>
-
-    <img src="../../images/s2-w1-base-grid-example.webp" alt="لقطة فعلية لتوزيع قواعد NWH" width="600" height="400" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
 
     <div class="highlight-box">هذه استراتيجية تنظيمية داخلية لـNWH، وليست قاعدة مفروضة رسميًا من اللعبة أو من الدليل المجتمعي.</div>
   </div>
@@ -419,7 +343,7 @@
     <div class="highlight-blue">💡 استخدم تبويب "Warm Up" لمعرفة الحلفاء الذين انخفضت حرارتهم بشكل خطير بسرعة، بدل تفقّد كل عضو يدويًا. كما يمكن تفعيل ضبط تلقائي لتشغيل الفرن الشخصي عند بداية عاصفة ثلجية (Blizzard)، لتجنّب التجمّد في حال غيابك عن اللعبة لحظة الوصول.</div>
     <div class="note-box">تنبيه: حرارة القاعدة لا تؤثر فقط على خطر التجمّد — فهي تؤثر أيضًا على إحصائيات وميزات/أضرار إضافية للقاعدة (Buffs/Debuffs). المصدر لا يذكر نسبًا دقيقة لهذا التأثير، لذلك لا نذكر أي رقم محدد هنا.</div>
 
-    <img src="../../images/s2-w1-freeze-thaw-diagram.webp" alt="آلية التجمد والذوبان" width="600" height="360" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-freeze-thaw-diagram.webp" alt="آلية التجمد والذوبان" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
 
     <div class="table-wrap">
       <table class="data-table">
@@ -460,7 +384,7 @@
     <div class="highlight-box">💡 نصيحة: استخدم زر "المطالبة بالكل كل ساعة" (Claim all hourly) في تبويب مواقع الحفر لعدم تفويت إنتاج الفحم التراكمي.</div>
     <div class="highlight-box">💡 نصيحة: نظّم بين الاحتياج الشخصي (فرن فردي) والاحتياج الجماعي (فرن التحالف) — لا تُفرغ مخزونك الشخصي في التحالف قبل تأمين حرارتك الخاصة، والعكس صحيح عند اقتراب عاصفة قوية.</div>
 
-    <img src="../../images/s2-w1-coal-sources.webp" alt="مصادر واستخدامات الفحم" width="600" height="400" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-coal-sources.webp" alt="مصادر واستخدامات الفحم" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -486,7 +410,7 @@
     <div class="highlight-box">🎯 استراتيجية استثمار: طوّر كل مصانعك إلى المستوى 15 أولًا (لفتح المصنع التالي)، ثم بعد توفر 4 مصانع أساسية + 1 من باقة الأسبوع، ارفعها جميعًا إلى 16 ثم 17 وهكذا — طالما كل مستوى يمنح نفس الزيادة في الإنتاج، رقّي الأرخص تكلفة أولًا.</div>
     <div class="note-box">تخفيضات التكلفة الممكنة: تقنية "Master Craftsman"، مهارة المهندس مستوى 35 "توفير الموارد" (حتى -5%)، وتقنية تحالف "Veteran Craftsman".</div>
 
-    <img src="../../images/s2-w1-titanium-factory-progress.webp" alt="تطور إنتاج مصانع سبائك التيتانيوم" width="600" height="360" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-titanium-factory-progress.webp" alt="تطور إنتاج مصانع سبائك التيتانيوم" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> و<a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">دليل الاستراتيجية الشامل</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -519,7 +443,7 @@
     <div class="highlight-box">🔥 يُفضَّل تنظيم تبرعات الفحم بين الأعضاء بشكل دوري للحفاظ على تشغيل فرن التحالف باستمرار قدر الإمكان، بدل تركه يتوقف بين فترات التبرع. هذه توصية تنظيمية من NWH، وليست قاعدة إلزامية من اللعبة.</div>
     <p>لمتابعة تقدّم الأهداف الجماعية لفرن التحالف (وغيرها من الأهداف الجماعية)، يمكن التحقق من: الموسم الثاني ← الأهداف ← التحالف (Season 2 → Goals → Alliance).</p>
 
-    <img src="../../images/s2-w1-alliance-furnace-layout.webp" alt="تموضع فرن التحالف ونطاق تدفئته" width="600" height="400" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-alliance-furnace-layout.webp" alt="تموضع فرن التحالف ونطاق تدفئته" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (دليل مجتمعي غير رسمي)</div>
 </div>
@@ -595,7 +519,7 @@
       <div class="event-row"><b>المكافآت:</b> مكافآت أول احتلال تذهب للمشاركين فعليًا في المعركة، وجميع أعضاء التحالف يحصلون على مكافآت المدينة + تحسينات (Buffs) عامة، بينما يتم توزيع صناديق الغنائم عبر R5 أو مسؤول التوزيع (Butler).</div>
       <div class="badges"><span class="tbadge tb-verify">حدود الإعلان اليومية وعدد مواقع الحفر القصوى مذكورة في تعليقات القراء وليست مؤكدة رسميًا من المقال</span></div>
 
-      <img src="../../images/s2-w1-city-clash-schedule.webp" alt="جدول مواعيد فتح مستويات المدن في City Clash S2" width="600" height="340" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+      <img src="../../images/s2-w1-city-clash-schedule.webp" alt="جدول مواعيد فتح مستويات المدن في City Clash S2" width="600" height="340" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
     </div>
 
     <div class="event-card">
@@ -685,7 +609,7 @@
       </div>
     </details>
 
-    <img src="../../images/s2-w1-rally-virus-resistance-example.webp" alt="مثال تطبيق مقاومة الفيروس داخل التجمع" width="600" height="360" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-rally-virus-resistance-example.webp" alt="مثال تطبيق مقاومة الفيروس داخل التجمع" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
 
     <p><strong>تطابق الوحدات مع الوحوش:</strong> الغوريلا (طيران) ضعيفة أمام المركبات الصاروخية، الدب (صاروخي) ضعيف أمام الدبابات، الماموث (دبابات) ضعيف أمام الطيران. التحالفات ذات القوة الدبابية يُنصح لها باستهداف الدببة القطبية أولًا.</p>
 
@@ -720,7 +644,7 @@
     </div>
     <div class="highlight-box">🎯 استراتيجية NWH: اختر أول موقع حفر بما يتناسب مع تركيبة جيشك (نوع الوحش مقابل نوع قواتك)، وجهّز خط توسّع نحو مدن المستوى 6 دون الكشف عن إحداثيات أو أهداف محددة قبل أوانها.</div>
 
-    <img src="../../images/s2-w1-territory-expansion-map.webp" alt="مخطط توسّع الأراضي ومواقع الحفر" width="600" height="400" loading="lazy" style="width:100%; height:auto; border-radius:10px; margin:10px 0;">
+    <img src="../../images/s2-w1-territory-expansion-map.webp" alt="مخطط توسّع الأراضي ومواقع الحفر" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
   </div>
   <div class="source-note">المصدر: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a>، <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> و<a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">دليل الاستراتيجية الشامل</a> (دليل مجتمعي غير رسمي)</div>
 </div>
