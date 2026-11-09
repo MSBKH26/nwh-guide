@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Squad Power Guide — [NWH] Night Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #06080e;
+    --card:     #0c1018;
+    --border:   #181f2e;
+    --gold:     #f5c518;
+    --gold-dim: rgba(245,197,24,0.12);
+    --red:      #e8394a;
+    --blue:     #3b82f6;
+    --cyan:     #06b6d4;
+    --green:    #22c55e;
+    --orange:   #f97316;
+    --purple:   #a855f7;
+    --steel:    #94a3b8;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 14px;
+    font-size: 14px;
+    background-image:
+      radial-gradient(ellipse at 15% 5%, rgba(245,197,24,0.06) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 95%, rgba(59,130,246,0.05) 0%, transparent 45%);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 22px 14px 18px;
+    margin-bottom: 18px;
+    background: linear-gradient(160deg, #0f1118 0%, #0c1018 100%);
+    border: 1px solid #1e2a3a;
+    border-top: 3px solid var(--gold);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(245,197,24,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(245,197,24,0.4);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(245,197,24,0.18);
+  }
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .header h1 span { color: var(--gold); }
+  .header-sub { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+  .back-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    transition: border-color .2s, color .2s;
+  }
+  .back-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .section-head {
+    padding: 11px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    border-bottom: 1px solid var(--border);
+  }
+  .sh-gold   { background: linear-gradient(90deg, rgba(245,197,24,0.10), transparent);  color: var(--gold);   border-bottom-color: rgba(245,197,24,0.2); }
+  .sh-orange { background: linear-gradient(90deg, rgba(249,115,22,0.10), transparent);  color: var(--orange); border-bottom-color: rgba(249,115,22,0.2); }
+  .sh-blue   { background: linear-gradient(90deg, rgba(59,130,246,0.10), transparent);  color: #60a5fa;       border-bottom-color: rgba(59,130,246,0.2); }
+  .sh-cyan   { background: linear-gradient(90deg, rgba(6,182,212,0.10), transparent);   color: var(--cyan);   border-bottom-color: rgba(6,182,212,0.2); }
+  .sh-green  { background: linear-gradient(90deg, rgba(34,197,94,0.10), transparent);   color: var(--green);  border-bottom-color: rgba(34,197,94,0.2); }
+  .sh-red    { background: linear-gradient(90deg, rgba(232,57,74,0.10), transparent);   color: var(--red);    border-bottom-color: rgba(232,57,74,0.2); }
+  .sh-purple { background: linear-gradient(90deg, rgba(168,85,247,0.10), transparent);  color: #c084fc;       border-bottom-color: rgba(168,85,247,0.2); }
+  .sh-steel  { background: linear-gradient(90deg, rgba(148,163,184,0.08), transparent); color: var(--steel);  border-bottom-color: rgba(148,163,184,0.15); }
+
+  .section-body { padding: 14px 15px; }
+
+  /* ── TEXT ── */
+  p { line-height: 1.65; margin-bottom: 8px; }
+  p:last-child { margin-bottom: 0; }
+  .t-gold   { color: var(--gold); }
+  .t-orange { color: var(--orange); }
+  .t-blue   { color: #60a5fa; }
+  .t-cyan   { color: var(--cyan); }
+  .t-green  { color: var(--green); }
+  .t-red    { color: var(--red); }
+  .t-purple { color: #c084fc; }
+  .t-muted  { color: var(--muted); }
+  .bold     { font-weight: 900; }
+  a { color: inherit; text-decoration: underline; }
+
+  /* ── INTRO BOX ── */
+  .intro-box {
+    background: rgba(245,197,24,0.05);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .intro-box .intro-title {
+    font-weight: 900;
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+  .alert:last-child { margin-bottom: 0; }
+  .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .alert-gold   { background: rgba(245,197,24,0.07); border: 1px solid rgba(245,197,24,0.25); }
+  .alert-orange { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.25); }
+  .alert-red    { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .alert-blue   { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.25); }
+  .alert-green  { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .alert-purple { background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.25); }
+  .alert-cyan   { background: rgba(6,182,212,0.07);  border: 1px solid rgba(6,182,212,0.25); }
+  .alert-steel  { background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.2); }
+
+  /* ── ROW LIST ── */
+  .row-list { display: flex; flex-direction: column; gap: 7px; }
+  .row-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 10px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 8px;
+    font-size: 0.82rem;
+  }
+  .row-label { color: var(--muted); flex-shrink: 0; min-width: 90px; }
+  .row-val   { font-weight: 700; text-align: right; line-height: 1.45; }
+
+  /* ── PILL ── */
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .pill-gold   { background: rgba(245,197,24,0.12);  color: var(--gold);   border: 1px solid rgba(245,197,24,0.3); }
+  .pill-orange { background: rgba(249,115,22,0.12);  color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+  .pill-blue   { background: rgba(59,130,246,0.12);  color: #60a5fa;       border: 1px solid rgba(59,130,246,0.3); }
+  .pill-cyan   { background: rgba(6,182,212,0.12);   color: var(--cyan);   border: 1px solid rgba(6,182,212,0.3); }
+  .pill-green  { background: rgba(34,197,94,0.12);   color: var(--green);  border: 1px solid rgba(34,197,94,0.3); }
+  .pill-red    { background: rgba(232,57,74,0.12);   color: var(--red);    border: 1px solid rgba(232,57,74,0.3); }
+  .pill-purple { background: rgba(168,85,247,0.12);  color: #c084fc;       border: 1px solid rgba(168,85,247,0.3); }
+  .pill-steel  { background: rgba(148,163,184,0.10); color: var(--steel);  border: 1px solid rgba(148,163,184,0.2); }
+
+  /* ── DECISION TABLE ── */
+  .prio-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  .prio-table th {
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 900;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.72rem;
+    letter-spacing: .5px;
+  }
+  .prio-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+    line-height: 1.45;
+  }
+  .prio-table tr:last-child td { border-bottom: none; }
+
+  /* ── TIER BADGES ── */
+  .tier-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tier-badge {
+    flex: 1;
+    min-width: 68px;
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 0.75rem;
+  }
+  .tier-num  { font-size: 1.05rem; font-weight: 900; display: block; margin-bottom: 2px; }
+  .tier-sub  { font-size: 0.72rem; color: var(--muted); line-height: 1.35; }
+  .tb-green  { border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.05);  color: var(--green); }
+  .tb-blue   { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); color: #60a5fa; }
+  .tb-orange { border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); color: var(--orange); }
+  .tb-gold   { border-color: rgba(245,197,24,0.3); background: rgba(245,197,24,0.05); color: var(--gold); }
+
+  /* ── DECISION CARD ── */
+  .decision-card {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .decision-card:last-child { margin-bottom: 0; }
+  .dc-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .dc-body { flex: 1; }
+  .dc-title { font-weight: 900; font-size: 0.88rem; margin-bottom: 4px; }
+  .dc-desc  { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+  .dc-gold   { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.2); }
+  .dc-orange { background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.2); }
+  .dc-blue   { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); }
+  .dc-green  { background: rgba(34,197,94,0.06);  border: 1px solid rgba(34,197,94,0.2); }
+  .dc-red    { background: rgba(232,57,74,0.06);  border: 1px solid rgba(232,57,74,0.2); }
+  .dc-purple { background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2); }
+  .dc-cyan   { background: rgba(6,182,212,0.06);  border: 1px solid rgba(6,182,212,0.2); }
+  .dc-steel  { background: rgba(148,163,184,0.05); border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── CHECKLIST ── */
+  .checklist { display: flex; flex-direction: column; gap: 6px; }
+  .check-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.025);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .cb-gold  { border-color: var(--gold);   background: rgba(245,197,24,0.12); color: var(--gold); }
+  .cb-todo  { border-color: var(--orange);  background: rgba(249,115,22,0.10); color: var(--orange); }
+  .cb-later { border-color: var(--muted);   background: transparent;           color: var(--muted); }
+  .cb-red   { border-color: var(--red);     background: rgba(232,57,74,0.10);  color: var(--red); }
+
+  /* ── VS COMPARE ── */
+  .compare-wrap { display: flex; gap: 10px; }
+  .compare-col {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .cc-bad  { background: rgba(232,57,74,0.06);  border: 1px solid rgba(232,57,74,0.2); }
+  .cc-good { background: rgba(34,197,94,0.06);  border: 1px solid rgba(34,197,94,0.2); }
+  .compare-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .compare-items { font-size: 0.78rem; color: var(--muted); line-height: 1.8; text-align: left; }
+
+  /* ── SQUAD FORMATION ── */
+  .formation-wrap { padding: 4px 0 10px; }
+  .formation-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+  }
+  .formation-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .hero-card {
+    border-radius: 10px;
+    padding: 9px 10px;
+    text-align: center;
+    flex: 1;
+    max-width: 100px;
+  }
+  .hc-front { background: linear-gradient(160deg, #160f04, #0e0a04); border: 1px solid rgba(249,115,22,0.4); }
+  .hc-back  { background: linear-gradient(160deg, #060d18, #040910); border: 1px solid rgba(59,130,246,0.35); }
+  .hero-role { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+  .role-front { color: var(--orange); }
+  .role-back  { color: #60a5fa; }
+  .hero-name { font-size: 0.85rem; font-weight: 900; color: var(--text); }
+  .hero-sub  { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .formation-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 2px 0 8px;
+  }
+  .fdiv-line { flex: 1; height: 1px; background: var(--border); }
+  .fdiv-label { font-size: 0.72rem; color: var(--muted); padding: 2px 8px; border: 1px solid var(--border); border-radius: 8px; }
+
+  /* ── DECISION FLOW ── */
+  .flow-wrap { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+  .flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .flow-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .flow-line { flex: 1; width: 2px; background: var(--border); margin: 2px 0; }
+  .flow-body {
+    flex: 1;
+    padding: 8px 0 8px 10px;
+  }
+  .flow-q {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .flow-answers { display: flex; gap: 8px; flex-wrap: wrap; }
+  .flow-ans {
+    flex: 1;
+    min-width: 100px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .fa-yes { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .fa-no  { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .fa-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 3px; }
+  .fa-yes .fa-label { color: var(--green); }
+  .fa-no  .fa-label { color: var(--red); }
+  .fa-val { color: var(--text); font-weight: 700; }
+
+  /* ── PHASE CARDS ── */
+  .phase-card {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+  }
+  .phase-card:last-child { margin-bottom: 0; }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .phase-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .phase-title { font-weight: 900; font-size: 0.9rem; }
+  .phase-sub   { font-size: 0.75rem; color: var(--muted); }
+  .pc-1 { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.25); }
+  .pn-1 { background: rgba(34,197,94,0.15); color: var(--green); }
+  .pt-1 { color: var(--green); }
+  .pc-2 { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.25); }
+  .pn-2 { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .pt-2 { color: #60a5fa; }
+  .pc-3 { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.25); }
+  .pn-3 { background: rgba(245,197,24,0.15); color: var(--gold); }
+  .pt-3 { color: var(--gold); }
+
+  /* ── SCENARIO BOX ── */
+  .scenario {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    font-size: 0.82rem;
+  }
+  .scenario:last-child { margin-bottom: 0; }
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .sc-badge {
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
+  .scenario-items { display: flex; flex-direction: column; gap: 4px; line-height: 1.55; }
+  .si-stat  { display: flex; gap: 8px; }
+  .si-label { color: var(--muted); flex-shrink: 0; min-width: 90px; }
+  .si-val   { font-weight: 700; }
+  .scenario-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 8px 0; }
+  .sc-1 { background: rgba(34,197,94,0.05);  border: 1px solid rgba(34,197,94,0.2); }
+  .sc-2 { background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.2); }
+  .sc-3 { background: rgba(232,57,74,0.05);  border: 1px solid rgba(232,57,74,0.2); }
+
+  /* ── DIAG CHECKLIST ── */
+  .diag-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+  }
+  .diag-item:last-child { margin-bottom: 0; }
+  .diag-q {
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .diag-answers { display: flex; gap: 8px; flex-wrap: wrap; }
+  .diag-ans {
+    flex: 1;
+    min-width: 110px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .da-yes { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .da-no  { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .da-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+  .da-yes .da-label { color: var(--red); }
+  .da-no  .da-label { color: var(--green); }
+  .da-val { color: var(--text); font-weight: 700; }
+  .di-red    { background: rgba(232,57,74,0.04);  border: 1px solid rgba(232,57,74,0.18); }
+  .di-orange { background: rgba(249,115,22,0.04); border: 1px solid rgba(249,115,22,0.18); }
+  .di-blue   { background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.18); }
+  .di-green  { background: rgba(34,197,94,0.04);  border: 1px solid rgba(34,197,94,0.18); }
+  .di-steel  { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── INTERNAL LINK ── */
+  .inner-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid;
+    transition: opacity .2s;
+  }
+  .inner-link:hover { opacity: .8; }
+  .il-gold   { border-color: rgba(245,197,24,0.4); color: var(--gold);   background: rgba(245,197,24,0.06); }
+  .il-orange { border-color: rgba(249,115,22,0.4); color: var(--orange); background: rgba(249,115,22,0.06); }
+  .il-blue   { border-color: rgba(59,130,246,0.4); color: #60a5fa;       background: rgba(59,130,246,0.06); }
+
+  /* ── TODAY BOX ── */
+  .today-grid { display: flex; flex-direction: column; gap: 8px; }
+  .today-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.82rem;
+  }
+  .today-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .today-q { font-weight: 900; color: var(--text); margin-bottom: 3px; }
+  .today-a { color: var(--muted); font-size: 0.78rem; line-height: 1.5; }
+  .ti-gold   { background: rgba(245,197,24,0.05);  border: 1px solid rgba(245,197,24,0.2); }
+  .ti-orange { background: rgba(249,115,22,0.05);  border: 1px solid rgba(249,115,22,0.2); }
+  .ti-blue   { background: rgba(59,130,246,0.05);  border: 1px solid rgba(59,130,246,0.2); }
+  .ti-purple { background: rgba(168,85,247,0.05);  border: 1px solid rgba(168,85,247,0.2); }
+  .ti-steel  { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.18); }
+  .ti-cyan   { background: rgba(6,182,212,0.05);   border: 1px solid rgba(6,182,212,0.2); }
+  .ti-green  { background: rgba(34,197,94,0.05);   border: 1px solid rgba(34,197,94,0.2); }
+
+  /* ── TAG GRID ── */
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 4px; }
+  .tag { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; border: 1px solid; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 18px 14px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.8;
+  }
+  .footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ════════ HEADER ════════ -->
+<div class="header">
+  <div class="header-badge">🛡️ [NWH] Night Watch</div>
+  <h1>Squad <span>Power Guide</span></h1>
+  <div class="header-sub">Diagnose · Decide · Invest — I have this resource, where should I spend it?</div>
+  <a href="index.html" class="back-link">← Home</a>
+</div>
+
+<!-- ════════ QUICK START ════════ -->
+<div class="section" style="margin-bottom:14px;">
+  <div class="section-head sh-gold">⚡ Quick Start — begin here before spending anything</div>
+  <div class="section-body">
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">1️⃣</span>
+        <span class="row-val">Open the <strong class="t-gold">Battle Report</strong> of your last loss</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">2️⃣</span>
+        <span class="row-val">Identify the first point that collapsed: <span class="pill pill-red">Front</span> <span class="pill pill-orange">Backline</span> <span class="pill pill-blue">Weak Damage</span> <span class="pill pill-purple">Counter</span></span>
+      </div>
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">3️⃣</span>
+        <span class="row-val">Jump straight to the matching Decision section ← <strong class="t-cyan">don't spend any resource before this step</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ INTRO ════════ -->
+<div class="intro-box">
+  <div class="intro-title">🎯 Five questions this page should answer</div>
+  <strong class="t-gold">1.</strong> Why is my squad losing?<br>
+  <strong class="t-gold">2.</strong> What's my biggest bottleneck right now?<br>
+  <strong class="t-gold">3.</strong> Where should I spend the resource I have?<br>
+  <strong class="t-gold">4.</strong> What should I <em>not</em> spend on right now?<br>
+  <strong class="t-gold">5.</strong> When do I switch to Squad 2 for shards?
+</div>
+
+
+<!-- ════════════════════════════════
+  §1 — What Makes Up Squad Power
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚙️ What makes up squad power?</div>
+  <div class="section-body">
+    <div class="tag-grid">
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">Hero Level</span>
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">Hero Stars</span>
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">Hero Skills</span>
+      <span class="tag" style="border-color:rgba(249,115,22,0.35); color:var(--orange); background:rgba(249,115,22,0.07);">Gear (4 pieces)</span>
+      <span class="tag" style="border-color:rgba(249,115,22,0.35); color:var(--orange); background:rgba(249,115,22,0.07);">Gear Level</span>
+      <span class="tag" style="border-color:rgba(6,182,212,0.35); color:var(--cyan); background:rgba(6,182,212,0.07);">Exclusive Weapons</span>
+      <span class="tag" style="border-color:rgba(59,130,246,0.35); color:#60a5fa; background:rgba(59,130,246,0.07);">Troops T7→T10</span>
+      <span class="tag" style="border-color:rgba(168,85,247,0.35); color:#c084fc; background:rgba(168,85,247,0.07);">Special Forces Research</span>
+      <span class="tag" style="border-color:rgba(168,85,247,0.35); color:#c084fc; background:rgba(168,85,247,0.07);">Squad-Type Research</span>
+      <span class="tag" style="border-color:rgba(34,197,94,0.35); color:var(--green); background:rgba(34,197,94,0.07);">Type Center</span>
+      <span class="tag" style="border-color:rgba(148,163,184,0.3); color:var(--steel); background:rgba(148,163,184,0.07);">Drone</span>
+    </div>
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">⚖️</span>
+      <div><strong class="t-gold">Don't max out one system while every other system falls behind.</strong> Always look for the weakest point that's holding the squad back.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §2 — Don't Just Chase the Power Number
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">⚠️ Don't just chase the Power number</div>
+  <div class="section-body">
+    <div class="compare-wrap">
+      <div class="compare-col cc-bad">
+        <div class="compare-label t-red">❌ Common mistakes</div>
+        <div class="compare-items">
+          3 average squads<br>
+          Tech neglected<br>
+          Low Troop Tier<br>
+          Unbalanced Gear<br>
+          Weak Skills
+        </div>
+      </div>
+      <div class="compare-col cc-good">
+        <div class="compare-label t-green">✅ The right way</div>
+        <div class="compare-items">
+          Focus on one squad<br>
+          5 × 5 stars<br>
+          Gear matched to role<br>
+          Tech that serves your current goal<br>
+          Troop Tier suited to your stage
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §3 — Diagnosing Squad Weakness
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">🔍 Diagnosing squad weakness — where's the problem?</div>
+  <div class="section-body">
+
+    <div class="diag-item di-red">
+      <div class="diag-q">🛡️ Case 1 — The frontline dies fast</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;"><strong class="t-orange">Direct causes:</strong> weak Armor/Radar · low Stars · weak defensive Skills<br><span class="t-muted"><strong>General factors that drag performance down:</strong> low Troop Tier · a Type Center behind schedule — these lower overall power, but they're not the direct reason Murphy dies before Kimberly.</span></div>
+      <div class="alert-gold alert" style="margin:0;">
+        <span class="alert-icon">💡</span>
+        <div>Don't add Damage yet. Fix the frontline's survivability first — DPS doesn't matter if the Front is collapsing.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-orange" style="margin-top:8px;">
+      <div class="diag-q">⚔️ Case 2 — The Front holds but Damage is weak</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">Signs: the fight drags on · the enemy stays alive · Kimberly / Stetmann aren't landing enough Damage</div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">Check</span><span class="row-val t-orange">Cannon · Data Chip · Hero Skills · Hero Stars · Exclusive Weapon · Offensive Tech</span></div>
+      </div>
+      <div class="alert-orange alert" style="margin:8px 0 0;">
+        <span class="alert-icon">💡</span>
+        <div>Your next investment should go into DPS, not more defense.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-blue" style="margin-top:8px;">
+      <div class="diag-q">💥 Case 3 — The backline dies even though the Front is alive</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">Causes: AoE reaching the backline · weak Radar/Armor on your DPS · a Tech gap · Counter</div>
+      <div class="alert-blue alert" style="margin:0;">
+        <span class="alert-icon">💡</span>
+        <div>Don't just keep raising Cannon and Chip. Start improving Backline survivability.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">❓ Case 4 — You lose to a player with less Power than you</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">Don't just say "Counter" — check:</div>
+      <div class="checklist">
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Is their squad type a Counter to yours? (Aircraft vs Tank)</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Is their Troop Tier higher?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Are their Hero Stars better?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Is their Gear distributed smarter?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Is their Drone stronger?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Is their combat Tech higher?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Are their Exclusive Weapons more advanced?</div></div>
+      </div>
+      <div class="alert-steel alert" style="margin:8px 0 0;">
+        <span class="alert-icon">📋</span>
+        <div>Open the Battle Report and try to see which part collapsed first — Power alone doesn't explain who wins.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §4 — Battle Report Diagnostic
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">📊 What should I watch in the Battle Report?</div>
+  <div class="section-body">
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">DPS dies first</span>
+        <span class="row-val t-red">→ Start by checking: Targeting + Damage taken + Armor/Radar on the Backline + current Gear distribution</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Tank dies first</span>
+        <span class="row-val t-orange">→ Start by checking: Targeting + Damage taken + Defense Gear + Stars + Tech on the Front</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Everyone survives but Damage is weak</span>
+        <span class="row-val t-blue">→ A DPS problem — Cannon / Skills / Weapon / Tech</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">You always lose to the same squad type</span>
+        <span class="row-val t-purple">→ Check Counter first; if it keeps happening, plan a second squad to answer it</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Lower-Power opponent, but stronger troops</span>
+        <span class="row-val t-gold">→ Start by checking: Troop Tier / Tech</span>
+      </div>
+    </div>
+    <div class="alert alert-steel" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Before any investment:</strong> compare matching heroes on the enemy side, Damage dealt vs. taken, and Skill level. One battle may not be enough to diagnose — look for a pattern across several fights.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §5 — Worked Example: the Tank Squad
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">🚗 Worked example — the Tank Squad</div>
+  <div class="section-body">
+    <div class="alert alert-orange">
+      <span class="alert-icon">ℹ️</span>
+      <div>Tank Squad is a popular, strong choice to start with, but it has a clear weakness against Aircraft — plan for it in advance.</div>
+    </div>
+    <div class="formation-wrap">
+      <div class="formation-label">Front Line</div>
+      <div class="formation-row">
+        <div class="hero-card hc-front">
+          <div class="hero-role role-front">Tank</div>
+          <div class="hero-name">Murphy</div>
+          <div class="hero-sub">Defense</div>
+        </div>
+        <div class="hero-card hc-front">
+          <div class="hero-role role-front">Tank</div>
+          <div class="hero-name">Williams</div>
+          <div class="hero-sub">Defense</div>
+        </div>
+      </div>
+      <div class="formation-divider">
+        <div class="fdiv-line"></div>
+        <div class="fdiv-label">Backline</div>
+        <div class="fdiv-line"></div>
+      </div>
+      <div class="formation-row">
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">DPS</div>
+          <div class="hero-name">Kimberly</div>
+          <div class="hero-sub">Main Damage</div>
+        </div>
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">DPS</div>
+          <div class="hero-name">Stetmann</div>
+          <div class="hero-sub">Damage</div>
+        </div>
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">SUP</div>
+          <div class="hero-name">Marshall</div>
+          <div class="hero-sub">Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-steel" style="margin-top:4px;">
+      <span class="alert-icon">📌</span>
+      <div><strong class="t-gold">5 heroes</strong>: 2 front + 3 back. Target: <strong class="t-gold">5 heroes × 5 stars</strong>.</div>
+    </div>
+    <a href="tank_squad.html" class="inner-link il-orange">🛡️ See the full Tank Squad guide</a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §6 — The Three Stages
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-green">📈 The three stages — the same resource doesn't always have the same priority</div>
+  <div class="section-body">
+
+    <div class="phase-card pc-1">
+      <div class="phase-header">
+        <div class="phase-num pn-1">1</div>
+        <div>
+          <div class="phase-title pt-1">Account still being built</div>
+          <div class="phase-sub">Squad 1 incomplete · Stars missing · Gear unsettled · low Troops</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">🥇 Priority</span><span class="row-val t-green">Squad 1 · Stars · Hero EXP · Skills · basic Gear · Troop Tier</span></div>
+        <div class="row-item"><span class="row-label">❌ Not now</span><span class="row-val t-muted">Squad 2 · Squad 3 · <strong>a huge Drone investment that drains your core resources</strong> — though steady, incremental Drone growth is still needed from the start</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card pc-2">
+      <div class="phase-header">
+        <div class="phase-num pn-2">2</div>
+        <div>
+          <div class="phase-title pt-2">First squad stabilized</div>
+          <div class="phase-sub">5 clear heroes · advancing Stars · good Gear · acceptable Troops</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">🎯 Goal</span><span class="row-val t-gold">Reach 5×5 on Squad 1 (for shards) + strengthen the rest of your systems</span></div>
+        <div class="row-item"><span class="row-label">🔎 How to choose?</span><span class="row-val t-blue">Gear · Tech · Type Center · Drone · Exclusive Weapon — all of these are candidates. Open the Battle Report, find the Bottleneck, then invest in just one or two of them.</span></div>
+        <div class="row-item"><span class="row-label">Optional</span><span class="row-val t-muted">Start light planning for Squad 2</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card pc-3">
+      <div class="phase-header">
+        <div class="phase-num pn-3">3</div>
+        <div>
+          <div class="phase-title pt-3">Squad 1 reached 5×5 (for shards)</div>
+          <div class="phase-sub">Decisions change here</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">Shards</span><span class="row-val t-gold">→ Squad 2 starts</span></div>
+        <div class="row-item"><span class="row-label">Gear</span><span class="row-val t-orange">→ Squad 1 usually stays the priority for longer</span></div>
+        <div class="row-item"><span class="row-label">Hero EXP</span><span class="row-val t-blue">→ Squad 2 after Squad 1 is maxed</span></div>
+        <div class="row-item"><span class="row-label">Skill Medals</span><span class="row-val t-purple">→ Squad 1's core stays the priority until it's settled</span></div>
+        <div class="row-item"><span class="row-label">Tech/Drone</span><span class="row-val t-steel">→ keep growing gradually</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §7 — Shards: Who Gets Them First?
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🔷 Shards — within Squad 1, who gets them first?</div>
+  <div class="section-body">
+
+    <div class="alert alert-gold">
+      <span class="alert-icon">🎯</span>
+      <div>Don't split shards evenly on autopilot. <strong class="t-gold">Level up the hero who removes the biggest bottleneck in the squad.</strong></div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">Main DPS</span>
+        <span class="row-val t-gold">High priority — raising their stars directly and clearly raises Damage</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Frontline</span>
+        <span class="row-val t-orange">If they die fast and that stops your DPS from working → priority</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Support</span>
+        <span class="row-val t-muted">Not to be ignored, but priority depends on the stage and their actual role</span>
+      </div>
+    </div>
+
+    <div class="divider">When do shards move to Squad 2?</div>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--gold);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Has Squad 1 reached 5×5 on all five heroes?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">No</div><div class="fa-val">As a rule: shards → Squad 1</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Yes</div><div class="fa-val">Start routing shards → Squad 2</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-steel" style="margin-top:10px;">
+      <span class="alert-icon">⚖️</span>
+      <div><strong class="t-steel">This is a general strategy, not an absolute rule.</strong> If the next upgrade for a Squad 1 hero gives limited benefit, while upgrading a Squad 2 hero unlocks a bigger improvement — <strong class="t-gold">re-evaluate the decision by actual benefit.</strong> The call depends on the heroes you have available and your current stage.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §8 — Gear: The Smart Decision
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-cyan">⚙️ Gear — the decision follows what shows up in combat</div>
+  <div class="section-body">
+
+    <div class="alert alert-cyan">
+      <span class="alert-icon">📌</span>
+      <div>4 pieces per hero: <strong class="t-cyan">Cannon/Railgun · Data Chip · Armor · Radar</strong></div>
+    </div>
+
+    <div class="divider">When do I stop investing in offense and start on defense?</div>
+
+    <div class="decision-card dc-orange">
+      <div class="dc-icon">⚔️</div>
+      <div class="dc-body">
+        <div class="dc-title t-orange">Scenario A — Kimberly deals good Damage but dies fast</div>
+        <div class="dc-desc">→ Start raising Radar / Armor on the Backline</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">🎯</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">Scenario B — Kimberly survives to the end but Damage is weak</div>
+        <div class="dc-desc">→ Keep pushing Cannon / Data Chip</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">🛡️</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">Scenario C — Murphy/Williams die fast</div>
+        <div class="dc-desc">→ Start by checking: Defense Gear + Stars + Skills + Tech on the Frontline</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-purple">
+      <div class="dc-icon">💥</div>
+      <div class="dc-body">
+        <div class="dc-title t-purple">Scenario D — Frontline holds but Backline gets wiped by AoE</div>
+        <div class="dc-desc">→ Don't leave Defensive Gear for your DPS too late — AoE gets through</div>
+      </div>
+    </div>
+
+    <div class="divider">Gear decision flow</div>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--orange);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Does the Frontline hold up well enough?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">No</div><div class="fa-val">Start checking: Armor/Radar · Stars · Skills · Tech on the Frontline</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Yes ↓</div><div class="fa-val">Move to the next question</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--red);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Does your DPS survive to the end of the fight?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">No</div><div class="fa-val">Defensive Gear for the DPS — Radar / Armor</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Yes ↓</div><div class="fa-val">Move to the next question</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:#60a5fa;"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Is Damage enough to finish the enemy off?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">No</div><div class="fa-val">Cannon / Data Chip / Skills</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Yes</div><div class="fa-val">Look for another bottleneck: Tech / Drone / Troops</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div><strong class="t-gold">Gear doesn't develop by hero name alone — it follows the problem that shows up in combat.</strong></div>
+    </div>
+
+    <div class="divider">A free step before spending any Ore</div>
+
+    <div class="decision-card dc-steel">
+      <div class="dc-icon">🔄</div>
+      <div class="dc-body">
+        <div class="dc-title t-steel">Try swapping Gear first — before upgrading</div>
+        <div class="dc-desc">
+          Pieces can be moved between heroes for free.<br>
+          <strong>The right order:</strong><br>
+          1. Check the current distribution<br>
+          2. Try a logical swap (e.g.: Radar from DPS to Front)<br>
+          3. Compare the result in similar fights<br>
+          4. Only spend Ore if the swap wasn't enough
+        </div>
+      </div>
+    </div>
+
+    <a href="gear_analysis.html" class="inner-link il-blue">⚙️ See the full gear guide</a>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §9 — Exclusive Weapons
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-cyan">🗡️ Exclusive Weapons — a real decision</div>
+  <div class="section-body">
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--cyan);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Will this hero stay in Squad 1 or Squad 2 long-term?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">No</div><div class="fa-val">Don't invest in their Exclusive Weapon right now</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Yes ↓</div><div class="fa-val">Move to the next question</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--gold);"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Is the hero a long-term Core in Squad 1 or Squad 2?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-yes"><div class="fa-label">Yes ↓</div><div class="fa-val">Evaluate the weapon's own ROI — not every Core Hero gets the same benefit from an Exclusive Weapon</div></div>
+            <div class="flow-ans fa-no"><div class="fa-label">No</div><div class="fa-val">Don't invest now — hold onto the shards</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-cyan" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div>Exclusive Weapon Shards are a resource that <strong>shouldn't be spread across several heroes</strong> just to unlock a weapon for everyone. Focus them on your Core heroes.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §10 — Skill Medals
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-purple">🎖️ Skill Medals — choose by role</div>
+  <div class="section-body">
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">DPS</span>
+        <span class="row-val t-purple">Priority to skills that directly affect Damage</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Tank / Defense</span>
+        <span class="row-val t-orange">Priority to skills that boost survival or reduce Damage taken</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Support</span>
+        <span class="row-val t-blue">Priority based on the value of the buff they give the squad</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">❌ Don't</span>
+        <span class="row-val t-muted">Spread Skill Medals evenly across every hero</span>
+      </div>
+    </div>
+
+    <div class="alert alert-purple" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div>Don't raise every skill equally. <strong class="t-purple">Pick the skill that gives the best combat result for that hero's current role.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §11 — Bottleneck / Breakpoint
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🔎 Where's your account's bottleneck?</div>
+  <div class="section-body">
+
+    <div class="alert alert-gold">
+      <span class="alert-icon">🎯</span>
+      <div><strong class="t-gold">Don't always look for the strongest upgrade. Look for the weakest system holding the squad back.</strong></div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">Great stars + weak Gear</span>
+        <span class="row-val t-orange">→ Gear is the bottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Great Gear + weak Skills</span>
+        <span class="row-val t-purple">→ Skills are the bottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Great heroes + only T7</span>
+        <span class="row-val t-blue">→ Troops are the bottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Everything's good but T10 is far off</span>
+        <span class="row-val t-purple">→ Special Forces / Research is the bottleneck</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Everything's balanced but Drone is behind</span>
+        <span class="row-val t-steel">→ Drone is your long-term bottleneck</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §12 — Troops
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">🪖 Troops — T7 to T10</div>
+  <div class="section-body">
+
+    <div class="tier-row">
+      <div class="tier-badge tb-green"><span class="tier-num">T7</span><div class="tier-sub">Barracks Lv.20<br>Starting point</div></div>
+      <div class="tier-badge tb-blue"><span class="tier-num">T8</span><div class="tier-sub">Barracks Lv.24<br>Minimum</div></div>
+      <div class="tier-badge tb-orange"><span class="tier-num">T9</span><div class="tier-sub">Barracks Lv.27<br>Main target</div></div>
+      <div class="tier-badge tb-gold"><span class="tier-num">T10</span><div class="tier-sub">Barracks Lv.30<br>+ T10 requirements<br>inside Special Forces</div></div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">🏆</span>
+      <div>
+        <strong class="t-gold">T10 requirements — all required together:</strong>
+        <div class="row-list" style="margin-top:8px;">
+          <div class="row-item"><span class="row-label">HQ</span><span class="row-val t-gold">Headquarters Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Tech Center</span><span class="row-val t-blue">Tech Center Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Barracks</span><span class="row-val t-orange">Barracks Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Special Forces</span><span class="row-val t-purple">Specific Unit research inside the Special Forces tree — needs Valor Badges</span></div>
+        </div>
+        <div style="margin-top:8px; color:var(--steel); font-size:.8rem;">⚠️ Reaching HQ30 alone isn't enough — Special Forces research takes a long time. Start it early, even before you reach HQ30.</div>
+      </div>
+    </div>
+
+    <div class="divider">When does Troop Tier become the problem?</div>
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">🔍</span>
+      <div>If your heroes are strong, your Gear is great, your Tech is good — but you still lose to similar players with a higher Tier, your troops have become the bottleneck.<br>
+      <strong>The same squad with a higher Tier performs better.</strong></div>
+    </div>
+
+    <a href="waterfalle.html" class="inner-link il-blue">💧 Waterfall strategy — double your VS points on Friday</a>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §13 — Tech/Research
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-purple">🔬 Research — based on your goal</div>
+  <div class="section-body">
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">🏆</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">If your current goal is T10</div>
+        <div class="dc-desc">→ Special Forces becomes a major priority — it's the only road there<br><span style="font-size:.78rem; color:var(--steel);">T10 requires: HQ30 + Tech Center 30 + Barracks 30 + Unit research in Special Forces</span></div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">⚖️</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">If you're still far from HQ30 / T10</div>
+        <div class="dc-desc">Balance between: Combat Tech · Type Tech · Unit Tech · Progression Requirements<br><span style="font-size:.78rem; color:var(--orange);">⚠️ Start Special Forces research early — it takes a long time and you will need it eventually</span></div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">⚔️</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">If you're losing because of weak combat stats</div>
+        <div class="dc-desc">→ Focus on ATK / DEF / HP / Unit stats that match your squad type</div>
+      </div>
+    </div>
+
+    <div class="alert alert-purple" style="margin-top:2px;">
+      <span class="alert-icon">📝</span>
+      <div>Special Forces is very important, but it's <strong>not always the first research for every player at every stage.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §14 — Buildings
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">🏗️ Buildings — ask yourself "why upgrade this now?"</div>
+  <div class="section-body">
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">🏛️ HQ</span>
+        <span class="row-val t-muted">Raise it if the next level unlocks: Hero Level / Barracks / a Building / Research</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🚗 Tank Center</span>
+        <span class="row-val t-orange">Direct buffs to the Tank Squad — raise it according to your squad's priority</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">✈️/🚀 Other Centers</span>
+        <span class="row-val t-muted">Don't raise the Aircraft/Missile Center at the same pace if you're not using them yet</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🏠 Barracks</span>
+        <span class="row-val t-blue">Raise it when you need a higher Troop Tier or the Waterfall strategy</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🔬 Tech Center</span>
+        <span class="row-val t-purple">Raise it when your current Research is being capped by its level</span>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div><strong class="t-gold">Don't upgrade a building because it's "important" — upgrade it because the next level serves a clear goal.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §15 — Drone
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">🤖 Drone</div>
+  <div class="section-body">
+
+    <div class="divider">The four Drone systems</div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">1 — Drone Level</span>
+        <span class="row-val t-steel">Combat Data (raises the level) + Drone Parts (needed for some upgrades) — the level strengthens every other system</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">2 — Components</span>
+        <span class="row-val t-blue">Progress through their own system (Component chests) — give the squad extra buffs</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">3 — Skill Chips</span>
+        <span class="row-val t-purple">Add specialized combat effects — some are aimed at specific squad types</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">4 — Combat Boost</span>
+        <span class="row-val t-gold">Cumulative rewards for the whole squad — unlocked at milestone points</span>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">🏆</span>
+      <div><strong class="t-gold">Combat Boost milestones:</strong><br>
+      <strong class="t-steel">Lv 150</strong> → total +1 Skill Chip Boost &nbsp;·&nbsp;
+      <strong class="t-steel">Lv 300</strong> → total +2 &nbsp;·&nbsp;
+      <strong class="t-steel">Lv 450</strong> → total +3<br>
+      <span style="font-size:.8rem; color:var(--muted);">These are cumulative totals at each milestone, not additions that stack on top of each other — plan toward the next milestone.</span></div>
+    </div>
+
+    <div class="divider">When to spend and when to save?</div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">VS Day coming up</span>
+        <span class="row-val t-gold">Best to save resources that count toward VS points</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Drone way behind</span>
+        <span class="row-val t-orange">Don't postpone all growth — develop it gradually from the moment it unlocks</span>
+      </div>
+    </div>
+
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <span class="alert-icon">📈</span>
+      <div><strong class="t-blue">Develop the Drone steadily from the moment it unlocks.</strong> Its buffs cover the whole squad — a long delay is hard to make up for later. A big investment should be judged against the next milestone and your available resources, not an absolute rule.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §16 — Counter System
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">⚔️ The Counter system</div>
+  <div class="section-body">
+    <div class="tier-row">
+      <div class="tier-badge tb-orange" style="text-align:center;">
+        <span class="tier-num">🚗</span>
+        <div style="font-weight:900; font-size:.8rem;">Tank</div>
+        <div class="tier-sub">Strong vs → Missile<br>Weak vs → Aircraft</div>
+      </div>
+      <div class="tier-badge tb-blue" style="text-align:center;">
+        <span class="tier-num">✈️</span>
+        <div style="font-weight:900; font-size:.8rem;">Aircraft</div>
+        <div class="tier-sub">Strong vs → Tank<br>Weak vs → Missile</div>
+      </div>
+      <div class="tier-badge tb-green" style="text-align:center;">
+        <span class="tier-num">🚀</span>
+        <div style="font-weight:900; font-size:.8rem;">Missile</div>
+        <div class="tier-sub">Strong vs → Aircraft<br>Weak vs → Tank</div>
+      </div>
+    </div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">🧭</span>
+      <div>If your squad is Tank, Missile is a logical second squad to answer Aircraft — which is commonly used against Tank players.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §17 — Building a Second Squad
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">🔄 A second squad — building it without weakening the first</div>
+  <div class="section-body">
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">🎯</span>
+      <div>Goal: <strong class="t-blue">build Squad 2 without weakening Squad 1.</strong> Every resource has its own right timing to switch.</div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item"><span class="row-label">Universal Shards</span><span class="row-val t-gold">Generally after Squad 1 reaches 5×5 → Squad 2 (re-evaluate by actual benefit for each upgrade)</span></div>
+      <div class="row-item"><span class="row-label">Hero EXP</span><span class="row-val t-blue">After Squad 1 is maxed → Squad 2</span></div>
+      <div class="row-item"><span class="row-label">Skill Medals</span><span class="row-val t-purple">Squad 1's core stays the priority until it's settled first</span></div>
+      <div class="row-item"><span class="row-label">Gear</span><span class="row-val t-orange">Squad 1 usually stays the priority for longer</span></div>
+      <div class="row-item"><span class="row-label">Type Tech</span><span class="row-val t-muted">Squad 2 gradually, once it becomes a real investment</span></div>
+      <div class="row-item"><span class="row-label">Type Center</span><span class="row-val t-muted">Same thing — by priority</span></div>
+      <div class="row-item"><span class="row-label">Drone</span><span class="row-val t-steel">A shared resource, not specific to Squad 2</span></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §18 — Don't Build 3 Squads
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">🚫 Don't build 3 squads at the same time</div>
+  <div class="section-body">
+    <div class="compare-wrap">
+      <div class="compare-col cc-bad">
+        <div class="compare-label t-red">❌ The mistake</div>
+        <div class="compare-items">Average Tank<br>Average Aircraft<br>Average Missile<br><strong class="t-red">= 3 weak squads</strong></div>
+      </div>
+      <div class="compare-col cc-good">
+        <div class="compare-label t-green">✅ The right way</div>
+        <div class="compare-items">Squad 1 very strong<br>Squad 2 being built<br>Squad 3 later<br><strong class="t-green">= two strong squads</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §19 — Three Full Scenarios
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">🎮 Real scenarios — what should I do right now?</div>
+  <div class="section-body">
+
+    <div class="scenario sc-1">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green);">Scenario 1</span>
+        <span class="t-muted" style="font-size:.78rem;">Account still being built</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Tank Squad</span><span class="si-val t-orange">4★ average</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-red">Weak</span></div>
+        <div class="si-stat"><span class="si-label">Troop Tier</span><span class="si-val t-blue">T8</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-green bold" style="font-size:.82rem;">Decision:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Shards</span><span class="si-val t-gold">→ Squad 1 until 5×5</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-gold">→ Squad 1, following the Diagnosis</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2</span><span class="si-val t-red">→ don't start yet</span></div>
+        <div class="si-stat"><span class="si-label">Tech/Troops</span><span class="si-val t-blue">→ gradually, by stage</span></div>
+      </div>
+    </div>
+
+    <div class="scenario sc-2">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); color:#60a5fa;">Scenario 2</span>
+        <span class="t-muted" style="font-size:.78rem;">Squad 1 complete</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Tank Squad</span><span class="si-val t-green">5×5</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-orange">Average</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2</span><span class="si-val t-muted">Weak</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-blue bold" style="font-size:.82rem;">Decision:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Shards</span><span class="si-val t-gold">→ Squad 2 starts</span></div>
+        <div class="si-stat"><span class="si-label">Gear</span><span class="si-val t-orange">→ Squad 1 stays the priority</span></div>
+        <div class="si-stat"><span class="si-label">Hero EXP</span><span class="si-val t-blue">→ start on Squad 2 as it becomes available</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2 Tech</span><span class="si-val t-muted">→ gradually</span></div>
+      </div>
+    </div>
+
+    <div class="scenario sc-3">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(232,57,74,0.12); border:1px solid rgba(232,57,74,0.3); color:var(--red);">Scenario 3</span>
+        <span class="t-muted" style="font-size:.78rem;">Losing to a lower-Power opponent</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Situation</span><span class="si-val t-red">High Power, but losses to a lower-Power Aircraft squad</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-red bold" style="font-size:.82rem;">Diagnosis:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Check first</span><span class="si-val t-purple">Counter — Aircraft vs Tank gives an edge</span></div>
+        <div class="si-stat"><span class="si-label">Doesn't mean</span><span class="si-val t-muted">your Gear or Heroes are weak</span></div>
+        <div class="si-stat"><span class="si-label">Future fix</span><span class="si-val t-green">a Missile Squad covers that weak point</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §20 — What Should I Do Today?
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚡ What should I do today? — the one-minute answer</div>
+  <div class="section-body">
+
+    <div class="today-grid">
+
+      <div class="today-item ti-gold">
+        <div class="today-icon">🔷</div>
+        <div>
+          <div class="today-q">I have Universal Shards</div>
+          <div class="today-a">Is Squad 1 at 5×5?<br>
+          <strong class="t-red">No</strong> → Squad 1 · <strong class="t-green">Yes</strong> → Squad 2</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-orange">
+        <div class="today-icon">⚙️</div>
+        <div>
+          <div class="today-q">I have Gear Ore / Materials</div>
+          <div class="today-a">Open the Battle Report — who dies first?<br>
+          <strong class="t-red">Frontline</strong> → check: Targeting + Damage taken + Defense Gear + Gear distribution<br>
+          <strong class="t-orange">DPS</strong> → check: Targeting + Damage taken + Armor/Radar + Gear distribution<br>
+          <strong class="t-blue">Both survive but Damage is weak</strong> → Cannon/Chip</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-purple">
+        <div class="today-icon">🎖️</div>
+        <div>
+          <div class="today-q">I have Skill Medals</div>
+          <div class="today-a">Who's the Core Hero / Main DPS?<br>
+          → Priority to the skill that most improves their role's performance</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-blue">
+        <div class="today-icon">🔬</div>
+        <div>
+          <div class="today-q">I have Valor Badges / Research Resources</div>
+          <div class="today-a">Is my T10 goal close?<br>
+          <strong class="t-gold">Yes</strong> → Special Forces first<br>
+          <strong class="t-muted">No</strong> → Combat/Progression Tech, by bottleneck</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-steel">
+        <div class="today-icon">🤖</div>
+        <div>
+          <div class="today-q">I have Drone Resources</div>
+          <div class="today-a">Is a VS Day close (a day that scores points for spending Drone resources)?<br>
+          <strong class="t-gold">Yes</strong> → hold the resources that count toward VS points until the right day<br>
+          <strong class="t-muted">Drone way behind</strong> → develop it gradually, don't postpone everything</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-green">
+        <div class="today-icon">🏗️</div>
+        <div>
+          <div class="today-q">I have Resources for Buildings</div>
+          <div class="today-a">Which upgrade unlocks something important for me?<br>
+          → HQ + Type Center + Barracks, by your current goal</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §21 — Diagnostic Checklist
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">📋 Diagnostic Checklist — question + what it means + what to do</div>
+  <div class="section-body">
+
+    <div class="diag-item di-red">
+      <div class="diag-q">🛡️ Does the Frontline die first in the Battle Report?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Yes — start by checking</div><div class="da-val">Targeting + Damage taken + Defense Gear + Stars + Tech on the Front — before any investment</div></div>
+        <div class="diag-ans da-no"><div class="da-label">No — good</div><div class="da-val">Move to the next question</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-orange" style="margin-top:8px;">
+      <div class="diag-q">💥 Does your DPS die first even though the Front is alive?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Yes — start by checking</div><div class="da-val">Targeting + Damage taken + Skills + current Gear distribution — before any investment</div></div>
+        <div class="diag-ans da-no"><div class="da-label">No — good</div><div class="da-val">Move to the next question</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-blue" style="margin-top:8px;">
+      <div class="diag-q">⚔️ Is Damage weak even though everyone survives?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Yes — a problem</div><div class="da-val">Cannon / Chip / Skills / Exclusive Weapon</div></div>
+        <div class="diag-ans da-no"><div class="da-label">No — good</div><div class="da-val">Move to the next question</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">✈️ Do you only lose to Aircraft?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Yes — Counter</div><div class="da-val">Build a Missile Squad later as Squad 2</div></div>
+        <div class="diag-ans da-no"><div class="da-label">No</div><div class="da-val">The problem is elsewhere</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-green" style="margin-top:8px;">
+      <div class="diag-q">🔷 Is Squad 1 at 5×5?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-no"><div class="da-label">No — incomplete</div><div class="da-val">Don't move shards to Squad 2</div></div>
+        <div class="diag-ans da-yes"><div class="da-label">Yes — ✅</div><div class="da-val">You can start Squad 2 gradually</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">🔬 Is Tech weak even though Heroes and Gear are good?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Yes — Bottleneck</div><div class="da-val">Tech is the bottleneck — focus on Special Forces / Combat</div></div>
+        <div class="diag-ans da-no"><div class="da-label">No — good</div><div class="da-val">Look for the bottleneck elsewhere</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §22 — Quick Decision Table (Yes/No)
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚡ Decision table — the first question decides</div>
+  <div class="section-body">
+
+    <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+    <table class="prio-table" style="min-width:480px;">
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>Question</th>
+          <th>Yes →</th>
+          <th>No →</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong class="t-gold">Universal Shards</strong></td>
+          <td class="t-muted">Squad 1 = 5×5?</td>
+          <td><span class="pill pill-blue">Squad 2</span></td>
+          <td><span class="pill pill-gold">Squad 1</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-orange">Gear Ore</strong></td>
+          <td class="t-muted">Frontline dying fast?</td>
+          <td><span class="pill pill-orange">Armor/Radar on Front</span></td>
+          <td><span class="pill pill-blue">Check DPS</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-purple">Valor Badges</strong></td>
+          <td class="t-muted">T10 goal close?</td>
+          <td><span class="pill pill-purple">Special Forces</span></td>
+          <td><span class="pill pill-steel">Combat/Progression Tech</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-cyan">Hero EXP</strong></td>
+          <td class="t-muted">Squad 1 at Max Level?</td>
+          <td><span class="pill pill-blue">Squad 2</span></td>
+          <td><span class="pill pill-cyan">Squad 1 first</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-cyan">Exclusive Weapon Shards</strong></td>
+          <td class="t-muted">Long-term Core hero?</td>
+          <td><span class="pill pill-cyan">Invest</span></td>
+          <td><span class="pill pill-steel">Hold onto them</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-steel">Drone Resources</strong></td>
+          <td class="t-muted">A points-earning VS Day close?</td>
+          <td><span class="pill pill-gold">Hold until the right day</span></td>
+          <td><span class="pill pill-steel">Develop gradually</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-green">Training troops</strong></td>
+          <td class="t-muted">Friday (VS)?</td>
+          <td><span class="pill pill-orange">T7→T8→T9 waterfall</span></td>
+          <td><span class="pill pill-green">Stockpile T7</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-blue">Building resources</strong></td>
+          <td class="t-muted">Does the next level unlock something important?</td>
+          <td><span class="pill pill-blue">Upgrade the building</span></td>
+          <td><span class="pill pill-steel">Delay until needed</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §23 — Golden Rules
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🏆 Golden rules — remember these</div>
+  <div class="section-body">
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">1️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">Don't spread your resources across 3 squads</div>
+        <div class="dc-desc">Two strong squads beat three incomplete ones.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-orange">
+      <div class="dc-icon">2️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-orange">As a rule: shards → Squad 1 until 5×5</div>
+        <div class="dc-desc">5 heroes × 5 stars — that's the general cutoff line. If the next upgrade on Squad 1 gives limited benefit compared to a core upgrade on Squad 2, re-evaluate by actual benefit.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-cyan">
+      <div class="dc-icon">3️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-cyan">Gear develops by what shows up in combat — not by hero name</div>
+        <div class="dc-desc">Open the Battle Report first — who dies first gives you a <em>lead to check</em>, not a final verdict. Check Damage taken, Skills, and Targeting before any investment.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">4️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">Don't look for the strongest upgrade — look for the weakest bottleneck</div>
+        <div class="dc-desc">The biggest combat improvement comes from fixing your weakest point, not strengthening what's already strong.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-purple">
+      <div class="dc-icon">5️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-purple">Tech and Special Forces — start them early if T10 is your goal</div>
+        <div class="dc-desc">Special Forces is the only road to T10 — delaying it costs a lot.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-steel">
+      <div class="dc-icon">6️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-steel">Drone isn't "the endgame" — develop it gradually</div>
+        <div class="dc-desc">On VS days, hold resources that score points when spent — Drone resources are one of them. Balance daily power against building up VS points.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">7️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">Gear and Shards switch to Squad 2 on different timelines</div>
+        <div class="dc-desc">Shards move over after 5×5 — but Gear can stay the first squad's priority for longer.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">8️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">Real power is combat performance, not the number alone</div>
+        <div class="dc-desc">Focusing on fixing the bottleneck gives a better combat result than spreading resources thin.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════ FOOTER ════════ -->
+<div class="footer">
+  🛡️ <strong>[NWH] Night Watch</strong><br>
+  Prepared by: MSBKH · Last updated: 10/20/2026<br>
+  <span style="font-size:0.7rem;">Internal alliance guide — squad power diagnosis and resource decisions</span>
+</div>
+
+</body>
+</html>
