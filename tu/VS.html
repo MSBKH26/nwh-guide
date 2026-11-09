@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Haftalık İttifak VS Savaşı Planı</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #080c10;
+    --card:      #131b24;
+    --border:    #1e2d3d;
+    --gold:      #f5c518;
+    --gold-dim:  #8a6f0a;
+    --red:       #e8394a;
+    --blue:      #3b82f6;
+    --cyan:      #06b6d4;
+    --text:      #e2e8f0;
+    --muted:     #64748b;
+    --warn-bg:   rgba(232,57,74,0.08);
+    --warn-border:rgba(232,57,74,0.3);
+    --sync-bg:   rgba(245,197,24,0.07);
+    --sync-border:rgba(245,197,24,0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .main-header {
+    text-align: center;
+    padding: 20px 16px 16px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #0e1419 0%, #131b24 100%);
+    border: 1px solid var(--gold-dim);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .main-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .main-header h1 { font-size: 1.5rem; font-weight: 900; color: var(--gold); letter-spacing: 1px; text-shadow: 0 0 20px rgba(245,197,24,0.4); }
+  .main-header .subtitle { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+  .crown { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #e2e8f0;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  .priority-banner {
+    background: linear-gradient(90deg, rgba(232,57,74,0.15), rgba(232,57,74,0.05));
+    border: 1px solid var(--red);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fca5a5;
+    text-align: center;
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 0.78rem;
+  }
+  .legend-title { width: 100%; font-weight: 700; color: var(--muted); font-size: 0.75rem; margin-bottom: 4px; }
+  .leg { display: flex; align-items: center; gap: 5px; }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  .day-block {
+    margin-bottom: 14px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .day-header {
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 900;
+  }
+  .day-num {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.85;
+  }
+  .day-theme { font-size: 0.78rem; opacity: 0.75; margin-right: auto; font-weight: 600; }
+
+  .day-0 .day-header { background: linear-gradient(90deg,#141410,#0e0e0a); color:#f5c518; border-bottom:2px solid #f5c518; }
+  .day-1 .day-header { background: linear-gradient(90deg,#0f1f2e,#0a1520); color:#3b82f6; border-bottom:2px solid #3b82f6; }
+  .day-2 .day-header { background: linear-gradient(90deg,#1a1a2e,#110f20); color:#a855f7; border-bottom:2px solid #a855f7; }
+  .day-3 .day-header { background: linear-gradient(90deg,#1a2010,#111508); color:#22c55e; border-bottom:2px solid #22c55e; }
+  .day-4 .day-header { background: linear-gradient(90deg,#201808,#160f03); color:#f97316; border-bottom:2px solid #f97316; }
+  .day-5 .day-header { background: linear-gradient(90deg,#1f0a14,#15060d); color:#ec4899; border-bottom:2px solid #ec4899; }
+  .day-6 .day-header { background: linear-gradient(90deg,#1a0a08,#120602); color:#e8394a; border-bottom:2px solid #e8394a; }
+
+  .prep-note { padding: 14px; background: var(--card); font-size: 0.85rem; line-height: 2; }
+  .prep-note .prep-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .prep-note .prep-item:last-child { border-bottom: none; }
+  .prep-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+  .tasks-section { background: var(--card); }
+  .task-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+    transition: background 0.15s;
+  }
+  .task-row:last-child { border-bottom: none; }
+  .task-row:hover { background: rgba(255,255,255,0.02); }
+  .task-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 1px; }
+  .task-content { flex: 1; }
+  .task-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .task-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+  .badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 12px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .b-ur    { background:rgba(249,115,22,0.2); color:#f97316; border:1px solid #f97316; }
+  .b-ssr   { background:rgba(245,197,24,0.2); color:#f5c518; border:1px solid #f5c518; }
+  .b-sr    { background:rgba(148,163,184,0.2); color:#94a3b8; border:1px solid #94a3b8; }
+  .b-star2 { background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e; }
+  .b-star3 { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid #60a5fa; }
+  .b-radar { background:rgba(6,182,212,0.15); color:#06b6d4; border:1px solid #06b6d4; }
+
+  .sync-box {
+    margin: 0 12px 12px;
+    padding: 10px 12px;
+    background: var(--sync-bg);
+    border: 1px solid var(--sync-border);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+  .sync-box .sync-title {
+    font-weight: 900;
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sync-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 3px 0;
+    color: #fde68a;
+  }
+  .sync-item::before { content: '↗'; color: var(--gold); flex-shrink: 0; }
+
+  .warn-box {
+    margin: 0 12px 12px;
+    padding: 9px 12px;
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: #fca5a5;
+    line-height: 1.6;
+  }
+  .warn-box strong { color: #f87171; }
+  .spacer { height: 8px; background: var(--card); }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+  }
+  .intro-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .intro-tip {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(245,197,24,0.06);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: #fde68a;
+  }
+
+  /* ── DAY DESCRIPTION ── */
+  .day-desc {
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #94a3b8;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  /* ── REWARDS ── */
+  .rewards-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .rewards-title {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    background: linear-gradient(90deg,#1c1a08,#13120a);
+    border-bottom: 2px solid var(--gold-dim);
+  }
+  .reward-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+  }
+  .reward-item:last-child { border-bottom: none; }
+  .reward-name { font-weight: 700; font-size: 0.88rem; color: var(--text); margin-bottom: 3px; }
+  .reward-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── CONCLUSION ── */
+  .conclusion-block {
+    background: linear-gradient(135deg, #0e1419, #131b24);
+    border: 1px solid var(--gold-dim);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+  }
+  .conclusion-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  /* ── VERSION BADGE ── */
+  .version-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    z-index: 2;
+  }
+  .version-badge strong { color: #94a3b8; }
+
+  /* ── QUICK MENU ── */
+  .quick-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .menu-btn {
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 6px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: transform 0.15s, opacity 0.15s;
+    border: 1px solid transparent;
+  }
+  .menu-btn:active { transform: scale(0.96); }
+  .menu-sun { background: rgba(245,197,24,0.1); color: var(--gold); border-color: rgba(245,197,24,0.3); }
+  .menu-mon { background: rgba(59,130,246,0.1); color: #60a5fa; border-color: rgba(59,130,246,0.3); }
+  .menu-tue { background: rgba(168,85,247,0.1); color: #c084fc; border-color: rgba(168,85,247,0.3); }
+  .menu-wed { background: rgba(34,197,94,0.1); color: #4ade80; border-color: rgba(34,197,94,0.3); }
+  .menu-thu { background: rgba(249,115,22,0.1); color: #fb923c; border-color: rgba(249,115,22,0.3); }
+  .menu-fri { background: rgba(236,72,153,0.1); color: #f472b6; border-color: rgba(236,72,153,0.3); }
+  .menu-sat { background: rgba(232,57,74,0.1); color: #f87171; border-color: rgba(232,57,74,0.3); }
+  .menu-rew { background: rgba(148,163,184,0.1); color: #cbd5e1; border-color: rgba(148,163,184,0.3); }
+
+  /* ── TL;DR ── */
+  .tldr-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .tldr-title {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--gold);
+    background: linear-gradient(90deg, rgba(245,197,24,0.1), transparent);
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 1px;
+  }
+  .tldr-list { padding: 8px 16px; }
+  .tldr-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.82rem;
+    border-bottom: 1px solid rgba(30,45,61,0.4);
+  }
+  .tldr-item:last-child { border-bottom: none; }
+  .tldr-day {
+    font-weight: 900;
+    min-width: 60px;
+    flex-shrink: 0;
+  }
+  .tldr-content { color: #cbd5e1; }
+
+  /* ── THEME PROGRESSION TAG ── */
+  .theme-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    margin-right: auto;
+  }
+  .theme-activity { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.4); }
+  .theme-base     { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); }
+  .theme-tech     { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.4); }
+  .theme-heroes   { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.4); }
+  .theme-mobil    { background: rgba(236,72,153,0.15); color: #f472b6; border: 1px solid rgba(236,72,153,0.4); }
+  .theme-pvp      { background: rgba(232,57,74,0.15); color: #f87171; border: 1px solid rgba(232,57,74,0.4); }
+  .theme-prep     { background: rgba(245,197,24,0.15); color: var(--gold); border: 1px solid rgba(245,197,24,0.4); }
+
+  /* ── COMMON MISTAKES ── */
+  .mistakes-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .mistakes-title {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #f87171;
+    background: linear-gradient(90deg, rgba(232,57,74,0.12), transparent);
+    border-bottom: 2px solid rgba(232,57,74,0.3);
+  }
+  .mistake-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+  }
+  .mistake-item:last-child { border-bottom: none; }
+  .mistake-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .mistake-text { font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; }
+  .mistake-text strong { color: #fca5a5; }
+
+  /* ── ALLIANCE LOGO ── */
+  .alliance-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .alliance-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 12px rgba(245,197,24,0.4));
+  }
+  .alliance-name {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 16px rgba(245,197,24,0.5);
+  }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--gold), #d4a017);
+    border: 2px solid #fff8e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 999;
+  }
+  .back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* ── FAQ ── */
+  .faq-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .faq-title {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    background: linear-gradient(90deg,#1c1a08,#13120a);
+    border-bottom: 2px solid var(--gold-dim);
+  }
+  .faq-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(30,45,61,0.6);
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .faq-a {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── ACTION BADGES ── */
+  .action-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 2px 0;
+  }
+  .action-do {
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.4);
+  }
+  .action-dont {
+    background: rgba(232,57,74,0.15);
+    color: #f87171;
+    border: 1px solid rgba(232,57,74,0.4);
+  }
+  .action-keep {
+    background: rgba(245,197,24,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(245,197,24,0.4);
+  }
+
+  /* ── FOOTER ── */
+  .nwh-footer {
+    text-align: center;
+    padding: 20px 16px;
+    margin-top: 8px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .nwh-footer .footer-shield {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .nwh-footer .footer-name {
+    color: var(--gold);
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .nwh-footer .footer-credit {
+    color: #94a3b8;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="main-header">
+  <div class="alliance-logo-wrap">
+    <a href="https://msbkh26.github.io/nwh-guide/"><img src="../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo"></a>
+  </div>
+  <div class="alliance-name">[NWH] Night Watch</div>
+  <img src="../images/logo_vs.png" alt="VS Logo" style="width:90px;height:90px;object-fit:contain;margin-bottom:8px;filter:drop-shadow(0 0 16px rgba(245,197,24,0.5));">
+  <h1>Haftalık İttifak VS Savaşı Planı</h1>
+  <p class="subtitle">Last War: Survival — VS Savaşını Kazanmak İçin Kapsamlı Kılavuz</p>
+</div>
+
+<div class="priority-banner">
+  🏆 Her zaman en yüksek öncelik: İttifak VS Savaşını kazanmak — Silahlanma Yarışı sadece ek bir kazançtır!
+</div>
+
+<div class="legend">
+  <div class="legend-title">🔑 Sembol Kılavuzu</div>
+  <div class="leg"><div class="leg-dot" style="background:#3b82f6"></div> Temel görev</div>
+  <div class="leg"><div class="leg-dot" style="background:#f5c518"></div> Silahlanma Yarışı ile senkronizasyon</div>
+  <div class="leg"><div class="leg-dot" style="background:#e8394a"></div> Önemli uyarı</div>
+  <div class="leg"><div class="leg-dot" style="background:#06b6d4"></div> Radar görevleri (sadece Pazartesi/Çarşamba/Cuma)</div>
+  <span class="badge b-star3">***</span> 3 gün tekrarlanır &nbsp;
+  <span class="badge b-star2">**</span> 2 gün tekrarlanır
+</div>
+
+<!-- ══════ GİRİŞ ══════ -->
+<div class="intro-block">
+  <div class="intro-title">⚔️ İttifak VS Savaşı Nedir?</div>
+  <p>İttifak VS Savaşı, ittifakınızın başka bir ittifaka karşı çeşitli günlük zorluklarla yarıştığı 6 gün süren bir etkinliktir. Her gün farklı bir eksene odaklanır ve her üye günlük görevleri tamamlayarak puan kazanır. En çok puanı toplayan ittifak günü kazanır, en çok günü kazanan ise haftayı kazanır. Bireysel performansınıza ve ittifakınızın performansına göre günlük ve haftalık ödüller alırsınız.</p>
+  <div class="intro-tip">
+    <strong>🔑 Başarının Anahtarı:</strong> Kazanmak sadece güce bağlı değildir — akıllı planlama, doğru zamanlama ve ittifak üyeleri arasındaki koordinasyona bağlıdır. Her gün üssünüzün ve gelişiminizin farklı bir yönüne odaklanır, bu yüzden ne yapacağınızı ve ne zaman yapacağınızı bilin.
+  </div>
+</div>
+
+
+<!-- ══════ HIZLI MENÜ ══════ -->
+<div class="quick-menu">
+  <a href="#day-sun" class="menu-btn menu-sun">☀️ Pazar</a>
+  <a href="#day-mon" class="menu-btn menu-mon">🌙 Pazartesi</a>
+  <a href="#day-tue" class="menu-btn menu-tue">⚡ Salı</a>
+  <a href="#day-wed" class="menu-btn menu-wed">🔬 Çarşamba</a>
+  <a href="#day-thu" class="menu-btn menu-thu">🦸 Perşembe</a>
+  <a href="#day-fri" class="menu-btn menu-fri">🔥 Cuma</a>
+  <a href="#day-sat" class="menu-btn menu-sat">💥 Cumartesi</a>
+  <a href="#rewards" class="menu-btn menu-rew">🏅 Ödüller</a>
+</div>
+
+<!-- ══════ TL;DR ══════ -->
+<div class="tldr-block">
+  <div class="tldr-title">📌 Hızlı Özet</div>
+  <div class="tldr-list">
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#f5c518">☀️ Pazar</span>
+      <span class="theme-tag theme-prep">Hazırlık</span>
+      <span class="tldr-content">Kaynak toplama + radar ve parça biriktirme</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#60a5fa">🌙 Pazartesi</span>
+      <span class="theme-tag theme-activity">Aktivite</span>
+      <span class="tldr-content">Radar + Hayatiyet + EXP + Drone</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#c084fc">⚡ Salı</span>
+      <span class="theme-tag theme-base">İnşa</span>
+      <span class="tldr-content">İnşaat + turuncu kamyonlar + askere alma</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#4ade80">🔬 Çarşamba</span>
+      <span class="theme-tag theme-tech">Teknoloji</span>
+      <span class="tldr-content">Araştırma + Cesaret Madalyaları + drone sandıkları</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#fb923c">🦸 Perşembe</span>
+      <span class="theme-tag theme-heroes">Kahramanlar</span>
+      <span class="tldr-content">Askere alma + EXP + Parça + Madalyalar</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#f472b6">🔥 Cuma</span>
+      <span class="theme-tag theme-mobil">Seferberlik</span>
+      <span class="tldr-content">Birlikler + Araştırma + İnşaat + Radar</span>
+    </div>
+    <div class="tldr-item">
+      <span class="tldr-day" style="color:#f87171">💥 Cumartesi</span>
+      <span class="theme-tag theme-pvp">PvP</span>
+      <span class="tldr-content">Savaş + kamyonlar + gizli görevler</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════ PAZAR ══════ -->
+<div class="day-block day-0" id="day-sun">
+  <div class="day-header">
+    <span>☀️ Pazar</span>
+    <span class="day-num">Hazırlık Günü</span>
+    <span class="day-theme">VS Savaşı başlamadan önce hazırlanın</span>
+    <span class="theme-tag theme-prep">Hazırlık</span>
+  </div>
+  <div class="prep-note">
+    <div class="prep-item">
+      <span class="prep-icon">🍖</span>
+      <div><strong>Pazar gecesi haritadan yiyecek, çelik ve para toplamaya başlayın</strong> — böylece birlikleriniz Pazartesi günü VS Savaşı başladığında geri dönüp puanlarınıza sayılsın</div>
+    </div>
+    <div class="prep-item">
+      <span class="prep-icon">📡</span>
+      <div><strong>Radar görevlerini biriktirin</strong> — şimdi tüketmeyin, Pazartesi günü ihtiyacınız olacak</div>
+    </div>
+    <div class="prep-item">
+      <span class="prep-icon">🚫</span>
+      <div><strong>Hiçbir şey harcamayın</strong> — haftanın günlerinde çok fazla harcama olacak, tüm kaynaklarınızı saklayın</div>
+    </div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️ Unutmayın:</strong> Radar görevlerini tüketmeyin — Pazartesi için saklayın. Ayrıca enerjinizin tümünü boşaltmayın, VS Savaşı başladığında tam Hayatiyet ile başlayın (40+40+120=200)
+  </div>
+  <div style="padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px;">
+    <span class="action-badge action-keep">🟡 UR Parçalarını saklayın</span>
+    <span class="action-badge action-dont">🔴 Perşembe'den önce açmayın</span>
+    <span class="action-badge action-keep">🟡 Radar görevlerini saklayın</span>
+    <span class="action-badge action-do">🟢 Geceleyin haritadan kaynak toplayın</span>
+    <span class="action-badge action-dont">🔴 Bugün kaynaklarınızı harcamayın</span>
+  </div>
+</div>
+
+
+<!-- ══════ PAZARTESİ ══════ -->
+<div class="day-block day-1" id="day-mon">
+  <div class="day-header">
+    <span>🌙 Pazartesi</span>
+    <span class="day-num">1. Gün</span>
+    <span class="day-theme">Radar Eğitimi</span>
+    <span class="theme-tag theme-activity">Aktivite</span>
+  </div>
+  <div class="day-desc">İlk gün sürekli aktivite ve işleri hareket halinde tutmakla ilgilidir. Odak noktası enerji tüketmek, radar görevlerini tamamlamak ve dronunuzu geliştirmektir. Pazar günü yapılan iyi bir hazırlık, bu günün başarısının anahtarıdır.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">📡</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-radar">Radar</span> <span class="badge b-star3">***</span> Radar görevlerini tamamlama</div>
+        <div class="task-desc">Hedef 80 görev — Pazar'dan biriktirdiniz, şimdi tüketme zamanı</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_eclair.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Hayatiyet (Enerji) tüketimi</div>
+        <div class="task-desc">Zombi saldırılarında, baskınlarda veya ittifak görevlerinde kullanın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">✈️</span>
+      <div class="task-content">
+        <div class="task-name">Drone eğitim verisi + Drone Parçaları</div>
+        <div class="task-desc">Drone yedek parçalarını biriktirin — bu gün için ihtiyacınız olacak</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_exp.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Kahraman EXP puanlarını tüketme</div>
+        <div class="task-desc">Ana kahramanlarınızın seviyesini yükseltin</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🍖</span>
+      <div class="task-content">
+        <div class="task-name">Haritadan yiyecek, çelik ve para toplama — gün boyunca</div>
+        <div class="task-desc">Pazar gecesi başladığınızın devamı — Pazartesi günü boyunca birliklerinizi sürekli toplamaya gönderin</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Bir taşla iki kuş vurun — Silahlanma Yarışı</div>
+    <div class="sync-item">Silahlanma Yarışı aşaması <strong>«Drone Güçlendirme»</strong> olduğunda — Savaş Verisi ve Hayatiyetinizi aynı anda tüketerek çift puan kazanın</div>
+    <div class="sync-item">Aşama <strong>«Kahraman İlerlemesi»</strong> olduğunda — bu zaman aralığında kahramanlarınızın EXP'sini tüketin</div>
+  </div>
+</div>
+
+
+<!-- ══════ SALI ══════ -->
+<div class="day-block day-2" id="day-tue">
+  <div class="day-header">
+    <span>⚡ Salı</span>
+    <span class="day-num">2. Gün</span>
+    <span class="day-theme">Üs Genişletme</span>
+    <span class="theme-tag theme-base">İnşa</span>
+  </div>
+  <div class="day-desc">İkinci gün odağınızı üs geliştirmeye çevirir. Teknoloji Merkezleri, Kışlalar ve hastaneler gibi önemli binaları yükseltmek, bu etkinliğin ötesinde size uzun vadeli bir avantaj sağlayacaktır. Hızlandırıcılarınızı rastgele kullanmak yerine, gerçek bir fark yaratan şeylere odaklanın.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">🏙️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> İnşaatı hızlandırma</div>
+        <div class="task-desc">İnşaat hızlandırıcılarını kullanın ve binaların yapımını tamamlayın — puanlar inşaat tamamlandığında sayılır</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏗️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Bina savaş gücünü artırma</div>
+        <div class="task-desc">Üs gücünü artırmak için binaların seviyesini yükseltin</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🚛</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-ur">UR</span> Turuncu kamyon gönderme</div>
+        <div class="task-desc">Hafta boyunca kamyon yenileme biletlerini toplayın — Salı ve Cumartesi günleri ihtiyacınız olacak</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🎯</span>
+      <div class="task-content">
+        <div class="task-name">Efsanevi (turuncu) gizli görevleri gerçekleştirme</div>
+        <div class="task-desc">Hafta boyunca gizli görev yenileme biletlerini toplayın — Salı ve Cumartesi günleri ihtiyacınız olacak</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🎟️</span>
+      <div class="task-content">
+        <div class="task-name">Hayatta kalanları askere alma</div>
+        <div class="task-desc">Hafta boyunca biriktirdiğiniz tüm askere alma biletlerini kullanın</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Bir taşla iki kuş vurun — Silahlanma Yarışı</div>
+    <div class="sync-item">Silahlanma Yarışı aşaması <strong>«Şehir İnşaatı»</strong> ise — VS Savaşı ve Silahlanma Yarışı puanlarını birlikte kazanmak için inşaat hızlandırıcılarını kullanın ve binaların seviyesini aynı anda yükseltin</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Radar görevlerini tüketmeyin — Çarşamba günü ihtiyacınız olacak
+  </div>
+</div>
+
+
+<!-- ══════ ÇARŞAMBA ══════ -->
+<div class="day-block day-3" id="day-wed">
+  <div class="day-header">
+    <span>🔬 Çarşamba</span>
+    <span class="day-num">3. Gün</span>
+    <span class="day-theme">Bilim Çağı</span>
+    <span class="theme-tag theme-tech">Teknoloji</span>
+  </div>
+  <div class="day-desc">Üçüncü gün, araştırma laboratuvarında akıllı kararlar almakla ilgilidir. Bu, üssünüzü güçlendiren teknolojilere yatırım yapma fırsatınızdır. Özellikle İttifak VS Savaşı, şehirler arası kamyonlar ve Özel Kuvvetler bölümlerinde Cesaret Madalyaları kullanan araştırmalara odaklanın — bunlar her zorlukta gücünüzü artıran uzun vadeli yükseltmelerdir.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">📡</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-radar">Radar</span> <span class="badge b-star3">***</span> Radar görevlerini tamamlama</div>
+        <div class="task-desc">Hedef 80 görev — Salı'dan 40 biriktirilmiş + Çarşamba'dan 40 = 80 görev hazır!</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🔬</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Teknoloji araştırmasını hızlandırma</div>
+        <div class="task-desc">Araştırma hızlandırıcılarını kullanın ve bekleyen araştırmaları tamamlayın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚗️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Teknoloji savaş gücünü artırma</div>
+        <div class="task-desc">Teknoloji gücünü artırmak için araştırmaların seviyesini yükseltin</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏅</span>
+      <div class="task-content">
+        <div class="task-name">Cesaret Madalyalarını tüketme — Özel Kuvvetler</div>
+        <div class="task-desc">Teknoloji Merkezi'ndeki İttifak VS Savaşı araştırmalarında Cesaret Madalyalarını kullanın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🚁</span>
+      <div class="task-content">
+        <div class="task-name">Drone parça sandıklarını açma (Seviye 1→7)</div>
+        <div class="task-desc">⚠️ Bu sandıkları hafta boyunca toplayın — bugün onları açmanın tek zamanıdır</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">✈️</span>
+      <div class="task-content">
+        <div class="task-name">Drone parçalarını yükseltme</div>
+        <div class="task-desc">Drone sayfasındaki parçalar bölümünden parçaları birleştirin</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Bir taşla iki kuş vurun — Silahlanma Yarışı</div>
+    <div class="sync-item">Aşama <strong>«Teknolojik Araştırma»</strong> ise — araştırma hızlandırıcılarını kullanın ve aynı anda teknoloji gücünüzü artırın</div>
+    <div class="sync-item">Aşama <strong>«Drone Güçlendirme»</strong> ise — drone parça sandıklarını açın ve Savaş Verisi kullanın</div>
+  </div>
+</div>
+
+
+<!-- ══════ PERŞEMBE ══════ -->
+<div class="day-block day-4" id="day-thu">
+  <div class="day-header">
+    <span>🦸 Perşembe</span>
+    <span class="day-num">4. Gün</span>
+    <span class="day-theme">Kahraman Eğitimi</span>
+    <span class="theme-tag theme-heroes">Kahramanlar</span>
+  </div>
+  <div class="day-desc">Dördüncü gün, kahraman gelişimine odaklanır ve malzemelerinizi biriktirdiyseniz en ödüllendirici günlerden biridir. Biriktirdiğiniz tüm EXP, parçalar ve Yetenek Madalyaları bir araya geldiğinde takımınızı bir sonraki seviyeye taşır. Ana kahramanlarınızı geliştirmeye odaklanın, bu oyunun her alanında gücünüzü artıracaktır.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">🎟️</span>
+      <div class="task-content">
+        <div class="task-name">Kahramanları askere alma</div>
+        <div class="task-desc">Hafta boyunca askere alma biletlerini toplayın — bugün hepsini kullanma zamanı</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_exp.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Kahraman EXP puanlarını tüketme</div>
+        <div class="task-desc">Ana kahramanlarınızın seviyesini yükseltin</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_fragment.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Kahraman parçalarını tüketme <span class="badge b-ur">UR</span> <span class="badge b-ssr">SSR</span> <span class="badge b-sr">SR</span></div>
+        <div class="task-desc">Hafta boyunca parçaları toplayın — bugün hepsini kullanma zamanı</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon"><img src="../images/icon_medaille.png" style="width:28px;height:28px;object-fit:contain;border-radius:4px;"></span>
+      <div class="task-content">
+        <div class="task-name">Yetenek Madalyalarını tüketme</div>
+        <div class="task-desc">Hafta boyunca madalyaları toplayın — bugün hepsini kullanma zamanı</div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Bir taşla iki kuş vurun — Silahlanma Yarışı</div>
+    <div class="sync-item">Aşama <strong>«Kahraman İlerlemesi»</strong> ise — VS Savaşı ve Silahlanma Yarışı puanlarını birlikte kazanmak için kahraman EXP'sini, parçalarını ve askere alma biletlerini aynı anda tüketin</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Radar görevlerini tüketmeyin — Cuma günü ihtiyacınız olacak
+  </div>
+</div>
+
+
+<!-- ══════ CUMA ══════ -->
+<div class="day-block day-5" id="day-fri">
+  <div class="day-header">
+    <span>🔥 Cuma</span>
+    <span class="day-num">5. Gün</span>
+    <span class="day-theme">Genel Seferberlik</span>
+    <span class="theme-tag theme-mobil">Seferberlik</span>
+  </div>
+  <div class="day-desc">Haftanın bu aşamasında, tüm gücünüzü ortaya koyma zamanı geldi. Beşinci gün, üssünüzün, teknolojinizin ve askerlerinizin birden fazla sisteminin bir araya geldiği gündür. Yoğun bir gündür, ancak hafta boyunca yapılan iyi bir hazırlığın size büyük bir avantaj sağladığı gündür de.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">📡</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-radar">Radar</span> <span class="badge b-star3">***</span> Radar görevlerini tamamlama</div>
+        <div class="task-desc">Hedef 80 görev — Perşembe sabahından radar görevlerini biriktirmiş olmalısınız</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏙️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> İnşaatı hızlandırma</div>
+        <div class="task-desc">İnşaat hızlandırıcılarını kullanın ve yapımı tamamlayın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏗️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Bina savaş gücünü artırma</div>
+        <div class="task-desc">Üs gücünü artırmak için binaların seviyesini yükseltin</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚔️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Eğitimi hızlandırma + asker eğitimi</div>
+        <div class="task-desc">Birliklerinizi eğitin ve seviyelerini yükseltin — 1. seviyeden 10. seviyeye</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🔬</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Teknoloji araştırmasını hızlandırma</div>
+        <div class="task-desc">Araştırma hızlandırıcılarını kullanın ve bekleyen araştırmaları tamamlayın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚗️</span>
+      <div class="task-content">
+        <div class="task-name">Teknoloji savaş gücünü artırma</div>
+        <div class="task-desc">Teknoloji gücünü artırmak için araştırmaların seviyesini yükseltin</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Bir taşla iki kuş vurun — Silahlanma Yarışı</div>
+    <div class="sync-item">Aşama <strong>«Şehir İnşaatı»</strong> ise — aynı anda inşaat hızlandırıcılarını kullanın</div>
+    <div class="sync-item">Aşama <strong>«Teknolojik Araştırma»</strong> ise — aynı anda araştırma hızlandırıcılarını kullanın</div>
+    <div class="sync-item">Aşama <strong>«Birlik Gelişimi»</strong> ise — aynı anda eğitim hızlandırıcılarını kullanın</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Uyumadan önce koruma kalkanını etkinleştirin — rakip ittifakın sizin üzerinizden puan kazanmaması için
+  </div>
+</div>
+
+
+<!-- ══════ CUMARTESİ ══════ -->
+<div class="day-block day-6" id="day-sat">
+  <div class="day-header">
+    <span>💥 Cumartesi</span>
+    <span class="day-num">6. Gün</span>
+    <span class="day-theme">Düşman Yok Edici</span>
+    <span class="theme-tag theme-pvp">PvP</span>
+  </div>
+  <div class="day-desc">Düşman Yok Edici gününe hoş geldiniz! Bu, düşman askerlerini öldürmenin size büyük puanlar kazandırdığı PvP savaş günüdür. Savaşamıyorsanız, gereksiz kayıpları önlemek için kalkan şarttır. İyi planlayan biri için, bu kaotik gün haftanın en değerli günü haline gelir.</div>
+  <div class="tasks-section">
+
+    <div class="task-row">
+      <span class="task-icon">🚛</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-ur">UR</span> Turuncu kamyon gönderme</div>
+        <div class="task-desc">Hafta boyunca kamyon yenileme biletlerini toplayın — Salı ve Cumartesi günleri ihtiyacınız olacak</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🎯</span>
+      <div class="task-content">
+        <div class="task-name">Efsanevi (turuncu) gizli görevleri gerçekleştirme</div>
+        <div class="task-desc">Hafta boyunca gizli görev yenileme biletlerini toplayın — Salı ve Cumartesi günleri ihtiyacınız olacak</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🏙️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> İnşaatı hızlandırma</div>
+        <div class="task-desc">İnşaat hızlandırıcılarını kullanın ve yapımı tamamlayın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚔️</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star2">**</span> Eğitimi hızlandırma</div>
+        <div class="task-desc">Birliklerinizi eğitin ve seviyelerini yükseltin</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🔬</span>
+      <div class="task-content">
+        <div class="task-name"><span class="badge b-star3">***</span> Teknoloji araştırmasını hızlandırma</div>
+        <div class="task-desc">Araştırma hızlandırıcılarını kullanın ve bekleyen araştırmaları tamamlayın</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">➕</span>
+      <div class="task-content">
+        <div class="task-name">Tedaviyi hızlandırma</div>
+        <div class="task-desc">Hastanelerde askerleri tedavi etmek için kullanılır</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">🗡️</span>
+      <div class="task-content">
+        <div class="task-name">Düşman ittifakının askerlerini öldürme</div>
+        <div class="task-desc">Rakip ittifakın kalesine saldırın — haritada kırmızı balonla gösterilir. Birliğin seviyesi ne kadar yüksekse puan da o kadar artar</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">⚔️</span>
+      <div class="task-content">
+        <div class="task-name">Diğer ittifakların askerlerini öldürme</div>
+        <div class="task-desc">Diğer ittifakların kalelerine saldırın — haritada beyaz balonla gösterilir</div>
+      </div>
+    </div>
+
+    <div class="task-row">
+      <span class="task-icon">💀</span>
+      <div class="task-content">
+        <div class="task-name">Kendi askerlerinizin ölümü</div>
+        <div class="task-desc">Askerlerinizi kaybetmek bile size puan kazandırır — savaşmayı planlamıyorsanız kalkanı etkinleştirin</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="spacer"></div>
+  <div class="sync-box">
+    <div class="sync-title">⚡ Bir taşla iki kuş vurun — Silahlanma Yarışı</div>
+    <div class="sync-item">Aşama <strong>«Şehir İnşaatı»</strong> ise — aynı anda inşaat hızlandırıcılarını kullanın</div>
+    <div class="sync-item">Aşama <strong>«Birlik Gelişimi»</strong> ise — aynı anda eğitim ve tedavi hızlandırıcılarını kullanın</div>
+    <div class="sync-item">Aşama <strong>«Teknolojik Araştırma»</strong> ise — aynı anda araştırma hızlandırıcılarını kullanın</div>
+  </div>
+  <div class="warn-box">
+    <strong>⚠️</strong> Akşam radar görevlerini tüketmeyin — gelecek Pazartesi günü ihtiyacınız olacak
+  </div>
+</div>
+
+<!-- ══════ YAYGIN HATALAR ══════ -->
+<div class="mistakes-block">
+  <div class="mistakes-title">❌ Kaçınılması Gereken Yaygın Hatalar</div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text"><strong>UR Parçalarını</strong> Perşembe'den önce açmak — doğru an için saklayın</div>
+  </div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text"><strong>Radar görevlerini</strong> kendi günleri (Pazartesi/Çarşamba/Cuma) dışında tüketmek</div>
+  </div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text"><strong>Cesaret Madalyalarını</strong> İttifak VS Savaşı araştırmasına odaklanmak yerine rastgele harcamak</div>
+  </div>
+  <div class="mistake-item">
+    <span class="mistake-icon">❌</span>
+    <div class="mistake-text">Cumartesi günü uyumadan önce <strong>kalkanı</strong> etkinleştirmeyi unutmak</div>
+  </div>
+</div>
+
+<!-- ══════ ÖDÜLLER ══════ -->
+<div class="rewards-block" id="rewards">
+  <div class="rewards-title">🏅 İttifak VS Savaşı Ödülleri</div>
+
+  <div class="reward-item">
+    <div class="reward-name">🥇 Günlük Sıralama Ödülleri</div>
+    <div class="reward-desc">Günlük bireysel puanlarda ilk 30 oyuncu arasına girerseniz, ek özel ödüller alırsınız.</div>
+  </div>
+
+  <div class="reward-item">
+    <div class="reward-name">📦 Günlük Seviye Ödülleri</div>
+    <div class="reward-desc">VS Savaşına katıldığınız her gün, kazanıp kazanmadığınıza bakılmaksızın bir ödül paketi alırsınız — tek yapmanız gereken günlük görevleri tamamlamaktır. Hafta sonunda ittifakınız, savaşın sonucuna göre ek ödüller alır.</div>
+  </div>
+
+  <div class="reward-item">
+    <div class="reward-name">🏆 Lig Sonuçlandırma Ödülleri</div>
+    <div class="reward-desc">VS Savaşı liginin sonunda, ittifakınızın en az 6,000,000 puan toplaması gerekir. Alacağınız ödüller, etkinlikteki ittifak seviyenize (gümüş, altın veya elmas) büyük ölçüde bağlıdır.</div>
+  </div>
+</div>
+
+<!-- ══════ SONUÇ ══════ -->
+<div class="conclusion-block">
+  <div class="conclusion-title">🎯 Sonuç</div>
+  <p>İttifak VS Savaşı sadece kimin daha güçlü olduğuyla ilgili değildir — daha akıllıca planlayan, zamanlamayı daha iyi yapan ve takımıyla uyumlu bir birim olarak çalışanla ilgilidir. Her gün üssünüzün ve gelişiminizin farklı bir yönüne odaklanır. Ne yapacağınızı, ne zaman yapacağınızı ve her kaynaktan nasıl en iyi şekilde yararlanacağınızı bilin.</p>
+  <br>
+  <p>Eylemlerinizi Silahlanma Yarışı ile senkronize edin, kaynaklar, inşaat/araştırma/eğitim hızlandırıcıları ve Cesaret Madalyaları gibi öğeleri biriktirin ve en etkili yükseltmelere odaklanın. <strong>İttifak VS Savaşı ödülleri için planlama, katılımın kendisi kadar önemlidir — planlayın, koordine edin ve haftayı güçlü bir şekilde kapatın! 🏆</strong></p>
+</div>
+
+<!-- ══════ SSS ══════ -->
+<div class="faq-block">
+  <div class="faq-title">❓ Sıkça Sorulan Sorular</div>
+  <div class="faq-item">
+    <div class="faq-q">UR Parçalarını ne zaman açmalıyım?</div>
+    <div class="faq-a">➡️ Kahraman Günü (Train Heroes) — UR kahraman parçalarını açıp kullanmak için en uygun gün budur.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Hızlandırıcıları ne zaman kullanmalıyım?</div>
+    <div class="faq-a">➡️ Türüne göre, uygun günde: inşaat hızlandırıcıları Genişleme Günü'nde, araştırma hızlandırıcıları Bilim Günü'nde, eğitim hızlandırıcıları Kahraman Günü'nde.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Radar görevlerini saklamalı mıyım?</div>
+    <div class="faq-a">➡️ Evet, mümkün olan en fazla puanı almak için radar günlerinden (Pazartesi, Çarşamba, Cuma) önce onları saklayın.</div>
+  </div>
+</div>
+
+<!-- ══════ FOOTER NWH ══════ -->
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Hazırlayan: MSBKH</div>
+  <div class="footer-credit">Son güncelleme: Haziran 2026</div>
+</div>
+
+<!-- ══════ BACK TO TOP ══════ -->
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Başa dön">🔝</a>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>

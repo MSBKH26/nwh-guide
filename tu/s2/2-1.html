@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] 2. Sezon — 1. Hafta | Kutup Fırtınası</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --orange:#f97316; --blue:#3b82f6; --green:#22c55e;
+    --purple:#a855f7; --cyan:#06b6d4; --ice:#7dd3fc;
+    --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+
+  /* ── HEADER ── */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:20px 16px 16px; margin-bottom:16px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(125,211,252,0.10),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.3rem; font-weight:900; color:var(--ice); letter-spacing:1px; text-shadow:0 0 20px rgba(125,211,252,0.35); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+  .season-badge { display:inline-block; margin-top:10px; padding:5px 14px; border-radius:16px; background:rgba(125,211,252,0.12); border:1px solid rgba(125,211,252,0.35); color:var(--ice); font-weight:900; font-size:0.78rem; }
+
+  /* ── INFO / SUMMARY BOX ── */
+  .info-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; margin-bottom:14px; font-size:0.86rem; line-height:1.9; }
+  .info-box .info-title { font-weight:900; font-size:1rem; color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .info-box.exec { border-color:rgba(125,211,252,0.35); background:linear-gradient(135deg,#0e1419,#131b24); }
+  .exec-list { list-style:none; padding:0; }
+  .exec-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; gap:8px; align-items:flex-start; color:#cbd5e1; }
+  .exec-list li:last-child { border-bottom:none; }
+  .exec-list li::before { content:'🔹'; flex-shrink:0; }
+  .toc-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:4px; }
+  .toc-list a { color:#93c5fd; text-decoration:none; font-size:0.85rem; display:block; padding:6px 10px; border-radius:8px; background:rgba(255,255,255,0.02); }
+  .toc-list a:active { background:rgba(255,255,255,0.06); }
+
+  /* ── TYPE BADGES ── */
+  .badges { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
+  .tbadge { font-size:0.72rem; font-weight:900; padding:3px 10px; border-radius:12px; white-space:nowrap; }
+  .tb-official { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.3); }
+  .tb-collective { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); }
+  .tb-nwh { background:rgba(245,197,24,0.15); color:var(--gold); border:1px solid rgba(245,197,24,0.3); }
+  .tb-verify { background:rgba(249,115,22,0.15); color:var(--orange); border:1px solid rgba(249,115,22,0.3); }
+  .tb-warn { background:rgba(232,57,74,0.15); color:#fca5a5; border:1px solid rgba(232,57,74,0.3); }
+
+  /* ── SECTION ── */
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); scroll-margin-top:12px; }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.98rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-ice { background:linear-gradient(90deg,rgba(125,211,252,0.12),transparent); color:var(--ice); border-bottom-color:rgba(125,211,252,0.25); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-orange { background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent); color:var(--orange); border-bottom-color:rgba(249,115,22,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .sh-purple { background:linear-gradient(90deg,rgba(168,85,247,0.12),transparent); color:var(--purple); border-bottom-color:rgba(168,85,247,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x:auto; }
+  table.data-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:420px; }
+  table.data-table th { background:rgba(0,0,0,0.35); padding:8px 10px; font-weight:700; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; color:var(--muted); font-size:0.72rem; }
+  table.data-table td { padding:8px 10px; text-align:left; border-bottom:1px solid rgba(24,31,46,0.6); white-space:nowrap; }
+  table.data-table tr:last-child td { border-bottom:none; }
+
+  /* ── HIGHLIGHT / NOTE BOXES ── */
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.86rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.86rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.86rem; }
+  .highlight-blue { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#93c5fd; font-size:0.86rem; line-height:1.9; }
+  .highlight-warn { background:rgba(249,115,22,0.09); border:1px solid rgba(249,115,22,0.3); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fdba74; font-size:0.85rem; line-height:1.9; }
+  .note-box { padding:10px 14px; font-size:0.78rem; color:var(--muted); border-top:1px dashed var(--border); background:rgba(0,0,0,0.15); }
+  .source-note { padding:10px 14px; font-size:0.76rem; color:#64748b; border-top:1px solid var(--border); background:rgba(0,0,0,0.1); }
+  .source-note a { color:#60a5fa; }
+
+  /* ── LISTS ── */
+  .checklist, .use-list, .claim-list, .warning-list { list-style:none; padding:0; }
+  .checklist li, .use-list li, .claim-list li, .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.6); display:flex; align-items:flex-start; gap:8px; font-size:0.86rem; }
+  .checklist label { display:flex; align-items:center; gap:8px; cursor:pointer; width:100%; }
+  .checklist input[type="checkbox"] { width:18px; height:18px; flex-shrink:0; accent-color:var(--green); cursor:pointer; }
+  .checklist li:has(input:checked) label { color:#86efac; text-decoration:line-through; text-decoration-color:rgba(134,239,172,0.5); }
+  .checklist li:last-child, .use-list li:last-child, .claim-list li:last-child, .warning-list li:last-child { border-bottom:none; }
+  .use-list li { color:#86efac; }
+  .claim-list li { color:#fde68a; }
+  .warning-list li { color:#fca5a5; }
+
+  /* ── DETAILS (collapsible) ── */
+  details.explain { margin-top:10px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:rgba(0,0,0,0.15); }
+  details.explain summary { padding:10px 12px; cursor:pointer; font-weight:700; color:var(--ice); font-size:0.85rem; list-style:none; display:flex; align-items:center; gap:6px; }
+  details.explain summary::-webkit-details-marker { display:none; }
+  details.explain summary::before { content:'▸'; transition:transform 0.2s; }
+  details.explain[open] summary::before { transform:rotate(90deg); }
+  details.explain .explain-body { padding:0 12px 12px; font-size:0.84rem; color:#cbd5e1; line-height:1.9; }
+
+  /* ── DAY-1 TASK CARDS ── */
+  .task-card { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+  .task-card:last-child { margin-bottom:0; }
+  .task-num { display:inline-flex; width:22px; height:22px; border-radius:50%; background:var(--ice); color:#0b0e12; font-weight:900; font-size:0.78rem; align-items:center; justify-content:center; margin-right:6px; }
+  .task-title { font-weight:700; color:#e2e8f0; font-size:0.88rem; }
+  .task-why { margin-top:6px; font-size:0.82rem; color:var(--muted); }
+
+  /* ── EVENT CARD ── */
+  .event-card { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+  .event-card:last-child { margin-bottom:0; }
+  .event-title { font-weight:900; color:var(--ice); font-size:0.92rem; margin-bottom:4px; }
+  .event-meta { font-size:0.76rem; color:var(--muted); margin-bottom:6px; }
+  .event-row { font-size:0.84rem; color:#cbd5e1; margin-top:4px; }
+  .event-row b { color:#e2e8f0; }
+
+  /* ── BASE GRID SVG ── */
+  .grid-wrap { display:flex; justify-content:center; overflow-x:auto; padding:6px 0; }
+  .grid-legend { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:10px; font-size:0.78rem; }
+  .legend-item { display:flex; align-items:center; gap:6px; color:#cbd5e1; }
+  .legend-swatch { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
+
+  /* ── TIMELINE ── */
+  .timeline { position:relative; padding-left:18px; border-left:2px solid var(--border); margin:6px 4px; }
+  .timeline-day { position:relative; margin-bottom:16px; }
+  .timeline-day:last-child { margin-bottom:0; }
+  .timeline-day::before { content:''; position:absolute; left:-24px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--ice); box-shadow:0 0 8px rgba(125,211,252,0.6); }
+  .timeline-day-title { font-weight:900; color:var(--ice); font-size:0.92rem; margin-bottom:6px; }
+  .timeline-items { list-style:none; padding:0; }
+  .timeline-items li { font-size:0.84rem; color:#cbd5e1; padding:4px 0; }
+
+  /* ── FOOTER ── */
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top { position:fixed; bottom:20px; right:16px; width:48px; height:48px; background:linear-gradient(135deg, var(--ice), #38bdf8); border:2px solid #e0f2fe; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,0.4); opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; z-index:999; }
+  .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+</style>
+</head>
+<body id="top">
+
+<a href="https://msbkh26.github.io/nwh-guide/tu/">
+  <div class="alliance-logo-wrap">
+    <img src="../../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>❄️ 2. Sezon — 1. Hafta</h1>
+  <p class="subtitle">Kutup Fırtınası (Polar Storm) — Eksiksiz NWH Rehberi</p>
+  <span class="season-badge">2. Sezon · 1. Hafta</span>
+</div>
+
+<!-- ══════ YÖNETİCİ ÖZETİ ══════ -->
+<div class="info-box exec">
+  <div class="info-title">⚡ Yönetici Özeti — Şu Anda Ne Yapmalıyım?</div>
+  <ul class="exec-list">
+    <li>1. gün: kişisel fırını 600 saniye çalıştır + Overdrive modunu 600 saniye aç + bir kez kömür bağışla + 3 müttefike ısınmasında yardım et.</li>
+    <li>Yüksek Isı Fırınını aç ve ilk Titanyum Alaşım Fabrikasını geliştirmeye başla.</li>
+    <li>Toprak sahipliğine başlamak için 1. seviye ilk Kazı Alanını keşfet.</li>
+    <li>Üssünün sıcaklığının 5 dakikadan uzun süre -20°C'nin altına düşmesine izin verme (donma riski).</li>
+    <li>NWH'nin üs yerleşim planına uy: her üs 3×3 kare kaplar, bitişik her iki üs arasında iki boş kare bırakılır.</li>
+    <li>Kömür sevkiyatlarını erken harcamak yerine aktivasyon günü için biriktir.</li>
+  </ul>
+  <div class="badges">
+    <span class="tbadge tb-official">Sezonluk görev</span>
+    <span class="tbadge tb-collective">Kolektif hedef</span>
+    <span class="tbadge tb-nwh">NWH stratejisi</span>
+    <span class="tbadge tb-verify">Doğrulama gerekli</span>
+    <span class="tbadge tb-warn">Kaynak çelişkisi</span>
+  </div>
+</div>
+
+<!-- ══════ İÇİNDEKİLER ══════ -->
+<div class="info-box">
+  <div class="info-title">📑 Rehber İçeriği</div>
+  <ul class="toc-list">
+    <li><a href="#intro">1. 2. Sezon Girişi</a></li>
+    <li><a href="#day1">2. 1. Gün — Temel Atma</a></li>
+    <li><a href="#grid">3. Üs Yerleşim Düzeni</a></li>
+    <li><a href="#temp">4. Sıcaklık ve Fırtınalar</a></li>
+    <li><a href="#coal">5. Kömür ve Kaynaklar</a></li>
+    <li><a href="#titanium">6. Titanyum Alaşım Fabrikaları</a></li>
+    <li><a href="#furnace">7. İttifak Fırını</a></li>
+    <li><a href="#events">8. 1. Hafta Etkinlikleri</a></li>
+    <li><a href="#territory">9. Kazı Alanları ve Şehirler</a></li>
+    <li><a href="#timeline">10. 1-7. Gün Takvimi</a></li>
+    <li><a href="#checklist">11. Pratik Kontrol Listesi</a></li>
+    <li><a href="#mistakes">12. Sık Yapılan Hatalar</a></li>
+    <li><a href="#sources">13. Kaynaklar</a></li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 1. Giriş -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="intro">
+  <div class="section-head sh-ice">❄️ 1. 2. Sezon Girişi</div>
+  <div class="section-body">
+    <p>2. Sezon, tamamen <strong>Sıcaklık</strong> üzerine kurulu yepyeni bir sistem sunuyor. Üssünün kendine özgü bir sıcaklığı var ve çevrendeki haritanın, merkeze yaklaştıkça düşen (Başkent'te -80°C'ye kadar) bir ortam sıcaklığı var. Üssün, zamanla çevresindeki ortam sıcaklığına doğru kayar.</p>
+    <p>Üssün 5 dakikadan uzun süre -20°C'nin altında kalırsa <strong style="color:var(--red)">donar</strong> — bu durumda transfer ve Toplanma (Rally) yasaklanır; sadece rastgele ışınlanma ve ittifak transferi mümkün kalır.</p>
+    <p>Buna karşı elinde şunlar var:</p>
+    <ul class="checklist">
+      <li>🔥 <strong>Kişisel Yüksek Isı Fırını</strong> — ısını ve virüs direncini yükseltir, Overdrive modunda daha fazla kömür tüketir.</li>
+      <li>🏛️ <strong>İttifak Fırını</strong> — 1. seviye toprak üzerine kurulur, menzilindeki üsleri ısıtır ve üyelerden kömür gerektirir.</li>
+      <li>🏭 <strong>Titanyum Alaşım Fabrikaları</strong> — kişisel fırını ve sezonluk yapıları geliştirmek için gereken titanyum alaşımını üretir.</li>
+      <li>⛏️ <strong>Kazı Alanları (Dig Sites)</strong> — sürekli kömür kaynağın ve ilk sahip olduğun topraklar.</li>
+    </ul>
+
+    <img src="../../images/s2-w1-high-heat-furnace-ui.webp" alt="Kişisel Yüksek Isı Fırını arayüzü" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+
+    <p>Bu sistemler birbirine bağlıdır: kazı alanlarından gelen kömür, fırınları ve fabrikaları inşa etmek ve geliştirmek için kullanılır; bunlar da seni donmaktan korur ve kutup canavarlarıyla savaşmak ve daha fazla toprak ele geçirmek için gereken virüs direncini açar.</p>
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 2. 1. Gün -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="day1">
+  <div class="section-head sh-gold">🥇 2. 1. Gün — Temel Atma | En Yüksek Öncelik</div>
+  <div class="section-body">
+    <p>Bunlar, sezonun ilk günü tamamlanması gereken görevlerdir. Her görevin türü (topluluk rehberine göre oyunun sezonluk görevi veya NWH'nin dahili stratejisi) belirtilmiştir.</p>
+
+    <div class="task-card">
+      <span class="task-num">1</span><span class="task-title">İttifak Fırını yakınında üye toplanma noktası belirle</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH stratejisi</span></div>
+      <div class="task-why">İlk günden itibaren toplu ısınmayı ve fırının ortak savunmasını kolaylaştırır.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">2</span><span class="task-title">Üye katılımıyla İttifak Fırınını yerleştir ve onar</span>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="task-why">Onarım sürecini başlatmak ve yönetmek (İttifak ← İttifak Fırını ← Koordinatlar) sadece R4/R5 ile sınırlıdır; onarıma gerçek katılım ise üyelerin takımlarını fırını güçlendirmeye göndermesiyle olur — buna kadar 20 güçlendirme katılabilir (1. Sezondaki kale onarımına benzer bir mekanik). Bu olmadan, ittifak menzilinde toplu ısınma olmaz.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">3</span><span class="task-title">Tüm üyelerden Yüksek Isı Fırınını inşa etmelerini iste</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH stratejisi</span></div>
+      <div class="task-why">Bu fırın olmadan virüs direnci ve bireysel Overdrive aktivasyonu mümkün değildir.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">4</span><span class="task-title">Kişisel fırını en az 600 saniye çalıştır</span>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span> <span class="tbadge tb-collective">Cold Wave Alert hedefi</span></div>
+      <div class="task-why">1. günde hemen kullanılabilen Cold Wave Alert görevinin hedeflerinden biri.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">5</span><span class="task-title">Overdrive modunu 600 saniye aktif et</span>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="task-why">Daha yüksek ısı karşılığında daha fazla kömür tüketir ve Cold Wave Alert içinde belirli bir hedeftir.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">6</span><span class="task-title">İttifak Fırınına kömür bağışla</span>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="task-why">Tüm savaş bölgeleri genelinde ortak kolektif sandık hedefine katkıda bulunur (toplam 5.000.000 kömür — sadece senin ittifakına özel bir hedef değil) — ayrıca kişisel bağış miktarına göre ayrı bir bireysel sıralama vardır.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">7</span><span class="task-title">3 müttefike ısınmasında yardım et</span>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="task-why">Recon Plane göndererek (her vuruşta yaklaşık +2°C ekler) veya elle buz kırarak.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">8</span><span class="task-title">İlk Titanyum Alaşım Fabrikasını geliştirmeye başla</span>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="task-why">İkinci fabrika sadece ilki 15. seviyeye ulaştığında açılır — mümkün olduğunca erken başla.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">9</span><span class="task-title">Uygun aktivitelerden kömür topla (Radar, Mahsur Kalan Hayatta Kalanlar...)</span>
+      <div class="badges"><span class="tbadge tb-verify">Doğrulama gerekli</span></div>
+      <div class="task-why">Kaynaklar, kömürün radar görevlerinden ve diğer kaynaklardan geldiğini doğruluyor, ancak her sunucudaki tam aktivite listesi değişebilir — oyun içinde doğrula.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">10</span><span class="task-title">Ulaşabildiğin en yüksek seviyeli sezonluk zombiyi öldür (Purge Action)</span>
+      <div class="badges"><span class="tbadge tb-collective">Bireysel sıralama</span></div>
+      <div class="task-why">Purge Action sıralaması, bu sezon öldürdüğün ilk zombinin seviyesine göre belirlenir — daha yüksek seviye daha iyi sıralama sağlar.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">11</span><span class="task-title">İlk hedef Kazı Alanına karar ver</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH stratejisi</span></div>
+      <div class="task-why">Sahip olunması gereken ilk toprak 1. seviye bir Kazı Alanıdır — ittifakın tüm genişlemesinin başlangıç noktasını belirler.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">12</span><span class="task-title">İlk günlük Doom Walker'ın zamanlamasına dikkat et</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH stratejisi</span></div>
+      <div class="task-why">İlk günlük Doom Walker'ı, 2. Sezon fiilen başlamadan önceki sıfırlama gününde öldürmekten kaçın (sunucu zamanlaması buna izin veriyorsa) — bunun yerine sezonun gerçekten başlamasını bekle, ardından her gün "ilk öldürme" ödülleri için ulaşabildiğin en yüksek seviyeyi hedefle. Doom Walker (bireysel günlük ödül), Doom Elite (Cold Wave Alert içinde kolektif sandık hedefi, tüm savaş bölgelerinde 800) ve sezonun ilk normal zombisini (Purge Action sıralamasının temeli) birbirine karıştırma — üçünün ödülleri ve koşulları tamamen farklıdır.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ Oyunun sezonluk görevini (örneğin fırını 600 saniye çalıştırmak) NWH'nin idari talimatıyla (örneğin toplanma noktası) karıştırma — tür, yukarıdaki her kartta belirtilmiştir.</div>
+    <div class="highlight-blue">💡 Fırın ilerlemesiyle ilgili bireysel ödüller şuradan toplanabilir: 2. Sezon ← Hedefler ← Bireysel (Season 2 → Goals → Individual). Cold Wave Alert etkinlikleri için: Cold Wave Event ← Hedefler (Goals). Bu ödüllerin bazıları kırmızı bildirim noktası göstermez, bu yüzden sadece bildirimlere güvenmek yerine bu listeleri düzenli olarak elle kontrol et.</div>
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> + dahili NWH stratejisi + oyun içi oyuncu deneyimi (ödül alma yolu)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 3. Üs Yerleşim Düzeni -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="grid">
+  <div class="section-head sh-gold">🧱 3. Üs Yerleşim Düzeni — NWH Stratejisi</div>
+  <div class="section-body">
+    <div class="badges"><span class="tbadge tb-nwh">Dahili NWH stratejisi — resmi bir oyun kuralı değildir</span></div>
+    <p>Her üs <strong>3×3 kare</strong> (9 kare) kaplar. NWH'nin benimsediği dağılımda, bitişik her iki üs arasında yatay ve dikey olarak <strong>tam olarak iki boş kare</strong> bırakılır: 3 dolu kare + 2 boş kare + 3 dolu kare.</p>
+    <p>Hedefler: NWH'nin etki alanını genişletmek, hareketleri düzenlemek, düşmana açık alanları azaltmak ve İttifak Fırını için korunan bir arka bölge hazırlamak.</p>
+
+    <div class="grid-wrap">
+      <img src="../../images/s2-w1-base-grid-example.webp" alt="NWH üs yerleşiminin gerçek örneği" width="600" height="400" loading="lazy" style="width:100%; max-width:420px; height:auto; border-radius:10px; display:block; margin:0 auto;">
+    </div>
+    <div class="grid-legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:rgba(59,130,246,0.5); border:1px solid #3b82f6;"></span> Üye üssü (3×3 kare)</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:transparent; border:1px solid rgba(148,163,184,0.4);"></span> İki üs arası boşluk = iki boş kare</div>
+    </div>
+    <div class="note-box">İttifak Fırını bu diyagramda bilerek gösterilmemiştir — buradaki üs yerleşimi, Bölüm 7'de ayrıntılı olarak açıklanan fırının konumundan bağımsızdır.</div>
+
+    <div class="highlight-box">Bu, NWH'nin dahili bir organizasyon stratejisidir; oyun veya topluluk rehberi tarafından resmi olarak dayatılan bir kural değildir.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 4. Sıcaklık ve Fırtınalar -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="temp">
+  <div class="section-head sh-ice">🌡️ 4. Sıcaklık ve Fırtınalar</div>
+  <div class="section-body">
+    <p>Sıcaklık aralığı -270°C ile +300°C arasında değişir. Üssünün sıcaklığı, zamanla çevresindeki ortam sıcaklığına doğru kayar.</p>
+    <ul class="checklist">
+      <li>⏳ <strong>Donma uyarısı:</strong> -20°C'nin altında kalmak 5 dakikalık bir geri sayım başlatır.</li>
+      <li>🧊 <strong>Tam donma:</strong> -20°C'nin altında 5 dakika kesintisiz kaldıktan sonra — transfer ve toplanmalar yasaklanır (rastgele ışınlanma ve ittifak transferi kullanılabilir kalır).</li>
+      <li>🔥 <strong>Çözülme:</strong> -20°C'nin üstünde 5 dakika kalmak donmayı kaldırır. Tekrar -20°C'nin altına düşmek, bir an için bile olsa sayacı sıfırlar.</li>
+      <li>🧨 <strong>Buz kırma:</strong> müttefikler buzu elle kırabilir (5 vuruş, vuruş başına 5 enerji puanı).</li>
+      <li>✈️ <strong>Recon Plane:</strong> her vuruşta yaklaşık +2°C ekler, ancak etkisi geçici ve kısa sürelidir.</li>
+    </ul>
+
+    <div class="highlight-blue">💡 Her üyeyi tek tek kontrol etmek yerine, sıcaklığı tehlikeli şekilde hızlı düşen müttefikleri görmek için "Warm Up" sekmesini kullan. Ayrıca, oyundan uzakken Kar Fırtınası (Blizzard) başladığında kişisel fırını otomatik çalıştırmak için bir otomatik ayar etkinleştirebilirsin — böylece sen yokken donma riskinden kaçınırsın.</div>
+    <div class="note-box">Not: üs sıcaklığı sadece donma riskini etkilemez — üssün istatistiklerini ve ekstra buff/debuff'larını da etkiler. Kaynak bu etki için kesin oranlar vermiyor, bu yüzden burada belirli bir rakam belirtmiyoruz.</div>
+
+    <img src="../../images/s2-w1-freeze-thaw-diagram.webp" alt="Donma ve çözülme mekaniği" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Kar Fırtınası (Blizzard) Seviyesi</th><th>Sıcaklık Düşüşü</th></tr></thead>
+        <tbody>
+          <tr><td>1. Seviye</td><td>-10°C</td></tr>
+          <tr><td>2. Seviye</td><td>-15°C</td></tr>
+          <tr><td>3. Seviye</td><td>-20°C</td></tr>
+          <tr><td>4. Seviye</td><td>-25°C</td></tr>
+          <tr><td>5. Seviye</td><td>-30°C</td></tr>
+          <tr><td>7. Seviye</td><td>-45°C</td></tr>
+          <tr><td>8. Seviye</td><td>-50°C</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-warn">Kaynak çelişkisi</span></div>
+    <div class="highlight-warn">⚠️ Kaynaktaki açıklama metni "ilk fırtına -15°C düşüşle 1. seviyedir ve sezonun başlangıcından 7 saat sonra gelir" diyor — aynı kaynaktaki tablo ise 1. seviyenin sadece -10°C olduğunu belirtiyor. Bu çelişkiyi çözemedik, olduğu gibi sunuyoruz. Ayrıca 2. seviyenin süresi 3 saat olarak belirtilmiş, ancak diğer seviyelerin süreleri belirsiz ve ilk fırtınanın geliş zamanlaması sunucuya göre rastgele olabilir.</div>
+
+    <details class="explain">
+      <summary>Diğer ısı kaynakları</summary>
+      <div class="explain-body">
+        <p><strong>Şehir Fırını</strong> (kontrol ettiğin şehirler için, tüm şehir karesini ısıtır): 1. seviye = +5°C, 2. seviye = +20°C, 3. seviye = +30°C, 4. seviye = +40°C, 5. seviye = +50°C, 6. seviye = +60°C.</p>
+        <p><strong>Nükleer Fırın</strong> (Başkent'te): aktive edildiğinde tüm haritayı ısıtır, harita genelinde yaklaşık +10°C ekler.</p>
+      </div>
+    </details>
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> ve <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 5. Kömür ve Kaynaklar -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="coal">
+  <div class="section-head sh-orange">⛏️ 5. Kömür ve Kaynaklar</div>
+  <div class="section-body">
+    <p><strong>Kömür kaynakları:</strong> Kazı Alanları (sürekli üretim), Sezon Paketi ve Haftalık Paket, dağınık Tedarik Koleksiyonları (Supply Collections — sadece toprağın sıcaklığı 0°C'ye ulaştığında belirir), sezon görevleri, Hedefler (Goals), radar görevleri, zombi öldürme ödülleri, Hero's Return biletleri ve bir şehir veya kazı alanının ilk işgali. <span style="color:var(--muted); font-size:0.82rem;">(Polar Dishes/Snowflake besleme etkinliği ekstra bir kömür kaynağı ekler ama 2. haftadan başlar — bu rehberin kapsamı dışındadır.)</span></p>
+    <p><strong>Kullanım alanları:</strong> sezonluk yapıları inşa etmek ve geliştirmek, kişisel fırını çalıştırmak, İttifak Fırınına bağış yapmak.</p>
+    <div class="highlight-box">💡 İpucu: birikimli kömür üretimini kaçırmamak için Kazı Alanları sekmesindeki "Saatlik hepsini talep et" (Claim all hourly) düğmesini kullan.</div>
+    <div class="highlight-box">💡 İpucu: kişisel ihtiyaç (bireysel fırın) ile kolektif ihtiyaç (İttifak Fırını) arasında denge kur — kendi ısını güvence altına almadan kişisel stokunu ittifaka boşaltma, güçlü bir fırtına yaklaşırken de tersi geçerlidir.</div>
+
+    <img src="../../images/s2-w1-coal-sources.webp" alt="Kömür kaynakları ve kullanımları" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 6. Titanyum Alaşım Fabrikaları -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="titanium">
+  <div class="section-head sh-purple">🏭 6. Titanyum Alaşım Fabrikaları</div>
+  <div class="section-body">
+    <p>Üretim 1. seviyede saatte 720'den başlar ve 30. seviyede saatte 21.600'e ulaşır — her seviye sabit 720/saat ekler.</p>
+    <p>Yeni bir fabrika, sadece önceki fabrika <strong>15. seviyeye</strong> ulaştığında açılır. Haftalık Paket (Weekly Pass) hemen ekstra bir fabrika verir ve bu fabrika sadece paketin geçerlilik süresi boyunca üretime devam eder — bu <strong>ücretli ve isteğe bağlı bir özelliktir</strong>, paket bittiğinde sona erer, kalıcı bir kazanım değildir ve 1. hafta ilerlemesini tamamlamak için gerekli de değildir.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Seviye</th><th>Üretim/saat</th><th>Yükseltme maliyeti (kömür, yaklaşık)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>720</td><td>—</td></tr>
+          <tr><td>2</td><td>1.440</td><td>≈ 1.400</td></tr>
+          <tr><td>30</td><td>21.600</td><td>≈ 359.300 (indirimler öncesi)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box">🎯 Yatırım stratejisi: önce tüm fabrikalarını 15. seviyeye getir (bir sonraki fabrikayı açmak için), ardından 4 temel fabrika + Haftalık Paket'ten 1 tane elinde olduğunda, hepsini 16'ya, sonra 17'ye ve böyle devam ettirerek yükselt — her seviye aynı üretim artışını sağladığı sürece, en ucuz maliyetli olanı önce yükselt.</div>
+    <div class="note-box">Olası maliyet indirimleri: "Master Craftsman" teknolojisi, Mühendis'in 35. seviye "Kaynak Tasarrufu" yeteneği (%5'e kadar), ve "Veteran Craftsman" ittifak teknolojisi.</div>
+
+    <img src="../../images/s2-w1-titanium-factory-progress.webp" alt="Titanyum alaşım fabrikaları üretim gelişimi" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> ve <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">Kapsamlı Strateji Rehberi</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 7. İttifak Fırını -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="furnace">
+  <div class="section-head sh-gold">🏛️ 7. İttifak Fırını</div>
+  <div class="section-body">
+    <p>1. seviye toprak üzerine kurulur. Onarım sürecini başlatmak ve yönetmek (şu yoldan: İttifak ← İttifak Fırını ← Koordinatlar) sadece R4/R5 ile sınırlıdır. Onarıma gerçek katılım ise herhangi bir üyenin takımlarını fırını güçlendirmeye göndermesiyle olur — 1. Sezondaki kale onarımıyla aynı mekanik — buna <strong>20 güçlendirmeye kadar</strong> katılabilir (süreci tamamlamak için zorunlu bir sayı değildir). Sadece menzili içindeki üsleri ısıtır — bu yüzden üyelerin yakınında toplanması gerekir.</p>
+    <div class="badges"><span class="tbadge tb-nwh">NWH stratejisi</span></div>
+    <p>Kişisel ısısı düşük veya kişisel fırını daha az gelişmiş olan üyeler, ısıtma menzilinden yararlanmak için İttifak Fırınına daha yakın konumlandırılabilir — bu menzilin sınırları içinde ve NWH'nin genel yerleşim kararlarıyla (Bölüm 3) uyumlu şekilde.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Seviye</th><th>Kömür/dk</th><th>Isı</th><th>Overdrive Isısı</th><th>Kömür/dk (Overdrive)</th><th>Depolama</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>300</td><td>3°C</td><td>6°C</td><td>1.200</td><td>200K</td></tr>
+          <tr><td>5</td><td>540</td><td>5°C</td><td>10°C</td><td>2.160</td><td>600K</td></tr>
+          <tr><td>10</td><td>840</td><td>7.5°C</td><td>15°C</td><td>3.360</td><td>1.450K</td></tr>
+          <tr><td>20</td><td>1.440</td><td>12.5°C</td><td>25°C</td><td>5.760</td><td>4.150K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-verify">Kısmi veri — sadece kaynak tarafından doğrulanan 1, 5, 10, 20. seviyeleri gösteriyoruz</span></div>
+    <p>Dayanıklılık (Durability), 1. seviyede 205K'dan 20. seviyede 300K'ya kadar değişir. Kaynak, 8. seviye için 340K değeri veriyor — 7. seviye yaklaşık 235K ve 9. seviye yaklaşık 245K iken — yani 8. seviye değeri, çevresindeki seviyelerden mantıksız biçimde yüksek. Bu çelişkiyi ekstrapolasyonla "düzeltmeden" kaynakta göründüğü gibi bırakıyoruz ve sadece referans tablosunda olası bir yazım hatası olarak işaretliyoruz.</p>
+    <p><strong>Tedarik Koleksiyonları (Supply Collections):</strong> sadece toprak 0°C'ye ulaştığında belirir, günde en fazla 5 talep denemesi hakkı vardır. Donmuşsa, İttifak Fırını ısısı veya buz kırma gerektirir (vuruş başına 1.000 dayanıklılık, 5 enerji puanı).</p>
+
+    <div class="badges"><span class="tbadge tb-nwh">NWH önerisi — zorunlu bir kural değil</span></div>
+    <div class="highlight-box">🔥 İttifak Fırınını bağış dönemleri arasında durmaya bırakmak yerine, mümkün olduğunca kesintisiz çalıştırmak için üyeler arasında kömür bağışlarını düzenli şekilde organize etmek tercih edilir. Bu NWH'nin organizasyonel bir önerisidir, oyunda zorunlu bir kural değildir.</div>
+    <p>İttifak Fırınının kolektif hedeflerinin ilerlemesini (ve diğer kolektif hedefleri) takip etmek için şuraya bakılabilir: 2. Sezon ← Hedefler ← İttifak (Season 2 → Goals → Alliance).</p>
+
+    <img src="../../images/s2-w1-alliance-furnace-layout.webp" alt="İttifak Fırını konumu ve ısıtma menzili" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 8. 1. Hafta Etkinlikleri -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="events">
+  <div class="section-head sh-blue">🎉 8. 1. Hafta Etkinlikleri</div>
+  <div class="section-body">
+    <p>1. Hafta, destekleyici etkinliklerin yanı sıra <strong>6 ana sezonluk görev</strong> (Cold Wave Alert, Yüksek Isı Fırını, Titanyum Fabrikası, İttifak Fırını, Köy açılışı, Kasaba açılışı) içerir. Karışıklığı önlemek için aşağıdaki her kart şunlar arasında açıkça ayrım yapar:</p>
+    <ul class="checklist">
+      <li>🎯 <strong>Görev Hedefi (Mission Goal):</strong> belirli bir bireysel başarım (örneğin fırını 600 saniye çalıştırmak) — bazı durumlarda sadece kolektif sandık hedefi gerçekleştikten sonra açılabilir (12 saatlik bir fark olabilir).</li>
+      <li>📦 <strong>Ödül Sandığı Kolektif Hedefi (Reward Chest Goal):</strong> savaş bölgen veya tüm savaş bölgeleri tarafından toplu olarak ulaşılan birikimli bir başarım (sadece senin ittifakın değil).</li>
+      <li>🏅 <strong>Bireysel sıralama:</strong> katkı veya hıza göre oyuncular arasında kişisel bir sıralama.</li>
+      <li>🤝 <strong>İttifaklar arası sıralama:</strong> ittifaklar arasında kolektif bir sıralama (bireyler arasında değil).</li>
+      <li>🛠️ <strong>Dahili NWH talimatı:</strong> ittifak liderliğinden gelen, oyundaki herhangi bir ödül sistemiyle ilgisi olmayan organizasyonel bir karar.</li>
+    </ul>
+
+    <div class="event-card">
+      <div class="event-title">❄️ Cold Wave Alert</div>
+      <div class="event-meta">1. günde başlar — 7 gün sürer</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span> <span class="tbadge tb-collective">Kolektif hedef</span></div>
+      <div class="event-row"><b>Bireysel görev hedefleri:</b> 600 saniye kişisel fırın + 600 saniye Overdrive + bir kez kömür bağışı + 3 müttefike ısınma yardımı.</div>
+      <div class="event-row"><b>Kolektif sandık hedefi:</b> tüm savaş bölgeleri genelinde toplam 800 Doom Elite öldürmek.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🔥 Yüksek Isı Fırını</div>
+      <div class="event-meta">1. gün</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span> <span class="tbadge tb-collective">Kolektif hedef</span></div>
+      <div class="event-row"><b>Görev:</b> Yüksek Isı Fırınını aç.</div>
+      <div class="event-row"><b>Kolektif sandık hedefi:</b> tüm savaş bölgeleri genelinde 3.000.000 demir bağışlamak, ayrıca bağışa göre ek bireysel sıralama.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏭 Titanyum Alaşım Fabrikasını Aç</div>
+      <div class="event-meta">1. gün</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="event-row"><b>Görev:</b> 1'den 5'e kadar fabrikaları aç ve yükselt — her fabrika öncekinin yükseltilmesiyle açılır ve kömür gerektirir.</div>
+      <div class="event-row"><b>Kolektif sandık hedefi:</b> aynı 3.000.000 demir hedefi.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏛️ İttifak Fırını</div>
+      <div class="event-meta">1. gün</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="event-row"><b>Görev:</b> İttifak Fırınını şu yoldan inşa et/onar: İttifak ← İttifak Fırını ← Koordinatlar, ardından bir takım gönder (1. Sezondaki kalelere benzer).</div>
+      <div class="event-row"><b>Kolektif sandık hedefi:</b> tüm savaş bölgeleri genelinde 5.000.000 kömür bağışlamak, ayrıca bireysel sıralama.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏘️ Şehir Açılışı — Köy (1. Seviye)</div>
+      <div class="event-meta">3. gün (sandık hedefi anında, görev hedefi ek 12 saat sonra başlar)</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="event-row"><b>Görev:</b> 1. seviye şehirleri işgal et.</div>
+      <div class="event-row"><b>Kolektif sandık hedefi:</b> savaş bölgeleri genelinde toplam 80 kazı alanı işgal etmek.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏙️ Şehir Açılışı — Kasaba (2. Seviye)</div>
+      <div class="event-meta">6. gün (sandık hedefi anında, görev hedefi ek 12 saat sonra başlar)</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="event-row"><b>Görev:</b> 2. seviye şehirleri işgal et.</div>
+      <div class="event-row"><b>Kolektif sandık hedefi:</b> aynı 80 kazı alanı hedefi.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">⚔️ City Clash S2</div>
+      <div class="event-meta">3. günde sunucu saatiyle 12:00'de başlar</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="event-row">R4/R5'in şehirlere savaş ilan edebilmesi için önce 1. seviye bir kazı alanına sahip olman gerekir. Her ittifak aynı anda bir şehri hedefler. Birlikler, kuşatma sırasında zehir hasarına (virüs direnciyle azalır) ek olarak doğrudan birim kayıplarına da maruz kalır. İşgal edilen şehirler yaklaşık 6 gün koruma kazanır; bir şehir terk edildikten sonra yaklaşık 5 günlük bekleme süresi vardır.</div>
+      <div class="event-row"><b>Ödüller:</b> ilk işgal ödülleri savaşa fiilen katılanlara gider ve tüm ittifak üyeleri şehir ödülleri + genel buff'lar alır, ganimet sandıkları ise R5 veya belirlenen bir dağıtıcı (Butler) tarafından dağıtılır.</div>
+      <div class="badges"><span class="tbadge tb-verify">Günlük ilan sınırları ve maksimum kazı alanı sayısı okuyucu yorumlarında belirtilmiştir, makale tarafından resmi olarak doğrulanmamıştır</span></div>
+
+      <img src="../../images/s2-w1-city-clash-schedule.webp" alt="City Clash S2 şehir seviyesi açılış takvimi" width="600" height="340" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">⚔️ Murphy'nin Özel Silahı (Murphy's Exclusive Weapon)</div>
+      <div class="event-meta">4. günden itibaren kullanılabilir</div>
+      <div class="badges"><span class="tbadge tb-official">Sezonluk görev</span></div>
+      <div class="event-row">5 yıldızlı Murphy kahramanını gerektirir. Aktivasyon 50 parça gerektirir; Murphy'nin Özel Silah paketi 70 parça verir (aktivasyon + 2. seviye için yeterli) ve 2. Haftanın 3. gününe kadar geçerlidir. Yükseltmeler genel özel silah parçalarını kullanır (bazı Düello VS sandıklarında bulunur). Maksimum: 30. seviye. Murphy'nin yetenek seviye tavanını 40'a çıkarır.</div>
+      <div class="event-row"><b>Etki:</b> sadece gelen bir sonraki otomatik saldırının hasarını azaltır, ardından bir otomatik saldırıdan sonra tükenir ve 3 kata kadar istiflenebilir.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🧟 Purge Action</div>
+      <div class="event-meta">1. gün — 7 gün sürer</div>
+      <div class="badges"><span class="tbadge tb-collective">Bireysel sıralama</span></div>
+      <div class="event-row">Liderleri, yeni sezondan her birinin öldürdüğü ilk zombiye göre sıralar — daha yüksek zombi seviyesi daha iyi sıralama sağlar, eşitlik durumunda daha hızlı öldüren öne geçer. Günlük hesaplaşmalar, ödüller posta ile gönderilir.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">☣️ Purge the Polluted Area</div>
+      <div class="event-meta">1. gün — 13 gün sürer</div>
+      <div class="badges"><span class="tbadge tb-collective">İttifak sıralaması</span></div>
+      <div class="event-row">İttifakları, kazı alanlarını işgal etmek için geçen süreye göre sıralar — daha yüksek seviye daha iyi sıralama sağlar, eşitlik durumunda daha hızlı olan öne geçer. Günlük hesaplaşmalar, ödüller posta ile gönderilir.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ Purge Action'ı (bireysel sıralama, 7 gün) Purge the Polluted Area (ittifak sıralaması, 13 gün) ile karıştırma — süreleri ve sıralama türleri tamamen farklıdır.</div>
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 9. Kazı Alanları ve Şehirler -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="territory">
+  <div class="section-head sh-green">🗺️ 9. Kazı Alanları ve Şehirler</div>
+  <div class="section-body">
+    <p>Sahip olunması gereken ilk toprak <strong>1. seviye bir Kazı Alanıdır</strong>. Sonraki genişleme, bitişiklik prensibini izler (köşelerden çapraz bağlantı dahil).</p>
+    <ul class="checklist">
+      <li>📊 Maksimum: şehir sayısı fark etmeksizin, ittifak başına 4 kazı alanı.</li>
+      <li>📅 Günlük sınır: günde sadece iki işgal. Bu sınıra ulaşıldığında, tarafsız veya sahip olunan alanlara saldırılamaz.</li>
+      <li>⏱️ İşgal penceresi: ittifak 4 saat içinde %100'e ulaşmalıdır, aksi halde girişim başarısız olur.</li>
+      <li>🛡️ İşgal sonrası koruma: 36 saat, alan muhafızları tarafından korunur.</li>
+      <li>🦣 Gereksinimler: canavarların donmuş olmaması gerekir (donmuş bir canavarı çözmek önce bir takım göndermeyi gerektirir), her vuruş sadece bir hasar yüzdesi verdiği için birden fazla Toplanma (Rally) gerekir.</li>
+      <li>🧱 Güçlendirme: canavar yenildikten sonra, bir kazı alanını güçlendirmek için 10 takıma kadar gönderilebilir.</li>
+      <li>🚪 Terk etme: bir saat sürer; başka bir ittifakın yeniden işgal edebilmesi için koruma süresinin bitmesi gerekir.</li>
+    </ul>
+
+    <div class="highlight-green">🎁 <strong>İlk katılım ödülleri</strong> (aşağıdakilerden herhangi biri kazanmak için yeterlidir): güçlü bir takımla bir Mutant Canavara karşı normal bir Toplanmaya (Rally) katılmak, tek bir zayıf kahraman takımıyla bir "katılım toplanması" başlatmak/katılmak, ya da işgal sırasında bir kazı alanını birkaç saniyeliğine bile olsa güçlendirmek.</div>
+    <div class="note-box">⚠️ Bunlar strateji rehberinde verilen işgal ve katılım kurallarıdır — aşağıdaki NWH taktik önerilerinden bilerek ayrı tutulmuştur ve ittifak için belirli bir genişleme hızı garanti etmezler.</div>
+
+    <div class="highlight-blue">💡 <strong>Strateji rehberinden genel öneri (aşağıdaki direnç tablosundan değil):</strong> genel olarak Mutant Canavarlara karşı savaşa katılmak için, yaklaşık 2.500 veya üzeri virüs direnci ve yaklaşık 25 milyon veya üzeri takım gücü önerilir. <strong>Bu, özellikle 1. seviye bir kazı alanına karşı başarıyı garanti etmeyen yaklaşık ve genel bir rakamdır</strong> — aşağıdaki tablo, 1. seviye alanın kendisinin yaklaşık 4.000 direnç gerektirdiğini gösteriyor, bu da genel öneriden daha yüksek.</div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Kazı Alanı Seviyesi</th><th>Gerekli Virüs Direnci (yaklaşık)</th></tr></thead>
+        <tbody>
+          <tr><td>1. Seviye</td><td>4.000</td></tr>
+          <tr><td>2. Seviye</td><td>6.500</td></tr>
+          <tr><td>3. Seviye</td><td>8.500</td></tr>
+          <tr><td>4. Seviye</td><td>9.500</td></tr>
+          <tr><td>6. Seviye</td><td>10.500</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-verify">5. seviyenin değeri kaynakta belirsiz (olası yazım hatası) — yanlış bir rakam yayınlamamak için belirtmedik</span></div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Kazı Alanı Seviyesi</th><th>Kömür/saat</th><th>Nadir Toprak/saat</th></tr></thead>
+        <tbody>
+          <tr><td>1. Seviye</td><td>2.736</td><td>100</td></tr>
+          <tr><td>2. Seviye</td><td>2.880</td><td>110</td></tr>
+          <tr><td>3. Seviye</td><td>3.024</td><td>120</td></tr>
+          <tr><td>4. Seviye</td><td>3.168</td><td>130</td></tr>
+          <tr><td>5. Seviye</td><td>3.312</td><td>140</td></tr>
+          <tr><td>6. Seviye</td><td>3.456</td><td>150</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <details class="explain">
+      <summary>🧮 Virüs direnci bir Toplanma (Rally) içinde nasıl uygulanır?</summary>
+      <div class="explain-body">
+        <p>Toplanma liderinin virüs direnci tüm katılımcılara uygulanır, <strong>ancak</strong> kendi direnci liderinkinden yüksek olanlar hariç — bu üye kendi kişisel değerini korur.</p>
+        <p><strong>Örnek:</strong> Lider = 2.500 — A üyesi = 3.000 — B, C ve D üyeleri = her biri 1.000.</p>
+        <p><strong>Savaşta fiilen uygulanan direnç:</strong> Lider = 2.500 — A = 3.000 (daha yüksek olduğu için kendi değerini korur) — B, C, D = her biri 2.500 (lider seviyesine yükselir).</p>
+        <p>Bu yüzden kazı alanlarına karşı toplanmaları virüs direnci yüksek üyelerin yönetmesi tercih edilir — bu, diğer katılımcıların bu dirençten yararlanmasına ve daha hızlı, daha güvenli işgallere ulaşmasına olanak tanır.</p>
+      </div>
+    </details>
+
+    <img src="../../images/s2-w1-rally-virus-resistance-example.webp" alt="Toplanma içinde virüs direnci uygulama örneği" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+
+    <p><strong>Birimlerin canavarlarla eşleşmesi:</strong> Goril (uçak) füze birimlerine karşı zayıftır, Ayı (füze) tanklara karşı zayıftır, Mamut (tank) uçaklara karşı zayıftır. Tank gücü ağırlıklı ittifaklara önce Kutup Ayılarını hedeflemeleri önerilir.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Şehir Seviyesi</th><th>Açılış Zamanı</th></tr></thead>
+        <tbody>
+          <tr><td>1. Seviye</td><td>1. Hafta, 3. gün + 12 saat</td></tr>
+          <tr><td>2. Seviye</td><td>1. Hafta, 6. gün + 12 saat</td></tr>
+          <tr><td>3. Seviye</td><td>2. Hafta, 3. gün + 12 saat</td></tr>
+          <tr><td>4. Seviye</td><td>2. Hafta, 6. gün + 12 saat</td></tr>
+          <tr><td>5. Seviye</td><td>3. Hafta, 3. gün + 12 saat</td></tr>
+          <tr><td>6. Seviye</td><td>3. Hafta, 6. gün + 12 saat</td></tr>
+          <tr><td>7. Seviye</td><td>4. Hafta, 7. gün + 12 saat</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Maksimum şehir sahipliği: 6 şehir. 6. seviye şehirler en değerli olanlardır ve Başkent'in kuzeyinde, doğusunda, güneyinde ve batısında bulunur.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Şehir Seviyesi</th><th>Nadir Toprak/saat (yaklaşık)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>350</td></tr>
+          <tr><td>2</td><td>400</td></tr>
+          <tr><td>3</td><td>450</td></tr>
+          <tr><td>4</td><td>800</td></tr>
+          <tr><td>5</td><td>900</td></tr>
+          <tr><td>6</td><td>1.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box">🎯 NWH stratejisi: ilk kazı alanını ordu kompozisyonuna uygun seç (canavar türüne karşı birlik türün), ve zamanından önce koordinat veya belirli hedefler ifşa etmeden 6. seviye şehirlere doğru bir genişleme hattı hazırla.</div>
+
+    <img src="../../images/s2-w1-territory-expansion-map.webp" alt="Toprak genişleme ve kazı alanları haritası" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Kaynak: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a>, <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> ve <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">Kapsamlı Strateji Rehberi</a> (resmi olmayan topluluk rehberi)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 10. Gün Takvimi -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="timeline">
+  <div class="section-head sh-ice">📅 10. 1'den 7'ye Gün Takvimi</div>
+  <div class="section-body">
+    <div class="highlight-blue">Not: buradaki "gün", sezon günü anlamına gelir (1. gün = sezonun ilk günü), mutlaka takvim günü değildir. "Sunucu saati" etiketli tarihler, kaynağın kesin olarak doğruladığı tek tarihlerdir.</div>
+
+    <div class="timeline">
+      <div class="timeline-day">
+        <div class="timeline-day-title">1. Gün</div>
+        <ul class="timeline-items">
+          <li>✅ Hemen kullanılabilir: Cold Wave Alert, Yüksek Isı Fırını açılışı, ilk Titanyum Fabrikası açılışı, İttifak Fırını, Purge Action, Purge the Polluted Area.</li>
+          <li>🎯 Bireysel öncelik: 600 saniye fırın + 600 saniye Overdrive + kömür bağışı + 3 müttefike yardım.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">2. Gün</div>
+        <ul class="timeline-items">
+          <li>🔄 Devam ediyor: titanyum fabrikalarını geliştirmek, sahip olunan kazı alanlarından kömür toplamak.</li>
+          <li>📌 Genellikle bu noktaya kadar sadece bir adet 1. seviye kazı alanı kullanılabilir (strateji rehberine göre).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">3. Gün</div>
+        <ul class="timeline-items">
+          <li>🏘️ Şehir açılışı (Köy, 1. seviye) — sandık hedefi anında, görev hedefi 12 saat sonra.</li>
+          <li>⚔️ City Clash S2, sunucu saatiyle 12:00'de başlar.</li>
+          <li>📌 Orta büyüklükte bir ittifak için tipik gün sonu durumu: yaklaşık 3 adet 1. seviye kazı alanı ve 2 adet 1. seviye şehir (başlangıç noktasına bağlı olarak).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">4. Gün</div>
+        <ul class="timeline-items">
+          <li>⚔️ Murphy'nin Özel Silahı kullanılabilir hale gelir (5 yıldızlı Murphy gerektirir).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">5. Gün</div>
+        <ul class="timeline-items">
+          <li>🔄 Devam ediyor: mevcut kaynaklarda özellikle 5. gün için doğrulanmış yeni bir etkinlik yok — City Clash S2 hedeflerine, fabrika gelişimine ve kömür toplamaya devam et.</li>
+          <li>🧟 Purge Action, 7. günde sona erene kadar devam eder — ulaşabildiğin en yüksek zombiyi hedeflemeye devam et.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">6. Gün</div>
+        <ul class="timeline-items">
+          <li>🏙️ Şehir açılışı (Kasaba, 2. seviye) — sandık hedefi anında, görev hedefi 12 saat sonra.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">7. Gün</div>
+        <ul class="timeline-items">
+          <li>⏳ Cold Wave Alert sona erer (başlangıcından 7 gün sonra).</li>
+          <li>☣️ Purge the Polluted Area, 13. güne kadar devam eder (1. Hafta'nın sonunu aşar).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-box">Murphy'nin Özel Silah paketi, 2. Haftanın 3. gününe kadar kullanılabilir kalır — bu haftanın kapsamını aşar, sadece hatırlatma amacıyla burada belirtilmiştir.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 11. Kontrol Listesi -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="checklist">
+  <div class="section-head sh-green">✅ 11. Pratik Kontrol Listesi (Bireysel)</div>
+  <div class="section-body">
+    <div class="note-box">Bu liste sadece kendi tarayıcında saklanır (bireysel yerel depolama) — ittifakla senkronize edilmez, başka hiçbir üye göremez ve gerçek kolektif veriyi temsil etmez. Tarayıcı verilerini silmek listeyi sıfırlar.</div>
+    <ul class="checklist" id="s2w1-checklist">
+      <li><label><input type="checkbox" data-task="furnace600"> Kişisel fırını 600 saniye çalıştır</label></li>
+      <li><label><input type="checkbox" data-task="overdrive600"> Overdrive'ı 600 saniye aktif et</label></li>
+      <li><label><input type="checkbox" data-task="donate-coal"> İttifak Fırınına en az bir kez kömür bağışla</label></li>
+      <li><label><input type="checkbox" data-task="help-allies"> 3 müttefike ısınmasında yardım et</label></li>
+      <li><label><input type="checkbox" data-task="open-furnace"> Yüksek Isı Fırınını aç</label></li>
+      <li><label><input type="checkbox" data-task="titanium-factory"> İlk Titanyum Alaşım Fabrikasını geliştirmeye başla</label></li>
+      <li><label><input type="checkbox" data-task="dig-site"> R4/R5 ile koordineli şekilde hedef kazı alanına karar ver</label></li>
+      <li><label><input type="checkbox" data-task="base-layout"> NWH yerleşim planındaki (3×3 + iki boş kare) belirlenen üs konumuna uy</label></li>
+      <li><label><input type="checkbox" data-task="monitor-temp"> Donmayı önlemek için üs sıcaklığını düzenli takip et</label></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 12. Sık Yapılan Hatalar -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="mistakes">
+  <div class="section-head sh-red">⚠️ 12. Sık Yapılan Hatalar</div>
+  <div class="section-body">
+    <ul class="warning-list">
+      <li>🪨 <strong>Kötü kömür yönetimi:</strong> kömürü fabrika ve fırın yükseltmeleri için biriktirmek yerine rastgele harcamak — 1. hafta boyunca ilerlemeni önemli ölçüde yavaşlatır.</li>
+      <li>🐌 <strong>Gecikmiş gelişim:</strong> Yüksek Isı Fırınını veya ilk titanyum fabrikasını inşa etmeyi ertelemek — her gecikme günü, zincirlenmiş diğer açılışları geciktirir.</li>
+      <li>🔥 <strong>Kullanılmayan fırın:</strong> kişisel bir fırına sahip olup düzenli çalıştırmamak — görev hedeflerini kaçırır ve seni donma riskine maruz bırakır.</li>
+      <li>🧊 <strong>Fırtına öncesi ısınmamak:</strong> bir kar fırtınası gelmeden önce hazırlanmamak donmaya yol açar ve hareketi ve toplanmaları engeller.</li>
+      <li>🤝 <strong>Kötü üye koordinasyonu:</strong> İttifak Fırını yakınında toplanmamak, bazı üyeleri toplu ısınma menzilinin dışında bırakır.</li>
+      <li>🧱 <strong>Düzensiz üs yerleşimi:</strong> 3×3 + iki boş kare düzenine uymamak, kolektif savunmayı zorlaştırır ve düşmana açık alanlar bırakır.</li>
+      <li>⚔️ <strong>Hazırlıksız saldırı:</strong> yeterli virüs direnci veya yeterli toplanma olmadan bir kazı alanı veya şehir işgal etmeye çalışmak gereksiz kayıplara yol açar.</li>
+      <li>🔀 <strong>Bireysel ve kolektif etkinlikleri karıştırmak:</strong> örneğin Purge Action'ı (bireysel) Purge the Polluted Area (ittifak) ile karıştırmak — ödüller ve sıralama konusunda yanlış beklentilere yol açar.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 13. Kaynaklar -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="sources">
+  <div class="section-head sh-gold">📚 13. Kaynaklar</div>
+  <div class="section-body">
+    <p>Bu rehber, aşağıdaki kaynakların analiz ve sentezine dayanmaktadır; bunlar resmi olmayan topluluk rehberleridir (oyunun resmi yayıncısı tarafından yayınlanmamıştır). Rakamlar oyun güncellemeleriyle değişebilir — önemli kararlar almadan önce her zaman oyun içinde doğrula.</p>
+    <ul class="checklist">
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — Season 2: Polar Storm</a></li>
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — Season 2 Week 1</a></li>
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — The Ultimate Strategy Guide for Season 2</a></li>
+    </ul>
+    <div class="highlight-warn">⚠️ NWH'deki bir R4 yetkilisinden bize verilen ek bir stratejik tartışma linki mevcut çalışma ortamından erişilemediği için içeriği bu rehberde kullanılmadı. Eklenmesini istiyorsan, lütfen metnini doğrudan gönder.</div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Hazırlayan: MSBKH</div>
+  <div class="footer-credit">Son güncelleme: 09/11/2026</div>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Yukarı dön">🔝</a>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Kontrol listesi — sadece bireysel yerel depolama (ziyaretçinin tarayıcısı), ittifakla senkronizasyon yok
+  (function() {
+    const STORAGE_KEY = 'nwh-s2w1-checklist';
+    const boxes = document.querySelectorAll('#s2w1-checklist input[type="checkbox"]');
+    let saved = {};
+    try {
+      saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (e) { saved = {}; }
+
+    boxes.forEach(box => {
+      if (saved[box.dataset.task]) box.checked = true;
+      box.addEventListener('change', () => {
+        try {
+          const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          state[box.dataset.task] = box.checked;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { /* yerel depolama kullanılamıyor — liste sadece mevcut oturum içinde çalışmaya devam eder */ }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

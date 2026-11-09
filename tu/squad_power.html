@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Takım Gücü Kılavuzu — [NWH] Night Watch</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #06080e;
+    --card:     #0c1018;
+    --border:   #181f2e;
+    --gold:     #f5c518;
+    --gold-dim: rgba(245,197,24,0.12);
+    --red:      #e8394a;
+    --blue:     #3b82f6;
+    --cyan:     #06b6d4;
+    --green:    #22c55e;
+    --orange:   #f97316;
+    --purple:   #a855f7;
+    --steel:    #94a3b8;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 14px;
+    font-size: 14px;
+    background-image:
+      radial-gradient(ellipse at 15% 5%, rgba(245,197,24,0.06) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 95%, rgba(59,130,246,0.05) 0%, transparent 45%);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 22px 14px 18px;
+    margin-bottom: 18px;
+    background: linear-gradient(160deg, #0f1118 0%, #0c1018 100%);
+    border: 1px solid #1e2a3a;
+    border-top: 3px solid var(--gold);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(245,197,24,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(245,197,24,0.4);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 20px rgba(245,197,24,0.18);
+  }
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .header h1 span { color: var(--gold); }
+  .header-sub { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+  .back-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    transition: border-color .2s, color .2s;
+  }
+  .back-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SECTION ── */
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .section-head {
+    padding: 11px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    border-bottom: 1px solid var(--border);
+  }
+  .sh-gold   { background: linear-gradient(90deg, rgba(245,197,24,0.10), transparent);  color: var(--gold);   border-bottom-color: rgba(245,197,24,0.2); }
+  .sh-orange { background: linear-gradient(90deg, rgba(249,115,22,0.10), transparent);  color: var(--orange); border-bottom-color: rgba(249,115,22,0.2); }
+  .sh-blue   { background: linear-gradient(90deg, rgba(59,130,246,0.10), transparent);  color: #60a5fa;       border-bottom-color: rgba(59,130,246,0.2); }
+  .sh-cyan   { background: linear-gradient(90deg, rgba(6,182,212,0.10), transparent);   color: var(--cyan);   border-bottom-color: rgba(6,182,212,0.2); }
+  .sh-green  { background: linear-gradient(90deg, rgba(34,197,94,0.10), transparent);   color: var(--green);  border-bottom-color: rgba(34,197,94,0.2); }
+  .sh-red    { background: linear-gradient(90deg, rgba(232,57,74,0.10), transparent);   color: var(--red);    border-bottom-color: rgba(232,57,74,0.2); }
+  .sh-purple { background: linear-gradient(90deg, rgba(168,85,247,0.10), transparent);  color: #c084fc;       border-bottom-color: rgba(168,85,247,0.2); }
+  .sh-steel  { background: linear-gradient(90deg, rgba(148,163,184,0.08), transparent); color: var(--steel);  border-bottom-color: rgba(148,163,184,0.15); }
+
+  .section-body { padding: 14px 15px; }
+
+  /* ── TEXT ── */
+  p { line-height: 1.65; margin-bottom: 8px; }
+  p:last-child { margin-bottom: 0; }
+  .t-gold   { color: var(--gold); }
+  .t-orange { color: var(--orange); }
+  .t-blue   { color: #60a5fa; }
+  .t-cyan   { color: var(--cyan); }
+  .t-green  { color: var(--green); }
+  .t-red    { color: var(--red); }
+  .t-purple { color: #c084fc; }
+  .t-muted  { color: var(--muted); }
+  .bold     { font-weight: 900; }
+  a { color: inherit; text-decoration: underline; }
+
+  /* ── INTRO BOX ── */
+  .intro-box {
+    background: rgba(245,197,24,0.05);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .intro-box .intro-title {
+    font-weight: 900;
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+  .alert:last-child { margin-bottom: 0; }
+  .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .alert-gold   { background: rgba(245,197,24,0.07); border: 1px solid rgba(245,197,24,0.25); }
+  .alert-orange { background: rgba(249,115,22,0.07); border: 1px solid rgba(249,115,22,0.25); }
+  .alert-red    { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .alert-blue   { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.25); }
+  .alert-green  { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .alert-purple { background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.25); }
+  .alert-cyan   { background: rgba(6,182,212,0.07);  border: 1px solid rgba(6,182,212,0.25); }
+  .alert-steel  { background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.2); }
+
+  /* ── ROW LIST ── */
+  .row-list { display: flex; flex-direction: column; gap: 7px; }
+  .row-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 10px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 8px;
+    font-size: 0.82rem;
+  }
+  .row-label { color: var(--muted); flex-shrink: 0; min-width: 90px; }
+  .row-val   { font-weight: 700; text-align: right; line-height: 1.45; }
+
+  /* ── PILL ── */
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  .pill-gold   { background: rgba(245,197,24,0.12);  color: var(--gold);   border: 1px solid rgba(245,197,24,0.3); }
+  .pill-orange { background: rgba(249,115,22,0.12);  color: var(--orange); border: 1px solid rgba(249,115,22,0.3); }
+  .pill-blue   { background: rgba(59,130,246,0.12);  color: #60a5fa;       border: 1px solid rgba(59,130,246,0.3); }
+  .pill-cyan   { background: rgba(6,182,212,0.12);   color: var(--cyan);   border: 1px solid rgba(6,182,212,0.3); }
+  .pill-green  { background: rgba(34,197,94,0.12);   color: var(--green);  border: 1px solid rgba(34,197,94,0.3); }
+  .pill-red    { background: rgba(232,57,74,0.12);   color: var(--red);    border: 1px solid rgba(232,57,74,0.3); }
+  .pill-purple { background: rgba(168,85,247,0.12);  color: #c084fc;       border: 1px solid rgba(168,85,247,0.3); }
+  .pill-steel  { background: rgba(148,163,184,0.10); color: var(--steel);  border: 1px solid rgba(148,163,184,0.2); }
+
+  /* ── DECISION TABLE ── */
+  .prio-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  .prio-table th {
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 900;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.72rem;
+    letter-spacing: .5px;
+  }
+  .prio-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+    line-height: 1.45;
+  }
+  .prio-table tr:last-child td { border-bottom: none; }
+
+  /* ── TIER BADGES ── */
+  .tier-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tier-badge {
+    flex: 1;
+    min-width: 68px;
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 0.75rem;
+  }
+  .tier-num  { font-size: 1.05rem; font-weight: 900; display: block; margin-bottom: 2px; }
+  .tier-sub  { font-size: 0.72rem; color: var(--muted); line-height: 1.35; }
+  .tb-green  { border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.05);  color: var(--green); }
+  .tb-blue   { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); color: #60a5fa; }
+  .tb-orange { border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); color: var(--orange); }
+  .tb-gold   { border-color: rgba(245,197,24,0.3); background: rgba(245,197,24,0.05); color: var(--gold); }
+
+  /* ── DECISION CARD ── */
+  .decision-card {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .decision-card:last-child { margin-bottom: 0; }
+  .dc-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .dc-body { flex: 1; }
+  .dc-title { font-weight: 900; font-size: 0.88rem; margin-bottom: 4px; }
+  .dc-desc  { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+  .dc-gold   { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.2); }
+  .dc-orange { background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.2); }
+  .dc-blue   { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); }
+  .dc-green  { background: rgba(34,197,94,0.06);  border: 1px solid rgba(34,197,94,0.2); }
+  .dc-red    { background: rgba(232,57,74,0.06);  border: 1px solid rgba(232,57,74,0.2); }
+  .dc-purple { background: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.2); }
+  .dc-cyan   { background: rgba(6,182,212,0.06);  border: 1px solid rgba(6,182,212,0.2); }
+  .dc-steel  { background: rgba(148,163,184,0.05); border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── CHECKLIST ── */
+  .checklist { display: flex; flex-direction: column; gap: 6px; }
+  .check-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.025);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .cb-gold  { border-color: var(--gold);   background: rgba(245,197,24,0.12); color: var(--gold); }
+  .cb-todo  { border-color: var(--orange);  background: rgba(249,115,22,0.10); color: var(--orange); }
+  .cb-later { border-color: var(--muted);   background: transparent;           color: var(--muted); }
+  .cb-red   { border-color: var(--red);     background: rgba(232,57,74,0.10);  color: var(--red); }
+
+  /* ── VS COMPARE ── */
+  .compare-wrap { display: flex; gap: 10px; }
+  .compare-col {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .cc-bad  { background: rgba(232,57,74,0.06);  border: 1px solid rgba(232,57,74,0.2); }
+  .cc-good { background: rgba(34,197,94,0.06);  border: 1px solid rgba(34,197,94,0.2); }
+  .compare-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+  .compare-items { font-size: 0.78rem; color: var(--muted); line-height: 1.8; text-align: left; }
+
+  /* ── SQUAD FORMATION ── */
+  .formation-wrap { padding: 4px 0 10px; }
+  .formation-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+  }
+  .formation-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .hero-card {
+    border-radius: 10px;
+    padding: 9px 10px;
+    text-align: center;
+    flex: 1;
+    max-width: 100px;
+  }
+  .hc-front { background: linear-gradient(160deg, #160f04, #0e0a04); border: 1px solid rgba(249,115,22,0.4); }
+  .hc-back  { background: linear-gradient(160deg, #060d18, #040910); border: 1px solid rgba(59,130,246,0.35); }
+  .hero-role { font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+  .role-front { color: var(--orange); }
+  .role-back  { color: #60a5fa; }
+  .hero-name { font-size: 0.85rem; font-weight: 900; color: var(--text); }
+  .hero-sub  { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .formation-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 2px 0 8px;
+  }
+  .fdiv-line { flex: 1; height: 1px; background: var(--border); }
+  .fdiv-label { font-size: 0.72rem; color: var(--muted); padding: 2px 8px; border: 1px solid var(--border); border-radius: 8px; }
+
+  /* ── DECISION FLOW ── */
+  .flow-wrap { display: flex; flex-direction: column; gap: 0; }
+  .flow-step {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+  .flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .flow-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+  .flow-line { flex: 1; width: 2px; background: var(--border); margin: 2px 0; }
+  .flow-body {
+    flex: 1;
+    padding: 8px 0 8px 10px;
+  }
+  .flow-q {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .flow-answers { display: flex; gap: 8px; flex-wrap: wrap; }
+  .flow-ans {
+    flex: 1;
+    min-width: 100px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .fa-yes { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .fa-no  { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .fa-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 3px; }
+  .fa-yes .fa-label { color: var(--green); }
+  .fa-no  .fa-label { color: var(--red); }
+  .fa-val { color: var(--text); font-weight: 700; }
+
+  /* ── PHASE CARDS ── */
+  .phase-card {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+  }
+  .phase-card:last-child { margin-bottom: 0; }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .phase-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .phase-title { font-weight: 900; font-size: 0.9rem; }
+  .phase-sub   { font-size: 0.75rem; color: var(--muted); }
+  .pc-1 { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.25); }
+  .pn-1 { background: rgba(34,197,94,0.15); color: var(--green); }
+  .pt-1 { color: var(--green); }
+  .pc-2 { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.25); }
+  .pn-2 { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .pt-2 { color: #60a5fa; }
+  .pc-3 { background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.25); }
+  .pn-3 { background: rgba(245,197,24,0.15); color: var(--gold); }
+  .pt-3 { color: var(--gold); }
+
+  /* ── SCENARIO BOX ── */
+  .scenario {
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 10px;
+    font-size: 0.82rem;
+  }
+  .scenario:last-child { margin-bottom: 0; }
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .sc-badge {
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
+  .scenario-items { display: flex; flex-direction: column; gap: 4px; line-height: 1.55; }
+  .si-stat  { display: flex; gap: 8px; }
+  .si-label { color: var(--muted); flex-shrink: 0; min-width: 90px; }
+  .si-val   { font-weight: 700; }
+  .scenario-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 8px 0; }
+  .sc-1 { background: rgba(34,197,94,0.05);  border: 1px solid rgba(34,197,94,0.2); }
+  .sc-2 { background: rgba(59,130,246,0.05); border: 1px solid rgba(59,130,246,0.2); }
+  .sc-3 { background: rgba(232,57,74,0.05);  border: 1px solid rgba(232,57,74,0.2); }
+
+  /* ── DIAG CHECKLIST ── */
+  .diag-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+  }
+  .diag-item:last-child { margin-bottom: 0; }
+  .diag-q {
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .diag-answers { display: flex; gap: 8px; flex-wrap: wrap; }
+  .diag-ans {
+    flex: 1;
+    min-width: 110px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .da-yes { background: rgba(232,57,74,0.07);  border: 1px solid rgba(232,57,74,0.25); }
+  .da-no  { background: rgba(34,197,94,0.07);  border: 1px solid rgba(34,197,94,0.25); }
+  .da-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+  .da-yes .da-label { color: var(--red); }
+  .da-no  .da-label { color: var(--green); }
+  .da-val { color: var(--text); font-weight: 700; }
+  .di-red    { background: rgba(232,57,74,0.04);  border: 1px solid rgba(232,57,74,0.18); }
+  .di-orange { background: rgba(249,115,22,0.04); border: 1px solid rgba(249,115,22,0.18); }
+  .di-blue   { background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.18); }
+  .di-green  { background: rgba(34,197,94,0.04);  border: 1px solid rgba(34,197,94,0.18); }
+  .di-steel  { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.15); }
+
+  /* ── INTERNAL LINK ── */
+  .inner-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid;
+    transition: opacity .2s;
+  }
+  .inner-link:hover { opacity: .8; }
+  .il-gold   { border-color: rgba(245,197,24,0.4); color: var(--gold);   background: rgba(245,197,24,0.06); }
+  .il-orange { border-color: rgba(249,115,22,0.4); color: var(--orange); background: rgba(249,115,22,0.06); }
+  .il-blue   { border-color: rgba(59,130,246,0.4); color: #60a5fa;       background: rgba(59,130,246,0.06); }
+
+  /* ── TODAY BOX ── */
+  .today-grid { display: flex; flex-direction: column; gap: 8px; }
+  .today-item {
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.82rem;
+  }
+  .today-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .today-q { font-weight: 900; color: var(--text); margin-bottom: 3px; }
+  .today-a { color: var(--muted); font-size: 0.78rem; line-height: 1.5; }
+  .ti-gold   { background: rgba(245,197,24,0.05);  border: 1px solid rgba(245,197,24,0.2); }
+  .ti-orange { background: rgba(249,115,22,0.05);  border: 1px solid rgba(249,115,22,0.2); }
+  .ti-blue   { background: rgba(59,130,246,0.05);  border: 1px solid rgba(59,130,246,0.2); }
+  .ti-purple { background: rgba(168,85,247,0.05);  border: 1px solid rgba(168,85,247,0.2); }
+  .ti-steel  { background: rgba(148,163,184,0.04); border: 1px solid rgba(148,163,184,0.18); }
+  .ti-cyan   { background: rgba(6,182,212,0.05);   border: 1px solid rgba(6,182,212,0.2); }
+  .ti-green  { background: rgba(34,197,94,0.05);   border: 1px solid rgba(34,197,94,0.2); }
+
+  /* ── TAG GRID ── */
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 4px; }
+  .tag { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; border: 1px solid; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 18px 14px;
+    margin-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.8;
+  }
+  .footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ════════ HEADER ════════ -->
+<div class="header">
+  <div class="header-badge">🛡️ [NWH] Night Watch</div>
+  <h1>Takım <span>Gücü Kılavuzu</span></h1>
+  <div class="header-sub">Teşhis · Karar · Yatırım — bu kaynak elimde, nereye harcayayım?</div>
+  <a href="index.html" class="back-link">← Ana Sayfa</a>
+</div>
+
+<!-- ════════ QUICK START ════════ -->
+<div class="section" style="margin-bottom:14px;">
+  <div class="section-head sh-gold">⚡ Quick Start — herhangi bir kaynağı harcamadan önce buradan başla</div>
+  <div class="section-body">
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">1️⃣</span>
+        <span class="row-val">Kaybettiğin son savaşın <strong class="t-gold">Savaş Raporu</strong>'nu (Battle Report) aç</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">2️⃣</span>
+        <span class="row-val">Önce çöken noktayı belirle: <span class="pill pill-red">Ön Saf</span> <span class="pill pill-orange">Arka Saf</span> <span class="pill pill-blue">Zayıf Hasar</span> <span class="pill pill-purple">Kontra</span></span>
+      </div>
+      <div class="row-item">
+        <span class="row-label" style="font-size:.9rem; color:var(--gold); font-weight:900;">3️⃣</span>
+        <span class="row-val">Doğrudan ilgili Karar'a (Decision) in ← <strong class="t-cyan">bu adımdan önce hiçbir kaynak harcama</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ INTRO ════════ -->
+<div class="intro-box">
+  <div class="intro-title">🎯 Bu sayfanın yanıtlaması gereken beş soru</div>
+  <strong class="t-gold">1.</strong> Takımım neden kaybediyor?<br>
+  <strong class="t-gold">2.</strong> Şu anda en büyük Darboğazım ne?<br>
+  <strong class="t-gold">3.</strong> Elimdeki kaynağı nereye harcamalıyım?<br>
+  <strong class="t-gold">4.</strong> Şu anda <em>harcamamam</em> gereken şey ne?<br>
+  <strong class="t-gold">5.</strong> Parça (Shards) açısından Takım 2'ye (Squad 2) ne zaman geçmeliyim?
+</div>
+
+
+<!-- ════════════════════════════════
+  §1 — Takım gücünün bileşenleri
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚙️ Takım gücünü ne oluşturur?</div>
+  <div class="section-body">
+    <div class="tag-grid">
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">Kahraman seviyesi</span>
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">Kahraman yıldızları</span>
+      <span class="tag" style="border-color:rgba(245,197,24,0.35); color:var(--gold); background:rgba(245,197,24,0.07);">Kahraman yetenekleri</span>
+      <span class="tag" style="border-color:rgba(249,115,22,0.35); color:var(--orange); background:rgba(249,115,22,0.07);">Teçhizat (4 parça)</span>
+      <span class="tag" style="border-color:rgba(249,115,22,0.35); color:var(--orange); background:rgba(249,115,22,0.07);">Teçhizat seviyesi</span>
+      <span class="tag" style="border-color:rgba(6,182,212,0.35); color:var(--cyan); background:rgba(6,182,212,0.07);">Özel Silahlar</span>
+      <span class="tag" style="border-color:rgba(59,130,246,0.35); color:#60a5fa; background:rgba(59,130,246,0.07);">T7→T10 Birlikler</span>
+      <span class="tag" style="border-color:rgba(168,85,247,0.35); color:#c084fc; background:rgba(168,85,247,0.07);">Özel Kuvvetler Araştırmaları</span>
+      <span class="tag" style="border-color:rgba(168,85,247,0.35); color:#c084fc; background:rgba(168,85,247,0.07);">Tür Araştırmaları</span>
+      <span class="tag" style="border-color:rgba(34,197,94,0.35); color:var(--green); background:rgba(34,197,94,0.07);">Type Center</span>
+      <span class="tag" style="border-color:rgba(148,163,184,0.3); color:var(--steel); background:rgba(148,163,184,0.07);">Drone (İHA)</span>
+    </div>
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">⚖️</span>
+      <div><strong class="t-gold">Diğer sistemler geride kalırken bir tek sistemi mükemmelliğe kadar geliştirme.</strong> Her zaman takımın ilerlemesini durduran en zayıf noktayı ara.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §2 — Power rakamının arkasından koşma
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">⚠️ Sadece Power rakamının arkasından koşma</div>
+  <div class="section-body">
+    <div class="compare-wrap">
+      <div class="compare-col cc-bad">
+        <div class="compare-label t-red">❌ Yaygın hatalar</div>
+        <div class="compare-items">
+          3 orta seviye takım<br>
+          İhmal edilmiş Teknoloji<br>
+          Düşük Birlik Seviyesi (Troop Tier)<br>
+          Dengesiz Teçhizat<br>
+          Zayıf Yetenekler
+        </div>
+      </div>
+      <div class="compare-col cc-good">
+        <div class="compare-label t-green">✅ Doğru yol</div>
+        <div class="compare-items">
+          Tek bir takıma odaklanmak<br>
+          5 × 5 Yıldız<br>
+          Role göre Teçhizat<br>
+          Şu anki hedefine hizmet eden Teknoloji<br>
+          Aşamana uygun Birlik Seviyesi
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §3 — Takım zayıflığı teşhisi
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">🔍 Takım zayıflığı teşhisi — sorun nerede?</div>
+  <div class="section-body">
+
+    <div class="diag-item di-red">
+      <div class="diag-q">🛡️ Durum 1 — Ön Saf çok hızlı ölüyor</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;"><strong class="t-orange">Doğrudan nedenler:</strong> Zayıf Zırh/Radar · Düşük Yıldız · Zayıf savunma Yetenekleri<br><span class="t-muted"><strong>Performansı genel olarak zayıflatan faktörler:</strong> Düşük Birlik Seviyesi · Gecikmiş Type Center — bunlar toplam gücü düşürür ama Murphy'nin Kimberly'den önce ölmesinin doğrudan sebebi değildir.</span></div>
+      <div class="alert-gold alert" style="margin:0;">
+        <span class="alert-icon">💡</span>
+        <div>Şimdi Hasar eklemeye çalışma. Önce Ön Saf'ın hayatta kalmasını iyileştir — Ön Saf çökerse DPS işe yaramaz.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-orange" style="margin-top:8px;">
+      <div class="diag-q">⚔️ Durum 2 — Ön Saf yaşıyor ama Hasar zayıf</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">Belirtiler: savaş uzuyor · rakip hayatta kalıyor · Kimberly / Stetmann yeterli Hasar kaydetmiyor</div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">Şuna bak</span><span class="row-val t-orange">Top (Cannon) · Veri Çipi (Data Chip) · Kahraman Yetenekleri · Kahraman Yıldızları · Özel Silah · Saldırı Teknolojisi</span></div>
+      </div>
+      <div class="alert-orange alert" style="margin:8px 0 0;">
+        <span class="alert-icon">💡</span>
+        <div>Sonraki yatırım daha fazla savunmaya değil, DPS'e gitmeli.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-blue" style="margin-top:8px;">
+      <div class="diag-q">💥 Durum 3 — Ön Saf hayattayken Arka Saf ölüyor</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">Nedenler: AoE Arka Saf'a ulaşıyor · DPS'in Radar/Zırhı zayıf · Teknoloji farkı · Kontra</div>
+      <div class="alert-blue alert" style="margin:0;">
+        <span class="alert-icon">💡</span>
+        <div>Sadece Top ve Çip'i yükseltmeye devam etme. Arka Saf'ın hayatta kalma yeteneğini (Survivability) iyileştirmeye başla.</div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">❓ Durum 4 — Senden daha düşük Power'a sahip bir oyuncuya karşı kaybediyorsun</div>
+      <div class="t-muted" style="font-size:.8rem; margin-bottom:8px;">Sadece "Kontra" deme — şunu incele:</div>
+      <div class="checklist">
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Rakibin türü sana Kontra mı? (Tank'a karşı Uçak)</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Onun Birlik Seviyesi daha yüksek mi?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Onun Kahraman Yıldızları daha iyi mi?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Teçhizatı daha akıllıca mı dağıtılmış?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Drone'u daha güçlü mü?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Savaş Teknolojisi daha yüksek mi?</div></div>
+        <div class="check-item"><div class="check-box cb-todo">?</div><div>Özel Silahları daha ileri mi?</div></div>
+      </div>
+      <div class="alert-steel alert" style="margin:8px 0 0;">
+        <span class="alert-icon">📋</span>
+        <div>Savaş Raporu'nu aç ve hangi bölümün önce çöktüğünü anlamaya çalış — Power tek başına kazanma sebebini açıklamaz.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §4 — Battle Report Diagnostic
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">📊 Savaş Raporu'nda neye bakmalıyım?</div>
+  <div class="section-body">
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">DPS önce ölüyor</span>
+        <span class="row-val t-red">→ şununla başla: Hedefleme (Targeting) + alınan Hasar + Arka Saf'ın Zırh/Radarı + mevcut Teçhizat dağılımı</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Tank önce ölüyor</span>
+        <span class="row-val t-orange">→ şununla başla: Hedefleme (Targeting) + alınan Hasar + Savunma Teçhizatı + Yıldızlar + Ön Saf'ın Teknolojisi</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Herkes yaşıyor ama Hasar zayıf</span>
+        <span class="row-val t-blue">→ DPS sorunu — Top / Yetenekler / Silah / Teknoloji</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Her zaman aynı türe karşı kaybediyorsun</span>
+        <span class="row-val t-purple">→ önce Kontra'yı incele; sorun tekrarlanıyorsa karşı bir ikinci takım planla</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Rakip daha düşük Power ama birlikleri daha güçlü</span>
+        <span class="row-val t-gold">→ şununla başla: Birlik Seviyesi / Teknoloji</span>
+      </div>
+    </div>
+    <div class="alert alert-steel" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Herhangi bir yatırımdan önce:</strong> rakipteki eşdeğer kahramanları, verilen ve alınan Hasarı, Yetenek seviyesini karşılaştır. Teşhis için bir tek savaş yetmeyebilir — birkaç savaş boyunca tekrar eden bir örüntü ara.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §5 — Tank takımı örneği
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">🚗 Pratik örnek — Tank takımı</div>
+  <div class="section-body">
+    <div class="alert alert-orange">
+      <span class="alert-icon">ℹ️</span>
+      <div>Tank takımı başlangıç için yaygın ve güçlü bir seçimdir, ancak Uçak'a (Aircraft) karşı açık bir zayıf noktası vardır — önceden planla.</div>
+    </div>
+    <div class="formation-wrap">
+      <div class="formation-label">Ön Saf — Front</div>
+      <div class="formation-row">
+        <div class="hero-card hc-front">
+          <div class="hero-role role-front">Tank</div>
+          <div class="hero-name">Murphy</div>
+          <div class="hero-sub">Defense</div>
+        </div>
+        <div class="hero-card hc-front">
+          <div class="hero-role role-front">Tank</div>
+          <div class="hero-name">Williams</div>
+          <div class="hero-sub">Defense</div>
+        </div>
+      </div>
+      <div class="formation-divider">
+        <div class="fdiv-line"></div>
+        <div class="fdiv-label">Arka Saf — Back</div>
+        <div class="fdiv-line"></div>
+      </div>
+      <div class="formation-row">
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">DPS</div>
+          <div class="hero-name">Kimberly</div>
+          <div class="hero-sub">Main Damage</div>
+        </div>
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">DPS</div>
+          <div class="hero-name">Stetmann</div>
+          <div class="hero-sub">Damage</div>
+        </div>
+        <div class="hero-card hc-back">
+          <div class="hero-role role-back">SUP</div>
+          <div class="hero-name">Marshall</div>
+          <div class="hero-sub">Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-steel" style="margin-top:4px;">
+      <span class="alert-icon">📌</span>
+      <div><strong class="t-gold">5 Kahraman</strong>: 2 ön + 3 arka. Hedef: <strong class="t-gold">5 Kahraman × 5 Yıldız</strong>.</div>
+    </div>
+    <a href="tank_squad.html" class="inner-link il-orange">🛡️ Tank takımı kılavuzunu detaylıca incele</a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §6 — 3 aşama hesabı
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-green">📈 Üç Aşama — aynı kaynak her zaman aynı önceliğe sahip değildir</div>
+  <div class="section-body">
+
+    <div class="phase-card pc-1">
+      <div class="phase-header">
+        <div class="phase-num pn-1">1</div>
+        <div>
+          <div class="phase-title pt-1">İnşa aşamasında bir hesap</div>
+          <div class="phase-sub">Squad 1 tamamlanmamış · Yıldızlar eksik · Teçhizat kararsız · Birlikler düşük</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">🥇 Öncelik</span><span class="row-val t-green">Squad 1 · Yıldızlar · Kahraman EXP · Yetenekler · Temel Teçhizat · Birlik Seviyesi</span></div>
+        <div class="row-item"><span class="row-label">❌ Şimdi değil</span><span class="row-val t-muted">Squad 2 · Squad 3 · <strong>temel kaynakları tüketen büyük bir Drone yatırımı</strong> — ama düzenli, kademeli gelişim açılıştan itibaren gereklidir</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card pc-2">
+      <div class="phase-header">
+        <div class="phase-num pn-2">2</div>
+        <div>
+          <div class="phase-title pt-2">Kararlı ilk takım</div>
+          <div class="phase-sub">5 kahraman belirlenmiş · Yıldızlar ileri düzeyde · Teçhizat iyi · Birlikler kabul edilebilir</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">🎯 Hedef</span><span class="row-val t-gold">Squad 1 için (Parçalar açısından) 5×5'e ulaşmak + diğer sistemleri güçlendirmek</span></div>
+        <div class="row-item"><span class="row-label">🔎 Nasıl seçersin?</span><span class="row-val t-blue">Teçhizat · Teknoloji · Type Center · Drone · Özel Silah — bunların hepsi adaydır. Savaş Raporu'nu aç, Darboğazı belirle, sonra sadece birine veya ikisine yatırım yap.</span></div>
+        <div class="row-item"><span class="row-label">İsteğe bağlı</span><span class="row-val t-muted">Squad 2 için hafif planlamaya başlamak</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card pc-3">
+      <div class="phase-header">
+        <div class="phase-num pn-3">3</div>
+        <div>
+          <div class="phase-title pt-3">Squad 1, (Parçalar açısından) 5×5'e ulaştı</div>
+          <div class="phase-sub">Kararlar burada değişir</div>
+        </div>
+      </div>
+      <div class="row-list">
+        <div class="row-item"><span class="row-label">Parçalar (Shards)</span><span class="row-val t-gold">→ Squad 2 başlar</span></div>
+        <div class="row-item"><span class="row-label">Teçhizat</span><span class="row-val t-orange">→ genellikle daha uzun süre Squad 1 öncelikli kalır</span></div>
+        <div class="row-item"><span class="row-label">Kahraman EXP</span><span class="row-val t-blue">→ Squad 1 Max olduktan sonra Squad 2</span></div>
+        <div class="row-item"><span class="row-label">Yetenek Madalyaları</span><span class="row-val t-purple">→ istikrar sağlayana kadar Squad 1 Çekirdeği öncelikli kalır</span></div>
+        <div class="row-item"><span class="row-label">Teknoloji/Drone</span><span class="row-val t-steel">→ kademeli devam</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §7 — Parçalar — önce kim alır?
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🔷 Parçalar (Shards) — Squad 1 içinde önce kim alır?</div>
+  <div class="section-body">
+
+    <div class="alert alert-gold">
+      <span class="alert-icon">🎯</span>
+      <div>Parçaları otomatik olarak eşit dağıtma. <strong class="t-gold">Takımdaki en büyük Darboğazı ortadan kaldıran kahramanın yıldızını yükselt.</strong></div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">Main DPS</span>
+        <span class="row-val t-gold">Yüksek öncelik — yıldızını yükseltmek Hasarı doğrudan ve açık bir şekilde artırır</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Frontline</span>
+        <span class="row-val t-orange">Hızlı ölüyor ve DPS'in çalışmasını engelliyorsa → yükseltmek öncelikli olur</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Support</span>
+        <span class="row-val t-muted">İhmal edilmez, ama öncelik aşamaya ve gerçek rolüne bağlıdır</span>
+      </div>
+    </div>
+
+    <div class="divider">Parçalar ne zaman Squad 2'ye geçer?</div>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--gold);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Squad 1'in beş kahramanının tümü 5×5'e ulaştı mı?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">Hayır</div><div class="fa-val">Genel olarak: Parçalar → Squad 1</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Evet</div><div class="fa-val">Parçaları Squad 2'ye yönlendirmeye başla</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-steel" style="margin-top:10px;">
+      <span class="alert-icon">⚖️</span>
+      <div><strong class="t-steel">Bu genel bir stratejidir, kesin bir kural değil.</strong> Squad 1'deki bir kahramanın sonraki yükseltmesi sınırlı bir fayda sağlayacaksa, Squad 2'deki bir kahramanın yükseltmesi ise daha büyük bir gelişim açacaksa — <strong class="t-gold">kararı her yükseltmenin gerçek faydasına göre yeniden değerlendir.</strong> Karar, mevcut kahramanlara ve bulunduğun aşamaya bağlıdır.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §8 — Gear: Akıllı karar
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-cyan">⚙️ Teçhizat — karar, savaşta ortaya çıkana göre verilir</div>
+  <div class="section-body">
+
+    <div class="alert alert-cyan">
+      <span class="alert-icon">📌</span>
+      <div>Her kahraman için 4 parça: <strong class="t-cyan">Top/Railgun (Cannon/Railgun) · Veri Çipi (Data Chip) · Zırh · Radar</strong></div>
+    </div>
+
+    <div class="divider">Saldırıyı ne zaman bırakıp savunmaya ne zaman başlamalıyım?</div>
+
+    <div class="decision-card dc-orange">
+      <div class="dc-icon">⚔️</div>
+      <div class="dc-body">
+        <div class="dc-title t-orange">Senaryo A — Kimberly iyi Hasar veriyor ama hızlı ölüyor</div>
+        <div class="dc-desc">→ Arka Saf için Radar / Zırh yükseltmeye başla</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">🎯</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">Senaryo B — Kimberly sona kadar yaşıyor ama Hasar zayıf</div>
+        <div class="dc-desc">→ Top / Veri Çipi'ne devam et</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">🛡️</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">Senaryo C — Murphy/Williams hızlı ölüyor</div>
+        <div class="dc-desc">→ şununla başla: Savunma Teçhizatı + Yıldızlar + Yetenekler + Ön Saf'ın Teknolojisi</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-purple">
+      <div class="dc-icon">💥</div>
+      <div class="dc-body">
+        <div class="dc-title t-purple">Senaryo D — Ön Saf güçlü ama Arka Saf AoE'den patlıyor</div>
+        <div class="dc-desc">→ Savunma Teçhizatı'nı DPS için çok geciktirme — AoE ulaşıyor</div>
+      </div>
+    </div>
+
+    <div class="divider">Decision Flow — Teçhizat</div>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--orange);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Ön Saf yeterince dayanıyor mu?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">Hayır</div><div class="fa-val">Şununla başla: Zırh/Radar · Yıldızlar · Yetenekler · ön saftakilerin Teknolojisi</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Evet ↓</div><div class="fa-val">Sonraki soruya geç</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--red);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">DPS savaşın sonuna kadar yaşıyor mu?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">Hayır</div><div class="fa-val">DPS için Savunma Teçhizatı — Radar / Zırh</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Evet ↓</div><div class="fa-val">Sonraki soruya geç</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:#60a5fa;"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Hasar, rakibi bitirmeye yeterli mi?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">Hayır</div><div class="fa-val">Top / Veri Çipi / Yetenekler</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Evet</div><div class="fa-val">Başka bir Darboğaza geç: Teknoloji / Drone / Birlikler</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div><strong class="t-gold">Teçhizat sadece kahraman adına göre gelişmez, savaşta ortaya çıkan soruna göre gelişir.</strong></div>
+    </div>
+
+    <div class="divider">Herhangi bir Ore harcamadan önce bedava bir adım</div>
+
+    <div class="decision-card dc-steel">
+      <div class="dc-icon">🔄</div>
+      <div class="dc-body">
+        <div class="dc-title t-steel">Önce Teçhizat değişimini dene — yükseltmeden önce</div>
+        <div class="dc-desc">
+          Parçalar kahramanlar arasında bedava taşınabilir.<br>
+          <strong>Doğru sıra:</strong><br>
+          1. Mevcut dağılımı incele<br>
+          2. Mantıklı bir değişim dene (örneğin: Radar'ı DPS'ten Ön Saf'a)<br>
+          3. Sonucu benzer savaşlarda karşılaştır<br>
+          4. Değişim yetmediyse ancak o zaman Ore yatır
+        </div>
+      </div>
+    </div>
+
+    <a href="gear_analysis.html" class="inner-link il-blue">⚙️ Teçhizat kılavuzunu detaylıca incele</a>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §9 — Özel Silahlar
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-cyan">🗡️ Özel Silahlar — gerçek bir karar</div>
+  <div class="section-body">
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--cyan);"></div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Bu kahraman uzun süre Squad 1 veya Squad 2'de kalacak mı?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-no"><div class="fa-label">Hayır</div><div class="fa-val">Şimdi onun için Özel Silah'a yatırım yapma</div></div>
+            <div class="flow-ans fa-yes"><div class="fa-label">Evet ↓</div><div class="fa-val">Sonraki soruya geç</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-left">
+          <div class="flow-dot" style="border-color:var(--gold);"></div>
+        </div>
+        <div class="flow-body">
+          <div class="flow-q">Kahraman, Squad 1 veya Squad 2'de uzun vadeli bir Çekirdek (Core) mi?</div>
+          <div class="flow-answers">
+            <div class="flow-ans fa-yes"><div class="fa-label">Evet ↓</div><div class="fa-val">Silahın kendisinin ROI'sini değerlendir — her Çekirdek Kahraman, Özel Silahtan aynı faydayı görmez</div></div>
+            <div class="flow-ans fa-no"><div class="fa-label">Hayır</div><div class="fa-val">Şimdi yatırım yapma — Parçaları sakla</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-cyan" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div>Özel Silah Parçaları, sadece herkese Silah açmak için birden fazla kahraman arasında <strong>dağıtılmaması gereken</strong> kaynaklardandır. Onları Çekirdek kahramanlarda topla.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §10 — Skill Medals
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-purple">🎖️ Yetenek Madalyaları — role göre seç</div>
+  <div class="section-body">
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">DPS</span>
+        <span class="row-val t-purple">Öncelik, Hasarı doğrudan etkileyen yeteneklere</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Tank / Defense</span>
+        <span class="row-val t-orange">Öncelik, hayatta kalmayı artıran veya alınan Hasarı azaltan yeteneklere</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Support</span>
+        <span class="row-val t-blue">Öncelik, takıma sunduğu Buff'ın değerine göre</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">❌ Yapma</span>
+        <span class="row-val t-muted">Yetenek Madalyalarını tüm kahramanlar arasında eşit dağıtma</span>
+      </div>
+    </div>
+
+    <div class="alert alert-purple" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div>Tüm Yetenekleri eşit şekilde yükseltme. <strong class="t-purple">Kahramanın şu anki rolünde en iyi savaş sonucunu veren Yeteneği seç.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §11 — Bottleneck / Breakpoint
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🔎 Hesabımın Darboğazı nerede?</div>
+  <div class="section-body">
+
+    <div class="alert alert-gold">
+      <span class="alert-icon">🎯</span>
+      <div><strong class="t-gold">Her zaman en güçlü Upgrade'i arama. Takımın gücünü sınırlayan en zayıf sistemi ara.</strong></div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">Mükemmel Yıldızlar + zayıf Teçhizat</span>
+        <span class="row-val t-orange">→ Darboğaz Teçhizat'tır</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Mükemmel Teçhizat + zayıf Yetenekler</span>
+        <span class="row-val t-purple">→ Darboğaz Yetenekler'dir</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Mükemmel Kahramanlar + sadece T7</span>
+        <span class="row-val t-blue">→ Darboğaz Birlikler'dir</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Her şey iyi ama T10 uzak</span>
+        <span class="row-val t-purple">→ Darboğaz Özel Kuvvetler / Araştırma'dır</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Her şey dengeli ama Drone geride</span>
+        <span class="row-val t-steel">→ Uzun vadeli Darboğaz Drone'dur</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §12 — Birlikler
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">🪖 Birlikler — T7'den T10'a</div>
+  <div class="section-body">
+
+    <div class="tier-row">
+      <div class="tier-badge tb-green"><span class="tier-num">T7</span><div class="tier-sub">Kışla Lv.20<br>Başlangıç noktası</div></div>
+      <div class="tier-badge tb-blue"><span class="tier-num">T8</span><div class="tier-sub">Kışla Lv.24<br>Asgari seviye</div></div>
+      <div class="tier-badge tb-orange"><span class="tier-num">T9</span><div class="tier-sub">Kışla Lv.27<br>Ana hedef</div></div>
+      <div class="tier-badge tb-gold"><span class="tier-num">T10</span><div class="tier-sub">Kışla Lv.30<br>+ T10 gereksinimleri<br>Özel Kuvvetler içinde</div></div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">🏆</span>
+      <div>
+        <strong class="t-gold">T10 gereksinimleri — hepsi birlikte gereklidir:</strong>
+        <div class="row-list" style="margin-top:8px;">
+          <div class="row-item"><span class="row-label">HQ</span><span class="row-val t-gold">Karargah Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Tech Center</span><span class="row-val t-blue">Teknoloji Merkezi Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Barracks</span><span class="row-val t-orange">Kışla Lv.30</span></div>
+          <div class="row-item"><span class="row-label">Special Forces</span><span class="row-val t-purple">Özel Kuvvetler ağacı içinde belirli Birim araştırmaları — Cesaret Madalyaları gerektirir</span></div>
+        </div>
+        <div style="margin-top:8px; color:var(--steel); font-size:.8rem;">⚠️ Sadece HQ30'a ulaşmak yeterli değil — Özel Kuvvetler araştırmaları uzun zaman alır. HQ30'a ulaşmadan önce bile erkenden başla.</div>
+      </div>
+    </div>
+
+    <div class="divider">Birlik Seviyesi ne zaman sorun haline gelir?</div>
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">🔍</span>
+      <div>Kahramanların güçlü, Teçhizatın mükemmel ve Teknolojin iyiyse, ama daha yüksek Seviyeye sahip benzer oyunculara karşı kaybediyorsan — birlikler artık Darboğaz haline gelmiştir.<br>
+      <strong>Aynı takım, daha yüksek Seviye ile daha iyi performans verir.</strong></div>
+    </div>
+
+    <a href="waterfall.html" class="inner-link il-blue">💧 Şelale stratejisi — Cuma günü VS puanını ikiye katlama</a>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §13 — Teknoloji
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-purple">🔬 Teknoloji (Research) — hedefine göre</div>
+  <div class="section-body">
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">🏆</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">Şu anki hedefin T10 ise</div>
+        <div class="dc-desc">→ Özel Kuvvetler büyük bir öncelik haline gelir — tek yol budur<br><span style="font-size:.78rem; color:var(--steel);">T10 şunu gerektirir: HQ30 + Teknoloji Merkezi 30 + Kışla 30 + Özel Kuvvetler içinde Birim araştırmaları</span></div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">⚖️</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">Hâlâ HQ30 / T10'dan uzaksan</div>
+        <div class="dc-desc">Şunlar arasında dengele: Savaş Teknolojisi (Combat Tech) · Tür Teknolojisi (Type Tech) · Birim Teknolojisi (Unit Tech) · İlerleme Gereksinimleri<br><span style="font-size:.78rem; color:var(--orange);">⚠️ Özel Kuvvetler araştırmalarına erkenden başla — uzun zaman alır ve mutlaka ihtiyacın olacak</span></div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">⚔️</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">Savaş zayıflığı nedeniyle kaybediyorsan</div>
+        <div class="dc-desc">→ takım türüne uygun ATK / DEF / HP / Birim istatistiklerine odaklan</div>
+      </div>
+    </div>
+
+    <div class="alert alert-purple" style="margin-top:2px;">
+      <span class="alert-icon">📝</span>
+      <div>Özel Kuvvetler çok önemlidir, ama <strong>her oyuncu için her aşamada ilk Araştırma olmak zorunda değildir.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §14 — Binalar
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">🏗️ Binalar — "bunu şimdi neden yükseltiyorum?" diye sor</div>
+  <div class="section-body">
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">🏛️ HQ</span>
+        <span class="row-val t-muted">Sonraki seviye şunu açıyorsa yükselt: Kahraman Seviyesi / Kışla / Bina / Araştırma</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🚗 Tank Center</span>
+        <span class="row-val t-orange">Tank takımına doğrudan Buff — takımının önceliğine göre yükselt</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">✈️/🚀 Other Centers</span>
+        <span class="row-val t-muted">Henüz kullanmıyorsan Uçak/Füze Merkezi'ni aynı hızla yükseltme</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🏠 Barracks</span>
+        <span class="row-val t-blue">Daha yüksek Birlik Seviyesine veya Şelale stratejisine ihtiyacın olduğunda yükselt</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">🔬 Tech Center</span>
+        <span class="row-val t-purple">Mevcut Araştırma, seviyesi tarafından sınırlandığında yükselt</span>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">💡</span>
+      <div><strong class="t-gold">Binayı "önemli" olduğu için geliştirme, sonraki seviye açık bir hedefe hizmet ettiği için geliştir.</strong></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §15 — Drone
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-steel">🤖 Drone (İHA)</div>
+  <div class="section-body">
+
+    <div class="divider">Drone'un dört sistemi</div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">1 — Drone Level</span>
+        <span class="row-val t-steel">Savaş Verisi (seviyeyi yükseltir) + Drone Parçaları (bazı yükseltmeler için gerekli) — seviye diğer sistemleri güçlendirir</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">2 — Components</span>
+        <span class="row-val t-blue">Kendi sistemiyle gelişir (Components kutuları) — takıma ek Buff verir</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">3 — Skill Chips</span>
+        <span class="row-val t-purple">Özel savaş Efektleri ekler — bazıları belirli takım türlerine yöneliktir</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">4 — Combat Boost</span>
+        <span class="row-val t-gold">Tüm takım için kümülatif ödüller — kilometre taşlarına ulaşıldığında etkinleşir</span>
+      </div>
+    </div>
+
+    <div class="alert alert-gold" style="margin-top:10px;">
+      <span class="alert-icon">🏆</span>
+      <div><strong class="t-gold">Combat Boost kilometre taşları:</strong><br>
+      <strong class="t-steel">Lv 150</strong> → toplam +1 Yetenek Çipi Boost &nbsp;·&nbsp;
+      <strong class="t-steel">Lv 300</strong> → toplam +2 &nbsp;·&nbsp;
+      <strong class="t-steel">Lv 450</strong> → toplam +3<br>
+      <span style="font-size:.8rem; color:var(--muted);">Bunlar her kilometre taşındaki kümülatif toplamlardır, üst üste eklenen ekler değildir — sonraki kilometre taşına ulaşmayı planla.</span></div>
+    </div>
+
+    <div class="divider">Ne zaman kullanmalı, ne zaman biriktirmeli?</div>
+
+    <div class="row-list">
+      <div class="row-item">
+        <span class="row-label">VS Günü yaklaşıyor</span>
+        <span class="row-val t-gold">VS'de puana sayılan kaynakları saklamak daha iyidir</span>
+      </div>
+      <div class="row-item">
+        <span class="row-label">Drone çok geride</span>
+        <span class="row-val t-orange">Tüm gelişimi erteleme — açılıştan itibaren kademeli olarak geliştir</span>
+      </div>
+    </div>
+
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <span class="alert-icon">📈</span>
+      <div><strong class="t-blue">Drone'u açıldığından itibaren düzenli olarak geliştir.</strong> Buff'lar tüm takımı kapsar — uzun gecikmeyi sonradan telafi etmek zordur. Büyük yatırım, sonraki kilometre taşına ve mevcut kaynaklara göre değerlendirilir, kesin bir kurala dayanmaz.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §16 — Counter
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">⚔️ Kontra sistemi</div>
+  <div class="section-body">
+    <div class="tier-row">
+      <div class="tier-badge tb-orange" style="text-align:center;">
+        <span class="tier-num">🚗</span>
+        <div style="font-weight:900; font-size:.8rem;">Tank</div>
+        <div class="tier-sub">Güçlü karşı → Füze<br>Zayıf karşı → Uçak</div>
+      </div>
+      <div class="tier-badge tb-blue" style="text-align:center;">
+        <span class="tier-num">✈️</span>
+        <div style="font-weight:900; font-size:.8rem;">Uçak</div>
+        <div class="tier-sub">Güçlü karşı → Tank<br>Zayıf karşı → Füze</div>
+      </div>
+      <div class="tier-badge tb-green" style="text-align:center;">
+        <span class="tier-num">🚀</span>
+        <div style="font-weight:900; font-size:.8rem;">Füze</div>
+        <div class="tier-sub">Güçlü karşı → Uçak<br>Zayıf karşı → Tank</div>
+      </div>
+    </div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">🧭</span>
+      <div>Takımın Tank ise, Füze, Uçak'a karşı mantıklı bir ikinci takım seçimidir — ve Tank oyuncularına karşı yaygın olarak kullanılan budur.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §17 — İkinci takım
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-blue">🔄 İkinci takım — birinciyi zayıflatmadan inşa etmek</div>
+  <div class="section-body">
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">🎯</span>
+      <div>Hedef: <strong class="t-blue">Squad 1'i zayıflatmadan Squad 2'yi inşa etmek.</strong> Her kaynağın geçiş için doğru zamanlaması vardır.</div>
+    </div>
+
+    <div class="row-list">
+      <div class="row-item"><span class="row-label">Universal Shards</span><span class="row-val t-gold">Genel olarak Squad 1 için 5×5'ten sonra → Squad 2 (her yükseltmenin gerçek faydasına göre yeniden değerlendir)</span></div>
+      <div class="row-item"><span class="row-label">Kahraman EXP</span><span class="row-val t-blue">Squad 1 Max olduktan sonra → Squad 2</span></div>
+      <div class="row-item"><span class="row-label">Yetenek Madalyaları</span><span class="row-val t-purple">İlk önce istikrar sağlayana kadar Squad 1 Çekirdeği öncelikli kalır</span></div>
+      <div class="row-item"><span class="row-label">Teçhizat</span><span class="row-val t-orange">Genellikle daha uzun süre Squad 1 öncelikli kalır</span></div>
+      <div class="row-item"><span class="row-label">Tür Teknolojisi</span><span class="row-val t-muted">Gerçek bir yatırım olduğunda kademeli olarak Squad 2</span></div>
+      <div class="row-item"><span class="row-label">Type Center</span><span class="row-val t-muted">Aynı şey — önceliğe göre</span></div>
+      <div class="row-item"><span class="row-label">Drone</span><span class="row-val t-steel">Ortak bir kaynaktır, sadece Squad 2'ye özel değildir</span></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §18 — 3 takım inşa etme
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-red">🚫 Aynı anda 3 takım inşa etme</div>
+  <div class="section-body">
+    <div class="compare-wrap">
+      <div class="compare-col cc-bad">
+        <div class="compare-label t-red">❌ Hata</div>
+        <div class="compare-items">Orta Tank<br>Orta Uçak<br>Orta Füze<br><strong class="t-red">= 3 zayıf takım</strong></div>
+      </div>
+      <div class="compare-col cc-good">
+        <div class="compare-label t-green">✅ Doğru</div>
+        <div class="compare-items">Çok güçlü Squad 1<br>İnşa aşamasında Squad 2<br>Squad 3 daha sonra<br><strong class="t-green">= iki güçlü takım</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §19 — 3 tam senaryo
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">🎮 Gerçekçi senaryolar — şimdi ne yapmalıyım?</div>
+  <div class="section-body">
+
+    <div class="scenario sc-1">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); color:var(--green);">Senaryo 1</span>
+        <span class="t-muted" style="font-size:.78rem;">İnşa aşamasında bir hesap</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Tank Squad</span><span class="si-val t-orange">Ortalama 4★</span></div>
+        <div class="si-stat"><span class="si-label">Teçhizat</span><span class="si-val t-red">Zayıf</span></div>
+        <div class="si-stat"><span class="si-label">Birlik Seviyesi</span><span class="si-val t-blue">T8</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-green bold" style="font-size:.82rem;">Karar:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Parçalar</span><span class="si-val t-gold">→ 5×5'e kadar Squad 1</span></div>
+        <div class="si-stat"><span class="si-label">Teçhizat</span><span class="si-val t-gold">→ Teşhise göre Squad 1</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2</span><span class="si-val t-red">→ Şimdi başlama</span></div>
+        <div class="si-stat"><span class="si-label">Teknoloji/Birlikler</span><span class="si-val t-blue">→ Aşamaya göre kademeli</span></div>
+      </div>
+    </div>
+
+    <div class="scenario sc-2">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); color:#60a5fa;">Senaryo 2</span>
+        <span class="t-muted" style="font-size:.78rem;">Squad 1 tamamlandı</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Tank Squad</span><span class="si-val t-green">5×5</span></div>
+        <div class="si-stat"><span class="si-label">Teçhizat</span><span class="si-val t-orange">Orta</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2</span><span class="si-val t-muted">Zayıf</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-blue bold" style="font-size:.82rem;">Karar:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Parçalar</span><span class="si-val t-gold">→ Squad 2 başlar</span></div>
+        <div class="si-stat"><span class="si-label">Teçhizat</span><span class="si-val t-orange">→ Squad 1 öncelikli kalır</span></div>
+        <div class="si-stat"><span class="si-label">Kahraman EXP</span><span class="si-val t-blue">→ mevcut olduğunda Squad 2 başlar</span></div>
+        <div class="si-stat"><span class="si-label">Squad 2 Teknolojisi</span><span class="si-val t-muted">→ kademeli</span></div>
+      </div>
+    </div>
+
+    <div class="scenario sc-3">
+      <div class="scenario-header">
+        <span class="sc-badge" style="background:rgba(232,57,74,0.12); border:1px solid rgba(232,57,74,0.3); color:var(--red);">Senaryo 3</span>
+        <span class="t-muted" style="font-size:.78rem;">Daha düşük Power'lı rakibe karşı kaybediyorum</span>
+      </div>
+      <div class="scenario-items">
+        <div class="si-stat"><span class="si-label">Durum</span><span class="si-val t-red">Power yüksek ama daha düşük Power'lı Uçak'a karşı kayıplar var</span></div>
+      </div>
+      <div class="scenario-divider"></div>
+      <div class="t-red bold" style="font-size:.82rem;">Teşhis:</div>
+      <div class="scenario-items" style="margin-top:4px;">
+        <div class="si-stat"><span class="si-label">Önce incelenen</span><span class="si-val t-purple">Kontra — Tank'a karşı Uçak avantaj verir</span></div>
+        <div class="si-stat"><span class="si-label">Anlamına gelmez</span><span class="si-val t-muted">tüm Teçhizat veya Kahramanların zayıf olduğu</span></div>
+        <div class="si-stat"><span class="si-label">Gelecekteki çözüm</span><span class="si-val t-green">Füze Takımı bu zayıf noktayı kapatır</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §20 — Bugün ne yapmalıyım?
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚡ Bugün ne yapmalıyım? — bir dakikada cevap</div>
+  <div class="section-body">
+
+    <div class="today-grid">
+
+      <div class="today-item ti-gold">
+        <div class="today-icon">🔷</div>
+        <div>
+          <div class="today-q">Universal Shards var</div>
+          <div class="today-a">Squad 1 = 5×5 mi?<br>
+          <strong class="t-red">Hayır</strong> → Squad 1 · <strong class="t-green">Evet</strong> → Squad 2</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-orange">
+        <div class="today-icon">⚙️</div>
+        <div>
+          <div class="today-q">Gear Ore / Materials var</div>
+          <div class="today-a">Savaş Raporu'nu aç — önce kim ölüyor?<br>
+          <strong class="t-red">Frontline</strong> → şuna bak: Hedefleme (Targeting) + alınan Hasar + Savunma Teçhizatı + Teçhizat dağılımı<br>
+          <strong class="t-orange">DPS</strong> → şuna bak: Hedefleme (Targeting) + alınan Hasar + Zırh/Radar + Teçhizat dağılımı<br>
+          <strong class="t-blue">İkisi de yaşıyor ama Hasar zayıf</strong> → Top/Çip</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-purple">
+        <div class="today-icon">🎖️</div>
+        <div>
+          <div class="today-q">Skill Medals var</div>
+          <div class="today-a">Core Hero / Main DPS kim?<br>
+          → Öncelik, rolünün performansını en çok etkileyen Yeteneğe</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-blue">
+        <div class="today-icon">🔬</div>
+        <div>
+          <div class="today-q">Valor Badges / Research Resources var</div>
+          <div class="today-a">Hedefim T10 yakın mı?<br>
+          <strong class="t-gold">Evet</strong> → önce Özel Kuvvetler<br>
+          <strong class="t-muted">Hayır</strong> → Darboğaza göre Savaş/İlerleme Teknolojisi</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-steel">
+        <div class="today-icon">🤖</div>
+        <div>
+          <div class="today-q">Drone Resources var</div>
+          <div class="today-a">VS Günü yakın mı (Drone kaynakları harcandığında puan veren gün)?<br>
+          <strong class="t-gold">Evet</strong> → VS puanı veren kaynakları doğru güne kadar sakla<br>
+          <strong class="t-muted">Drone çok geride</strong> → kademeli geliştir, her şeyi erteleme</div>
+        </div>
+      </div>
+
+      <div class="today-item ti-green">
+        <div class="today-icon">🏗️</div>
+        <div>
+          <div class="today-q">Binalar için Resources var</div>
+          <div class="today-a">Hangi Upgrade bana önemli bir şey açıyor?<br>
+          → şu anki hedefe göre HQ + Type Center + Barracks</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §21 — Diagnostic Checklist
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-orange">📋 Diagnostic Checklist — soru + anlamı + ne yapmalı</div>
+  <div class="section-body">
+
+    <div class="diag-item di-red">
+      <div class="diag-q">🛡️ Savaş Raporu'nda Ön Saf önce ölüyor mu?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Evet — şuna bak</div><div class="da-val">Hedefleme (Targeting) + alınan Hasar + Savunma Teçhizatı + Yıldızlar + Ön Saf'ın Teknolojisi — herhangi bir yatırımdan önce</div></div>
+        <div class="diag-ans da-no"><div class="da-label">Hayır — iyi</div><div class="da-val">Sonraki soruya geç</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-orange" style="margin-top:8px;">
+      <div class="diag-q">💥 Ön Saf hayatta olduğu halde DPS önce ölüyor mu?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Evet — şuna bak</div><div class="da-val">Hedefleme (Targeting) + alınan Hasar + Yetenekler + mevcut Teçhizat dağılımı — herhangi bir yatırımdan önce</div></div>
+        <div class="diag-ans da-no"><div class="da-label">Hayır — iyi</div><div class="da-val">Sonraki soruya geç</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-blue" style="margin-top:8px;">
+      <div class="diag-q">⚔️ Herkes yaşadığı halde Hasar zayıf mı?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Evet — sorun</div><div class="da-val">Top / Çip / Yetenekler / Özel Silah</div></div>
+        <div class="diag-ans da-no"><div class="da-label">Hayır — iyi</div><div class="da-val">Sonraki soruya geç</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">✈️ Sadece Uçak'a karşı mı kaybediyorsun?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Evet — Kontra</div><div class="da-val">Gelecekte Squad 2 olarak bir Füze Takımı inşa et</div></div>
+        <div class="diag-ans da-no"><div class="da-label">Hayır</div><div class="da-val">Sorun başka bir yerde</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-green" style="margin-top:8px;">
+      <div class="diag-q">🔷 Squad 1 = 5×5 mi?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-no"><div class="da-label">Hayır — eksik</div><div class="da-val">Parçaları Squad 2'ye taşıma</div></div>
+        <div class="diag-ans da-yes"><div class="da-label">Evet — ✅</div><div class="da-val">Squad 2'ye kademeli başlanabilir</div></div>
+      </div>
+    </div>
+
+    <div class="diag-item di-steel" style="margin-top:8px;">
+      <div class="diag-q">🔬 Kahramanlar ve Teçhizat iyi olduğu halde Teknoloji zayıf mı?</div>
+      <div class="diag-answers">
+        <div class="diag-ans da-yes"><div class="da-label">Evet — Darboğaz</div><div class="da-val">Teknoloji Darboğazdır — Özel Kuvvetler / Combat'a odaklan</div></div>
+        <div class="diag-ans da-no"><div class="da-label">Hayır — iyi</div><div class="da-val">Darboğazı başka bir yerde ara</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §22 — Hızlı karar tablosu (Yes/No)
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">⚡ Karar tablosu — ilk soru belirler</div>
+  <div class="section-body">
+
+    <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+    <table class="prio-table" style="min-width:480px;">
+      <thead>
+        <tr>
+          <th>Kaynak</th>
+          <th>Soru</th>
+          <th>Evet →</th>
+          <th>Hayır →</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong class="t-gold">Universal Shards</strong></td>
+          <td class="t-muted">Squad 1 = 5×5 mi?</td>
+          <td><span class="pill pill-blue">Squad 2</span></td>
+          <td><span class="pill pill-gold">Squad 1</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-orange">Gear Ore</strong></td>
+          <td class="t-muted">Frontline hızlı ölüyor mu?</td>
+          <td><span class="pill pill-orange">Ön saf için Zırh/Radar</span></td>
+          <td><span class="pill pill-blue">DPS'i incele</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-purple">Valor Badges</strong></td>
+          <td class="t-muted">T10 hedefi yakın mı?</td>
+          <td><span class="pill pill-purple">Özel Kuvvetler</span></td>
+          <td><span class="pill pill-steel">Savaş/İlerleme Teknolojisi</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-cyan">Hero EXP</strong></td>
+          <td class="t-muted">Squad 1 Max Level mi?</td>
+          <td><span class="pill pill-blue">Squad 2</span></td>
+          <td><span class="pill pill-cyan">Önce Squad 1</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-cyan">Exclusive Weapon Shards</strong></td>
+          <td class="t-muted">Kahraman uzun vadeli bir Çekirdek kahraman mı?</td>
+          <td><span class="pill pill-cyan">Ona yatırım yap</span></td>
+          <td><span class="pill pill-steel">Sakla</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-steel">Drone Resources</strong></td>
+          <td class="t-muted">Drone harcandığında puan veren VS Günü yakın mı?</td>
+          <td><span class="pill pill-gold">Doğru güne kadar sakla</span></td>
+          <td><span class="pill pill-steel">Kademeli geliştir</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-green">Birlik eğitimi</strong></td>
+          <td class="t-muted">Cuma günü (VS) mi?</td>
+          <td><span class="pill pill-orange">T7→T8→T9 Şelale</span></td>
+          <td><span class="pill pill-green">T7 biriktir</span></td>
+        </tr>
+        <tr>
+          <td><strong class="t-blue">Bina kaynakları</strong></td>
+          <td class="t-muted">Sonraki seviye önemli bir şey açıyor mu?</td>
+          <td><span class="pill pill-blue">Binayı yükselt</span></td>
+          <td><span class="pill pill-steel">İhtiyaç olana kadar geciktir</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+  §23 — Altın kurallar
+════════════════════════════════ -->
+<div class="section">
+  <div class="section-head sh-gold">🏆 Altın Kurallar — bunları ezberle</div>
+  <div class="section-body">
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">1️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">Kaynaklarını 3 takıma dağıtma</div>
+        <div class="dc-desc">İki güçlü takım, tamamlanmamış üç takımdan daha iyidir.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-orange">
+      <div class="dc-icon">2️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-orange">Genel olarak: Parçalar → 5×5'e kadar Squad 1</div>
+        <div class="dc-desc">5 Kahraman × 5 Yıldız — genel durumda bu ayrım çizgisidir. Squad 1'in sonraki yükseltmesi sınırlı bir fayda sağlıyorsa, Squad 2'deki temel bir yükseltmeye kıyasla, kararı gerçek faydaya göre yeniden değerlendir.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-cyan">
+      <div class="dc-icon">3️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-cyan">Teçhizat kahramanın adına göre değil — savaşta ortaya çıkana göre gelişir</div>
+        <div class="dc-desc">Önce Savaş Raporu'nu aç — kimin önce öldüğü sana <em>inceleme için bir ipucu</em> verir, kesin bir karar vermez. Herhangi bir yatırımdan önce alınan Hasarı, Yetenekleri ve Hedeflemeyi (Targeting) kontrol et.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-red">
+      <div class="dc-icon">4️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-red">En güçlü Upgrade'i arama — en zayıf Darboğazı ara</div>
+        <div class="dc-desc">En büyük savaş gelişimi, zaten güçlü olanı güçlendirmekten değil, en zayıf noktayı düzeltmekten gelir.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-purple">
+      <div class="dc-icon">5️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-purple">Teknoloji ve Özel Kuvvetler — hedefin T10 ise erkenden başla</div>
+        <div class="dc-desc">Özel Kuvvetler, T10'a tek yoldur — gecikmek çok maliyetlidir.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-steel">
+      <div class="dc-icon">6️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-steel">Drone "oyunun sonu" değildir — kademeli geliştir</div>
+        <div class="dc-desc">VS günlerinde, harcandığında puan veren kaynakları sakla — Drone kaynakları bunlardan biridir. Günlük güç ile VS puanı birikimi arasında dengele.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-blue">
+      <div class="dc-icon">7️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-blue">Teçhizat ve Parçaların Squad 2'ye geçiş zamanlaması farklıdır</div>
+        <div class="dc-desc">Parçalar 5×5'ten sonra geçer — ama Teçhizat daha uzun süre ilk takım için öncelikli kalabilir.</div>
+      </div>
+    </div>
+
+    <div class="decision-card dc-gold">
+      <div class="dc-icon">8️⃣</div>
+      <div class="dc-body">
+        <div class="dc-title t-gold">Gerçek güç savaştaki performanstır, sadece rakam değil</div>
+        <div class="dc-desc">Darboğazı çözmeye odaklanmak, kaynakları dağıtmaktan daha iyi bir savaş sonucu verir.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════ FOOTER ════════ -->
+<div class="footer">
+  🛡️ <strong>[NWH] Night Watch</strong><br>
+  Hazırlayan: MSBKH · Son güncelleme: 20/10/2026<br>
+  <span style="font-size:0.7rem;">İttifak için dahili kılavuz — takım gücü teşhisi ve kaynak kararları</span>
+</div>
+
+</body>
+</html>
