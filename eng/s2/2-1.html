@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>[NWH] Season 2 — Week 1 | Polar Storm</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080c10; --card:#131b24; --border:#1e2d3d;
+    --gold:#f5c518; --gold-dim:#8a6f0a; --red:#e8394a;
+    --orange:#f97316; --blue:#3b82f6; --green:#22c55e;
+    --purple:#a855f7; --cyan:#06b6d4; --ice:#7dd3fc;
+    --text:#e2e8f0; --muted:#64748b;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; padding:12px; font-size:14px; line-height:1.9; }
+
+  /* ── HEADER ── */
+  .alliance-logo-wrap { display:flex; justify-content:center; margin-bottom:8px; }
+  .alliance-logo { width:80px; height:80px; object-fit:contain; border-radius:12px; filter:drop-shadow(0 0 12px rgba(245,197,24,0.4)); }
+  .alliance-name { font-size:1.1rem; font-weight:900; color:var(--gold); text-align:center; letter-spacing:2px; margin-bottom:10px; text-shadow:0 0 16px rgba(245,197,24,0.5); }
+  .main-header { text-align:center; padding:20px 16px 16px; margin-bottom:16px; background:linear-gradient(135deg,#0e1419,#131b24); border:1px solid var(--gold-dim); border-radius:16px; position:relative; overflow:hidden; }
+  .main-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,rgba(125,211,252,0.10),transparent 70%); pointer-events:none; }
+  .main-header h1 { font-size:1.3rem; font-weight:900; color:var(--ice); letter-spacing:1px; text-shadow:0 0 20px rgba(125,211,252,0.35); }
+  .main-header .subtitle { font-size:0.82rem; color:var(--muted); margin-top:6px; }
+  .season-badge { display:inline-block; margin-top:10px; padding:5px 14px; border-radius:16px; background:rgba(125,211,252,0.12); border:1px solid rgba(125,211,252,0.35); color:var(--ice); font-weight:900; font-size:0.78rem; }
+
+  /* ── INFO / SUMMARY BOX ── */
+  .info-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; margin-bottom:14px; font-size:0.86rem; line-height:1.9; }
+  .info-box .info-title { font-weight:900; font-size:1rem; color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .info-box.exec { border-color:rgba(125,211,252,0.35); background:linear-gradient(135deg,#0e1419,#131b24); }
+  .exec-list { list-style:none; padding:0; }
+  .exec-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.8); display:flex; gap:8px; align-items:flex-start; color:#cbd5e1; }
+  .exec-list li:last-child { border-bottom:none; }
+  .exec-list li::before { content:'🔹'; flex-shrink:0; }
+  .toc-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:4px; }
+  .toc-list a { color:#93c5fd; text-decoration:none; font-size:0.85rem; display:block; padding:6px 10px; border-radius:8px; background:rgba(255,255,255,0.02); }
+  .toc-list a:active { background:rgba(255,255,255,0.06); }
+
+  /* ── TYPE BADGES ── */
+  .badges { display:flex; gap:6px; flex-wrap:wrap; margin:8px 0; }
+  .tbadge { font-size:0.72rem; font-weight:900; padding:3px 10px; border-radius:12px; white-space:nowrap; }
+  .tb-official { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.3); }
+  .tb-collective { background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); }
+  .tb-nwh { background:rgba(245,197,24,0.15); color:var(--gold); border:1px solid rgba(245,197,24,0.3); }
+  .tb-verify { background:rgba(249,115,22,0.15); color:var(--orange); border:1px solid rgba(249,115,22,0.3); }
+  .tb-warn { background:rgba(232,57,74,0.15); color:#fca5a5; border:1px solid rgba(232,57,74,0.3); }
+
+  /* ── SECTION ── */
+  .section { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; box-shadow:0 4px 24px rgba(0,0,0,0.5); scroll-margin-top:12px; }
+  .section-head { padding:12px 16px; font-weight:900; font-size:0.98rem; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .sh-ice { background:linear-gradient(90deg,rgba(125,211,252,0.12),transparent); color:var(--ice); border-bottom-color:rgba(125,211,252,0.25); }
+  .sh-gold { background:linear-gradient(90deg,rgba(245,197,24,0.1),transparent); color:var(--gold); border-bottom-color:rgba(245,197,24,0.2); }
+  .sh-blue { background:linear-gradient(90deg,rgba(59,130,246,0.1),transparent); color:#60a5fa; border-bottom-color:rgba(59,130,246,0.2); }
+  .sh-green { background:linear-gradient(90deg,rgba(34,197,94,0.1),transparent); color:var(--green); border-bottom-color:rgba(34,197,94,0.2); }
+  .sh-orange { background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent); color:var(--orange); border-bottom-color:rgba(249,115,22,0.2); }
+  .sh-red { background:linear-gradient(90deg,rgba(232,57,74,0.12),transparent); color:var(--red); border-bottom-color:rgba(232,57,74,0.2); }
+  .sh-purple { background:linear-gradient(90deg,rgba(168,85,247,0.12),transparent); color:var(--purple); border-bottom-color:rgba(168,85,247,0.2); }
+  .section-body { padding:14px 16px; font-size:0.88rem; color:#cbd5e1; line-height:2; }
+  .section-body p { margin-bottom:10px; }
+  .section-body p:last-child { margin-bottom:0; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x:auto; }
+  table.data-table { width:100%; border-collapse:collapse; font-size:0.82rem; min-width:420px; }
+  table.data-table th { background:rgba(0,0,0,0.35); padding:8px 10px; font-weight:700; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; color:var(--muted); font-size:0.72rem; }
+  table.data-table td { padding:8px 10px; text-align:left; border-bottom:1px solid rgba(24,31,46,0.6); white-space:nowrap; }
+  table.data-table tr:last-child td { border-bottom:none; }
+
+  /* ── HIGHLIGHT / NOTE BOXES ── */
+  .highlight-box { background:rgba(245,197,24,0.07); border:1px solid rgba(245,197,24,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:var(--gold); font-weight:700; font-size:0.86rem; line-height:1.9; }
+  .highlight-red { background:rgba(232,57,74,0.08); border:1px solid rgba(232,57,74,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fca5a5; font-size:0.86rem; line-height:1.9; }
+  .highlight-green { background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; color:#86efac; font-weight:700; font-size:0.86rem; }
+  .highlight-blue { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:10px; padding:12px 14px; margin:10px 0; color:#93c5fd; font-size:0.86rem; line-height:1.9; }
+  .highlight-warn { background:rgba(249,115,22,0.09); border:1px solid rgba(249,115,22,0.3); border-radius:10px; padding:12px 14px; margin:10px 0; color:#fdba74; font-size:0.85rem; line-height:1.9; }
+  .note-box { padding:10px 14px; font-size:0.78rem; color:var(--muted); border-top:1px dashed var(--border); background:rgba(0,0,0,0.15); }
+  .source-note { padding:10px 14px; font-size:0.76rem; color:#64748b; border-top:1px solid var(--border); background:rgba(0,0,0,0.1); }
+  .source-note a { color:#60a5fa; }
+
+  /* ── LISTS ── */
+  .checklist, .use-list, .claim-list, .warning-list { list-style:none; padding:0; }
+  .checklist li, .use-list li, .claim-list li, .warning-list li { padding:7px 0; border-bottom:1px solid rgba(24,31,46,0.6); display:flex; align-items:flex-start; gap:8px; font-size:0.86rem; }
+  .checklist label { display:flex; align-items:center; gap:8px; cursor:pointer; width:100%; }
+  .checklist input[type="checkbox"] { width:18px; height:18px; flex-shrink:0; accent-color:var(--green); cursor:pointer; }
+  .checklist li:has(input:checked) label { color:#86efac; text-decoration:line-through; text-decoration-color:rgba(134,239,172,0.5); }
+  .checklist li:last-child, .use-list li:last-child, .claim-list li:last-child, .warning-list li:last-child { border-bottom:none; }
+  .use-list li { color:#86efac; }
+  .claim-list li { color:#fde68a; }
+  .warning-list li { color:#fca5a5; }
+
+  /* ── DETAILS (collapsible) ── */
+  details.explain { margin-top:10px; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:rgba(0,0,0,0.15); }
+  details.explain summary { padding:10px 12px; cursor:pointer; font-weight:700; color:var(--ice); font-size:0.85rem; list-style:none; display:flex; align-items:center; gap:6px; }
+  details.explain summary::-webkit-details-marker { display:none; }
+  details.explain summary::before { content:'▸'; transition:transform 0.2s; }
+  details.explain[open] summary::before { transform:rotate(90deg); }
+  details.explain .explain-body { padding:0 12px 12px; font-size:0.84rem; color:#cbd5e1; line-height:1.9; }
+
+  /* ── DAY-1 TASK CARDS ── */
+  .task-card { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+  .task-card:last-child { margin-bottom:0; }
+  .task-num { display:inline-flex; width:22px; height:22px; border-radius:50%; background:var(--ice); color:#0b0e12; font-weight:900; font-size:0.78rem; align-items:center; justify-content:center; margin-right:6px; }
+  .task-title { font-weight:700; color:#e2e8f0; font-size:0.88rem; }
+  .task-why { margin-top:6px; font-size:0.82rem; color:var(--muted); }
+
+  /* ── EVENT CARD ── */
+  .event-card { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+  .event-card:last-child { margin-bottom:0; }
+  .event-title { font-weight:900; color:var(--ice); font-size:0.92rem; margin-bottom:4px; }
+  .event-meta { font-size:0.76rem; color:var(--muted); margin-bottom:6px; }
+  .event-row { font-size:0.84rem; color:#cbd5e1; margin-top:4px; }
+  .event-row b { color:#e2e8f0; }
+
+  /* ── BASE GRID SVG ── */
+  .grid-wrap { display:flex; justify-content:center; overflow-x:auto; padding:6px 0; }
+  .grid-legend { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:10px; font-size:0.78rem; }
+  .legend-item { display:flex; align-items:center; gap:6px; color:#cbd5e1; }
+  .legend-swatch { width:14px; height:14px; border-radius:3px; flex-shrink:0; }
+
+  /* ── TIMELINE ── */
+  .timeline { position:relative; padding-left:18px; border-left:2px solid var(--border); margin:6px 4px; }
+  .timeline-day { position:relative; margin-bottom:16px; }
+  .timeline-day:last-child { margin-bottom:0; }
+  .timeline-day::before { content:''; position:absolute; left:-24px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--ice); box-shadow:0 0 8px rgba(125,211,252,0.6); }
+  .timeline-day-title { font-weight:900; color:var(--ice); font-size:0.92rem; margin-bottom:6px; }
+  .timeline-items { list-style:none; padding:0; }
+  .timeline-items li { font-size:0.84rem; color:#cbd5e1; padding:4px 0; }
+
+  /* ── FOOTER ── */
+  .nwh-footer { text-align:center; padding:20px 16px; margin-top:8px; border-top:1px solid var(--border); color:var(--muted); font-size:0.85rem; line-height:1.8; }
+  .nwh-footer .footer-shield { font-size:1.4rem; margin-bottom:4px; }
+  .nwh-footer .footer-name { color:var(--gold); font-weight:900; letter-spacing:1px; }
+  .nwh-footer .footer-credit { color:#94a3b8; font-size:0.8rem; }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top { position:fixed; bottom:20px; right:16px; width:48px; height:48px; background:linear-gradient(135deg, var(--ice), #38bdf8); border:2px solid #e0f2fe; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.3rem; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,0.4); opacity:0; visibility:hidden; transform:translateY(10px); transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s; z-index:999; }
+  .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+</style>
+</head>
+<body id="top">
+
+<a href="https://msbkh26.github.io/nwh-guide/eng/">
+  <div class="alliance-logo-wrap">
+    <img src="../../images/logo_alliance.jpg" class="alliance-logo" alt="NWH Logo">
+  </div>
+</a>
+<div class="alliance-name">[NWH] Night Watch</div>
+
+<div class="main-header">
+  <h1>❄️ Season 2 — Week 1</h1>
+  <p class="subtitle">Polar Storm — Complete NWH Guide</p>
+  <span class="season-badge">Season 2 · Week 1</span>
+</div>
+
+<!-- ══════ EXECUTIVE SUMMARY ══════ -->
+<div class="info-box exec">
+  <div class="info-title">⚡ Executive Summary — What Should I Do Right Now?</div>
+  <ul class="exec-list">
+    <li>Day 1: run your personal furnace for 600 seconds + Overdrive mode for 600 seconds + donate coal once + help 3 allies warm up.</li>
+    <li>Open the High-Heat Furnace and start developing your first Titanium Alloy Factory.</li>
+    <li>Scout your first Level-1 Dig Site to begin territory ownership.</li>
+    <li>Don't let your base temperature drop below -20°C for more than 5 minutes (freeze risk).</li>
+    <li>Follow NWH's base-placement plan: every base occupies 3×3 tiles, with two empty tiles between each pair of adjacent bases.</li>
+    <li>Save coal shipments for activation day instead of spending them early.</li>
+  </ul>
+  <div class="badges">
+    <span class="tbadge tb-official">Seasonal mission</span>
+    <span class="tbadge tb-collective">Collective goal</span>
+    <span class="tbadge tb-nwh">NWH strategy</span>
+    <span class="tbadge tb-verify">Needs verification</span>
+    <span class="tbadge tb-warn">Source conflict</span>
+  </div>
+</div>
+
+<!-- ══════ TABLE OF CONTENTS ══════ -->
+<div class="info-box">
+  <div class="info-title">📑 Guide Contents</div>
+  <ul class="toc-list">
+    <li><a href="#intro">1. Season 2 Introduction</a></li>
+    <li><a href="#day1">2. Day 1 — Foundation</a></li>
+    <li><a href="#grid">3. Base Placement Layout</a></li>
+    <li><a href="#temp">4. Temperature and Storms</a></li>
+    <li><a href="#coal">5. Coal and Resources</a></li>
+    <li><a href="#titanium">6. Titanium Alloy Factories</a></li>
+    <li><a href="#furnace">7. Alliance Furnace</a></li>
+    <li><a href="#events">8. Week 1 Events</a></li>
+    <li><a href="#territory">9. Dig Sites and Cities</a></li>
+    <li><a href="#timeline">10. Day 1-7 Timeline</a></li>
+    <li><a href="#checklist">11. Practical Checklist</a></li>
+    <li><a href="#mistakes">12. Common Mistakes</a></li>
+    <li><a href="#sources">13. Sources</a></li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 1. Introduction -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="intro">
+  <div class="section-head sh-ice">❄️ 1. Season 2 Introduction</div>
+  <div class="section-body">
+    <p>Season 2 introduces a brand-new system built around <strong>Temperature</strong>. Your base has its own temperature, and the map around you has an ambient temperature that drops the closer you get to the center (down to -80°C at the Capital). Your base's temperature gradually drifts toward the ambient temperature surrounding it.</p>
+    <p>If your base stays below -20°C for more than 5 minutes, it <strong style="color:var(--red)">freezes</strong> — transfers and Rallies are then blocked, with only random teleports and alliance transfers remaining available.</p>
+    <p>To counter this, you have:</p>
+    <ul class="checklist">
+      <li>🔥 <strong>Personal High-Heat Furnace</strong> — raises your heat and virus resistance, consuming more coal in Overdrive mode.</li>
+      <li>🏛️ <strong>Alliance Furnace</strong> — built on Level-1 land, warms bases within its range, and needs coal from members.</li>
+      <li>🏭 <strong>Titanium Alloy Factories</strong> — produce the titanium alloy needed to develop the personal furnace and seasonal buildings.</li>
+      <li>⛏️ <strong>Dig Sites</strong> — your ongoing coal source and your first owned territory.</li>
+    </ul>
+
+    <img src="../../images/s2-w1-high-heat-furnace-ui.webp" alt="Personal High-Heat Furnace interface" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+
+    <p>These systems are all connected: coal from dig sites is used to build and upgrade furnaces and factories, which in turn protect you from freezing and unlock the virus resistance needed to fight the polar monsters and take more territory.</p>
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 2. Day 1 -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="day1">
+  <div class="section-head sh-gold">🥇 2. Day 1 — Foundation | Top Priority</div>
+  <div class="section-body">
+    <p>These are the tasks to complete on the season's first day. Each task is tagged by type (a seasonal mission per the community guide, or an internal NWH strategy).</p>
+
+    <div class="task-card">
+      <span class="task-num">1</span><span class="task-title">Designate a member rally point near the Alliance Furnace</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH strategy</span></div>
+      <div class="task-why">Makes collective warming and shared defense of the furnace easier from day one.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">2</span><span class="task-title">Place and repair the Alliance Furnace with member participation</span>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="task-why">Starting and managing the repair process (Alliance → Alliance Furnace → Coordinates) is restricted to R4/R5, while actual participation in the repair is done by sending members' squads to reinforce the furnace — up to 20 reinforcements can take part (a mechanic similar to stronghold repairs in Season 1). Without it, there's no collective warming for the alliance's range.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">3</span><span class="task-title">Have every member build the High-Heat Furnace</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH strategy</span></div>
+      <div class="task-why">Without this furnace, there's no virus resistance and no way to activate Overdrive individually.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">4</span><span class="task-title">Run the personal furnace for at least 600 seconds</span>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span> <span class="tbadge tb-collective">Cold Wave Alert goal</span></div>
+      <div class="task-why">One of the Cold Wave Alert mission's goals, available immediately on Day 1.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">5</span><span class="task-title">Activate Overdrive mode for 600 seconds</span>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="task-why">Consumes more coal for more heat, and it's a specific goal within Cold Wave Alert.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">6</span><span class="task-title">Donate coal to the Alliance Furnace</span>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="task-why">Contributes to the shared collective chest goal across all war zones combined (5,000,000 coal total — not a goal specific to your alliance alone) — with a separate individual ranking based on your personal donation amount.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">7</span><span class="task-title">Help allies raise their heat 3 times</span>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="task-why">Via sending a Recon Plane (adds roughly +2°C per strike), or breaking the ice manually.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">8</span><span class="task-title">Start developing your first Titanium Alloy Factory</span>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="task-why">The second factory only unlocks once the first reaches level 15 — start as early as possible.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">9</span><span class="task-title">Collect coal from the relevant activities (Radar, Trapped Survivors...)</span>
+      <div class="badges"><span class="tbadge tb-verify">Needs verification</span></div>
+      <div class="task-why">Sources confirm coal comes from radar missions and other sources, but the exact activity list may vary by server — verify in-game.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">10</span><span class="task-title">Kill the highest seasonal zombie you can reach (Purge Action)</span>
+      <div class="badges"><span class="tbadge tb-collective">Individual ranking</span></div>
+      <div class="task-why">Purge Action ranking is based on the level of the first zombie you kill this season — a higher level grants a better ranking.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">11</span><span class="task-title">Decide on your first target Dig Site</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH strategy</span></div>
+      <div class="task-why">The first land to secure is a Level-1 Dig Site — it defines the launch point for the whole alliance's expansion.</div>
+    </div>
+
+    <div class="task-card">
+      <span class="task-num">12</span><span class="task-title">Time your first daily Doom Walker carefully</span>
+      <div class="badges"><span class="tbadge tb-nwh">NWH strategy</span></div>
+      <div class="task-why">Avoid killing the first daily Doom Walker on the reset day right before Season 2 actually begins (if server timing allows it) — instead wait for the season to truly start, then attack the highest level you can reach each day for the daily "first kill" rewards. Don't confuse the Doom Walker (individual daily reward), Doom Elite (a collective chest goal within Cold Wave Alert, 800 across all war zones), and the first regular zombie of the season (the basis for Purge Action ranking) — all three have completely different rewards and conditions.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ Don't confuse an in-game seasonal mission (like running the furnace for 600 seconds) with an internal NWH directive (like the rally point) — the type is marked on each card above.</div>
+    <div class="highlight-blue">💡 Individual rewards tied to furnace progress can be collected from: Season 2 → Goals → Individual. For Cold Wave Alert events: Cold Wave Event → Goals. Some of these rewards don't show a red notification dot, so check these lists manually on a regular basis rather than relying only on notifications.</div>
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> + internal NWH strategy + in-game player experience (reward-claiming path)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 3. Base Placement Layout -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="grid">
+  <div class="section-head sh-gold">🧱 3. Base Placement Layout — NWH Strategy</div>
+  <div class="section-body">
+    <div class="badges"><span class="tbadge tb-nwh">Internal NWH strategy — not an official in-game rule</span></div>
+    <p>Each base occupies <strong>3×3 tiles</strong> (9 tiles). NWH's adopted layout leaves <strong>exactly two empty tiles</strong> between the edges of every pair of adjacent bases, both horizontally and vertically: 3 occupied tiles + 2 empty tiles + 3 occupied tiles.</p>
+    <p>Goals: expand NWH's area of influence, keep movement organized, reduce open spots for the enemy, and prepare a protected rear zone for the Alliance Furnace.</p>
+
+    <div class="grid-wrap">
+      <img src="../../images/s2-w1-base-grid-example.webp" alt="Real example of NWH base placement" width="600" height="400" loading="lazy" style="width:100%; max-width:420px; height:auto; border-radius:10px; display:block; margin:0 auto;">
+    </div>
+    <div class="grid-legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:rgba(59,130,246,0.5); border:1px solid #3b82f6;"></span> Member base (3×3 tiles)</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:transparent; border:1px solid rgba(148,163,184,0.4);"></span> Gap between bases = two empty tiles</div>
+    </div>
+    <div class="note-box">The Alliance Furnace is deliberately not shown in this diagram — base layout here is independent of the furnace's location, which is explained in detail in Section 7 below.</div>
+
+    <div class="highlight-box">This is an internal NWH organizational strategy, not a rule officially imposed by the game or by the community guide.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 4. Temperature and Storms -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="temp">
+  <div class="section-head sh-ice">🌡️ 4. Temperature and Storms</div>
+  <div class="section-body">
+    <p>The temperature range runs from -270°C to +300°C. Your base's temperature gradually drifts toward the surrounding ambient temperature.</p>
+    <ul class="checklist">
+      <li>⏳ <strong>Freeze warning:</strong> staying below -20°C starts a 5-minute countdown.</li>
+      <li>🧊 <strong>Full freeze:</strong> after 5 continuous minutes below -20°C — transfers and rallies are blocked (random teleports and alliance transfers remain available).</li>
+      <li>🔥 <strong>Thaw:</strong> staying above -20°C for 5 minutes removes the freeze. Dropping below -20°C again, even for a moment, resets the countdown.</li>
+      <li>🧨 <strong>Breaking the ice:</strong> allies can break the ice manually (5 strikes, 5 energy points per strike).</li>
+      <li>✈️ <strong>Recon Plane:</strong> adds roughly +2°C per strike, but its effect is temporary and fades quickly.</li>
+    </ul>
+
+    <div class="highlight-blue">💡 Use the "Warm Up" tab to see which allies' heat has dropped dangerously fast, instead of checking every member manually. You can also enable an auto-setting to run your personal furnace automatically at the start of a Blizzard, to avoid freezing if you're away from the game the moment it hits.</div>
+    <div class="note-box">Note: base temperature doesn't only affect freeze risk — it also affects stats and extra buffs/debuffs for the base. The source doesn't give exact percentages for this effect, so we don't quote any specific figure here.</div>
+
+    <img src="../../images/s2-w1-freeze-thaw-diagram.webp" alt="Freeze and thaw mechanic" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Blizzard Level</th><th>Temperature Drop</th></tr></thead>
+        <tbody>
+          <tr><td>Level 1</td><td>-10°C</td></tr>
+          <tr><td>Level 2</td><td>-15°C</td></tr>
+          <tr><td>Level 3</td><td>-20°C</td></tr>
+          <tr><td>Level 4</td><td>-25°C</td></tr>
+          <tr><td>Level 5</td><td>-30°C</td></tr>
+          <tr><td>Level 7</td><td>-45°C</td></tr>
+          <tr><td>Level 8</td><td>-50°C</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-warn">Source conflict</span></div>
+    <div class="highlight-warn">⚠️ The source's descriptive text states that "the first storm is Level 1 with a -15°C drop, arriving 7 hours after the season starts" — while the table in the same source lists Level 1 as only -10°C. We couldn't resolve this conflict, so we present it as-is. The Level 2 duration is listed as 3 hours, but durations for other levels are unconfirmed, and the timing of the first storm's arrival may be random depending on the server.</div>
+
+    <details class="explain">
+      <summary>Other heat sources</summary>
+      <div class="explain-body">
+        <p><strong>City Furnace</strong> (for cities you control, warms the entire city tile): Level 1 = +5°C, Level 2 = +20°C, Level 3 = +30°C, Level 4 = +40°C, Level 5 = +50°C, Level 6 = +60°C.</p>
+        <p><strong>Nuclear Furnace</strong> (at the Capital): warms the entire map once activated, adding roughly +10°C map-wide.</p>
+      </div>
+    </details>
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> and <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 5. Coal and Resources -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="coal">
+  <div class="section-head sh-orange">⛏️ 5. Coal and Resources</div>
+  <div class="section-body">
+    <p><strong>Coal sources:</strong> Dig Sites (ongoing production), the Season Pass and Weekly Pass, scattered Supply Collections (only appear when the land's temperature reaches 0°C), season missions, Goals, radar missions, zombie-kill rewards, Hero's Return tickets, and your first occupation of a city or dig site. <span style="color:var(--muted); font-size:0.82rem;">(The Polar Dishes/Snowflake-feeding event adds an extra coal source, but it starts from Week 2 — outside the scope of this guide.)</span></p>
+    <p><strong>Uses:</strong> building and upgrading seasonal buildings, running the personal furnace, donating to the Alliance Furnace.</p>
+    <div class="highlight-box">💡 Tip: use the "Claim all hourly" button in the Dig Sites tab so you don't miss cumulative coal production.</div>
+    <div class="highlight-box">💡 Tip: balance personal needs (your own furnace) against collective needs (the Alliance Furnace) — don't empty your personal stockpile into the alliance before securing your own heat, and vice versa when a strong storm is approaching.</div>
+
+    <img src="../../images/s2-w1-coal-sources.webp" alt="Coal sources and uses" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 6. Titanium Alloy Factories -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="titanium">
+  <div class="section-head sh-purple">🏭 6. Titanium Alloy Factories</div>
+  <div class="section-body">
+    <p>Production starts at 720/hour at Level 1 and reaches 21,600/hour at Level 30 — each level adds a flat 720/hour.</p>
+    <p>A new factory only unlocks once the previous factory reaches <strong>Level 15</strong>. The Weekly Pass grants an extra factory immediately, and this factory keeps producing only for the duration of the pass — it's a <strong>paid, optional feature</strong> that ends when the pass expires and isn't a permanent gain, nor is it required to complete Week 1 progress.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Level</th><th>Production/hour</th><th>Upgrade cost (coal, approx.)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>720</td><td>—</td></tr>
+          <tr><td>2</td><td>1,440</td><td>≈ 1,400</td></tr>
+          <tr><td>30</td><td>21,600</td><td>≈ 359,300 (before discounts)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box">🎯 Investment strategy: first bring every factory to Level 15 (to unlock the next one), then once you have 4 base factories + 1 from the Weekly Pass, raise them all to 16, then 17, and so on — since every level grants the same production increase, upgrade the cheapest one first.</div>
+    <div class="note-box">Possible cost reductions: the "Master Craftsman" tech, the Engineer's Level-35 skill "Resource Saving" (up to -5%), and the alliance tech "Veteran Craftsman".</div>
+
+    <img src="../../images/s2-w1-titanium-factory-progress.webp" alt="Titanium alloy factory production growth" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> and <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">The Ultimate Strategy Guide</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 7. Alliance Furnace -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="furnace">
+  <div class="section-head sh-gold">🏛️ 7. Alliance Furnace</div>
+  <div class="section-body">
+    <p>Built on Level-1 land. Starting and managing the repair process (via: Alliance → Alliance Furnace → Coordinates) is restricted to R4/R5 only. Actual participation in the repair is done by any member sending their squads to reinforce the furnace — the same mechanic as stronghold repairs in Season 1 — where <strong>up to 20 reinforcements</strong> can take part (not a mandatory number to complete the process). It only warms bases located within its range — so members need to gather near it.</p>
+    <div class="badges"><span class="tbadge tb-nwh">NWH strategy</span></div>
+    <p>Members with low personal heat or a less-developed personal furnace can be placed closer to the Alliance Furnace to benefit from its warming range, within the bounds of that range and in line with NWH's general placement decisions (Section 3).</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Level</th><th>Coal/min</th><th>Heat</th><th>Overdrive heat</th><th>Coal/min (Overdrive)</th><th>Storage</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>300</td><td>3°C</td><td>6°C</td><td>1,200</td><td>200K</td></tr>
+          <tr><td>5</td><td>540</td><td>5°C</td><td>10°C</td><td>2,160</td><td>600K</td></tr>
+          <tr><td>10</td><td>840</td><td>7.5°C</td><td>15°C</td><td>3,360</td><td>1,450K</td></tr>
+          <tr><td>20</td><td>1,440</td><td>12.5°C</td><td>25°C</td><td>5,760</td><td>4,150K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-verify">Partial data — we only show levels 1, 5, 10, 20 as confirmed by the source</span></div>
+    <p>Durability ranges from 205K at Level 1 to 300K at Level 20. The source lists 340K for Level 8 — while Level 7 is around 235K and Level 9 around 245K — meaning the Level 8 value is implausibly higher than the levels surrounding it. We keep this conflict as it appears in the source rather than "correcting" it by extrapolation, and flag it only as a likely typo in the reference table.</p>
+    <p><strong>Supply Collections:</strong> only appear when the land reaches 0°C, with a maximum of 5 claim attempts per day. If frozen, they need Alliance Furnace heat or ice-breaking (1,000 durability per strike, 5 energy points).</p>
+
+    <div class="badges"><span class="tbadge tb-nwh">NWH recommendation — not a mandatory rule</span></div>
+    <div class="highlight-box">🔥 It's best to organize coal donations among members on a rotating basis to keep the Alliance Furnace running as continuously as possible, rather than letting it stop between donation periods. This is an NWH organizational recommendation, not a mandatory in-game rule.</div>
+    <p>To track progress on the Alliance Furnace's collective goals (and other collective goals), check: Season 2 → Goals → Alliance.</p>
+
+    <img src="../../images/s2-w1-alliance-furnace-layout.webp" alt="Alliance Furnace placement and warming range" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 8. Week 1 Events -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="events">
+  <div class="section-head sh-blue">🎉 8. Week 1 Events</div>
+  <div class="section-body">
+    <p>Week 1 includes <strong>6 main seasonal missions</strong> (Cold Wave Alert, High-Heat Furnace, Titanium Factory, Alliance Furnace, Village unlock, Town unlock) alongside supporting events. To avoid confusion, every card below clearly distinguishes between:</p>
+    <ul class="checklist">
+      <li>🎯 <strong>Mission Goal:</strong> a specific individual achievement (such as running the furnace for 600 seconds) — may only unlock after the collective chest goal is met (a 12-hour gap in some cases).</li>
+      <li>📦 <strong>Reward Chest Goal:</strong> a cumulative achievement reached by your war zone or all war zones combined (not your alliance alone).</li>
+      <li>🏅 <strong>Individual ranking:</strong> a personal ranking among players by contribution or speed.</li>
+      <li>🤝 <strong>Alliance ranking:</strong> a collective ranking among alliances (not between individuals).</li>
+      <li>🛠️ <strong>Internal NWH directive:</strong> an organizational decision from alliance leadership, unrelated to any in-game reward system.</li>
+    </ul>
+
+    <div class="event-card">
+      <div class="event-title">❄️ Cold Wave Alert</div>
+      <div class="event-meta">Starts Day 1 — lasts 7 days</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span> <span class="tbadge tb-collective">Collective goal</span></div>
+      <div class="event-row"><b>Individual mission goals:</b> 600 seconds personal furnace + 600 seconds Overdrive + donate coal once + help 3 allies warm up.</div>
+      <div class="event-row"><b>Collective chest goal:</b> kill 800 Doom Elite across all war zones combined.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🔥 High-Heat Furnace</div>
+      <div class="event-meta">Day 1</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span> <span class="tbadge tb-collective">Collective goal</span></div>
+      <div class="event-row"><b>Mission:</b> unlock the High-Heat Furnace.</div>
+      <div class="event-row"><b>Collective chest goal:</b> donate 3,000,000 iron across all war zones, with an additional individual ranking by donation.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏭 Unlock the Titanium Alloy Factory</div>
+      <div class="event-meta">Day 1</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="event-row"><b>Mission:</b> unlock and upgrade factories 1 through 5 — each factory unlocks when the previous one is upgraded, and needs coal.</div>
+      <div class="event-row"><b>Collective chest goal:</b> same 3,000,000 iron goal.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏛️ Alliance Furnace</div>
+      <div class="event-meta">Day 1</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="event-row"><b>Mission:</b> build/repair the Alliance Furnace via: Alliance → Alliance Furnace → Coordinates, then send a squad (similar to Season 1 strongholds).</div>
+      <div class="event-row"><b>Collective chest goal:</b> donate 5,000,000 coal across all war zones, with an individual ranking.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏘️ City Unlock — Village (Level 1)</div>
+      <div class="event-meta">Day 3 (chest goal immediate, mission goal starts after an extra 12 hours)</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="event-row"><b>Mission:</b> occupy Level-1 cities.</div>
+      <div class="event-row"><b>Collective chest goal:</b> occupy 80 dig sites total across war zones.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🏙️ City Unlock — Town (Level 2)</div>
+      <div class="event-meta">Day 6 (chest goal immediate, mission goal starts after an extra 12 hours)</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="event-row"><b>Mission:</b> occupy Level-2 cities.</div>
+      <div class="event-row"><b>Collective chest goal:</b> same 80-dig-site goal.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">⚔️ City Clash S2</div>
+      <div class="event-meta">Starts Day 3 at 12:00 PM server time</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="event-row">You must own a Level-1 dig site before R4/R5 can declare war on cities. Each alliance targets one city at a time. Troops take poison damage during the siege (reduced by virus resistance) in addition to direct unit losses. Occupied cities get roughly 6 days of protection; after abandoning a city, there's a wait period of roughly 5 days.</div>
+      <div class="event-row"><b>Rewards:</b> first-occupation rewards go to those who actually took part in the battle, and all alliance members get city rewards + general buffs, while loot chests are distributed by R5 or a designated distributor (Butler).</div>
+      <div class="badges"><span class="tbadge tb-verify">Daily declaration limits and the maximum number of dig sites are mentioned in reader comments and aren't officially confirmed by the article</span></div>
+
+      <img src="../../images/s2-w1-city-clash-schedule.webp" alt="City Clash S2 city-level unlock schedule" width="600" height="340" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">⚔️ Murphy's Exclusive Weapon</div>
+      <div class="event-meta">Available from Day 4</div>
+      <div class="badges"><span class="tbadge tb-official">Seasonal mission</span></div>
+      <div class="event-row">Requires 5-star Murphy. Activation needs 50 shards; the Murphy's Exclusive Weapon pack grants 70 shards (enough for activation + Level 2), available through Day 3 of Week 2. Upgrades use general exclusive-weapon shards (available in some Duel VS chests). Max level: 30. Raises Murphy's skill level cap to 40.</div>
+      <div class="event-row"><b>Effect:</b> reduces damage from the next incoming auto-attack only, then is consumed after one auto-attack, and can be stacked up to 3 times.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">🧟 Purge Action</div>
+      <div class="event-meta">Day 1 — lasts 7 days</div>
+      <div class="badges"><span class="tbadge tb-collective">Individual ranking</span></div>
+      <div class="event-row">Ranks commanders by the first zombie of the new season each one kills — a higher zombie level grants a better ranking, and in case of a tie, the fastest kill ranks higher. Daily settlements, rewards sent by mail.</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">☣️ Purge the Polluted Area</div>
+      <div class="event-meta">Day 1 — lasts 13 days</div>
+      <div class="badges"><span class="tbadge tb-collective">Alliance ranking</span></div>
+      <div class="event-row">Ranks alliances by the time taken to occupy dig sites — a higher level grants a better ranking, and in case of a tie, the fastest ranks higher. Daily settlements, rewards sent by mail.</div>
+    </div>
+
+    <div class="highlight-warn">⚠️ Don't confuse Purge Action (individual ranking, 7 days) with Purge the Polluted Area (alliance ranking, 13 days) — their durations and ranking nature are completely different.</div>
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">lastwartutorial.com — Season 2 Week 1</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 9. Dig Sites and Cities -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="territory">
+  <div class="section-head sh-green">🗺️ 9. Dig Sites and Cities</div>
+  <div class="section-body">
+    <p>The first land to secure is a <strong>Level-1 Dig Site</strong>. Expansion afterward follows an adjacency principle (including diagonal connections from corners).</p>
+    <ul class="checklist">
+      <li>📊 Maximum: 4 dig sites per alliance, regardless of how many cities you own.</li>
+      <li>📅 Daily cap: only two occupations per day. Once reached, neutral or owned sites can't be attacked.</li>
+      <li>⏱️ Occupation window: the alliance must reach 100% within 4 hours, or the attempt fails.</li>
+      <li>🛡️ Post-occupation protection: 36 hours, guarded by site guards.</li>
+      <li>🦣 Requirements: the monsters must not be frozen (thawing a frozen monster first requires sending a squad), and several rallies are needed since each strike only deals a percentage of damage.</li>
+      <li>🧱 Reinforcement: up to 10 squads can be sent to reinforce a dig site after the monster is defeated.</li>
+      <li>🚪 Abandoning: takes one hour; the protection period must end before any other alliance can re-occupy it.</li>
+    </ul>
+
+    <div class="highlight-green">🎁 <strong>First-participation rewards</strong> (any one of the following is enough to earn it): joining a regular Rally against a Mutant Beast with a strong squad, starting/joining a "participation rally" with just one weak hero squad, or reinforcing a dig site during its occupation even for a few seconds.</div>
+    <div class="note-box">⚠️ These are the occupation and participation rules as given in the strategy guide — deliberately kept separate from NWH's tactical recommendations below, and they don't guarantee any particular expansion speed for the alliance.</div>
+
+    <div class="highlight-blue">💡 <strong>General recommendation from the strategy guide (not from the resistance table below):</strong> to generally take part in fighting Mutant Beasts, a virus resistance of roughly 2,500 or more and a squad power of roughly 25 million or more are recommended. <strong>This is an approximate, general figure that doesn't guarantee success against a Level-1 dig site specifically</strong> — the table below shows that a Level-1 site itself requires resistance of about 4,000, higher than the general recommendation.</div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Dig Site Level</th><th>Required Virus Resistance (approx.)</th></tr></thead>
+        <tbody>
+          <tr><td>Level 1</td><td>4,000</td></tr>
+          <tr><td>Level 2</td><td>6,500</td></tr>
+          <tr><td>Level 3</td><td>8,500</td></tr>
+          <tr><td>Level 4</td><td>9,500</td></tr>
+          <tr><td>Level 6</td><td>10,500</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="badges"><span class="tbadge tb-verify">The Level 5 value is unclear in the source (possible typo) — we left it out to avoid publishing a wrong figure</span></div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Dig Site Level</th><th>Coal/hour</th><th>Rare Soil/hour</th></tr></thead>
+        <tbody>
+          <tr><td>Level 1</td><td>2,736</td><td>100</td></tr>
+          <tr><td>Level 2</td><td>2,880</td><td>110</td></tr>
+          <tr><td>Level 3</td><td>3,024</td><td>120</td></tr>
+          <tr><td>Level 4</td><td>3,168</td><td>130</td></tr>
+          <tr><td>Level 5</td><td>3,312</td><td>140</td></tr>
+          <tr><td>Level 6</td><td>3,456</td><td>150</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <details class="explain">
+      <summary>🧮 How does virus resistance apply within a Rally?</summary>
+      <div class="explain-body">
+        <p>The rally leader's virus resistance applies to every participant, <strong>except</strong> anyone whose own resistance is higher than the leader's — that member keeps their personal value.</p>
+        <p><strong>Example:</strong> Leader = 2,500 — Member A = 3,000 — Members B, C, D = 1,000 each.</p>
+        <p><strong>Resistance actually applied in combat:</strong> Leader = 2,500 — A = 3,000 (keeps their own value since it's higher) — B, C, D = 2,500 each (raised to the leader's level).</p>
+        <p>So it's best for rallies against dig sites to be led by members with high virus resistance — this lets the rest of the participants benefit from that resistance and reach faster, safer occupations.</p>
+      </div>
+    </details>
+
+    <img src="../../images/s2-w1-rally-virus-resistance-example.webp" alt="Example of virus resistance applied within a rally" width="600" height="360" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+
+    <p><strong>Unit matchups against monsters:</strong> Gorillas (aircraft) are weak against missile units, Bears (missile) are weak against tanks, Mammoths (tank) are weak against aircraft. Alliances with tank-heavy power are advised to target Polar Bears first.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>City Level</th><th>Unlock Timing</th></tr></thead>
+        <tbody>
+          <tr><td>Level 1</td><td>Week 1, Day 3 + 12 hours</td></tr>
+          <tr><td>Level 2</td><td>Week 1, Day 6 + 12 hours</td></tr>
+          <tr><td>Level 3</td><td>Week 2, Day 3 + 12 hours</td></tr>
+          <tr><td>Level 4</td><td>Week 2, Day 6 + 12 hours</td></tr>
+          <tr><td>Level 5</td><td>Week 3, Day 3 + 12 hours</td></tr>
+          <tr><td>Level 6</td><td>Week 3, Day 6 + 12 hours</td></tr>
+          <tr><td>Level 7</td><td>Week 4, Day 7 + 12 hours</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Maximum cities owned: 6. Level-6 cities are the most valuable, located north, east, south, and west of the Capital.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>City Level</th><th>Rare Soil/hour (approx.)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>350</td></tr>
+          <tr><td>2</td><td>400</td></tr>
+          <tr><td>3</td><td>450</td></tr>
+          <tr><td>4</td><td>800</td></tr>
+          <tr><td>5</td><td>900</td></tr>
+          <tr><td>6</td><td>1,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight-box">🎯 NWH strategy: pick your first dig site to match your army composition (monster type vs. your troop type), and prepare an expansion line toward Level-6 cities without revealing specific coordinates or targets ahead of time.</div>
+
+    <img src="../../images/s2-w1-territory-expansion-map.webp" alt="Territory expansion and dig-site map" width="600" height="400" loading="lazy" style="width:100%; max-width:480px; height:auto; border-radius:10px; display:block; margin:10px auto;">
+  </div>
+  <div class="source-note">Source: <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener">lastwartutorial.com — Season 2: Polar Storm</a>, <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener">Season 2 Week 1</a> and <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener">The Ultimate Strategy Guide</a> (unofficial community guide)</div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 10. Timeline -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="timeline">
+  <div class="section-head sh-ice">📅 10. Day 1 to 7 Timeline</div>
+  <div class="section-body">
+    <div class="highlight-blue">Note: "Day" here means season day (Day 1 = the season's first day), not necessarily a calendar day. Dates tagged "server time" are the only ones the source confirms precisely.</div>
+
+    <div class="timeline">
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 1</div>
+        <ul class="timeline-items">
+          <li>✅ Available immediately: Cold Wave Alert, High-Heat Furnace unlock, first Titanium Factory unlock, Alliance Furnace, Purge Action, Purge the Polluted Area.</li>
+          <li>🎯 Individual priority: 600 seconds furnace + 600 seconds Overdrive + donate coal + help 3 allies.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 2</div>
+        <ul class="timeline-items">
+          <li>🔄 Ongoing: developing titanium factories, collecting coal from owned dig sites.</li>
+          <li>📌 Usually only one Level-1 dig site is available by this point (per the strategy guide).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 3</div>
+        <ul class="timeline-items">
+          <li>🏘️ City unlock (Village, Level 1) — chest goal immediate, mission goal after 12 hours.</li>
+          <li>⚔️ City Clash S2 begins at 12:00 PM server time.</li>
+          <li>📌 Typical end-of-day state for a mid-sized alliance: around 3 Level-1 dig sites and 2 Level-1 cities (depending on starting point).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 4</div>
+        <ul class="timeline-items">
+          <li>⚔️ Murphy's Exclusive Weapon becomes available (requires 5-star Murphy).</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 5</div>
+        <ul class="timeline-items">
+          <li>🔄 Ongoing: no new event confirmed specifically for Day 5 in the available sources — keep pursuing City Clash S2 goals, factory development, and coal collection.</li>
+          <li>🧟 Purge Action continues through its end on Day 7 — keep targeting the highest zombie you can reach.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 6</div>
+        <ul class="timeline-items">
+          <li>🏙️ City unlock (Town, Level 2) — chest goal immediate, mission goal after 12 hours.</li>
+        </ul>
+      </div>
+      <div class="timeline-day">
+        <div class="timeline-day-title">Day 7</div>
+        <ul class="timeline-items">
+          <li>⏳ Cold Wave Alert ends (7 days from its start).</li>
+          <li>☣️ Purge the Polluted Area continues through Day 13 (extends beyond the end of Week 1).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-box">The Murphy's Exclusive Weapon pack stays available through Day 3 of Week 2 — beyond this week's scope, mentioned here only as a reminder.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 11. Checklist -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="checklist">
+  <div class="section-head sh-green">✅ 11. Practical Checklist (Individual)</div>
+  <div class="section-body">
+    <div class="note-box">This checklist is saved only in your own browser (individual local storage) — it's not synced with the alliance, no other member sees it, and it doesn't represent real collective data. Clearing your browser data resets it.</div>
+    <ul class="checklist" id="s2w1-checklist">
+      <li><label><input type="checkbox" data-task="furnace600"> Run the personal furnace for 600 seconds</label></li>
+      <li><label><input type="checkbox" data-task="overdrive600"> Activate Overdrive for 600 seconds</label></li>
+      <li><label><input type="checkbox" data-task="donate-coal"> Donate coal to the Alliance Furnace at least once</label></li>
+      <li><label><input type="checkbox" data-task="help-allies"> Help 3 allies raise their heat</label></li>
+      <li><label><input type="checkbox" data-task="open-furnace"> Unlock the High-Heat Furnace</label></li>
+      <li><label><input type="checkbox" data-task="titanium-factory"> Start developing your first Titanium Alloy Factory</label></li>
+      <li><label><input type="checkbox" data-task="dig-site"> Decide on your target dig site in coordination with R4/R5</label></li>
+      <li><label><input type="checkbox" data-task="base-layout"> Follow the assigned base position within the NWH layout (3×3 + two empty tiles)</label></li>
+      <li><label><input type="checkbox" data-task="monitor-temp"> Monitor base temperature regularly to avoid freezing</label></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 12. Common Mistakes -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="mistakes">
+  <div class="section-head sh-red">⚠️ 12. Common Mistakes</div>
+  <div class="section-body">
+    <ul class="warning-list">
+      <li>🪨 <strong>Poor coal management:</strong> spending coal randomly instead of saving it for factory and furnace upgrades — significantly slows your progress during Week 1.</li>
+      <li>🐌 <strong>Late development:</strong> delaying the High-Heat Furnace or first titanium factory — every day of delay pushes back the rest of the chained unlocks.</li>
+      <li>🔥 <strong>Unused furnace:</strong> owning a personal furnace without running it regularly — misses mission goals and exposes you to freeze risk.</li>
+      <li>🧊 <strong>No heating before a storm:</strong> not preparing before a blizzard arrives leads to freezing and blocks movement and rallies.</li>
+      <li>🤝 <strong>Poor member coordination:</strong> not gathering near the Alliance Furnace leaves some members outside the collective warming range.</li>
+      <li>🧱 <strong>Disorganized base placement:</strong> not following the 3×3 + two-empty-tile layout makes collective defense harder and leaves gaps for the enemy.</li>
+      <li>⚔️ <strong>Unprepared attacks:</strong> trying to occupy a dig site or city without enough virus resistance or enough rallies leads to unnecessary losses.</li>
+      <li>🔀 <strong>Confusing individual and collective events:</strong> such as mixing up Purge Action (individual) with Purge the Polluted Area (alliance) — leads to wrong expectations about rewards and ranking.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 13. Sources -->
+<!-- ══════════════════════════════════════ -->
+<div class="section" id="sources">
+  <div class="section-head sh-gold">📚 13. Sources</div>
+  <div class="section-body">
+    <p>This guide is built on an analysis and synthesis of the following sources, which are unofficial community guides (not issued by the game's official publisher). Figures may change with game updates — always verify in-game before making important decisions.</p>
+    <ul class="checklist">
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-polar-storm/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — Season 2: Polar Storm</a></li>
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-week-1/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — Season 2 Week 1</a></li>
+      <li>🔗 <a href="https://www.lastwartutorial.com/season-2-the-ultimate-strategy-guide-for-season-2-growth-captures-and-war/" target="_blank" rel="noopener" style="color:#60a5fa;">Last War Tutorial — The Ultimate Strategy Guide for Season 2</a></li>
+    </ul>
+    <div class="highlight-warn">⚠️ An additional strategic discussion link from one of NWH's R4 officers that we were given could not be accessed from the current work environment, so its content wasn't used in this guide. If you'd like it included, please send its text directly.</div>
+  </div>
+</div>
+
+<div class="nwh-footer">
+  <div class="footer-shield">🛡️</div>
+  <div class="footer-name">NWH Night Watch</div>
+  <div class="footer-credit">Prepared by: MSBKH</div>
+  <div class="footer-credit">Last updated: 11/09/2026</div>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">🔝</a>
+
+<script>
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) backToTopBtn.classList.add('show');
+    else backToTopBtn.classList.remove('show');
+  });
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Checklist — individual local storage only (visitor's browser), no sync with the alliance
+  (function() {
+    const STORAGE_KEY = 'nwh-s2w1-checklist';
+    const boxes = document.querySelectorAll('#s2w1-checklist input[type="checkbox"]');
+    let saved = {};
+    try {
+      saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (e) { saved = {}; }
+
+    boxes.forEach(box => {
+      if (saved[box.dataset.task]) box.checked = true;
+      box.addEventListener('change', () => {
+        try {
+          const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          state[box.dataset.task] = box.checked;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { /* local storage unavailable — checklist still works within the current session only */ }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
